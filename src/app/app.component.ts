@@ -1,3 +1,4 @@
+import { NbThemeService } from '@nebular/theme';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -12,10 +13,11 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private analytics: AnalyticsService) {
+  constructor(private analytics: AnalyticsService, private themeService: NbThemeService) {
   }
 
   ngOnInit(): void {
     this.analytics.trackPageViews();
+    this.themeService.changeTheme(`default`);
   }
 }
