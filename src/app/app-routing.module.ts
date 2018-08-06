@@ -1,57 +1,57 @@
-import { ExtraOptions, RouterModule, Routes } from "@angular/router";
-import { NgModule } from "@angular/core";
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import {
   NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
   NbRegisterComponent,
   NbRequestPasswordComponent,
-  NbResetPasswordComponent
-} from "@nebular/auth";
+  NbResetPasswordComponent,
+} from '@nebular/auth';
 
 const routes: Routes = [
-  { path: "home", loadChildren: "app/home/home.module#HomeModule" },
-  { path: "pages", loadChildren: "app/pages/pages.module#PagesModule" },
+  { path: 'home', loadChildren: 'app/home/home.module#HomeModule' },
+  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
   {
-    path: "auth",
+    path: 'auth',
     component: NbAuthComponent,
     children: [
       {
-        path: "",
-        component: NbLoginComponent
+        path: '',
+        component: NbLoginComponent,
       },
       {
-        path: "login",
-        component: NbLoginComponent
+        path: 'login',
+        component: NbLoginComponent,
       },
       {
-        path: "register",
-        component: NbRegisterComponent
+        path: 'register',
+        component: NbRegisterComponent,
       },
       {
-        path: "logout",
-        component: NbLogoutComponent
+        path: 'logout',
+        component: NbLogoutComponent,
       },
       {
-        path: "request-password",
-        component: NbRequestPasswordComponent
+        path: 'request-password',
+        component: NbRequestPasswordComponent,
       },
       {
-        path: "reset-password",
-        component: NbResetPasswordComponent
-      }
-    ]
+        path: 'reset-password',
+        component: NbResetPasswordComponent,
+      },
+    ],
   },
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "**", redirectTo: "home" }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 const config: ExtraOptions = {
-  useHash: true
+  useHash: true,
 };
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, config)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

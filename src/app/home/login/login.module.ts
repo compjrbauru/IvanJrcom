@@ -8,6 +8,6 @@ const LOGIN_COMPONENTS = [LoginComponent];
 
 @NgModule({
   imports: [LoginRoutingModule, ThemeModule],
-  declarations: [...LOGIN_COMPONENTS]
+  declarations: [...LOGIN_COMPONENTS],
 })
 export class LoginModule {}

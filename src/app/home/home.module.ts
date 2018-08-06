@@ -1,8 +1,9 @@
-import { NgModule } from "@angular/core";
-import { HomeComponent } from "./home.component";
-import { HomeRoutingModule } from "./home-routing.module";
-import { ThemeModule } from "../@theme-home/theme.module";
-import { MainModule} from "./main/main.module";
+import { NgModule } from '@angular/core';
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
+import { ThemeModule } from '../@theme-home/theme.module';
+import { MainModule} from './main/main.module';
+import { RegisterComponent } from './register/register.component';
 
 const HOME_COMPONENTS = [HomeComponent];
 

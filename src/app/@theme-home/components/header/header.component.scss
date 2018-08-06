@@ -24,6 +24,12 @@
     width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
   }
 
+  .header-button{
+    display: flex;
+    align-items: center;
+    padding: 1em;
+  }
+
   .control-item {
     display: block;
   }
@@ -180,6 +186,10 @@
 
     nb-user /deep/ .user-name {
       display: none;
+    }
+
+    .btn {
+      height: calc(#{nb-theme(sidebar-width)/7});
     }
   }
 

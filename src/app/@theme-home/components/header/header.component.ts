@@ -53,8 +53,12 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['/pages']);
   }
 
-  login() { 
-    this.logado = !this.logado;
+  login() {
+  /*   this.logado = !this.logado; */
     this.route.navigate(['/home/login']);
+  }
+
+  register() {
+    this.route.navigate(['/home/register']);
   }
 }
