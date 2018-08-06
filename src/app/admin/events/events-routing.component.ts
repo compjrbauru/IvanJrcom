@@ -14,7 +14,7 @@ const routes: Routes = [{
   }, {
     path: 'edit',
     component: EditEventsComponent,
-  }], 
+  }],
 }];
 
 @NgModule({

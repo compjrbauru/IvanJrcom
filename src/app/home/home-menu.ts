@@ -6,5 +6,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-home',
     link: '/home/main',
     home: true,
-  }
+  },
 ];
