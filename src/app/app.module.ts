@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,9 +29,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 })
-export class AppModule {
-}
+export class AppModule {}
