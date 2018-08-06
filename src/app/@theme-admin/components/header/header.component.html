@@ -3,10 +3,9 @@
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">Ivan<span>-JRCOM</span></div>
+    <div class="logo" (click)="goToHome()">Admin</div>
   </div>
- <!--  <ngx-theme-switcher></ngx-theme-switcher> -->
-  <button class="btn btn-hero-secondary" (click)="admin()">Admin</button>
+  <ngx-theme-switcher></ngx-theme-switcher>
 </div>
 
 <div class="header-container">
@@ -25,19 +24,5 @@
     </nb-action>
    
   </nb-actions>
-  <div class="row">
-    <div class="col-sm-6">
-    
-      
-      <button class="btn btn-hero-secondary" (click)="login()">Login</button>
-   
-  </div>
-    <div class="col-sm-6">
-    
-      
-      
-      <button class="btn btn-hero-warning" (click)="register()">Registrar</button>
-    
-  </div>
-  </div>
+  <button class="btn btn-hero-secondary" (click)="home()">Home</button>
 </div>

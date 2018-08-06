@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['/home/register']);
   }
 
-  admin() {
-    this.route.navigate(['/admin/main']);
+  home() {
+    this.route.navigate(['/home']);
   }
 }
