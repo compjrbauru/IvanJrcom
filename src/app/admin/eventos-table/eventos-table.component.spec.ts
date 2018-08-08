@@ -8,7 +8,7 @@ describe('EventosTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventosTableComponent ]
+      declarations: [ EventosTableComponent ],
     })
     .compileComponents();
   }));
