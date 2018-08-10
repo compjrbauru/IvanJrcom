@@ -8,7 +8,7 @@
         <nb-card-body>
           <div class="row show-grid">
               <h4 class="col-md-4">Categoria: {{evento.categoria}}</h4>
-              <h4 class="col-md-4">Data: {{evento.data.seconds | date:'d MMM, y - HH:mm'}}</h4>
+              <h4 class="col-md-4">Data: {{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm'}}</h4> <!-- Multiplca o timestamp por mil pra virar uma data (se tirar o 1000 a data sera diferente) -->
               <h4 class="col-md-4">ID: {{evento.id}}</h4>
           </div>
 

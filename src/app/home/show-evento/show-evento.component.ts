@@ -13,11 +13,11 @@ export class ShowEventoComponent implements OnInit {
   constructor(private queryService: QueryService) { }
 
   ngOnInit() {
-    const name$ = new Subject<any>();
-    this.queryService.eventoOrder(name$).subscribe(response => {
+    const order$ = new Subject<any>();
+    this.queryService.eventoOrder(order$).subscribe(response => {
       this.eventos = response;
     });
-    name$.next('data');
+    order$.next('nome');
   }
 
 }
