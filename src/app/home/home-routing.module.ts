@@ -1,3 +1,4 @@
+import { ShowEventoComponent } from './show-evento/show-evento.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: 'main',
-        component: MainComponent,
+        component: ShowEventoComponent,
       },
       {
         path: 'login',
