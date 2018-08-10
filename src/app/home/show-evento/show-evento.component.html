@@ -1,0 +1,57 @@
+<div class="row" *ngFor="let evento of eventos">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-header>
+          <h2>{{evento.nome}}</h2>
+        </nb-card-header>
+
+        <nb-card-body>
+          <div class="row show-grid">
+              <h4 class="col-md-4">Categoria: {{evento.categoria}}</h4>
+              <h4 class="col-md-4">Data: {{evento.data.seconds | date:'d MMM, y - HH:mm'}}</h4>
+              <h4 class="col-md-4">ID: {{evento.id}}</h4>
+          </div>
+
+          <div class="row show-grid">
+            <div class="col-md-8">
+              <h4>Descrição: {{evento.descricao}}</h4>
+            </div>
+            <div class="col-md-4">
+              <h4>URL: <a href="{{evento.url}}" target="_blank">{{evento.url}}</a></h4>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Lote: {{evento.ingressos.lote.numero}}</th>
+                  <th>Masculino</th>
+                  <th>Feminino</th>
+                  <th>Unisex</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="text-nowrap" scope="row">Disponiveis</th>
+
+                  <td>{{evento.ingressos.masculino.disponiveis}}</td>
+                  <td>{{evento.ingressos.feminino.disponiveis}}</td>
+                  <td>{{evento.ingressos.unisex.disponiveis}}</td>
+                  <td>{{evento.ingressos.lote.disponiveis}} </td>
+                </tr>
+                <tr>
+                  <th class="text-nowrap" scope="row">Valor</th>
+
+                  <td>{{evento.ingressos.masculino.valor}} R$</td>
+                  <td>{{evento.ingressos.feminino.valor}} R$</td>
+                  <td>{{evento.ingressos.unisex.valor}} R$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+</div>
