@@ -7,17 +7,24 @@
 
         <nb-card-body>
           <div class="row show-grid">
-              <h4 class="col-md-4">Categoria: {{evento.categoria}}</h4>
-              <h4 class="col-md-4">Data: {{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm'}}</h4> <!-- Multiplca o timestamp por mil pra virar uma data (se tirar o 1000 a data sera diferente) -->
-              <h4 class="col-md-4">ID: {{evento.id}}</h4>
-          </div>
-
-          <div class="row show-grid">
-            <div class="col-md-8">
-              <h4>Descrição: {{evento.descricao}}</h4>
+            <div class="col-md-6">
+                <img class="img-fluid rounded" src="{{evento.url}}">
             </div>
-            <div class="col-md-4">
-              <h4>URL: <a href="{{evento.url}}" target="_blank">{{evento.url}}</a></h4>
+            <div class="col-md-6">
+              <div class="row">
+                  <h4 class="col-md-4">Categoria: {{evento.categoria}}</h4>
+                  <h4 class="col-md-4">Data: {{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm'}}</h4> <!-- Multiplca o timestamp por mil pra virar uma data (se tirar o 1000 a data sera diferente) -->
+              </div>
+              <div class="row">
+                  <div class="col-md-8">
+                      <h4>Descrição: {{evento.descricao}}</h4>
+                    </div>
+                    <div class="col-md-4">
+                      <h4>URL: <a href="{{evento.url}}" target="_blank">{{evento.url}}</a></h4>
+                    </div>
+              </div>
+
+
             </div>
           </div>
 

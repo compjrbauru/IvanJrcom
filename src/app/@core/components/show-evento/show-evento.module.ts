@@ -1,6 +1,6 @@
 import { ShowEventoComponent } from './show-evento.component';
 import { NgModule } from '@angular/core';
-import { ThemeModule } from './../../@theme-home/theme.module';
+import { ThemeModule } from './../../../@theme-home/theme.module';
 import { CommonModule } from '@angular/common';
 
 @NgModule({

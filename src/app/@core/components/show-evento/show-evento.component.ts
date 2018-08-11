@@ -1,4 +1,4 @@
-import { QueryService } from './../../services/query.service';
+import { QueryService } from './../../../services/query.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
