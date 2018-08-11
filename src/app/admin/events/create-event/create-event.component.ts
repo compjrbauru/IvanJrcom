@@ -23,7 +23,7 @@ export class CreateEventComponent implements OnInit {
         }),
         feminino: this.formBuilder.group({
           disponiveis: [],
-          valor: []
+          valor: [],
         }),
         masculino: this.formBuilder.group({
           disponiveis: [],
@@ -39,7 +39,7 @@ export class CreateEventComponent implements OnInit {
     });
   }
 
-  submit(form){ }
+  submit(form) { }
   ngOnInit() { }
 
 }
