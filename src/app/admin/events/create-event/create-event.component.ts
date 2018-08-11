@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-create-event',
@@ -10,8 +10,7 @@ export class CreateEventComponent implements OnInit {
 
   formEvent: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { 
-    
+  constructor(private formBuilder: FormBuilder) {
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
       categoria: ['', Validators.required],
@@ -20,7 +19,7 @@ export class CreateEventComponent implements OnInit {
       ingressos: this.formBuilder.group({
         lote: this.formBuilder.group({
           disponiveis: ['', Validators.required],
-          numero: ['1']
+          numero: ['1'],
         }),
         feminino: this.formBuilder.group({
           disponiveis: [],
@@ -28,12 +27,12 @@ export class CreateEventComponent implements OnInit {
         }),
         masculino: this.formBuilder.group({
           disponiveis: [],
-          valor: []
+          valor: [],
         }),
         unisex: this.formBuilder.group({
           disponiveis: [],
-          valor: []
-        })
+          valor: [],
+        }),
       }),
       url: [null],
       id: ['', Validators.required],
@@ -41,7 +40,6 @@ export class CreateEventComponent implements OnInit {
   }
 
   submit(form){ }
-
   ngOnInit() { }
 
 }
