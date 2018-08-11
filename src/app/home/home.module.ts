@@ -1,4 +1,3 @@
-import { ShowEventoModule } from './show-evento/show-evento.module';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -8,7 +7,7 @@ import { MainModule} from './main/main.module';
 const HOME_COMPONENTS = [HomeComponent];
 
 @NgModule({
-  imports: [HomeRoutingModule, ThemeModule, MainModule, ShowEventoModule],
+  imports: [HomeRoutingModule, ThemeModule, MainModule],
   declarations: [...HOME_COMPONENTS],
 })
 export class HomeModule {}
