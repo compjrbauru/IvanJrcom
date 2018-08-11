@@ -19,7 +19,7 @@ export class CreateEventComponent implements OnInit {
       ingressos: this.formBuilder.group({
         lote: this.formBuilder.group({
           disponiveis: ['', Validators.required],
-          numero: ['1'],
+          numero: ['1', Validators.required],
         }),
         feminino: this.formBuilder.group({
           disponiveis: [],
@@ -34,7 +34,7 @@ export class CreateEventComponent implements OnInit {
           valor: [],
         }),
       }),
-      url: [null],
+      url: [null, Validators.pattern("(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})")],
       id: ['', Validators.required],
     });
   }
