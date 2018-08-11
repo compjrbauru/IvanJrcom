@@ -1,3 +1,4 @@
+import { AngularFirestore } from 'angularfire2/firestore';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -17,6 +18,8 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { config } from '../app/config/config';
+import { QueryService } from './services/query.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,6 +33,6 @@ import { config } from '../app/config/config';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, AngularFirestore],
 })
 export class AppModule {}
