@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { TableService } from './../../services/table.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'ngx-table',
@@ -12,52 +14,21 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TableComponent implements OnInit {
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      firstName: {
-        title: 'First Name',
-        type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
-      },
-    },
-  };
+  @Input() dataAsync: Observable<any>;
+  @Input() deleteData: any;
 
-  constructor() { }
+  constructor(private tableService: TableService) { }
 
   ngOnInit() {
+
+  }
+
+  onDelete(event): void {
+    if (window.confirm('Tem certeza que deeseja deletar?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
 
 }

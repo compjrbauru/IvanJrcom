@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { QueryService } from '../../services/query.service';
+import { TableService } from '../../services/table.service';
 import { TableComponent } from './table.component';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { TableComponent } from './table.component';
     Ng2SmartTableModule,
   ],
   providers: [
-    QueryService,
+    TableService,
   ],
   exports: [
     TableComponent,
