@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { config } from '../app/config/config';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
