@@ -5,6 +5,7 @@ import { EventsRoutingModule} from './events-routing.component';
 import { EventsComponent } from './events.component';
 import { EditEventsModule } from './edit-events/edit-events.module';
 import { CreateEventModule } from './create-event/create-event.module';
+import { ListEventsModule } from './edit-events/list-events/list-events.module';
 
 
 const CREATEEVENT_COMPONENTS = [EventsComponent];
@@ -16,6 +17,7 @@ const CREATEEVENT_COMPONENTS = [EventsComponent];
     EventsRoutingModule,
     EditEventsModule,
     CreateEventModule,
+    ListEventsModule,
   ],
   declarations: [
     CREATEEVENT_COMPONENTS,
