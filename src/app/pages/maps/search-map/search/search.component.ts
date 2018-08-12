@@ -1,6 +1,6 @@
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-
+import {} from 'googlemaps';
 import { Location } from '../entity/Location';
 
 @Component({
