@@ -1,0 +1,60 @@
+<div class="row" *ngFor="let evento of eventos">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-header>
+          <h2>{{evento.nome}}</h2>
+        </nb-card-header>
+
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-auto" style="max-width: 50%;">
+              <img class="img-fluid rounded" src="{{evento.url}}">
+            </div>  
+
+            <div class="col">
+              <div class="row" >
+                <h4>Categoria: {{evento.categoria}}</h4>
+              </div>
+              <div class="row">
+                  <h4>Data: {{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm'}}</h4> <!-- Multiplca o timestamp por mil pra virar uma data (se tirar o 1000 a data sera diferente) -->
+                </div>
+              <div class="row">
+                <h4>Descrição: {{evento.descricao}}</h4>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Lote: {{evento.ingressos.lote.numero}}</th>
+                  <th>Masculino</th>
+                  <th>Feminino</th>
+                  <th>Unisex</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="text-nowrap" scope="row">Disponiveis</th>
+
+                  <td>{{evento.ingressos.masculino.disponiveis}}</td>
+                  <td>{{evento.ingressos.feminino.disponiveis}}</td>
+                  <td>{{evento.ingressos.unisex.disponiveis}}</td>
+                  <td>{{evento.ingressos.lote.disponiveis}} </td>
+                </tr>
+                <tr>
+                  <th class="text-nowrap" scope="row">Valor</th>
+
+                  <td>{{evento.ingressos.masculino.valor}} R$</td>
+                  <td>{{evento.ingressos.feminino.valor}} R$</td>
+                  <td>{{evento.ingressos.unisex.valor}} R$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+</div>
