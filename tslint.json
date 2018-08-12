@@ -1,4 +1,7 @@
 {
+  "rulesDirectory": [
+    "node_modules"
+  ],
   "rules": {
     "trailing-comma": [
       true,
