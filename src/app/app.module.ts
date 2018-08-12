@@ -1,3 +1,5 @@
+import { TableModule } from './admin/table/table.module';
+import { EventoService } from './services/evento.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 /**
  * @license
@@ -27,12 +29,13 @@ import { QueryService } from './services/query.service';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    TableModule,
     AngularFireModule.initializeApp(config.fire),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, AngularFirestore],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, EventoService, AngularFirestore],
 })
 export class AppModule {}
