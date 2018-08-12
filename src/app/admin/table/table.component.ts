@@ -1,9 +1,8 @@
-import { TableService } from './../../services/table.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, Input, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { pluck, partition, mapTo, flatMap } from 'rxjs/operators';
-import { map } from 'leaflet';
+import { Observable } from 'rxjs/Observable';
+
+import { TableService } from './../../services/table.service';
 
 @Component({
   selector: 'ngx-table',
@@ -42,7 +41,6 @@ export class TableComponent implements OnInit {
         }
         return response;
       });
-      console.log(this.dataSource);
       this.source.load(this.dataSource);
     });
   }
