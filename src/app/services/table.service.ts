@@ -6,26 +6,24 @@ export class TableService {
 
   getColumnsEvento() {
     return {
-      nome: {
-        title: 'Nome',
-        type: 'string',
+      edit: {
+        editButtonContent: '<i class="nb-edit"></i>',
+        saveButtonContent: '<i class="nb-checkmark"></i>',
+        cancelButtonContent: '<i class="nb-close"></i>',
       },
-      categoria: {
-        title: 'Categoria',
-        type: 'string',
+      actions: {
+        add: false,
+        edit: false,
+        delete: false,
       },
-      data: {
-        title: 'Data',
-        type: 'Timestamp',
-      },
-      lote: {
-        disponiveis: {
-          title: 'Disponiveis',
-          type: 'number',
+      columns: {
+        categoria: {
+          title: 'Categoria',
+          type: 'string',
         },
-        numero: {
-          title: 'Lote',
-          type: 'number',
+        nome: {
+          title: 'Nome',
+          type: 'string',
         },
       },
     };
@@ -35,14 +33,6 @@ export class TableService {
     return {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    };
-  }
-
-  getEditButton() {
-    return {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
     };
   }

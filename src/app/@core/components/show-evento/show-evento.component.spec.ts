@@ -8,7 +8,7 @@ describe('ShowEventoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowEventoComponent ]
+      declarations: [ ShowEventoComponent ],
     })
     .compileComponents();
   }));

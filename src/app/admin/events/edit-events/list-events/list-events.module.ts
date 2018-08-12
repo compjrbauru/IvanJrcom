@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { ListEventsComponent } from './list-events.component';
+import { TableModule } from '../../../table/table.module';
 
 @NgModule({
   imports: [
+    TableModule,
   ],
   declarations: [
     ListEventsComponent,
