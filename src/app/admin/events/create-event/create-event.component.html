@@ -1,84 +1,66 @@
-<form [formGroup]="formEvent" (ngSubmit)="submit(formEvent.value)">
-  <nb-card-body >
-      <div _ngcontent-c41="" class="row">
-        <div _ngcontent-c41="" class="col-sm-6">
-          <div _ngcontent-c41="" class="form-group">
-              <label for="nome">Nome:</label>
-              <input [formControl]="formEvent.controls['nome']" id="nome" class="form-control" type="text">
-          </div>
+<div class="row">
+    <div class="col-lg-12">
+        <nb-card>
+    <nb-card-header>Criar Evento</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="formEvent" (ngSubmit)="submit(formEvent.value)">
+    <div class="form-group">
+      <div class="row full-name-inputs">
+        <div  class="col-sm-6 input-group">
+            <input formControlName="nome" placeholder="Nome" id="nome" class="form-control" type="text">
         </div>
-        <div _ngcontent-c41="" class="col-sm-6">
-          <div _ngcontent-c41="" class="form-group">
-              <label for="categoria">Categoria:</label>
-              <input [formControl]="formEvent.controls['categoria']" id="categoria" class="form-control" type="text">
-          </div>
-        </div>
-      </div>
-      <div _ngcontent-c41="" class="row">
-        <div _ngcontent-c41="" class="col-sm-6">
-        <div _ngcontent-c41="" class="form-group">
-            <label for="descricao">Descrição:</label>
-            <textarea [formControl]="formEvent.controls['descricao']" id="descricao" class="form-control" rows="5"></textarea>
+        <div class="col-sm-6 input-group">
+            <input formControlName="categoria" placeholder="Categoria" id="categoria" class="form-control" type="text">
         </div>
       </div>
-      <div _ngcontent-c41="" class="col-sm-6">
-        <div _ngcontent-c41="" class="form-group">
-            <label for="data">Data e Hora:</label>
-            <input [formControl]="formEvent.controls['data']" id="data" class="form-control" type="datetime-local">
+      <div class="row full-name-inputs">
+        <div class="col-sm-6 input-group">
+            <textarea formControlName="descricao" placeholder="Descrição" id="descricao" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="col-sm-6 input-group">
+            <input formControlName="data" placeholder="Data e Hora" id="data" class="form-control" type="datetime-local">
         </div>
       </div>
-      </div>
-      <div _ngcontent-c41="" class="form-group">
+      <div class="Ingressos">
           <label for="ingressos">Ingressos:</label>
-          <div [formGroup]="formEvent.controls['ingressos']">
-              <div _ngcontent-c41="" class="row">
-                  <div _ngcontent-c41="" class="col-sm-3">
-                    <div [formGroup]="formEvent.controls['ingressos'].controls['lote']">
+          <div formGroupName="ingressos">
+              <div class="row">
+                  <div class="col-sm-3 input-group">
+                    <div formGroupName="lote">
                         <label for="lote">Lote</label>
-                        <input [formControl]="formEvent.controls['ingressos'].controls['lote'].controls['numero']" id="lote-numero" placeholder="numero" class="form-control" type="number">
-                        <input [formControl]="formEvent.controls['ingressos'].controls['lote'].controls['disponiveis']" id="lote-disponiveis" placeholder="disponiveis" class="form-control" type="number">
+                        <input formControlName="numero" id="lote-numero" placeholder="numero" class="form-control" type="number">
+                        <input formControlName="disponiveis" id="lote-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="1">
                     </div>
                   </div>
-                  <div _ngcontent-c41="" class="col-sm-3">
-                      <div [formGroup]="formEvent.controls['ingressos'].controls['masculino']">
-                          <label for="lote">Masculino</label>
-                          <input [formControl]="formEvent.controls['ingressos'].controls['masculino'].controls['disponiveis']" id="masculino-disponiveis" placeholder="disponiveis" class="form-control" type="number">
-                          <input [formControl]="formEvent.controls['ingressos'].controls['masculino'].controls['valor']" id="masculino-valor" placeholder="valor" class="form-control" type="number">
+                  <div class="col-sm-3 input-group">
+                      <div formGroupName="masculino">
+                          <label for="lote" align="center">Masculino</label>
+                          <input formControlName="disponiveis" id="masculino-disponiveis" placeholder="disponiveis" class="form-control" type="number">
+                          <input formControlName="valor" id="masculino-valor" placeholder="valor" class="form-control" type="number" min="0">
                       </div>
                     </div>
-                    <div _ngcontent-c41="" class="col-sm-3">
-                        <div [formGroup]="formEvent.controls['ingressos'].controls['feminino']">
+                    <div class="col-sm-3 input-group">
+                        <div formGroupName="feminino">
                             <label for="lote">Feminino</label>
-                            <input [formControl]="formEvent.controls['ingressos'].controls['feminino'].controls['disponiveis']" id="feminino-disponiveis" placeholder="disponiveis" class="form-control" type="number">
-                            <input [formControl]="formEvent.controls['ingressos'].controls['feminino'].controls['valor']" id="feminino-valor" placeholder="valor" class="form-control" type="number">
+                            <input formControlName="disponiveis" id="feminino-disponiveis" placeholder="disponiveis" class="form-control" type="number">
+                            <input formControlName="valor" id="feminino-valor" placeholder="valor" class="form-control" type="number" min="0">
                         </div>
                       </div>
-                    <div _ngcontent-c41="" class="col-sm-3">
-                      <div [formGroup]="formEvent.controls['ingressos'].controls['unisex']">
+                    <div class="col-sm-3 input-group">
+                      <div formGroupName="unisex">
                         <label for="lote">Unisex</label>
-                        <input [formControl]="formEvent.controls['ingressos'].controls['unisex'].controls['disponiveis']" id="unisex-disponiveis" placeholder="disponiveis" class="form-control" type="number">
-                        <input [formControl]="formEvent.controls['ingressos'].controls['unisex'].controls['valor']" id="unisex-valor" placeholder="valor" class="form-control" type="number">
+                        <input formControlName="disponiveis" id="unisex-disponiveis" placeholder="disponiveis" class="form-control" type="number">
+                        <input formControlName="valor" id="unisex-valor" placeholder="valor" class="form-control" type="number" min="0">
                         </div>
                       </div>  
               </div>       
           </div>
       </div>
+    </div>
 
-      <div _ngcontent-c41="" class="row">
-          <div _ngcontent-c41="" class="col-sm-6">
-              <div _ngcontent-c41="" class="form-group">
-                  <label for="url">url:</label>
-                  <input [formControl]="formEvent.controls['url']" id="url" class="form-control" type="url">
-              </div>
-            </div>
-              <div _ngcontent-c41="" class="col-sm-6">
-                  <div _ngcontent-c41="" class="form-group">
-                      <label for="url">id:</label>
-                      <input [formControl]="formEvent.controls['id']" id="id" class="form-control">
-                  </div>
-              </div>
-      </div>
-
-      <button _ngcontent-c41="" [disabled]="!formEvent.valid" class="btn btn-primary" type="submit">Submit</button>
-  </nb-card-body>
-</form>
+      <button [disabled]="!formEvent.valid" class="btn btn-primary" type="submit">Criar</button>
+        </form>
+    </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -10,7 +10,9 @@ export class CreateEventComponent implements OnInit {
 
   formEvent: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit() { 
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
       categoria: ['', Validators.required],
@@ -38,11 +40,10 @@ export class CreateEventComponent implements OnInit {
         Validators.pattern(`(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+
         [a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+
         [a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})`)],
-      id: ['', Validators.required],
+      id: [''],
     });
   }
 
-  submit(form) { }
-  ngOnInit() { }
+  submit(form: any) { }
 
 }

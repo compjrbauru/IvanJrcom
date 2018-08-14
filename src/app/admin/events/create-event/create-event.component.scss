@@ -1,3 +1,16 @@
-.ng-invalid.ng-touched:not(form):not(div) {
+input.ng-invalid.ng-touched {
     border: 2px solid red;
+}
+
+textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+
+#data {
+    height: 45px;
+}
+
+.Ingressos {
+    margin: 20px;
 }
