@@ -12,7 +12,7 @@ export class CreateEventComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
       categoria: ['', Validators.required],
