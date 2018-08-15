@@ -7,8 +7,6 @@ import { LeafletComponent } from './leaflet/leaflet.component';
 import { BubbleMapComponent } from './bubble/bubble-map.component';
 import { SearchMapComponent } from './search-map/search-map.component';
 import { MapComponent } from './search-map/map/map.component';
-import { SearchComponent } from './search-map/search/search.component';
-
 const routes: Routes = [{
   path: '',
   component: MapsComponent,
@@ -40,5 +38,4 @@ export const routedComponents = [
   BubbleMapComponent,
   SearchMapComponent,
   MapComponent,
-  SearchComponent,
 ];
