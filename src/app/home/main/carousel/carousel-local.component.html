@@ -1,0 +1,8 @@
+<p-carousel
+[value]="eventos"
+[numVisible]="1"
+>
+  <ng-template let-evento pTemplate="evento">
+    {{ evento.nome }}
+  </ng-template>
+</p-carousel>

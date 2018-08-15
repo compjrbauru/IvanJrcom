@@ -1,4 +1,6 @@
+import { EventoService } from './../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-main',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  eventos: Observable<any>;
 
-  constructor() { }
+  constructor(private eventoService: EventoService) { }
 
   ngOnInit() {
+    this.eventos = this.eventoService.getAll();
   }
 
 }

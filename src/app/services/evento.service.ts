@@ -25,7 +25,7 @@ export class EventoService {
   }
 
   removeData(id: any) {
-    return this.db.doc(`/Evento/${id}`);
+    return this.db.doc(`/Evento/${id}`).delete();
   }
 
 }
