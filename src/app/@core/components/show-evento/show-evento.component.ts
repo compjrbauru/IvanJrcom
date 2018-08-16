@@ -5,11 +5,11 @@ import { enterUp } from '../../animations/animations';
 import { QueryService } from './../../../services/query.service';
 
 @Component({
-  selector: "ngx-show-evento",
-  templateUrl: "./show-evento.component.html",
-  styleUrls: ["./show-evento.component.scss"],
+  selector: 'ngx-show-evento',
+  templateUrl: './show-evento.component.html',
+  styleUrls: ['./show-evento.component.scss'],
   providers: [QueryService],
-  animations: [enterUp("teste", "1000ms")]
+  animations: [enterUp('teste', '1000ms')],
 })
 export class ShowEventoComponent implements OnInit {
   eventos: any;
@@ -20,6 +20,6 @@ export class ShowEventoComponent implements OnInit {
     this.queryService.eventoOrder(order$).subscribe(response => {
       this.eventos = response;
     });
-    order$.next("nome");
+    order$.next('nome');
   }
 }
