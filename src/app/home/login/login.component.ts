@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { enterLeave } from './../../@core/animations/animations';
+import { enterComponent } from '../../@core/animations/animations';
 
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [enterLeave('cardanimation')],
+  animations: [enterComponent('cardanimation')],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+  form_login: FormGroup;
+  constructor(private formBuilder: FormBuilder) {}
+  ngOnInit() {
+    this.form_login = this.formBuilder.group({
+      login: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 }

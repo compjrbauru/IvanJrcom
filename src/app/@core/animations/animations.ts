@@ -1,6 +1,6 @@
 import { animate, group, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
 
-export function enterLeave(name: string) {
+export function enterComponent(name: string) {
   return trigger(name, [
     state(
       'in',
