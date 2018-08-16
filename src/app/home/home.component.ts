@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { MENU_ITEMS } from './home-menu';
 
 @Component({
-  selector: "ngx-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  selector: 'ngx-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   menu = MENU_ITEMS;
@@ -15,6 +15,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   changeAdmin() {
-    this.router.navigate(["/admin"]);
+    this.router.navigate(['/admin']);
   }
 }
