@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
@@ -8,13 +7,14 @@ import {
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
+import { delay, takeWhile, withLatestFrom } from 'rxjs/operators';
 
 import { StateService } from '../../../@core/data/state.service';
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'ngx-sample-layout',
-  styleUrls: ['./sample.layout.scss'],
+  selector: "ngx-sample-layout",
+  styleUrls: ["./sample.layout.scss"],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
@@ -45,59 +45,50 @@ import { StateService } from '../../../@core/data/state.service';
       <nb-layout-footer fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
-
-      <nb-sidebar class="settings-sidebar"
-                   tag="settings-sidebar"
-                   state="collapsed"
-                   fixed
-                   [end]="sidebar.id !== 'end'">
-        <ngx-theme-settings></ngx-theme-settings>
-      </nb-sidebar>
     </nb-layout>
-  `,
+  `
 })
 export class SampleLayoutComponent implements OnDestroy {
-
   subMenu: NbMenuItem[] = [
     {
-      title: 'PAGE LEVEL MENU',
-      group: true,
+      title: "PAGE LEVEL MENU",
+      group: true
     },
     {
-      title: 'Buttons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/buttons',
+      title: "Buttons",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/buttons"
     },
     {
-      title: 'Grid',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/grid',
+      title: "Grid",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/grid"
     },
     {
-      title: 'Icons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/icons',
+      title: "Icons",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/icons"
     },
     {
-      title: 'Modals',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/modals',
+      title: "Modals",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/modals"
     },
     {
-      title: 'Typography',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/typography',
+      title: "Typography",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/typography"
     },
     {
-      title: 'Animated Searches',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/search-fields',
+      title: "Animated Searches",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/search-fields"
     },
     {
-      title: 'Tabs',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/tabs',
-    },
+      title: "Tabs",
+      icon: "ion ion-android-radio-button-off",
+      link: "/pages/ui-features/tabs"
+    }
   ];
   layout: any = {};
   sidebar: any = {};
@@ -106,40 +97,50 @@ export class SampleLayoutComponent implements OnDestroy {
 
   currentTheme: string;
 
-  constructor(protected stateService: StateService,
-              protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
-    this.stateService.onLayoutState()
+  constructor(
+    protected stateService: StateService,
+    protected menuService: NbMenuService,
+    protected themeService: NbThemeService,
+    protected bpService: NbMediaBreakpointsService,
+    protected sidebarService: NbSidebarService
+  ) {
+    this.stateService
+      .onLayoutState()
       .pipe(takeWhile(() => this.alive))
-      .subscribe((layout: string) => this.layout = layout);
+      .subscribe((layout: string) => (this.layout = layout));
 
-    this.stateService.onSidebarState()
+    this.stateService
+      .onSidebarState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((sidebar: string) => {
         this.sidebar = sidebar;
       });
 
-    const isBp = this.bpService.getByName('is');
-    this.menuService.onItemSelect()
+    const isBp = this.bpService.getByName("is");
+    this.menuService
+      .onItemSelect()
       .pipe(
         takeWhile(() => this.alive),
         withLatestFrom(this.themeService.onMediaQueryChange()),
-        delay(20),
+        delay(20)
       )
-      .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
-
-        if (bpTo.width <= isBp.width) {
-          this.sidebarService.collapse('menu-sidebar');
+      .subscribe(
+        ([item, [bpFrom, bpTo]]: [
+          any,
+          [NbMediaBreakpoint, NbMediaBreakpoint]
+        ]) => {
+          if (bpTo.width <= isBp.width) {
+            this.sidebarService.collapse("menu-sidebar");
+          }
         }
-      });
+      );
 
-    this.themeService.getJsTheme()
+    this.themeService
+      .getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
-    });
+      });
   }
 
   ngOnDestroy() {
