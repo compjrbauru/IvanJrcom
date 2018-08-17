@@ -3,4 +3,4 @@
     <h1>HOME</h1>
   </div>
 </div>
-<ngx-show-evento></ngx-show-evento>
+<ngx-show-evento *ngFor="let evento of eventos" [evento]=evento ></ngx-show-evento>
