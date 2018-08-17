@@ -11,7 +11,7 @@ import { MENU_ITEMS } from './home-menu';
 export class HomeComponent implements OnInit {
   menu = MENU_ITEMS;
   constructor(private router: Router) {}
-  xx;
+
   ngOnInit() {}
 
   changeAdmin() {
