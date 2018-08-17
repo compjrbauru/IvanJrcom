@@ -13,6 +13,10 @@ export class EventoService {
 
   constructor(private db: AngularFirestore) { }
 
+  getID(id: any): Observable<any> {
+    return this.db.collection('/Evento', ref => ref.where('id', '==', id)).valueChanges();
+  }
+
   getAll(): Observable<any> {
     return this.EventoCollection.valueChanges();
   }

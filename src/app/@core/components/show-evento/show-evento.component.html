@@ -8,7 +8,9 @@
         <nb-card-body>
           <div class="row">
             <div class="col-md-auto" style="max-width: 50%;">
-              <img class="img-fluid rounded" src="{{evento.url}}">
+              <a [routerLink]="['/home/evento', evento.id]" >
+                <img class="img-fluid rounded" src="{{evento.url}}">
+              </a>
             </div>  
 
             <div class="col">
