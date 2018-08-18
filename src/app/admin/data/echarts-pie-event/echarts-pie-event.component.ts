@@ -2,12 +2,11 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-echarts-pie',
-  template: `
-    <div echarts [options]="options" class="echart"></div>
-  `,
+  selector: 'ngx-echarts-pie-event',
+  templateUrl: './echarts-pie-event.component.html',
+  styleUrls: ['./echarts-pie-event.component.scss'],
 })
-export class EchartsPieComponent implements AfterViewInit, OnDestroy {
+export class EchartsPieEventComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
 
@@ -41,7 +40,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
         },
         series: [
           {
-            name: 'Countries',
+            name: 'Categorias',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
@@ -81,5 +80,9 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
+  }
+
+  onChartClick(params: any) {
+    console.log(params);
   }
 }
