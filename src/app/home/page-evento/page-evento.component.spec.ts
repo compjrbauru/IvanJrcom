@@ -8,7 +8,7 @@ describe('PageEventoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageEventoComponent ]
+      declarations: [ PageEventoComponent ],
     })
     .compileComponents();
   }));
