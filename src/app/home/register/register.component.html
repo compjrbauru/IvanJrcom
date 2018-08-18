@@ -6,15 +6,15 @@
         <form [formGroup]="novoRegistro" (ngSubmit)="submit()">
           
           <div class="row full-name-inputs">
-            <div class="col-sm-4">
-              <label for="nome">Nome de usuário</label> 
-              <input formControlName="Username" id="username" placeholder="Nome de usuário" class="form-control"/>
+            <div class="col-sm-6">
+              <label for="email">E-mail</label>
+              <input formControlName="email" type="email" id="email" placeholder="E-mail" class="form-control"/>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <label for="nome">Senha</label> 
               <input formControlName="Senha" type="password" id="senha" placeholder="Senha" class="form-control"/>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <label for="nome">Digite a senha novamente</label> 
               <input formControlName="ConfirmarSenha" type="password" id="ConfirmarSenha" placeholder="Repita a senha" class="form-control"/>
               <div class="alert alert-danger" *ngIf="novoRegistro.controls['ConfirmarSenha'].errors?.MesmaSenha">As senhas não são iguais</div>
@@ -38,11 +38,16 @@
           <div class="row full-name-inputs">
             <div class="col-sm-4">
               <label for="cpf">CPF (Somente números)</label>
-              <input formControlName="CPF" id="cpf" placeholder="CPF" class="form-control"/>
+              <input formControlName="CPF" maxlength="11" id="cpf" placeholder="CPF" class="form-control"/>
+              <div class="alert alert-danger" *ngIf="novoRegistro.controls['CPF'].errors?.DigitosRestantes">
+                Falta{{novoRegistro.value.CPF.length!=10? "m" : ""}} {{ 11 - novoRegistro.value.CPF.length }} dígito{{novoRegistro.value.CPF.length!=10? "s" : ""}}.</div>
             </div>
             <div class="col-sm-4">
               <label for="rg">RG (Somente números)</label>
-              <input formControlName="RG" id="rg" placeholder="RG" class="form-control"/>
+              <input formControlName="RG" maxlength="9" id="rg" placeholder="RG" class="form-control"/>
+              <div class="alert alert-danger" *ngIf="novoRegistro.controls['RG'].errors?.DigitosRestantes">
+                Falta{{novoRegistro.value.RG.length!=8? "m" : ""}} {{ 9 - novoRegistro.value.RG.length }} dígito{{novoRegistro.value.RG.length!=8? "s" : ""}}.</div>
+
             </div>
             <div class="col-sm-4">
               <label for="nascimento">Data de nascimento</label>
@@ -53,10 +58,6 @@
           <br/>
 
           <div class="row full-name-inputs">
-            <div class="col-sm-6">
-              <label for="email">E-mail</label>
-              <input formControlName="email" type="email" id="email" placeholder="E-mail" class="form-control"/>
-            </div>
             <div class="col-sm-1">
               <label for="dd">DDD</label>
               <input [formControl]="novoRegistro.controls['telefone'].controls['dd']" id="dd" placeholder="DDD" class="form-control"/>
