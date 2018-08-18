@@ -15,7 +15,9 @@
   .validation-checkboxes {
     display: flex;
     justify-content: space-between;
-
+  .button-sucess{
+   background-color:#40dc98
+  }
     .custom-control {
       margin-left: 1rem;
     }
@@ -127,4 +129,18 @@
       font-size: 0.75rem;
     }
   }
+.title{
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-family: Exo;
+  color: #2a2a2a;
+  font-size: 2rem;
+}
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
 }

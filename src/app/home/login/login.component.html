@@ -1,22 +1,45 @@
-<div class="row">
-  <div class="col-lg-12">
-    <nb-card>
-      <nb-card-header>Login</nb-card-header>
-      <nb-card-body>
-       <form [formGroup]="form_login">
-         <div class="col-lg-12">
-          <input type="email" class="form-control" formControlName="login" 
-          id="login" placeholder="Email">
-        </div>
-         <div class="col-lg-12">
-          <input type="password" class="form-control" formControlName="password" 
-          id="password" placeholder="Senha">
-       </div>
-         <div class="validation-checkboxes">
-          <button type="submit">Login</button> 
-       </div>
-       </form>
-      </nb-card-body>
-    </nb-card>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="row">
+    <div class="col-lg-12">
+      <nb-card>
+       <nb-card-body>
+        <h1 class="title">Entrar</h1> 
+          <form [formGroup]="form_login">
+           <div class="col-sm-6">
+              <input type="email" class="form-control"  formControlName="login" 
+              id="login" placeholder="Email">
+           </div>
+           <div class="col-sm-4">
+              <input type="password" class="form-control" formControlName="password" 
+              id="password" placeholder="Senha">
+           </div>
+           <div class="validation-checkboxes">
+              <button type="button" class="btn btn-hero-success btn-demo">Login</button>
+           </div>
+           <div class="forgot-password">
+              <p><a href="#">Esqueceu sua Senha?</a></p>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox">Lembrar Minha Senha</label>
+            </div>
+            <div>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-google"></a>
+            </div>
+            
+          </form>
+        </nb-card-body>
+      </nb-card>
+     </div>
   </div>
-</div>
+</body>
+</html>
