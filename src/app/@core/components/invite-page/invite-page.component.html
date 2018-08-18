@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        <div>
+          <img class="img-fluid rounded cape" src="{{evento.url}}">
+        </div>
+      </nb-card-header>
+      <nb-card-body id="ingresso">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1 class="text-center">{{evento.nome | uppercase}}</h1>
+            <br>
+            <h1 class="text-center">{{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm' | uppercase}}</h1>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-8">
+            <h2>Ingresso: Masculino (R$80.00)</h2>
+            <br>
+            <h2>Participante: Joselito Beiramar</h2>
+          </div>
+          <div class="col-md-4">
+            <div class="qrcodecenter">
+              <qrcode [qrdata]="'id do ingresso'" [size]="128" [level]="'M'"></qrcode>
+            </div>
+            <br>
+            <p class="text-center">{{evento.id}}</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary" (click)="gerarPDF()">Gerar PDF</button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
