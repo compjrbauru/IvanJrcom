@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
@@ -8,6 +7,7 @@ import {
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
+import { delay, takeWhile, withLatestFrom } from 'rxjs/operators';
 
 import { StateService } from '../../../@core/data/state.service';
 
@@ -45,19 +45,10 @@ import { StateService } from '../../../@core/data/state.service';
       <nb-layout-footer fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
-
-      <nb-sidebar class="settings-sidebar"
-                   tag="settings-sidebar"
-                   state="collapsed"
-                   fixed
-                   [end]="sidebar.id !== 'end'">
-        <ngx-theme-settings></ngx-theme-settings>
-      </nb-sidebar>
     </nb-layout>
   `,
 })
 export class SampleLayoutComponent implements OnDestroy {
-
   subMenu: NbMenuItem[] = [
     {
       title: 'PAGE LEVEL MENU',
@@ -106,40 +97,50 @@ export class SampleLayoutComponent implements OnDestroy {
 
   currentTheme: string;
 
-  constructor(protected stateService: StateService,
-              protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
-    this.stateService.onLayoutState()
+  constructor(
+    protected stateService: StateService,
+    protected menuService: NbMenuService,
+    protected themeService: NbThemeService,
+    protected bpService: NbMediaBreakpointsService,
+    protected sidebarService: NbSidebarService,
+  ) {
+    this.stateService
+      .onLayoutState()
       .pipe(takeWhile(() => this.alive))
-      .subscribe((layout: string) => this.layout = layout);
+      .subscribe((layout: string) => (this.layout = layout));
 
-    this.stateService.onSidebarState()
+    this.stateService
+      .onSidebarState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((sidebar: string) => {
         this.sidebar = sidebar;
       });
 
     const isBp = this.bpService.getByName('is');
-    this.menuService.onItemSelect()
+    this.menuService
+      .onItemSelect()
       .pipe(
         takeWhile(() => this.alive),
         withLatestFrom(this.themeService.onMediaQueryChange()),
         delay(20),
       )
-      .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
+      .subscribe(
+        ([item, [bpFrom, bpTo]]: [
+          any,
+          [NbMediaBreakpoint, NbMediaBreakpoint]
+        ]) => {
+          if (bpTo.width <= isBp.width) {
+            this.sidebarService.collapse('menu-sidebar');
+          }
+        },
+      );
 
-        if (bpTo.width <= isBp.width) {
-          this.sidebarService.collapse('menu-sidebar');
-        }
-      });
-
-    this.themeService.getJsTheme()
+    this.themeService
+      .getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
-    });
+      });
   }
 
   ngOnDestroy() {
