@@ -8,15 +8,6 @@ import { Observable } from 'rxjs';
 export class CarouselLocalComponent implements OnInit {
   @Input() eventos: Observable<any>;
   eventosShow: any;
-  teste: string = 'teste';
-  item = [
-    {
-      teste: 1,
-    },
-    {
-      teste: 2,
-    },
-  ];
 
   constructor() { }
 
