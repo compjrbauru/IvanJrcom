@@ -1,15 +1,17 @@
-<div class="row">
-    <div class="col-lg-12">
-      <nb-card>
-        <nb-card-body>
-          <p-carousel [value]="eventosShow">
-            <ng-template let-evento pTemplate="eventosShow">
-              <div class="carousel-item ui-grid ui-grid-responsive">
-                <img src="{{ evento.url }}" alt="{{ evento.nome }}">
-              </div>
-            </ng-template>
-          </p-carousel>
-        </nb-card-body>
-      </nb-card>
-    </div>
+<div class="row justify-content-md-center">
+  <div class="col-lg-8">
+    <nb-card>
+      <nb-card-body>
+        <ngb-carousel *ngIf="images">
+          <ng-template ngbSlide *ngFor="let image of images">
+            <img class="img-fluid rounded" [src]="image">
+            <div class="carousel-caption">
+              <h3>FESTA TOP</h3>
+              <p>MUITO TOP.</p>
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </nb-card-body>
+    </nb-card>
   </div>
+</div>
