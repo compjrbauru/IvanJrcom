@@ -14,7 +14,7 @@ export class CreateEventComponent implements OnInit {
   formEvent: FormGroup;
   categorias: any;
 
-  constructor(private formBuilder: FormBuilder, private eventoService: EventoService, 
+  constructor(private formBuilder: FormBuilder, private eventoService: EventoService,   
     private categoriaService: CategoriaService) { }
 
   ngOnInit() {
