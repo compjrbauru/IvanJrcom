@@ -37,6 +37,7 @@ import { QueryService } from './services/query.service';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, EventoService, AngularFirestore, CategoriaService],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, EventoService, AngularFirestore,
+   CategoriaService],
 })
 export class AppModule {}

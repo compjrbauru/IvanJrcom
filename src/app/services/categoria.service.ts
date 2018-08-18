@@ -11,7 +11,7 @@ export class CategoriaService {
 
     constructor(private db: AngularFirestore) { }
 
-    getCategoria(){
+    getCategoria() {
         const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
         return collections$;
     }
@@ -28,7 +28,7 @@ export class CategoriaService {
     patchCategoria(categoria: any, evento: any) {
         this.CategoriasCollection.doc(categoria.id)
             .update({
-                count: categoria.count+1,
+                count: categoria.count + 1,
                 idsevento: [...categoria.idsevento, evento.id],
             });
     }
@@ -38,3 +38,4 @@ export class CategoriaService {
     }
 
 }
+

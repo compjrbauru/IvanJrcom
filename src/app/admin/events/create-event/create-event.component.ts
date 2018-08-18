@@ -2,9 +2,6 @@ import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { timestamp } from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 
 @Component({
@@ -17,7 +14,8 @@ export class CreateEventComponent implements OnInit {
   formEvent: FormGroup;
   categorias: any;
 
-  constructor(private formBuilder: FormBuilder, private eventoService: EventoService, private categoriaService: CategoriaService) { }
+  constructor(private formBuilder: FormBuilder, private eventoService: EventoService, 
+    private categoriaService: CategoriaService) { }
 
   ngOnInit() {
     this.formEvent = this.formBuilder.group({
@@ -52,13 +50,11 @@ export class CreateEventComponent implements OnInit {
     });
 
     this.categorias = this.categoriaService.getCategoria();
-    console.log(this.categorias);
   }
 
   submit(form: any) {
-    console.log(form);
     this.eventoService.addData(form);
-    //this.categoriaService.patchCategoria(this.categorias, form);
+    // this.categoriaService.patchCategoria(this.categorias, form);
    }
 
 }
