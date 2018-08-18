@@ -15,8 +15,8 @@ export class InvitePageComponent implements OnInit {
   ngOnInit() {}
 
   gerarPDF() {
-    const data = document.getElementById('ingresso');
-    html2canvas(data).then(canvas => {
+    const ingresso = document.getElementById('ingresso');
+    html2canvas(ingresso).then(canvas => {
       const imgWidth = 208;
       const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
