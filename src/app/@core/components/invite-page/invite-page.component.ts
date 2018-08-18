@@ -18,9 +18,7 @@ export class InvitePageComponent implements OnInit {
     const ingresso = document.getElementById('ingresso');
     html2canvas(ingresso).then(canvas => {
       const imgWidth = 208;
-      const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jspdf('p', 'mm', 'a4');
       const position = 0;
