@@ -15,5 +15,4 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.eventos = this.eventoService.getAll();
   }
-
 }

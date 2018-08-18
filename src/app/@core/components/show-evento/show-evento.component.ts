@@ -8,7 +8,6 @@ import { QueryService } from './../../../services/query.service';
   selector: 'ngx-show-evento',
   templateUrl: './show-evento.component.html',
   styleUrls: ['./show-evento.component.scss'],
-  providers: [QueryService],
   animations: [enterUp('teste', '1000ms')],
 })
 export class ShowEventoComponent implements OnInit {

@@ -11,5 +11,4 @@ const MAIN_COMPONENTS = [MainComponent];
     imports: [ThemeModule, ShowEventoModule, CarouselLocalModule],
     declarations: [...MAIN_COMPONENTS],
 })
-
 export class MainModule {}
