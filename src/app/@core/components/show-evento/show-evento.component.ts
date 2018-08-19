@@ -6,7 +6,6 @@ import { enterUp } from '../../animations/animations';
   selector: 'ngx-show-evento',
   templateUrl: './show-evento.component.html',
   styleUrls: ['./show-evento.component.scss'],
-  animations: [enterUp('teste', '1000ms')],
 })
 export class ShowEventoComponent implements OnInit {
   @Input() evento: any;
