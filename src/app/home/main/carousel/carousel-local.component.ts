@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
+
 @Component({
   selector: 'ngx-carousel',
   templateUrl: './carousel-local.component.html',
