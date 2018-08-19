@@ -6,6 +6,6 @@
 <ngx-carousel
   [eventos]="eventos">
 </ngx-carousel>
-<ngx-show-evento>
-
-</ngx-show-evento>
+<div *ngFor="let evento of eventos">
+  <ngx-show-evento [evento]=evento ></ngx-show-evento>
+</div>

@@ -1,0 +1,41 @@
+.event-title {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    text-transform: capitalize;
+}
+
+.body-content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+}
+
+.content {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.center {
+    margin-left: auto;
+	margin-right: auto;
+    display: block;
+    img {
+        margin-left: auto;
+	    margin-right: auto;
+        display: block;
+    }
+}
+
+.hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.midqty {
+    padding-left: 5px;
+    padding-right: 5px;
+}

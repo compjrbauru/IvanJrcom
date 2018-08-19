@@ -1,0 +1,121 @@
+<nb-card>
+  <div class="center">
+    <img class="img-fluid rounded" src="{{evento?.url}}">
+  </div>
+
+  <nb-card-header>
+    <div class="content">
+        <div class="font-row font-secondary">
+          <div class="header">
+            <div class="name bold">{{evento?.nome}}</div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="row">
+            <i class="fa fa-calendar"></i>
+            <p style="padding-left: 5px">{{evento?.data.seconds * 1000 | date:'d MMM, y - HH:mm'}}</p>
+          </div>
+          <div class="row">
+            <i class="fa fa-asterisk"></i>
+            <p style="padding-left: 5px">{{evento?.categoria}}</p>
+          </div> 
+        </div>
+    </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="body-content row">
+      <div class="col-md-8">
+        <div class="font-row font-secondary">
+          <div class="row">
+            <div>
+              <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <h4 style="padding-left: 5px">Descricao do evento?</h4> 
+          </div>
+          <p>{{evento?.descricao}}</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="header row">
+            <div><i class="fa fa-ticket fa-2x"></i></div>
+            <h3 style="padding-left: 5px">Ingressos</h3>
+        </div>
+        <div class="hr"></div>
+
+        <div class="row">
+          <div class="col-6 col-sm-4">
+            <i class="fa fa-venus"></i>Feminino
+          </div>
+          <div class="col-6 col-sm-4">
+            {{evento?.ingressos.feminino.valor}} R$
+          </div>
+          <div class="col-6 col-sm-4 row">
+            <div (click)="minus('fem')">
+              <i class="fa fa-minus"></i>
+            </div>
+            <p class="midqty">{{qty.fem}}</p>
+            <div (click)="plus('fem')">
+              <i class="fa fa-plus"></i>
+            </div>
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col-6 col-sm-4 left_part">
+              <i class="fa fa-mars"></i>Masculino
+            </div>
+            <div class="col-6 col-sm-4 right_part">
+              {{evento?.ingressos.feminino.valor}} R$
+            </div>
+            <div class="col-6 col-sm-4 row">
+              <div (click)="minus('masc')">
+                <i class="fa fa-minus"></i>
+              </div>
+              <p class="midqty">{{qty.masc}}</p>
+              <div (click)="plus('masc')">
+                <i class="fa fa-plus"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-6 col-sm-4">
+                <i class="fa fa-venus-mars"></i>Unisex
+              </div>
+              <div class="col-6 col-sm-4">
+                {{evento?.ingressos.unisex.valor}} R$
+              </div>
+              <div class="col-6 col-sm-4 row">
+                <div (click)="minus('uni')">
+                  <i class="fa fa-minus"></i>
+                </div>
+                <p class="midqty">{{qty.uni}}</p>
+                <div (click)="plus('uni')">
+                  <i class="fa fa-plus"></i>
+                </div>
+              </div>
+            </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-8">
+              <h5>{{evento?.ingressos.lote.numero}}º Lote</h5>
+            </div>
+
+            <div class="col-6 col-md-4">
+              <div class="row">
+                <div>
+                  <i class="fa fa-shopping-cart fa-lg"></i>
+                </div>
+                <h5 style="padding-left: 10px; padding-right: 10px">0,00 R$</h5>
+              </div>
+              
+            </div>
+
+            
+          </div>
+      </div>
+   </div>
+  </nb-card-body>
+</nb-card>
