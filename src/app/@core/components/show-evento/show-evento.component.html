@@ -10,10 +10,10 @@
           <nb-card-body>
             <div class="row">
               <div class="col-md-auto" style="max-width: 50%;">
-                <a [routerLink]="['/home/evento', evento.id]" >
+                <a routerLink="/home/evento/{{evento.id}}" >
                   <img class="img-fluid rounded" src="{{evento.url}}">
                 </a>
-              </div> 
+              </div>
 
               <div class="col">
                 <div class="row">
