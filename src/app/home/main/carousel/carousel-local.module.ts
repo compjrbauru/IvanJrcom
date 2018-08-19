@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 
@@ -7,7 +8,7 @@ import { CarouselLocalComponent } from './carousel-local.component';
 const MAIN_COMPONENTS = [CarouselLocalComponent];
 
 @NgModule({
-    imports: [ThemeModule, CarouselModule],
+    imports: [ThemeModule, CarouselModule, RouterModule],
     declarations: [...MAIN_COMPONENTS],
     exports: [...MAIN_COMPONENTS],
 })

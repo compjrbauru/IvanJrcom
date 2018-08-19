@@ -15,7 +15,6 @@ export class CarouselLocalComponent implements OnInit {
   ngOnInit() {
     this.eventos.subscribe(response => {
       this.eventosShow = response;
-      console.log(this.eventosShow);
     });
   }
 

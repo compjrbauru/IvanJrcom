@@ -4,7 +4,9 @@
       <nb-card-body>
         <ngb-carousel *ngIf="eventosShow">
           <ng-template ngbSlide *ngFor="let evento of eventosShow">
-            <img class="img-fluid rounded img" [src]="evento.url">
+            <a routerLink="/home/evento/{{evento.id}}">
+              <img class="img-fluid rounded img" [src]="evento.url">
+            </a>
             <div class="carousel-caption">
             </div>
           </ng-template>
