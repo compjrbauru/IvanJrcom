@@ -52,9 +52,13 @@
             {{evento.ingressos.feminino.valor}} R$
           </div>
           <div class="col-6 col-sm-4 row">
-            <i class="fa fa-minus" onclick="minus(this.qty.fem)"></i>
+            <div (click)="minus('fem')">
+              <i class="fa fa-minus"></i>
+            </div>
             <p class="midqty">{{qty.fem}}</p>
-            <i class="fa fa-plus"></i>
+            <div (click)="plus('fem')">
+              <i class="fa fa-plus"></i>
+            </div>
           </div>
         </div>
 
@@ -66,10 +70,13 @@
               {{evento.ingressos.feminino.valor}} R$
             </div>
             <div class="col-6 col-sm-4 row">
-              <i class="fa fa-minus"></i>
-              
+              <div (click)="minus('masc')">
+                <i class="fa fa-minus"></i>
+              </div>
               <p class="midqty">{{qty.masc}}</p>
-              <i class="fa fa-plus"></i>
+              <div (click)="plus('masc')">
+                <i class="fa fa-plus"></i>
+              </div>
             </div>
           </div>
 
@@ -81,9 +88,13 @@
                 {{evento.ingressos.unisex.valor}} R$
               </div>
               <div class="col-6 col-sm-4 row">
-                <i class="fa fa-minus"></i>
+                <div (click)="minus('uni')">
+                  <i class="fa fa-minus"></i>
+                </div>
                 <p class="midqty">{{qty.uni}}</p>
-                <i class="fa fa-plus"></i>
+                <div (click)="plus('uni')">
+                  <i class="fa fa-plus"></i>
+                </div>
               </div>
             </div>
 
