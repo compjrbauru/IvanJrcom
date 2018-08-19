@@ -52,11 +52,11 @@
             {{evento?.ingressos.feminino.valor}} R$
           </div>
           <div class="col-6 col-sm-4 row">
-            <div (click)="minus('fem')">
+            <div (click)="minus('feminino')">
               <i class="fa fa-minus"></i>
             </div>
-            <p class="midqty">{{qty.fem}}</p>
-            <div (click)="plus('fem')">
+            <p class="midqty">{{qty.feminino}}</p>
+            <div (click)="plus('feminino')">
               <i class="fa fa-plus"></i>
             </div>
           </div>
@@ -70,11 +70,11 @@
               {{evento?.ingressos.feminino.valor}} R$
             </div>
             <div class="col-6 col-sm-4 row">
-              <div (click)="minus('masc')">
+              <div (click)="minus('masculino')">
                 <i class="fa fa-minus"></i>
               </div>
-              <p class="midqty">{{qty.masc}}</p>
-              <div (click)="plus('masc')">
+              <p class="midqty">{{qty.masculino}}</p>
+              <div (click)="plus('masculino')">
                 <i class="fa fa-plus"></i>
               </div>
             </div>
@@ -88,11 +88,11 @@
                 {{evento?.ingressos.unisex.valor}} R$
               </div>
               <div class="col-6 col-sm-4 row">
-                <div (click)="minus('uni')">
+                <div (click)="minus('unisex')">
                   <i class="fa fa-minus"></i>
                 </div>
-                <p class="midqty">{{qty.uni}}</p>
-                <div (click)="plus('uni')">
+                <p class="midqty">{{qty.unisex}}</p>
+                <div (click)="plus('unisex')">
                   <i class="fa fa-plus"></i>
                 </div>
               </div>
@@ -108,7 +108,7 @@
                 <div>
                   <i class="fa fa-shopping-cart fa-lg"></i>
                 </div>
-                <h5 style="padding-left: 10px; padding-right: 10px">0,00 R$</h5>
+                <h5 style="padding-left: 10px; padding-right: 10px">{{preco}} R$</h5>
               </div>
               
             </div>
