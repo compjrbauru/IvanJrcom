@@ -3,4 +3,9 @@
     <h1>HOME</h1>
   </div>
 </div>
-<ngx-show-evento></ngx-show-evento>
+<ngx-carousel
+  [eventos]="eventosAsync">
+</ngx-carousel>
+<div *ngFor="let evento of eventosAsync | async">
+  <ngx-show-evento [evento]=evento ></ngx-show-evento>
+</div>
