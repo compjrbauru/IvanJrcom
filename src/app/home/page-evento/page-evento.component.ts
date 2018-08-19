@@ -13,28 +13,33 @@ export class PageEventoComponent implements OnInit, OnDestroy {
   private sub: any;
   private eventsub: any;
   private qty: {
-    fem: number,
-    masc: number,
-    uni: number,
+    feminino: number,
+    masculino: number,
+    unisex: number,
   };
+  private preco: any;
 
   minus(type: string) {
-    if (this.qty[type] > 0)
+    if (this.qty[type] > 0) {
+      this.preco -= +this.evento.ingressos[type].valor;
       this.qty[type]--;
+    }
   }
 
   plus(type: string) {
     this.qty[type]++;
+    this.preco += +this.evento.ingressos[type].valor;
   }
 
   constructor(private route: ActivatedRoute, private eventoService: EventoService) { }
 
   ngOnInit() {
     this.qty = {
-      fem: 0,
-      masc: 0,
-      uni: 0,
+      feminino: 0,
+      masculino: 0,
+      unisex: 0,
     };
+    this.preco = 0;
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       this.eventsub = this.eventoService.getID(this.id).subscribe(response => {
