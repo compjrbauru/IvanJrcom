@@ -4,8 +4,8 @@
   </div>
 </div>
 <ngx-carousel
-  [eventos]="eventos">
+  [eventos]="eventosAsync">
 </ngx-carousel>
-<div *ngFor="let evento of eventos | async">
+<div *ngFor="let evento of eventosAsync | async">
   <ngx-show-evento [evento]=evento ></ngx-show-evento>
 </div>

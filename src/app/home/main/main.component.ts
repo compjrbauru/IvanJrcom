@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  eventos: Observable<any>;
+  eventosAsync: Observable<any>;
 
   constructor(private eventoService: EventoService) { }
 
   ngOnInit() {
-    this.eventos = this.eventoService.getByDate();
+    this.eventosAsync = this.eventoService.getByDate();
   }
 }
