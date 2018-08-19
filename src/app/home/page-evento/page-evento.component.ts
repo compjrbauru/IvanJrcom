@@ -19,21 +19,12 @@ export class PageEventoComponent implements OnInit, OnDestroy {
   };
 
   minus(type: string) {
-    if (type === 'fem')
-      this.qty.fem--;
-    else if (type === 'masc')
-      this.qty.masc--;
-    else if (type === 'uni')
-      this.qty.uni--;
+    if (this.qty[type] > 0)
+      this.qty[type]--;
   }
 
-  plus(type: any) {
-    if (type === 'fem')
-      this.qty.fem++;
-    else if (type === 'masc')
-      this.qty.masc++;
-    else if (type === 'uni')
-      this.qty.uni++;
+  plus(type: string) {
+    this.qty[type]++;
   }
 
   constructor(private route: ActivatedRoute, private eventoService: EventoService) { }
