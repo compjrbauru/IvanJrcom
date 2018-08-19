@@ -1,13 +1,11 @@
 <div class="row justify-content-md-center">
-  <div class="col-lg-8">
+  <div class="col-lg-12">
     <nb-card>
       <nb-card-body>
-        <ngb-carousel *ngIf="images">
-          <ng-template ngbSlide *ngFor="let image of images">
-            <img class="img-fluid rounded" [src]="image">
+        <ngb-carousel *ngIf="eventosShow">
+          <ng-template ngbSlide *ngFor="let evento of eventosShow">
+            <img class="img-fluid rounded img" [src]="evento.url">
             <div class="carousel-caption">
-              <h3>FESTA TOP</h3>
-              <p>MUITO TOP.</p>
             </div>
           </ng-template>
         </ngb-carousel>

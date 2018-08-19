@@ -13,6 +13,6 @@ export class MainComponent implements OnInit {
   constructor(private eventoService: EventoService) { }
 
   ngOnInit() {
-    this.eventos = this.eventoService.getAll();
+    this.eventos = this.eventoService.getByDate();
   }
 }

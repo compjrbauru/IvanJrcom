@@ -17,6 +17,10 @@ export class EventoService {
     return this.EventoCollection.valueChanges();
   }
 
+  getByDate(): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
+  }
+
   addData(evento: any) {
     evento.id = this.db.createId();
     this.EventoCollection.doc(evento.id).set({
