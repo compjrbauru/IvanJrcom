@@ -34,7 +34,7 @@ export class PageEventoComponent implements OnInit, OnDestroy {
       fem: 0,
       masc: 0,
       uni: 0,
-    }
+    };
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       this.eventsub = this.eventoService.getID(this.id).subscribe(response => {

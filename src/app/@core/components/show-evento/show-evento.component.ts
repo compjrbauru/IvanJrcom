@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { enterUp } from '../../animations/animations';
 
 @Component({
   selector: 'ngx-show-evento',

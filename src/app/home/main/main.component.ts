@@ -1,4 +1,3 @@
-import { EventoService } from './../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
