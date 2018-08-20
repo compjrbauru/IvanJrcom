@@ -2,8 +2,6 @@ import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
-import { timeout } from 'q';
 
 
 @Component({
@@ -61,9 +59,8 @@ export class CreateEventComponent implements OnInit {
       (res: any) => {
         this.categoriaService.patchCategoria(res[0], form);
         this.categoria.unsubscribe();
-      }
+      },
     );
-
 
     alert('Evento criado com sucesso!');
 
