@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Observable } from 'rxjs/Observable';
 import { find, cloneDeep } from 'lodash';
 import { TableService } from './../../services/table.service';
 import { Subject } from 'rxjs';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'ngx-table',
@@ -21,6 +22,7 @@ export class TableComponent implements OnInit {
   @Input() eventoIdAsync: Observable<any>;
   @Input() cat$: Subject<string>;
   @Input() deleteData: any = [];
+  @Output() editE = new EventEmitter();
   keysSettings: any = [];
   dataSource: any = [];
   dataSync: any;
