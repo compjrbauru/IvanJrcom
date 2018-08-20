@@ -5,6 +5,7 @@ import { SearchBarModule } from '../../@core/components/search-bar/search-bar.mo
 import { ShowEventoModule } from '../../@core/components/show-evento/show-evento.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { EventoService } from '../../services/evento.service';
+import { ShowEvento2Module } from './../../@core/components/show-evento2/show-evento2.module';
 import { CarouselLocalModule } from './carousel/carousel-local.module';
 import { MainComponent } from './main.component';
 
@@ -14,6 +15,7 @@ const MAIN_MODULES = [
   InvitePageModule,
   CarouselLocalModule,
   SearchBarModule,
+  ShowEvento2Module,
 ];
 
 @NgModule({
