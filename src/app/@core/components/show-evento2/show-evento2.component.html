@@ -1,0 +1,27 @@
+<div class="row">
+  <div *ngFor="let evento of eventos"  class="col-md-4">
+    <div class="card img">
+      <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%">
+      <div class="card-body">
+        <h5 class="card-title">{{evento.nome}}</h5>
+        <a routerLink="/home/evento/{{evento.id}}" class="btn btn-primary">Confira</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="row justify-content-md-center">
+  <div class="col-md-12">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link btn btn-primary" (click)="prev()">Anterior</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link btn btn-primary" (click)="next()">Próxima</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
