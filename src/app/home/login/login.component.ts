@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { enterComponent } from '../../@core/animations/animations';
 
@@ -10,12 +10,20 @@ import { enterComponent } from '../../@core/animations/animations';
   animations: [enterComponent('cardanimation')],
 })
 export class LoginComponent implements OnInit {
-  form_login: FormGroup;
+  formLogin: FormGroup;
+
   constructor(private formBuilder: FormBuilder) {}
+
   ngOnInit() {
-    this.form_login = this.formBuilder.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
+    this.formLogin = this.formBuilder.group({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
+
+  resetPass() {}
+
+  loginFacebook() {}
+
+  submit(form: any) {}
 }
