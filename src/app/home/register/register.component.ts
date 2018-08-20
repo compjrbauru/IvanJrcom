@@ -2,6 +2,7 @@ import { UsuarioService } from './../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { buttonVerified } from '../../@core/animations/animations';
 import { ValidatorSenha } from './Validators/ValidatorSenha';
 import { ValidatorNumMin } from './Validators/ValidatorNumMin';
 
@@ -9,10 +10,10 @@ import { ValidatorNumMin } from './Validators/ValidatorNumMin';
   selector: 'ngx-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  animations: [buttonVerified('buttonregister')],
 })
 export class RegisterComponent implements OnInit {
-
-public novoRegistro: FormGroup;
+  public novoRegistro: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService) { }
 
@@ -38,5 +39,4 @@ public novoRegistro: FormGroup;
   submit() {
     this.usuarioService.addUsuario(this.novoRegistro.value);
   }
-
 }

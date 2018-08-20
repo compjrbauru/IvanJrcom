@@ -13,8 +13,16 @@ export class EventoService {
 
   constructor(private db: AngularFirestore) { }
 
+  getID(id: any): Observable<any> {
+    return this.db.collection('/Evento', ref => ref.where('id', '==', id)).valueChanges();
+  }
+
   getAll(): Observable<any> {
     return this.EventoCollection.valueChanges();
+  }
+
+  getByDate(): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
   }
 
   addData(evento: any) {
@@ -25,7 +33,7 @@ export class EventoService {
   }
 
   removeData(id: any) {
-    return this.db.doc(`/Evento/${id}`);
+    return this.db.doc(`/Evento/${id}`).delete();
   }
 
 }
