@@ -10,14 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 export class PageEventoComponent implements OnInit, OnDestroy {
   evento: any;
   id: number;
-  private sub: any;
-  private eventsub: any;
-  private qty: {
+  sub: any;
+  eventsub: any;
+  qty: {
     feminino: number,
     masculino: number,
     unisex: number,
   };
-  private preco: any;
+  preco: any;
 
   minus(type: string) {
     if (this.qty[type] > 0) {
