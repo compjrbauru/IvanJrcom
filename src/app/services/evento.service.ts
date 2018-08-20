@@ -25,6 +25,24 @@ export class EventoService {
     return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
   }
 
+  getByNameWithLimit(): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(3)).valueChanges();
+  }
+
+  getByNameWithLimitWithStart(lastVisible: any): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref
+      .orderBy('nome')
+      .limit(3)
+      .startAfter(lastVisible)).valueChanges();
+  }
+
+  getByNameWithLimitWithEnd(firstVisible: any): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref
+      .orderBy('nome')
+      .limit(3)
+      .endBefore(firstVisible)).valueChanges();
+  }
+
   addData(evento: any) {
     evento.id = this.db.createId();
     this.EventoCollection.doc(evento.id).set({

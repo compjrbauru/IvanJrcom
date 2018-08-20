@@ -1,3 +1,4 @@
+import { ShowEvento2Module } from './../../@core/components/show-evento2/show-evento2.module';
 import { NgModule } from '@angular/core';
 
 import { ShowEventoModule } from '../../@core/components/show-evento/show-evento.module';
@@ -10,7 +11,7 @@ import { InvitePageModule } from '../../@core/components/invite-page/invite-page
 const MAIN_COMPONENTS = [MainComponent];
 
 @NgModule({
-  imports: [ThemeModule, ShowEventoModule, InvitePageModule, CarouselLocalModule],
+  imports: [ThemeModule, ShowEventoModule, InvitePageModule, CarouselLocalModule, ShowEvento2Module],
   declarations: [...MAIN_COMPONENTS],
   providers: [EventoService],
 })
