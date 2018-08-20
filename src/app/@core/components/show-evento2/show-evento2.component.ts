@@ -18,13 +18,14 @@ export class ShowEvento2Component implements OnInit {
   }
 
   next() {
-    this.eventoService.getByNameWithLimitWithStart(last(this.eventos)).subscribe(response => this.eventos = response);
+    this.eventoService.getByNameWithLimitWithStart(
+      last(this.eventos)).subscribe(response => response ? this.eventos = response : this.eventos);
   }
 
   prev() {
     this.eventoService.getByNameWithLimitWithEnd(
       first(this.eventos))
-      .subscribe(response => this.eventos = response);
+      .subscribe(response => response ? this.eventos = response : this.eventos);
   }
 
 }
