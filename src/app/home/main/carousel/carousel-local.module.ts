@@ -1,5 +1,5 @@
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 
 import { ThemeModule } from '../../../@theme/theme.module';
