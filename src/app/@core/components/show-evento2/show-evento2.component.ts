@@ -1,7 +1,8 @@
-import { EventoService } from './../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { first, last } from 'lodash';
+
+import { EventoService } from './../../../services/evento.service';
+
 @Component({
   selector: 'ngx-show-evento2',
   templateUrl: './show-evento2.component.html',

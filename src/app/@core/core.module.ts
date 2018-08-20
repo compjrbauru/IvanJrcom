@@ -7,7 +7,6 @@ import { of as observableOf } from 'rxjs';
 import { DataModule } from './data/data.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AnalyticsService } from './utils/analytics.service';
-import { ShowEvento2Component } from './components/show-evento2/show-evento2.component';
 
 const socialLinks = [
   {
