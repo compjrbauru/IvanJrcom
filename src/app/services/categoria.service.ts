@@ -11,6 +11,11 @@ export class CategoriaService {
 
     constructor(private db: AngularFirestore) { }
 
+    searchrcategoriabynome(query: string): any {
+        return this.db.collection('Categorias', ref => ref.where('nome', '==', query))
+          .valueChanges();
+      }
+
     getCategoria() {
         const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
         return collections$;
@@ -26,10 +31,11 @@ export class CategoriaService {
     }
 
     patchCategoria(categoria: any, evento: any) {
+        categoria.count++;
+        categoria.idsevento.push(evento.id);
         this.CategoriasCollection.doc(categoria.id)
-            .update({
-                count: categoria.count + 1,
-                idsevento: [...categoria.idsevento, evento.id],
+            .set({
+                ...categoria,
             });
     }
 
