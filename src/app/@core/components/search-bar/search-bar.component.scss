@@ -1,0 +1,57 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+.searchinput {
+  width: 33%;
+}
+
+.has-search-icon {
+  position: relative;
+  width: 33%;
+  .form-control {
+    padding-left: 3rem;
+    width: 100%;
+  }
+
+  &::before {
+    content: '\f4a5';
+    font-family: 'Ionicons';
+    font-size: 2rem;
+    position: absolute;
+    z-index: 100;
+    left: 1rem;
+    top: 0.25rem;
+  }
+}
+
+.has-location-icon {
+  position: relative;
+  width: 33%;
+  .form-control {
+    padding-left: 3rem;
+    width: 100%;
+  }
+
+  &::before {
+    content: '\f1ff';
+    font-family: 'Ionicons';
+    font-size: 2rem;
+    position: absolute;
+    z-index: 100;
+    left: 1rem;
+    top: 0.25rem;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .searchinput {
+    width: 100%;
+  }
+  .has-search-icon {
+    width: 100%;
+  }
+
+  .has-location-icon {
+    width: 100%;
+  }
+}
