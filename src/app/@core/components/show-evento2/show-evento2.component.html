@@ -1,11 +1,33 @@
 <div class="row">
-  <div *ngFor="let eventos of eventoAsync | async"  class="col-md-4">
-    <div class="card bg-dark text-white img">
-      <img class="card-img-top" src="{{eventos.url}}" alt="Card image cap">
+  <div *ngFor="let evento of eventos"  class="col-md-4">
+    <div class="card img">
+      <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%">
       <div class="card-body">
-        <h5 class="card-title">{{eventos.nome}}</h5>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h5 class="card-title">{{evento.nome}}</h5>
+        <a routerLink="/home/evento/{{evento.id}}" class="btn btn-primary">Confira</a>
       </div>
     </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="row center-text">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <nav aria-label="Page navigation example" center-text>
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link btn btn-primary" (click)="prev()">Anterior</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link btn btn-primary" (click)="next()">Próxima</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-md-4">
+
   </div>
 </div>
