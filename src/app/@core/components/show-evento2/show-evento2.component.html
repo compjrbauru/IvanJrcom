@@ -1,0 +1,11 @@
+<div class="row">
+  <div *ngFor="let eventos of eventoAsync | async"  class="col-md-4">
+    <div class="card bg-dark text-white img">
+      <img class="card-img-top" src="{{eventos.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{eventos.nome}}</h5>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
