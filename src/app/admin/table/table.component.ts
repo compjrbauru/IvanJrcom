@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Observable } from 'rxjs/Observable';
 import { find, cloneDeep } from 'lodash';
 import { TableService } from './../../services/table.service';
 import { Subject } from 'rxjs';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'ngx-table',
@@ -19,7 +18,7 @@ import { EventEmitter } from 'events';
 
 export class TableComponent implements OnInit {
   @Input() dataAsync: Observable<any>;
-  @Input() eventoIdAsync: Observable<any>;
+  @Input() dataIdAsync: Observable<any>;
   @Input() cat$: Subject<string>;
   @Input() deleteData: any = [];
   @Output() editE = new EventEmitter();
@@ -52,19 +51,23 @@ export class TableComponent implements OnInit {
       });
       this.source.load(this.dataSource);
     });
-    this.eventoIdAsync.subscribe(response => this.eventoResolved = response);
+    this.dataIdAsync.subscribe(response => {
+      this.eventoResolved = response;
+    });
   }
 
   onDelete(event): void {
-    if (window.confirm('Tem certeza que deeseja deletar?')) {
+    if (window.confirm('Tem certeza que deseja deletar?')) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
   }
 
-  patchForm(event: any) {
+  foundObject(event: any) {
     this.cat$.next(find(this.dataSync, event.data).id);
+    const emitter = cloneDeep(this.eventoResolved);
+    this.editE.emit(emitter);
     this.editEvento = true;
   }
 

@@ -19,6 +19,9 @@ export class ListEventsComponent implements OnInit {
     this.eventoAsync = this.eventoService.getAll();
     this.catID$.next('');
     this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
+  }
+
+  resolver(event) {
 
   }
 
