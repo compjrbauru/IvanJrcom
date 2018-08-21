@@ -3,17 +3,26 @@ import { EventoService } from './../../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
+import { CategoriaService } from '../../../../services/categoria.service';
 
 @Component({
   selector: 'ngx-list-events',
   templateUrl: './list-events.component.html',
 })
 export class ListEventsComponent implements OnInit {
+  form: any = {};
+  categorias: Observable<any>;
+  categoria: any;
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
+  eventoResolver: any = [];
   catID$ = new Subject<string>();
 
-  constructor(private eventoService: EventoService, private queryService: QueryService) { }
+  constructor(
+    private eventoService: EventoService,
+    private queryService: QueryService,
+    private categoriaService: CategoriaService,
+  ) { }
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
@@ -22,7 +31,22 @@ export class ListEventsComponent implements OnInit {
   }
 
   resolver(event) {
-
+    this.eventoResolver = event ? event[0] : null;
   }
+
+  submit(form: any) {
+    form.data = new Date(form.data);
+    this.eventoService.addData(form);
+    this.categoria = this.categoriaService.searchrcategoriabynome(form.categoria).subscribe(
+      (res: any) => {
+        this.categoriaService.patchCategoria(res[0], form);
+        this.categoria.unsubscribe();
+      },
+    );
+
+    alert('Evento editado com sucesso!');
+    this.eventoResolver = [];
+    this.form['formEvent'].reset();
+   }
 
 }

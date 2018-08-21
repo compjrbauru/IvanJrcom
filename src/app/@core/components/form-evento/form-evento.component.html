@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-lg-12">
+      <form [formGroup]="formEvent">
+          <div class="form-group">
+              <div class="row full-name-inputs">
+                  <div class="col-sm-4 input-group">
+                      <input formControlName="nome" placeholder="Nome" id="nome" class="form-control" type="text">
+                  </div>
+                  <div class="col-sm-4">
+                      <select formControlName="categoria" class="form-control">
+                          <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
+                            {{categoria.nome}}
+                          </option>
+                      </select>
+                  </div>
+                  <div class="col-sm-4 input-group">
+                      <input formControlName="data" placeholder="Data e Hora" id="data" class="form-control" type="datetime-local">
+                  </div>
+              </div>
+              <br>
+              <div class="row full-name-inputs">
+                  <div class="col-sm-12 input-group">
+                      <textarea formControlName="descricao" placeholder="Descrição" id="descricao" class="form-control" rows="5"></textarea>
+                  </div>
+
+              </div>
+              <div class="Ingressos">
+                  <label for="ingressos">Ingressos:</label>
+                  <div formGroupName="ingressos">
+                      <div class="row">
+                          <div class="col input-group">
+                              <div formGroupName="lote">
+                                  <label for="lote">Lote</label>
+                                  <input formControlName="numero" id="lote-numero" placeholder="numero" class="form-control" type="number" min="0">
+                                  <input formControlName="disponiveis" id="lote-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="1">
+                              </div>
+                          </div>
+                          <div class="col input-group">
+                              <div formGroupName="masculino">
+                                  <label for="lote" align="center">Masculino</label>
+                                  <input formControlName="disponiveis" id="masculino-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="0">
+                                  <input formControlName="valor" id="masculino-valor" placeholder="valor" class="form-control" type="number" min="0">
+                              </div>
+                          </div>
+                          <div class="col input-group">
+                              <div formGroupName="feminino">
+                                  <label for="lote">Feminino</label>
+                                  <input formControlName="disponiveis" id="feminino-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="0">
+                                  <input formControlName="valor" id="feminino-valor" placeholder="valor" class="form-control" type="number" min="0">
+                              </div>
+                          </div>
+                          <div class="col input-group">
+                              <div formGroupName="unisex">
+                                  <label for="lote">Unisex</label>
+                                  <input formControlName="disponiveis" id="unisex-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="0">
+                                  <input formControlName="valor" id="unisex-valor" placeholder="valor" class="form-control" type="number" min="0">
+                              </div>
+                          </div>
+                          <div class="col input-group">
+                              <label for="lote">Limite de compra por usuário</label>
+                              <input formControlName="compramax" id="compramax" placeholder="max." class="form-control" type="number" min="1">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
