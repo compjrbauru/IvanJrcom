@@ -1,7 +1,6 @@
-import { Observable } from 'rxjs';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, DoCheck } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { timestamp } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-evento',
@@ -41,10 +40,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
         }),
         compramax: ['', Validators.required],
       }),
-      url: [null,
-        Validators.pattern(`(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+
-        [a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+
-        [a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})`)],
+      url: null,
       id: [''],
     });
     this.patchValues(this.resolvedEvento);
@@ -82,7 +78,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
 
 
   onFormValueChanges() {
-    this.formEvent.valueChanges.subscribe(form => {
+    this.formEvent.valueChanges.subscribe(() => {
       this.formEmitter.emit(this.formEvent);
     });
   }

@@ -16,7 +16,6 @@
       [resolvedEvento]="eventoResolver ? eventoResolver : null"
     >
     </ngx-form-evento>
-    {{form?.formEvent?.status}}
     <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary" type="submit">Editar e Salvar</button>
   </nb-card-body>
 </nb-card>
