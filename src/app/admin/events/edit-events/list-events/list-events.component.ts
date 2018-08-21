@@ -28,6 +28,7 @@ export class ListEventsComponent implements OnInit {
     this.eventoAsync = this.eventoService.getAll();
     this.catID$.next('');
     this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
+    this.categorias = this.categoriaService.getCategoria();
   }
 
   resolver(event) {
@@ -36,7 +37,7 @@ export class ListEventsComponent implements OnInit {
 
   submit(form: any) {
     form.data = new Date(form.data);
-    this.eventoService.addData(form);
+    this.eventoService.patchData(form, this.eventoResolver.id);
     this.categoria = this.categoriaService.searchrcategoriabynome(form.categoria).subscribe(
       (res: any) => {
         this.categoriaService.patchCategoria(res[0], form);

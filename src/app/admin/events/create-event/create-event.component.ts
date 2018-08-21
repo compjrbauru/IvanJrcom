@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
-import { Observable } from 'rxjs';
 
 
 @Component({
