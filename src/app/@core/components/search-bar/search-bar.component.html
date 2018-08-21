@@ -20,3 +20,7 @@
     </form>
   </nb-card-body>
 </nb-card>
+
+<div *ngFor="let evento of eventos">
+  <ngx-show-evento [evento]=evento></ngx-show-evento>
+</div>
