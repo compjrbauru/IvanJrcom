@@ -32,9 +32,7 @@ export class SearchBarComponent implements OnInit {
         filter((data: any) => data.evento.length > 1 || data.local.length > 1),
       )
       .subscribe(res => {
-        this.searchservice
-          .searchEvento(res)
-          .subscribe(res1 => console.log(res1));
+        this.searchservice.searchEvento(res);
       });
   }
 }

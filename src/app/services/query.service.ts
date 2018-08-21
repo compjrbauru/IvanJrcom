@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class QueryService {
   data: any;
+
   constructor(private db: AngularFirestore) {}
 
   categoriaAsync(cat$: Subject<any>) {
@@ -40,13 +41,23 @@ export class QueryService {
   }
 
   searchEvento(data: any) {
-    return this.db
-      .collection('/Evento', ref =>
-        ref
-          .orderBy('nome')
-          .startAt(data.evento)
-          .endAt(data.evento + '\uf8ff'),
-      )
-      .valueChanges();
+    if (data.evento !== '') {
+      this.db
+        .collection('/Evento', ref =>
+          ref
+            .orderBy('nome')
+            .startAt(data.evento)
+            .endAt(data.evento + '\uf8ff'),
+        )
+        .valueChanges()
+        .subscribe(res => {
+          if (data.local !== '') {
+            const filterlocal = res.filter(function(el: any) {
+              return el.local.indexOf(data.local) > -1;
+            });
+            console.log(filterlocal);
+          }
+        });
+    }
   }
 }
