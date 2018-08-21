@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, merge, partition } from 'rxjs/operators';
 
 import { QueryService } from './../../../services/query.service';
 
@@ -26,16 +26,17 @@ export class SearchBarComponent implements OnInit {
 
   formOnChanges() {
     const formChanges = this.searchForm.valueChanges;
-    const formFilter = formChanges.pipe(
-      filter((data: any) => data.evento.length <= 1 || data.local.length <= 1),
-      map(res => (this.eventos = null)),
-    );
-
-    formChanges
+    /*   const [formValido, formInvalido] = formChanges.pipe(
+      partition((data: any) => data.evento.length > 1 || data.local.length > 1)); */
+    const [formValido, formInvalido] = partition(
+      (data: any) => data.evento.length > 1 || data.local.length > 1,
+    )(formChanges);
+    formInvalido.pipe(map(res => (this.eventos = null)));
+    formValido
       .pipe(
+        merge(formInvalido),
         debounceTime(1000),
         distinctUntilChanged(),
-        filter((data: any) => data.evento.length > 1 || data.local.length > 1),
       )
       .subscribe(res => {
         if (res.evento !== '') {
