@@ -6,28 +6,47 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class QueryService {
   data: any;
-  constructor(private db: AngularFirestore) {
-
-  }
+  constructor(private db: AngularFirestore) {}
 
   categoriaAsync(cat$: Subject<any>) {
-    const queryObservable = cat$.pipe(switchMap(cat =>
-      this.db.collection('/Evento', ref => ref.where('categoria', '==', cat)).valueChanges()));
+    const queryObservable = cat$.pipe(
+      switchMap(cat =>
+        this.db
+          .collection('/Evento', ref => ref.where('categoria', '==', cat))
+          .valueChanges(),
+      ),
+    );
     return queryObservable;
   }
 
   eventoAsync(cat$: Subject<any>) {
-    const queryObservable = cat$.pipe(switchMap(cat =>
-      this.db.collection('/Evento', ref => ref.where('nome', '==', cat)).valueChanges()));
+    const queryObservable = cat$.pipe(
+      switchMap(cat =>
+        this.db
+          .collection('/Evento', ref => ref.where('nome', '==', cat))
+          .valueChanges(),
+      ),
+    );
     return queryObservable;
   }
 
   eventoOrder(ord$: Subject<string>) {
-    const queryObservable = ord$.pipe(switchMap(cat =>
-      this.db.collection('/Evento', ref => ref.orderBy(cat)).valueChanges()));
+    const queryObservable = ord$.pipe(
+      switchMap(cat =>
+        this.db.collection('/Evento', ref => ref.orderBy(cat)).valueChanges(),
+      ),
+    );
     return queryObservable;
   }
 
+  searchEvento(data: any) {
+    return this.db
+      .collection('/Evento', ref =>
+        ref
+          .orderBy('nome')
+          .startAt(data.evento)
+          .endAt(data.evento + '\uf8ff'),
+      )
+      .valueChanges();
+  }
 }
-
-

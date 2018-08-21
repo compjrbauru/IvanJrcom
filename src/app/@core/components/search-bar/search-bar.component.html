@@ -1,20 +1,22 @@
 <nb-card>
   <nb-card-body>
-    <div class="row">
-      <div class="col-sm-12 form-inline">
-        <div class="has-search-icon">
-          <input class="searchinput form-control" placeholder="Eventos" type="text">
+    <form [formGroup]="searchForm">
+      <div class="row">
+        <div class="col-sm-12 form-inline">
+          <div class="has-search-icon">
+            <input class="searchinput form-control" placeholder="Eventos" type="text" formControlName="evento">
+          </div>
+          <div class="has-location-icon">
+            <input class="searchinput form-control" placeholder="Cidade" type="text" formControlName="local">
+          </div>
+          <select class="searchinput form-control" formControlName="categoria">
+            <option [value]="null">Selecionar categoria</option>
+            <option *ngFor="let categoria of categorias" [value]="categoria">
+              {{categoria}}
+            </option>
+          </select>
         </div>
-        <div class="has-location-icon">
-          <input class="searchinput form-control" placeholder="Cidade" type="text">
-        </div>
-        <select class="searchinput form-control">
-          <option [value]="null">Selecionar categoria</option>
-          <option *ngFor="let categoria of categorias" [value]="categoria">
-            {{categoria}}
-          </option>
-        </select>
       </div>
-    </div>
+    </form>
   </nb-card-body>
 </nb-card>

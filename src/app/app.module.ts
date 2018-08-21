@@ -1,3 +1,4 @@
+import { CategoriaService } from './services/categoria.service';
 import { TableModule } from './admin/table/table.module';
 import { EventoService } from './services/evento.service';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -36,6 +37,7 @@ import { QueryService } from './services/query.service';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, EventoService, AngularFirestore],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, QueryService, EventoService, AngularFirestore,
+   CategoriaService],
 })
 export class AppModule {}
