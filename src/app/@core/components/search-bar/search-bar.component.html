@@ -20,7 +20,11 @@
     </form>
   </nb-card-body>
 </nb-card>
-
-<div *ngFor="let evento of eventos">
-  <ngx-show-evento [evento]=evento></ngx-show-evento>
+<div *ngIf="eventos == 'NAO ENCONTRADO'; else encontrado">
+  <h1>NAD ENCONTRADO</h1>
 </div>
+<ng-template #encontrado>
+  <div *ngFor="let evento of eventos">
+    <ngx-show-evento [evento]=evento></ngx-show-evento>
+  </div>
+</ng-template>

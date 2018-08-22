@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, merge, partition } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { QueryService } from './../../../services/query.service';
 
@@ -26,50 +26,48 @@ export class SearchBarComponent implements OnInit {
 
   formOnChanges() {
     const formChanges = this.searchForm.valueChanges;
-    /*   const [formValido, formInvalido] = formChanges.pipe(
-      partition((data: any) => data.evento.length > 1 || data.local.length > 1)); */
-    const [formValido, formInvalido] = partition(
-      (data: any) => data.evento.length > 1 || data.local.length > 1,
-    )(formChanges);
-    formInvalido.pipe(map(res => (this.eventos = null)));
-    formValido
+    formChanges
       .pipe(
-        merge(formInvalido),
         debounceTime(1000),
         distinctUntilChanged(),
       )
       .subscribe(res => {
-        if (res.evento !== '') {
-          this.searchservice
-            .searchEvento(res.evento, 'nome')
-            .subscribe(res1 => {
-              if (res.local !== '') {
-                res1 = res1.filter(function(el: any) {
-                  return el.local.indexOf(res.local) > -1;
-                });
-              }
-              if (res.categoria !== 'null') {
-                res1 = res1.filter(function(el: any) {
-                  return el.categoria.indexOf(res.categoria) > -1;
-                });
-              }
-              this.eventos = res1;
-            });
-        } else if (res.local !== '') {
-          this.searchservice
-            .searchEvento(res.local, 'local')
-            .subscribe(res2 => {
-              if (res.categoria !== 'null') {
-                res2 = res2.filter(function(el: any) {
-                  return el.categoria.indexOf(res.categoria) > -1;
-                });
-              }
-              this.eventos = res2;
-            });
+        if (res.evento.length > 1 || res.local.length > 1) {
+          if (res.evento !== '') {
+            this.searchservice
+              .searchEvento(res.evento, 'nome')
+              .subscribe(res1 => {
+                if (res.local !== '') {
+                  res1 = res1.filter(function(el: any) {
+                    return el.local.indexOf(res.local) > -1;
+                  });
+                }
+                if (res.categoria !== 'null') {
+                  res1 = res1.filter(function(el: any) {
+                    return el.categoria.indexOf(res.categoria) > -1;
+                  });
+                }
+                res1.length === 0
+                  ? (this.eventos = 'NAO ENCONTRADO')
+                  : (this.eventos = res1);
+              });
+          } else {
+            this.searchservice
+              .searchEvento(res.local, 'local')
+              .subscribe(res2 => {
+                if (res.categoria !== 'null') {
+                  res2 = res2.filter(function(el: any) {
+                    return el.categoria.indexOf(res.categoria) > -1;
+                  });
+                }
+                res2.length === 0
+                  ? (this.eventos = 'NAO ENCONTRADO')
+                  : (this.eventos = res2);
+              });
+          }
         } else {
           this.eventos = null;
         }
-        console.log(this.eventos);
       });
   }
 }
