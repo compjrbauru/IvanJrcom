@@ -11,8 +11,8 @@
           </div>
           <select class="searchinput form-control" formControlName="categoria">
             <option [value]="null">Selecionar categoria</option>
-            <option *ngFor="let categoria of categorias" [value]="categoria">
-              {{categoria}}
+            <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
+              {{categoria.nome }}
             </option>
           </select>
         </div>
@@ -21,7 +21,7 @@
   </nb-card-body>
 </nb-card>
 <div *ngIf="eventos == 'NAO ENCONTRADO'; else encontrado">
-  <h1>NAD ENCONTRADO</h1>
+  <h1>NAO ENCONTRADO</h1>
 </div>
 <ng-template #encontrado>
   <div *ngFor="let evento of eventos">

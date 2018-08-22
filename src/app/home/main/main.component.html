@@ -1,8 +1,7 @@
-<ngx-search-bar></ngx-search-bar>
-<ngx-carousel [eventos]="eventosAsync">
-</ngx-carousel>
-<div *ngFor="let evento of eventosAsync | async">
-  <ngx-show-evento [evento]=evento></ngx-show-evento>
+<ngx-search-bar (pesquisa)="verificaPesquisa($event)"></ngx-search-bar>
+<div *ngIf="!search">
+  <ngx-carousel [eventos]="eventosAsync">
+  </ngx-carousel>
+  <ngx-show-evento2>
+  </ngx-show-evento2>
 </div>
-<ngx-show-evento2>
-</ngx-show-evento2>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { CategoriaService } from './../../../services/categoria.service';
 import { QueryService } from './../../../services/query.service';
 
 @Component({
@@ -10,10 +11,17 @@ import { QueryService } from './../../../services/query.service';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit {
-  categorias = ['Eletronica', 'metal', 'darkmetal'];
+  categorias: any;
   searchForm: FormGroup;
   eventos: any;
-  constructor(private fb: FormBuilder, private searchservice: QueryService) {}
+  @Output()
+  pesquisa: EventEmitter<any> = new EventEmitter();
+
+  constructor(
+    private fb: FormBuilder,
+    private searchservice: QueryService,
+    private categoriaservice: CategoriaService,
+  ) {}
 
   ngOnInit() {
     this.searchForm = this.fb.group({
@@ -21,6 +29,7 @@ export class SearchBarComponent implements OnInit {
       local: new FormControl('', [Validators.required]),
       categoria: new FormControl('null', [Validators.required]),
     });
+    this.categorias = this.categoriaservice.getCategoria();
     this.formOnChanges();
   }
 
@@ -33,6 +42,7 @@ export class SearchBarComponent implements OnInit {
       )
       .subscribe(res => {
         if (res.evento.length > 1 || res.local.length > 1) {
+          this.pesquisa.emit(true);
           if (res.evento !== '') {
             this.searchservice
               .searchEvento(res.evento, 'nome')
@@ -66,6 +76,7 @@ export class SearchBarComponent implements OnInit {
               });
           }
         } else {
+          this.pesquisa.emit(false);
           this.eventos = null;
         }
       });
