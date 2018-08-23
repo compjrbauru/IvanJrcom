@@ -21,6 +21,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
       categoria: ['', Validators.required],
       data: ['', Validators.required],
       descricao: ['', Validators.required],
+      local: ['', Validators.required],
       ingressos: this.formBuilder.group({
         lote: this.formBuilder.group({
           disponiveis: ['', Validators.required],
@@ -42,6 +43,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
       }),
       url: null,
       id: [''],
+      nomeBusca: null,
+      localBucas: null,
     });
     this.patchValues(this.resolvedEvento);
 

@@ -37,6 +37,8 @@ export class ListEventsComponent implements OnInit {
 
   submit(form: any) {
     form.data = new Date(form.data);
+    form.nomeBusca = form.nome.toLowerCase();
+    form.localBusca = form.local.toLowerCase();
     this.eventoService.patchData(form, this.eventoResolver.id);
     this.categoria = this.categoriaService.searchrcategoriabynome(form.categoria).subscribe(
       (res: any) => {

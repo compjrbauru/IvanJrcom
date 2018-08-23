@@ -53,6 +53,9 @@ export class TableComponent implements OnInit {
     });
     this.dataIdAsync.subscribe(response => {
       this.eventoResolved = response;
+      const emitter = cloneDeep(this.eventoResolved);
+      this.editE.emit(emitter);
+      this.editEvento = true;
     });
   }
 
@@ -66,9 +69,6 @@ export class TableComponent implements OnInit {
 
   foundObject(event: any) {
     this.cat$.next(find(this.dataSync, event.data).id);
-    const emitter = cloneDeep(this.eventoResolved);
-    this.editE.emit(emitter);
-    this.editEvento = true;
   }
 
 }
