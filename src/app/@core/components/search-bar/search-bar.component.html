@@ -20,8 +20,15 @@
     </form>
   </nb-card-body>
 </nb-card>
+<ngx-spinner bdColor="rgba(255,255,255,0)" size="large" color="#3dcc6d" type="ball-scale-ripple-multiple"></ngx-spinner>
 <div *ngIf="eventos == 'NAO ENCONTRADO'; else encontrado">
-  <h1>NAO ENCONTRADO</h1>
+  <nb-card>
+    <nb-card-body>
+      <div class="text-center">
+        <h1>OPS! Nenhum evento foi encontrado.</h1>
+      </div>
+    </nb-card-body>
+  </nb-card>
 </div>
 <ng-template #encontrado>
   <div *ngFor="let evento of eventos">

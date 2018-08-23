@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { CategoriaService } from './../../../services/categoria.service';
@@ -21,6 +22,7 @@ export class SearchBarComponent implements OnInit {
     private fb: FormBuilder,
     private searchservice: QueryService,
     private categoriaservice: CategoriaService,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit() {
@@ -37,39 +39,45 @@ export class SearchBarComponent implements OnInit {
     const formChanges = this.searchForm.valueChanges;
     formChanges
       .pipe(
-        debounceTime(1000),
+        debounceTime(300),
         distinctUntilChanged(),
       )
       .subscribe(res => {
         if (res.evento.length > 1 || res.local.length > 1) {
+          this.eventos = null;
           this.pesquisa.emit(true);
+          this.spinner.show();
+          res.evento = res.evento.toLowerCase();
+          res.local = res.local.toLowerCase();
           if (res.evento !== '') {
             this.searchservice
-              .searchEvento(res.evento, 'nome')
+              .searchEvento(res.evento, 'nomeBusca')
               .subscribe(res1 => {
                 if (res.local !== '') {
-                  res1 = res1.filter(function(el: any) {
-                    return el.local.indexOf(res.local) > -1;
+                  res1 = res1.filter((el: any) => {
+                    return el.localBusca.indexOf(res.local) > -1;
                   });
                 }
                 if (res.categoria !== 'null') {
-                  res1 = res1.filter(function(el: any) {
+                  res1 = res1.filter((el: any) => {
                     return el.categoria.indexOf(res.categoria) > -1;
                   });
                 }
+                this.spinner.hide();
                 res1.length === 0
                   ? (this.eventos = 'NAO ENCONTRADO')
                   : (this.eventos = res1);
               });
           } else {
             this.searchservice
-              .searchEvento(res.local, 'local')
+              .searchEvento(res.local, 'localBusca')
               .subscribe(res2 => {
                 if (res.categoria !== 'null') {
-                  res2 = res2.filter(function(el: any) {
+                  res2 = res2.filter((el: any) => {
                     return el.categoria.indexOf(res.categoria) > -1;
                   });
                 }
+                this.spinner.hide();
                 res2.length === 0
                   ? (this.eventos = 'NAO ENCONTRADO')
                   : (this.eventos = res2);
