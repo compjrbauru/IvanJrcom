@@ -1,6 +1,7 @@
-import { EventoService } from './../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { EventoService } from './../../services/evento.service';
 
 @Component({
   selector: 'ngx-main',
@@ -9,10 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class MainComponent implements OnInit {
   eventosAsync: Observable<any>;
-
-  constructor(private eventoService: EventoService) { }
+  search = false;
+  constructor(private eventoService: EventoService) {}
 
   ngOnInit() {
+    this.eventosAsync = this.eventoService.getByDate();
+  }
+
+  verificaPesquisa(event: boolean) {
+    event === true ? (this.search = true) : (this.search = false);
     this.eventosAsync = this.eventoService.getByDate();
   }
 }
