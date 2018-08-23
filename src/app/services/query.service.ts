@@ -31,6 +31,12 @@ export class QueryService {
     return queryObservable;
   }
 
+  eventoIdAsync(cat$: Subject<any>) {
+    const queryObservable = cat$.pipe(switchMap(cat =>
+      this.db.collection('/Evento', ref => ref.where('id', '==', cat)).valueChanges()));
+    return queryObservable;
+  }
+
   eventoOrder(ord$: Subject<string>) {
     const queryObservable = ord$.pipe(
       switchMap(cat =>

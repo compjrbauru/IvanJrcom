@@ -50,6 +50,13 @@ export class EventoService {
     });
   }
 
+  patchData(evento: any, id: string) {
+    this.EventoCollection.doc(id).set({
+      ...evento,
+      id: id,
+    });
+  }
+
   removeData(id: any) {
     return this.db.doc(`/Evento/${id}`).delete();
   }
