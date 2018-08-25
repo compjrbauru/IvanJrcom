@@ -1,25 +1,28 @@
 <div class="row">
-  <div *ngFor="let evento of eventos"  class="col-md-4">
+  <div *ngFor="let evento of eventos; index as i" class="col-md-4">
     <div class="card img">
       <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%">
-      <div class="card-body">
-        <h5 class="card-title">{{evento.nome}}</h5>
-        <a routerLink="/home/evento/{{evento.id}}" class="btn btn-primary">Confira</a>
-      </div>
+
+      <button [ngClass]="buttonclass[i]" (mouseover)="changeStyle($event, i)" (mouseout)="changeStyle($event, i)" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
+
     </div>
   </div>
 </div>
 <br>
 <br>
-<div class="row justify-content-sm-center">
-  <div class="col-sm-3">
+<div class="row justify-content-center">
+  <div class="col-2">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item">
-          <a class="page-link btn btn-primary" (click)="prev()">Anterior</a>
+          <button type="button" (click)="prev()" class="btn btn-outline-success btn-icon">
+            <i class="nb-arrow-thin-left"></i>
+          </button>
         </li>
         <li class="page-item">
-          <a class="page-link btn btn-primary" (click)="next()">Próxima</a>
+          <button type="button" (click)="next()" class="btn btn-outline-success btn-icon">
+            <i class="nb-arrow-thin-right"></i>
+          </button>
         </li>
       </ul>
     </nav>
