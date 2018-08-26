@@ -1,5 +1,3 @@
-import 'style-loader!angular2-toaster/toaster.css';
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 

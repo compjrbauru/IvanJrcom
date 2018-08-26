@@ -5,7 +5,6 @@ import { MatSnackBarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToasterService } from 'angular2-toaster';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ToastrModule } from 'ngx-toastr';
@@ -54,7 +53,6 @@ import { QueryService } from './services/query.service';
     AngularFirestore,
     CategoriaService,
     NotificacaoService,
-    ToasterService,
   ],
 })
 export class AppModule {}
