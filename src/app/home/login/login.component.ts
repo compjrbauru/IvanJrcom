@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
     private notificacao: NotificacaoService,
   ) {}
 
-  config: ToasterConfig;
-
   ngOnInit() {
     this.formLogin = this.formBuilder.group({
       email: new FormControl(null, [Validators.required, Validators.email]),

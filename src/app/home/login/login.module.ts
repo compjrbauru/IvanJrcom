@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ToasterModule } from 'angular2-toaster';
 
 import { ThemeModule } from '../../@theme-home/theme.module';
 import { LoginRoutingModule } from './login-routing.module';
