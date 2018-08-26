@@ -8,7 +8,7 @@ import { LoginComponent } from './login.component';
 const LOGIN_COMPONENTS = [LoginComponent];
 
 @NgModule({
-  imports: [LoginRoutingModule, ThemeModule, ToasterModule.forRoot()],
+  imports: [LoginRoutingModule, ThemeModule],
   declarations: [...LOGIN_COMPONENTS],
 })
 export class LoginModule {}

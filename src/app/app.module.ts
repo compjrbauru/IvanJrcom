@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterService } from 'angular2-toaster';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { ToastrModule } from 'ngx-toastr';
 
 import { config } from '../app/config/config';
 import { CoreModule } from './@core/core.module';
@@ -35,6 +36,12 @@ import { QueryService } from './services/query.service';
     AppRoutingModule,
     TableModule,
     AngularFireModule.initializeApp(config.fire),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+    }),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
