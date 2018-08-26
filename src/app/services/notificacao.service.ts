@@ -10,7 +10,7 @@ export class NotificacaoService {
 
   /* ngx toast */
   ngxtoaster(titulo: string, msg: string, sucesso: boolean) {
-    sucesso ? this.toastr.success(titulo, msg) : this.toastr.error(titulo, msg);
+    sucesso ? this.toastr.success(msg, titulo) : this.toastr.error(msg, titulo);
   }
 
   /* Angular material */
