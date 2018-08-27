@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./carousel-local.component.scss'],
 })
 export class CarouselLocalComponent implements OnInit {
-  @Input()
-  eventos: Observable<any>;
+  @Input() eventos: Observable<any>;
   eventosShow: any;
 
   constructor() {}
