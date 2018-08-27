@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { InvitePageModule } from '../../@core/components/invite-page/invite-page.module';
 import { SearchBarModule } from '../../@core/components/search-bar/search-bar.module';
 import { ShowEventoModule } from '../../@core/components/show-evento/show-evento.module';
+import { UploadFileModule } from '../../@core/components/upload-file/upload-file.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { EventoService } from '../../services/evento.service';
 import { ShowEvento2Module } from './../../@core/components/show-evento2/show-evento2.module';
@@ -16,6 +17,7 @@ const MAIN_MODULES = [
   CarouselLocalModule,
   SearchBarModule,
   ShowEvento2Module,
+  UploadFileModule,
 ];
 
 @NgModule({
