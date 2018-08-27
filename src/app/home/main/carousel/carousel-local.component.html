@@ -1,0 +1,18 @@
+<div class="row justify-content-md-center">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-body>
+        <ngb-carousel *ngIf="eventosShow">
+          <ng-template ngbSlide *ngFor="let evento of eventosShow">
+            <a routerLink="/home/evento/{{evento.id}}">
+              <img class="img-fluid rounded img" [src]="evento.url">
+            </a>
+            <div class="carousel-caption">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<br>

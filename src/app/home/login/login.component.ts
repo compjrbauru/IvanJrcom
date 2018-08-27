@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { enterComponent } from '../../@core/animations/animations';
+import { NotificacaoService } from './../../services/notificacao.service';
 
 @Component({
   selector: 'ngx-login',
@@ -10,12 +11,34 @@ import { enterComponent } from '../../@core/animations/animations';
   animations: [enterComponent('cardanimation')],
 })
 export class LoginComponent implements OnInit {
-  form_login: FormGroup;
-  constructor(private formBuilder: FormBuilder) {}
+  formLogin: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private notificacao: NotificacaoService,
+  ) {}
+
   ngOnInit() {
-    this.form_login = this.formBuilder.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
+    this.formLogin = this.formBuilder.group({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required]),
     });
+  }
+
+  resetPass() {}
+
+  loginFacebook() {}
+
+  submit(form: any) {
+    this.notificacao.showSnackbar(
+      'Senha incorreta ou  o usuário não existe',
+      null,
+      3000,
+    );
+    this.notificacao.ngxtoaster(
+      'Erro Login',
+      'Senha incorreta ou  o usuário não existe',
+      false,
+    );
   }
 }

@@ -1,6 +1,21 @@
 
 <ngx-table
 [dataAsync]="eventoAsync"
-
+[dataIdAsync]="eventoIdAsync"
+[cat$]="catID$"
+(editE)="resolver($event)"
 >
 </ngx-table>
+
+<nb-card *ngIf="eventoResolver">
+  <nb-card-header>Editar Evento</nb-card-header>
+  <nb-card-body>
+    <ngx-form-evento
+      (formEmitter)="form['formEvent']=$event"
+      [categorias]="categorias"
+      [resolvedEvento]="eventoResolver ? eventoResolver : null"
+    >
+    </ngx-form-evento>
+    <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary" type="submit">Salvar</button>
+  </nb-card-body>
+</nb-card>

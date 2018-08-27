@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: './register/register.module#RegisterModule',
       },
       {
+        path: 'evento/:id',
+        loadChildren: './page-evento/page-evento.module#PageEventoModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

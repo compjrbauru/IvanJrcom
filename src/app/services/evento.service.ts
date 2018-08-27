@@ -13,8 +13,34 @@ export class EventoService {
 
   constructor(private db: AngularFirestore) { }
 
+  getID(id: any): Observable<any> {
+    return this.db.collection('/Evento', ref => ref.where('id', '==', id)).valueChanges();
+  }
+
   getAll(): Observable<any> {
     return this.EventoCollection.valueChanges();
+  }
+
+  getByDate(): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
+  }
+
+  getByNameWithLimit(limit: number): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(limit)).valueChanges();
+  }
+
+  getByNameWithLimitWithStart(lastVisible: string, limit: number): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref
+      .orderBy('nome')
+      .limit(limit)
+      .startAfter(lastVisible)).valueChanges();
+  }
+
+  getByNameWithLimitWithEnd(firstVisible: string, limit: number): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref
+      .orderBy('nome')
+      .limit(limit)
+      .endBefore(firstVisible)).valueChanges();
   }
 
   addData(evento: any) {
@@ -24,8 +50,15 @@ export class EventoService {
     });
   }
 
+  patchData(evento: any, id: string) {
+    this.EventoCollection.doc(id).set({
+      ...evento,
+      id: id,
+    });
+  }
+
   removeData(id: any) {
-    return this.db.doc(`/Evento/${id}`);
+    return this.db.doc(`/Evento/${id}`).delete();
   }
 
 }
