@@ -45,7 +45,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
       url: null,
       id: [''],
       nomeBusca: null,
-      localBucas: null,
+      localBusca: null,
     });
     this.patchValues(this.resolvedEvento);
 
