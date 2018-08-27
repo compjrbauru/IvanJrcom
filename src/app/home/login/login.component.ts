@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { enterComponent } from '../../@core/animations/animations';
+import { NotificacaoService } from './../../services/notificacao.service';
 
 @Component({
   selector: 'ngx-login',
@@ -12,7 +13,10 @@ import { enterComponent } from '../../@core/animations/animations';
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private notificacao: NotificacaoService,
+  ) {}
 
   ngOnInit() {
     this.formLogin = this.formBuilder.group({
@@ -25,5 +29,16 @@ export class LoginComponent implements OnInit {
 
   loginFacebook() {}
 
-  submit(form: any) {}
+  submit(form: any) {
+    this.notificacao.showSnackbar(
+      'Senha incorreta ou  o usuário não existe',
+      null,
+      3000,
+    );
+    this.notificacao.ngxtoaster(
+      'Erro Login',
+      'Senha incorreta ou  o usuário não existe',
+      false,
+    );
+  }
 }

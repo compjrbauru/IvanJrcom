@@ -2,6 +2,13 @@
 <div *ngIf="!search">
   <ngx-carousel [eventos]="eventosAsync">
   </ngx-carousel>
-  <ngx-show-evento2>
-  </ngx-show-evento2>
+  <nb-card>
+    <nb-card-header>
+      <h2 class="font-w-light">Eventos em destaque</h2>
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-show-evento2>
+      </ngx-show-evento2>
+    </nb-card-body>
+  </nb-card>
 </div>
