@@ -2,29 +2,13 @@
   <div *ngFor="let evento of eventos; index as i" class="col-md-4">
     <div class="card img">
       <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%">
-
-      <button [ngClass]="buttonclass[i]" (mouseover)="changeStyle($event, i)" (mouseout)="changeStyle($event, i)" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
-
+      <button [ngClass]="mouseOvered[i] ?'btn btn-hero-success btn-demo' : 'btn btn-hero-secondary btn-demo'" (mouseover)="mouseOvered[i]=true" (mouseout)="mouseOvered[i]=false" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
     </div>
   </div>
 </div>
 <br>
 <br>
-<div class="row justify-content-center">
-  <div class="col-2">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <button type="button" (click)="prev()" class="btn btn-outline-success btn-icon">
-            <i class="nb-arrow-thin-left"></i>
-          </button>
-        </li>
-        <li class="page-item">
-          <button type="button" (click)="next()" class="btn btn-outline-success btn-icon">
-            <i class="nb-arrow-thin-right"></i>
-          </button>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
+<ngx-paginacao
+(eventosEmit)="eventos=$event">
+</ngx-paginacao>
+
