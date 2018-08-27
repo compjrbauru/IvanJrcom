@@ -25,21 +25,21 @@ export class EventoService {
     return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
   }
 
-  getByNameWithLimit(): Observable<any> {
-    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(3)).valueChanges();
+  getByNameWithLimit(limit: number): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(limit)).valueChanges();
   }
 
-  getByNameWithLimitWithStart(lastVisible: any): Observable<any> {
+  getByNameWithLimitWithStart(lastVisible: string, limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref
       .orderBy('nome')
-      .limit(3)
+      .limit(limit)
       .startAfter(lastVisible)).valueChanges();
   }
 
-  getByNameWithLimitWithEnd(firstVisible: any): Observable<any> {
+  getByNameWithLimitWithEnd(firstVisible: string, limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref
       .orderBy('nome')
-      .limit(3)
+      .limit(limit)
       .endBefore(firstVisible)).valueChanges();
   }
 
