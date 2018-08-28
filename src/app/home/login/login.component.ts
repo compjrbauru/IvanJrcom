@@ -38,40 +38,36 @@ export class LoginComponent implements OnInit {
   submit(form: any) {
     console.log(form);
     this.authService.signInWithEmail(form.email, form.password).then(res => {
-      if (res === 'sucesso'){
+      if (res === 'sucesso') {
         this.notificacao.ngxtoaster(
           'Login',
           'Realizado com Sucesso!',
           true,
         );
         this.router.navigate(['/home']);
-      }
-      else if (res === 'auth/invalid-email'){ //Email invalido
+      } else if (res === 'auth/invalid-email') { // Email invalido
         this.notificacao.ngxtoaster(
           'Erro Login',
           'Email Invalido!',
           false,
         );
-      }
-      else if (res === 'auth/user-not-found'){ //Erro no login, usuario nao encontrado
+      } else if (res === 'auth/user-not-found') { // Erro no login, usuario nao encontrado
         this.notificacao.ngxtoaster(
           'Erro Login',
           'Este Email não está cadastrado!',
           false,
         );
-      }
-      else if (res === 'auth/wrong-password'){ //Erro no login, senha incorreta
+      } else if (res === 'auth/wrong-password') { // Erro no login, senha incorreta
         this.notificacao.ngxtoaster(
           'Erro Login',
           'Senha Incorreta!',
           false,
-    );
-      }
-      else {
-    this.notificacao.ngxtoaster(
-      'Erro Login',
-          'Erro Inesperado, tente novamente',
-      false,
+         );
+      } else {
+        this.notificacao.ngxtoaster(
+        'Erro Login',
+        'Erro Inesperado, tente novamente',
+        false,
     );
   }
     });

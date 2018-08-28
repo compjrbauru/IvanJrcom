@@ -47,14 +47,14 @@ export class RegisterComponent implements OnInit {
     const email = this.novoRegistro.value.email;
     const pass = this.novoRegistro.value.Senha;
     this.authService.signupUser(email, pass).then(res => {
-      if (res === 'success'){
+      if (res === 'success') {
         const user = this.authService.getUser();
 
-        user.sendEmailVerification().then(res => {
-          let form = this.novoRegistro.value;
-          form.id = user.uid; //Adiciona o uid do usuario como campo id
+        user.sendEmailVerification().then( () => {
+          const form = this.novoRegistro.value;
+          form.id = user.uid; // Adiciona o uid do usuario como campo id
 
-          this.usuarioService.addUsuario(form); //Adiciona o usuario
+          this.usuarioService.addUsuario(form); // Adiciona o usuario
 
           this.notificacao.ngxtoaster(
             'Cadastro',
@@ -62,16 +62,14 @@ export class RegisterComponent implements OnInit {
             true,
           );
           this.router.navigate(['/home']);
-        });      
-      }
-      else if (res === 'auth/email-already-in-use'){ //Email ja cadastrado!
+        });
+      } else if (res === 'auth/email-already-in-use') { // Email ja cadastrado!
         this.notificacao.ngxtoaster(
           'Erro Cadastro',
           'Este Email já está cadastrado!',
           false,
         );
-      }
-      else { //imprime o erro especificado pelo firebase
+      } else { // imprime o erro especificado pelo firebase
         this.notificacao.ngxtoaster(
           'Erro Cadastro',
           res,

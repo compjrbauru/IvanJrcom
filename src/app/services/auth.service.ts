@@ -1,6 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
-import { auth } from "firebase"; 
+import { auth } from 'firebase';
 
 @Injectable()
 export class AuthService {
@@ -13,9 +13,9 @@ export class AuthService {
       this.firebaseAuth.auth.currentUser.getIdToken().then((tok: string) => {
         this.token = tok;
       });
-      return 'sucesso'
-    }, err => { 
-      return err.code; //Retorna o erro do firebase para ser tratado no componente
+      return 'sucesso';
+    }, err => {
+      return err.code; // Retorna o erro do firebase para ser tratado no componente
     });
   }
 
@@ -30,7 +30,7 @@ export class AuthService {
     return this.token;
   }
 
-  getUser(){
+  getUser() {
     return this.firebaseAuth.auth.currentUser;
   }
 
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   isVerified() {
-    return this.firebaseAuth.auth.currentUser.emailVerified
+    return this.firebaseAuth.auth.currentUser.emailVerified;
   }
 
   ReturnUsername(): string {
@@ -54,21 +54,18 @@ export class AuthService {
     this.firebaseAuth.auth.sendPasswordResetEmail(email);
   }
 
-  signupUser(email: string, password: string){
+  signupUser(email: string, password: string) {
     return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password).then(res => {
-      return 'success' //pro componente saber se deu certo
-    }).catch(err => { 
-      return err.code; //Retorna o erro para ser tratado no componente registrar
+      return 'success'; // pro componente saber se deu certo
+    }).catch(err => {
+      return err.code; // Retorna o erro para ser tratado no componente registrar
     });
   }
 
-  authFacebook(){
+  authFacebook() {
     return this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(res => {
         const user = res.user;
         const credential = res.credential;
-        console.log(res);
-        console.log(user);
-        console.log(credential);
     });
   }
 }
