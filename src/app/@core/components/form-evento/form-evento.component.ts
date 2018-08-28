@@ -41,10 +41,11 @@ export class FormEventoComponent implements OnInit, DoCheck {
         }),
         compramax: ['', Validators.required],
       }),
+      mostraHome: null,
       url: null,
       id: [''],
       nomeBusca: null,
-      localBucas: null,
+      localBusca: null,
     });
     this.patchValues(this.resolvedEvento);
 

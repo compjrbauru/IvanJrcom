@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   constructor(private eventoService: EventoService) {}
 
   ngOnInit() {
-    this.eventosAsync = this.eventoService.getByDate();
+    this.eventosAsync = this.eventoService.getCarousel();
   }
 
   verificaPesquisa(event: boolean) {
