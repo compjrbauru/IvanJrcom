@@ -35,6 +35,10 @@ export class SearchBarComponent implements OnInit {
     this.formOnChanges();
   }
 
+  date_sort(a, b) {
+    return a.data.seconds - b.data.seconds;
+  }
+
   formOnChanges() {
     const formChanges = this.searchForm.valueChanges;
     formChanges
@@ -66,7 +70,7 @@ export class SearchBarComponent implements OnInit {
                 this.spinner.hide();
                 res1.length === 0
                   ? (this.eventos = 'NAO ENCONTRADO')
-                  : (this.eventos = res1);
+                  : (this.eventos = res1.sort(this.date_sort));
               });
           } else {
             this.searchservice
@@ -80,7 +84,7 @@ export class SearchBarComponent implements OnInit {
                 this.spinner.hide();
                 res2.length === 0
                   ? (this.eventos = 'NAO ENCONTRADO')
-                  : (this.eventos = res2);
+                  : (this.eventos = res2.sort(this.date_sort));
               });
           }
         } else {
