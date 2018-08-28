@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { map, mapKeys, pick } from 'lodash';
 
@@ -9,8 +9,7 @@ import { CategoriaService } from './../../../services/categoria.service';
   templateUrl: './echarts-pie-event.component.html',
   styleUrls: ['./echarts-pie-event.component.scss'],
 })
-export class EchartsPieEventComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class EchartsPieEventComponent implements OnInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
   categorias: any = [];
@@ -30,7 +29,6 @@ export class EchartsPieEventComponent
           },
         );
       });
-
       this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
         const colors = config.variables;
         const echarts: any = config.variables.echarts;
@@ -91,13 +89,9 @@ export class EchartsPieEventComponent
     });
   }
 
-  ngAfterViewInit() {}
-
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
   }
 
-  onChartClick(params: any) {
-    console.log(params);
-  }
+  onChartClick(params: any) {}
 }
