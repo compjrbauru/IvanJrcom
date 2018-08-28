@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-show-evento2',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class ShowEvento2Component implements OnInit {
   eventos: any;
   mouseOvered: any = [];
+  cosmic: boolean;
 
-  constructor() {}
+  constructor(private themeService: NbThemeService) {}
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    'cosmic' === this.themeService.currentTheme
+      ? (this.cosmic = true)
+      : (this.cosmic = false);
+  }
 }
