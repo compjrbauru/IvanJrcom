@@ -9,7 +9,6 @@ export class UsuarioService {
   constructor(private db: AngularFirestore) { }
 
   addUsuario(usuario: any) {
-    usuario.id = this.db.createId();
     this.UsuarioCollection.doc(usuario.id).set({
       ...usuario,
     });

@@ -1,8 +1,10 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { enterComponent } from '../../@core/animations/animations';
 import { NotificacaoService } from './../../services/notificacao.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-login',
@@ -16,6 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private notificacao: NotificacaoService,
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -27,18 +31,49 @@ export class LoginComponent implements OnInit {
 
   resetPass() {}
 
-  loginFacebook() {}
+  loginFacebook() {
+    this.authService.authFacebook();
+  }
 
   submit(form: any) {
-    this.notificacao.showSnackbar(
-      'Senha incorreta ou  o usuário não existe',
-      null,
-      3000,
+    console.log(form);
+    this.authService.signInWithEmail(form.email, form.password).then(res => {
+      if (res === 'sucesso'){
+        this.notificacao.ngxtoaster(
+          'Login',
+          'Realizado com Sucesso!',
+          true,
+        );
+        this.router.navigate(['/home']);
+      }
+      else if (res === 'auth/invalid-email'){ //Email invalido
+        this.notificacao.ngxtoaster(
+          'Erro Login',
+          'Email Invalido!',
+          false,
+        );
+      }
+      else if (res === 'auth/user-not-found'){ //Erro no login, usuario nao encontrado
+        this.notificacao.ngxtoaster(
+          'Erro Login',
+          'Este Email não está cadastrado!',
+          false,
+        );
+      }
+      else if (res === 'auth/wrong-password'){ //Erro no login, senha incorreta
+        this.notificacao.ngxtoaster(
+          'Erro Login',
+          'Senha Incorreta!',
+          false,
     );
+      }
+      else {
     this.notificacao.ngxtoaster(
       'Erro Login',
-      'Senha incorreta ou  o usuário não existe',
+          'Erro Inesperado, tente novamente',
       false,
     );
+  }
+    });
   }
 }

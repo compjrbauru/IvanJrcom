@@ -1,3 +1,6 @@
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
+import { NotificacaoService } from './../../services/notificacao.service';
 import { UsuarioService } from './../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +18,11 @@ import { ValidatorNumMin } from './Validators/ValidatorNumMin';
 export class RegisterComponent implements OnInit {
   public novoRegistro: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService) { }
+  constructor(private formBuilder: FormBuilder,
+              private usuarioService: UsuarioService,
+              private notificacao: NotificacaoService,
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.novoRegistro = this.formBuilder.group({
@@ -37,6 +44,40 @@ export class RegisterComponent implements OnInit {
    }
 
   submit() {
-    this.usuarioService.addUsuario(this.novoRegistro.value);
+    const email = this.novoRegistro.value.email;
+    const pass = this.novoRegistro.value.Senha;
+    this.authService.signupUser(email, pass).then(res => {
+      if (res === 'success'){
+        const user = this.authService.getUser();
+
+        user.sendEmailVerification().then(res => {
+          let form = this.novoRegistro.value;
+          form.id = user.uid; //Adiciona o uid do usuario como campo id
+
+          this.usuarioService.addUsuario(form); //Adiciona o usuario
+
+          this.notificacao.ngxtoaster(
+            'Cadastro',
+            'Usuario Cadastrado com sucesso!',
+            true,
+          );
+          this.router.navigate(['/home']);
+        });      
+      }
+      else if (res === 'auth/email-already-in-use'){ //Email ja cadastrado!
+        this.notificacao.ngxtoaster(
+          'Erro Cadastro',
+          'Este Email já está cadastrado!',
+          false,
+        );
+      }
+      else { //imprime o erro especificado pelo firebase
+        this.notificacao.ngxtoaster(
+          'Erro Cadastro',
+          res,
+          false,
+        );
+      }
+    });
   }
 }
