@@ -8,9 +8,8 @@ describe('EchartsPieEventComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EchartsPieEventComponent ]
-    })
-    .compileComponents();
+      declarations: [EchartsPieEventComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
