@@ -35,7 +35,7 @@ export class SearchBarComponent implements OnInit {
     this.formOnChanges();
   }
 
-  date_sort(a, b) {
+  date_sort(a: any, b: any) {
     return a.data.seconds - b.data.seconds;
   }
 
