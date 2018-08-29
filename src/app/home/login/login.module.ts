@@ -1,3 +1,4 @@
+import { ResetPassComponent } from './reset-pass.component';
 import { AuthService } from './../../services/auth.service';
 import { NgModule } from '@angular/core';
 
@@ -5,11 +6,13 @@ import { ThemeModule } from '../../@theme-home/theme.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { UsuarioService } from '../../services/usuario.service';
+import { MatDialogModule } from '@angular/material';
 
-const LOGIN_COMPONENTS = [LoginComponent];
+const LOGIN_COMPONENTS = [LoginComponent, ResetPassComponent];
 
 @NgModule({
-  imports: [LoginRoutingModule, ThemeModule],
+  entryComponents: [ResetPassComponent],
+  imports: [LoginRoutingModule, ThemeModule, MatDialogModule],
   declarations: [...LOGIN_COMPONENTS],
   providers: [AuthService, UsuarioService],
 })

@@ -11,6 +11,10 @@
 }
 .resetpass {
   color: #3dcc6d;
+  cursor: pointer;
+}
+.resetpass:hover {
+  text-decoration: underline;
 }
 .ion-social-facebook {
   font-size: 2em;

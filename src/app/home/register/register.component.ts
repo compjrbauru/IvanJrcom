@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
           this.notificacao.ngxtoaster(
             'Cadastro',
-            'Usuario Cadastrado com sucesso!',
+            'Usuario Cadastrado com sucesso! Verifique seu Email!',
             true,
           );
           this.router.navigate(['/home']);

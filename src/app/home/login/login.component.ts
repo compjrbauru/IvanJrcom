@@ -1,3 +1,4 @@
+import { ResetPassComponent } from './reset-pass.component';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +7,7 @@ import { enterComponent } from '../../@core/animations/animations';
 import { NotificacaoService } from './../../services/notificacao.service';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'ngx-login',
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private usuarioService: UsuarioService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -31,7 +34,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  resetPass() {}
+  resetPass() {
+    const dialogRef = this.dialog.open(ResetPassComponent, {
+      height: '300px',
+      width: '350px',
+    });
+  }
 
   loginFacebook() {
     this.authService.authFacebook().then((res: any) => {

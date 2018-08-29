@@ -50,7 +50,11 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-    this.firebaseAuth.auth.sendPasswordResetEmail(email);
+    return this.firebaseAuth.auth.sendPasswordResetEmail(email).then(res => {
+      return 'success';
+    }).catch(err => {
+      return err.code;
+    });
   }
 
   signupUser(email: string, password: string) {
