@@ -52,7 +52,6 @@ export class RegisterComponent implements OnInit {
 
         user.sendEmailVerification().then( () => {
           const form = this.novoRegistro.value;
-          form.id = user.uid; // Adiciona o uid do usuario como campo id
 
           this.usuarioService.addUsuario(form); // Adiciona o usuario
 
