@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   resetPass() {
-    const dialogRef = this.dialog.open(ResetPassComponent, {
+    this.dialog.open(ResetPassComponent, {
       height: '300px',
       width: '350px',
     });
