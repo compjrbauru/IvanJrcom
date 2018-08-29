@@ -1,6 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
-import { auth } from 'firebase';
+import { auth } from 'firebase/app';
 
 @Injectable()
 export class AuthService {
@@ -10,10 +10,13 @@ export class AuthService {
 
   signInWithEmail(email, password) {
     return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
-      this.firebaseAuth.auth.currentUser.getIdToken().then((tok: string) => {
-        this.token = tok;
-      });
-      return 'sucesso';
+      if (this.isVerified()) {
+        this.getToken();
+        return 'sucesso';
+      } else {
+        this.firebaseAuth.auth.signOut();
+        return 'Email nao verificado!';
+      }
     }, err => {
       return err.code; // Retorna o erro do firebase para ser tratado no componente
     });
@@ -32,10 +35,6 @@ export class AuthService {
 
   getUser() {
     return this.firebaseAuth.auth.currentUser;
-  }
-
-  isAuthenticated() {
-    return this.token != null;
   }
 
   isVerified() {
@@ -64,8 +63,24 @@ export class AuthService {
 
   authFacebook() {
     return this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(res => {
-        const user = res.user;
-        const credential = res.credential;
+      const user = res.user;
+      const info = res.additionalUserInfo;
+      const profile: any = info.profile;
+
+      if (info.isNewUser) {
+        const userdata = { // Dados recebidos do Facebook
+          nome: profile.first_name,
+          sobrenome: profile.last_name,
+          email: profile.email,
+          id: user.uid,
+        };
+        return userdata;
+      } else {
+        this.getToken();
+        return 'sucesso';
+      }
+    }, (error) => {
+      return error.code;
     });
   }
 }

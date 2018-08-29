@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { enterComponent } from '../../@core/animations/animations';
 import { NotificacaoService } from './../../services/notificacao.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'ngx-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private notificacao: NotificacaoService,
     private authService: AuthService,
     private router: Router,
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit() {
@@ -32,11 +34,34 @@ export class LoginComponent implements OnInit {
   resetPass() {}
 
   loginFacebook() {
-    this.authService.authFacebook();
+    this.authService.authFacebook().then((res: any) => {
+      if (res === 'sucesso') {
+        this.notificacao.ngxtoaster(
+          'Login',
+          'Realizado com Sucesso!',
+          true,
+        );
+        this.router.navigate(['/home']);
+      } else if (typeof res === 'object') {
+        this.usuarioService.addUsuario(res);
+        this.router.navigate(['/home']);
+      } else {
+        this.notificacao.ngxtoaster(
+          'Erro Login',
+          'Login Falhou!',
+          false,
+        );
+      }
+    }, error => {
+      this.notificacao.ngxtoaster(
+        'Erro Login',
+        'Login Falhou!',
+        false,
+      );
+    });
   }
 
   submit(form: any) {
-    console.log(form);
     this.authService.signInWithEmail(form.email, form.password).then(res => {
       if (res === 'sucesso') {
         this.notificacao.ngxtoaster(
@@ -66,10 +91,10 @@ export class LoginComponent implements OnInit {
       } else {
         this.notificacao.ngxtoaster(
         'Erro Login',
-        'Erro Inesperado, tente novamente',
+        res,
         false,
-    );
-  }
+        );
+      }
     });
   }
 }
