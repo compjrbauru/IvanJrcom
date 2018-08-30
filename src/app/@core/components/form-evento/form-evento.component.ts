@@ -8,12 +8,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./form-evento.component.scss'],
 })
 export class FormEventoComponent implements OnInit, DoCheck {
-  @Input() categorias: Observable<any>;
-  @Input() resolvedEvento: any = null;
-  @Output() formEmitter = new EventEmitter<any>();
+  @Input()
+  categorias: Observable<any>;
+  @Input()
+  resolvedEvento: any = null;
+  @Output()
+  formEmitter = new EventEmitter<any>();
   formEvent: FormGroup = null;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.formEvent = this.formBuilder.group({
@@ -49,7 +52,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
     });
     this.patchValues(this.resolvedEvento);
 
-
     this.onFormValueChanges();
   }
 
@@ -61,10 +63,12 @@ export class FormEventoComponent implements OnInit, DoCheck {
     if (data && data.hasOwnProperty('seconds') && !(typeof data === 'string')) {
       data = data.toDate();
       const mnth = ('0' + (data.getMonth() + 1)).slice(-2);
-      const day  = ('0' + data.getDate()).slice(-2);
-      const hours  = ('0' + data.getHours()).slice(-2);
+      const day = ('0' + data.getDate()).slice(-2);
+      const hours = ('0' + data.getHours()).slice(-2);
       const minutes = ('0' + data.getMinutes()).slice(-2);
-      return [ data.getFullYear(), mnth, day + 'T' + hours + ':' + minutes ].join('-');
+      return [data.getFullYear(), mnth, day + 'T' + hours + ':' + minutes].join(
+        '-',
+      );
     } else {
       return null;
     }
@@ -80,11 +84,14 @@ export class FormEventoComponent implements OnInit, DoCheck {
     }
   }
 
+  imagem(event: any) {
+    console.log(event);
+    this.formEvent.controls.url = event;
+  }
 
   onFormValueChanges() {
     this.formEvent.valueChanges.subscribe(() => {
       this.formEmitter.emit(this.formEvent);
     });
   }
-
 }
