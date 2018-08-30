@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'categoria',
-        loadChildren: './show-categoria/show-categoria.module#ShowCategoriaModule'
+        loadChildren: './show-categoria/show-categoria.module#ShowCategoriaModule',
       },
       {
         path: '**',

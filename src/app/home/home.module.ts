@@ -8,7 +8,7 @@ import { ShowCategoriaModule } from './show-categoria/show-categoria.module';
 const HOME_COMPONENTS = [HomeComponent];
 
 @NgModule({
-  imports: [HomeRoutingModule, ThemeModule, MainModule],
+  imports: [HomeRoutingModule, ThemeModule, MainModule, ShowCategoriaModule],
   declarations: [...HOME_COMPONENTS ],
 })
 export class HomeModule {}
