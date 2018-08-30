@@ -12,9 +12,10 @@ export class CategoriaService {
     constructor(private db: AngularFirestore) { }
 
     searchrcategoriabynome(query: string): any {
-        return this.db.collection('Categorias', ref => ref.where('nome', '==', query))
+        return this.db.collection('Categorias', ref => ref.where('busca', '==', query.toLowerCase()))
           .valueChanges();
       }
+
 
     getCategoria() {
         const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
@@ -25,6 +26,8 @@ export class CategoriaService {
 
         categoria.id = this.db.createId();
         categoria.count = 0;
+        categoria.idsevento = [];
+        categoria.busca = categoria.nome.toLowerCase();
     this.CategoriasCollection.doc(categoria.id).set({
       ...categoria,
     });

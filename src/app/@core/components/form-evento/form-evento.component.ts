@@ -1,5 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
-      categoria: ['', Validators.required],
+      categoria: [null, Validators.required],
       data: ['', Validators.required],
       descricao: ['', Validators.required],
       local: ['', Validators.required],

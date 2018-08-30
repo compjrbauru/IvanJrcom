@@ -8,6 +8,7 @@
                   </div>
                   <div class="col-sm-3">
                       <select formControlName="categoria" class="form-control">
+                          <option [ngValue]="null">Selecionar categoria</option>
                           <option *ngFor="let categoria of categorias | async" [ngValue]="categoria.nome">
                             {{categoria.nome}}
                           </option>
