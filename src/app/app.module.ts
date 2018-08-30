@@ -1,3 +1,4 @@
+import { AngularFireAuth } from 'angularfire2/auth';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -54,6 +55,7 @@ import { QueryService } from './services/query.service';
     QueryService,
     EventoService,
     AngularFirestore,
+    AngularFireAuth,
     CategoriaService,
     NotificacaoService,
   ],

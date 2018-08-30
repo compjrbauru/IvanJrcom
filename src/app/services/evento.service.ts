@@ -25,6 +25,10 @@ export class EventoService {
     return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
   }
 
+  getCarousel(): Observable<any> {
+    return this.db.collection(`Evento`, ref => ref.where('mostraHome', '==', 'Carousel')).valueChanges();
+  }
+
   getByNameWithLimit(limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(limit)).valueChanges();
   }
