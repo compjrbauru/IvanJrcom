@@ -10,13 +10,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./create-categoria.component.scss'],
 })
 export class CreateCategoriaComponent implements OnInit {
-  
+
   categoria: any;
   formCategoria: FormGroup;
 
 
   constructor(
-    private eventoService: EventoService,
     private categoriaService: CategoriaService,
     private formBuilder: FormBuilder,
   ) {}
