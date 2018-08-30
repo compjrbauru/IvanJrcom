@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EventoService } from '../../../../services/evento.service';
 import { CategoriaService } from '../../../../services/categoria.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
