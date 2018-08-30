@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: './page-evento/page-evento.module#PageEventoModule',
       },
       {
+        path: 'categoria',
+        loadChildren: './show-categoria/show-categoria.module#ShowCategoriaModule'
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },
