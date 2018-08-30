@@ -20,6 +20,10 @@
   font-size: 2em;
   color: #3dcc6d;
 }
+.ion-social-facebook:hover {
+  cursor: pointer;
+	color: #3a7999;
+}
 @include media-breakpoint-down(xs) {
   button:not(.btn-icon) {
     padding: 0.75rem 1rem;
