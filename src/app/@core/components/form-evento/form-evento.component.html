@@ -8,6 +8,7 @@
                     </div>
                     <div class="col-sm-3">
                         <select formControlName="categoria" class="form-control">
+                            <option [ngValue]="null">Selecionar categoria</option>
                             <option *ngFor="let categoria of categorias | async" [ngValue]="categoria.nome">
                                 {{categoria.nome}}
                             </option>
@@ -79,7 +80,7 @@
                 </div>
                 <br>
                 <label>Enviar Imagem:</label>
-                <ngx-upload-file (uploadEmitter)="formEvent.value.url = $event"></ngx-upload-file>
+                <ngx-upload-file (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
             </div>
         </form>
     </div>

@@ -17,7 +17,8 @@ export class UploadFileComponent {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   isHovering: boolean;
-
+  imgenviada = false;
+  path: string;
   constructor(
     private storage: AngularFireStorage,
     private queryservice: QueryService,
@@ -33,16 +34,17 @@ export class UploadFileComponent {
       console.error('unsupported file type :( ');
       return;
     }
-    const path = `Eventos/${new Date().getTime()}_${file.name}`;
-    this.task = this.queryservice.sendImage(path, file);
+    this.path = `Eventos/${new Date().getTime()}_${file.name}`;
+    this.task = this.queryservice.sendImage(this.path, file);
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       finalize(() => {
         this.storage
-          .ref(path)
+          .ref(this.path)
           .getDownloadURL()
           .subscribe(ref => {
             this.uploadEmitter.emit(ref);
+            this.imgenviada = true;
           });
       }),
     );
@@ -53,5 +55,19 @@ export class UploadFileComponent {
       snapshot.state === 'running' &&
       snapshot.bytesTransferred < snapshot.totalBytes
     );
+  }
+
+  excluirimg() {
+    this.storage
+      .ref(this.path)
+      .delete()
+      .subscribe(res => {
+        this.percentage = null;
+        this.snapshot = null;
+        this.task = null;
+        this.path = '';
+        this.uploadEmitter.emit(this.path);
+        this.imgenviada = false;
+      });
   }
 }

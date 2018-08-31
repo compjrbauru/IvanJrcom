@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: './page-evento/page-evento.module#PageEventoModule',
       },
       {
+        path: 'conta',
+        loadChildren: './user-info/user-info.module#UserInfoModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

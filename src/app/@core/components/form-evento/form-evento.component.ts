@@ -21,7 +21,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
-      categoria: ['', Validators.required],
+      categoria: [null, Validators.required],
       data: ['', Validators.required],
       descricao: ['', Validators.required],
       local: ['', Validators.required],
@@ -45,7 +45,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
         compramax: ['', Validators.required],
       }),
       mostraHome: null,
-      url: null,
+      url: ['', Validators.required],
       id: [''],
       nomeBusca: null,
       localBusca: null,
@@ -84,9 +84,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
     }
   }
 
-  imagem(event: any) {
-    console.log(event);
-    this.formEvent.controls.url = event;
+  imagemupdate(event: any) {
+    this.formEvent.controls['url'].setValue(event);
   }
 
   onFormValueChanges() {
