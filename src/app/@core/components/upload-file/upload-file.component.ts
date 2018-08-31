@@ -35,7 +35,6 @@ export class UploadFileComponent {
     }
     const path = `Eventos/${new Date().getTime()}_${file.name}`;
     this.task = this.queryservice.sendImage(path, file);
-
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       finalize(() => {
