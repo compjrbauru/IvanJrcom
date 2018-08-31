@@ -52,4 +52,7 @@ export class ListEventsComponent implements OnInit {
     this.form['formEvent'].reset();
    }
 
+   deleteForm(form: any) {
+   }
+
 }
