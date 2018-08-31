@@ -16,6 +16,9 @@
       [resolvedEvento]="eventoResolver ? eventoResolver : null"
     >
     </ngx-form-evento>
-    <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary" type="submit">Salvar</button>
+    <div class="row">
+      <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary" type="submit">Salvar</button>
+      <button (click)="deleteForm(form['formEvent']?.value)" class="btn btn-danger" type="button">Deletar</button>
+    </div>
   </nb-card-body>
 </nb-card>

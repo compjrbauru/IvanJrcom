@@ -14,6 +14,6 @@ const LOGIN_COMPONENTS = [LoginComponent, ResetPassComponent];
   entryComponents: [ResetPassComponent],
   imports: [LoginRoutingModule, ThemeModule, MatDialogModule],
   declarations: [...LOGIN_COMPONENTS],
-  providers: [AuthService, UsuarioService],
+  providers: [UsuarioService],
 })
 export class LoginModule {}

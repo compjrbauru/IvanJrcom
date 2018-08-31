@@ -20,6 +20,7 @@ import { CategoriaService } from './services/categoria.service';
 import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
+import { AuthService } from './services/auth.service';
 
 /**
  * @license
@@ -55,6 +56,7 @@ import { QueryService } from './services/query.service';
     AngularFireAuth,
     CategoriaService,
     NotificacaoService,
+    AuthService,
   ],
 })
 export class AppModule {}
