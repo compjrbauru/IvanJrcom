@@ -18,7 +18,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
-      categoria: ['', Validators.required],
+      categoria: [null, Validators.required],
       data: ['', Validators.required],
       descricao: ['', Validators.required],
       local: ['', Validators.required],

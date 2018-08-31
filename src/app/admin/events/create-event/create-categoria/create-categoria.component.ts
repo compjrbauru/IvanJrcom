@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from '../../../../services/categoria.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'ngx-create-categoria',
@@ -6,7 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-categoria.component.scss'],
 })
 export class CreateCategoriaComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit() {}
+  categoria: any;
+  formCategoria: FormGroup;
+
+
+  constructor(
+    private categoriaService: CategoriaService,
+    private formBuilder: FormBuilder,
+  ) {}
+
+  ngOnInit() {
+    this.formCategoria = this.formBuilder.group({
+        id: [''],
+        count: [''],
+        idsevento: [''],
+        nome: ['', Validators.required],
+        busca: [''],
+    });
+  }
+
+  OnSubmit(form: any) {
+    this.categoriaService.addCategoria(form);
+    this.formCategoria.reset();
+  }
+
 }
