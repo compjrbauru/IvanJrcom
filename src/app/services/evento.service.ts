@@ -25,21 +25,25 @@ export class EventoService {
     return this.db.collection(`/Evento`, ref => ref.orderBy('data')).valueChanges();
   }
 
-  getByNameWithLimit(): Observable<any> {
-    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(3)).valueChanges();
+  getCarousel(): Observable<any> {
+    return this.db.collection(`Evento`, ref => ref.where('mostraHome', '==', 'Carousel')).valueChanges();
   }
 
-  getByNameWithLimitWithStart(lastVisible: any): Observable<any> {
+  getByNameWithLimit(limit: number): Observable<any> {
+    return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(limit)).valueChanges();
+  }
+
+  getByNameWithLimitWithStart(lastVisible: string, limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref
       .orderBy('nome')
-      .limit(3)
+      .limit(limit)
       .startAfter(lastVisible)).valueChanges();
   }
 
-  getByNameWithLimitWithEnd(firstVisible: any): Observable<any> {
+  getByNameWithLimitWithEnd(firstVisible: string, limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref
       .orderBy('nome')
-      .limit(3)
+      .limit(limit)
       .endBefore(firstVisible)).valueChanges();
   }
 
@@ -47,6 +51,13 @@ export class EventoService {
     evento.id = this.db.createId();
     this.EventoCollection.doc(evento.id).set({
       ...evento,
+    });
+  }
+
+  patchData(evento: any, id: string) {
+    this.EventoCollection.doc(id).set({
+      ...evento,
+      id: id,
     });
   }
 

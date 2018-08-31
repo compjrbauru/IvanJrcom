@@ -10,12 +10,11 @@ export class CarouselLocalComponent implements OnInit {
   @Input() eventos: Observable<any>;
   eventosShow: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.eventos.subscribe(response => {
       this.eventosShow = response;
     });
   }
-
 }

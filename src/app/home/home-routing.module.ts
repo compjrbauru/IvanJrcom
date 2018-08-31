@@ -25,8 +25,13 @@ const routes: Routes = [
         loadChildren: './page-evento/page-evento.module#PageEventoModule',
       },
       {
+<<<<<<< HEAD
         path: 'conta',
         loadChildren: './user-info/user-info.module#UserInfoModule',
+=======
+        path: 'categoria',
+        loadChildren: './show-categoria/show-categoria.module#ShowCategoriaModule',
+>>>>>>> master
       },
       {
         path: '**',

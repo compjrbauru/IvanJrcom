@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { first, last } from 'lodash';
-
-import { EventoService } from './../../../services/evento.service';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-show-evento2',
@@ -10,22 +8,14 @@ import { EventoService } from './../../../services/evento.service';
 })
 export class ShowEvento2Component implements OnInit {
   eventos: any;
+  mouseOvered: any = [];
+  cosmic: boolean;
 
-  constructor(private eventoService: EventoService) { }
+  constructor(private themeService: NbThemeService) {}
 
   ngOnInit() {
-    this.eventoService.getByNameWithLimit().subscribe(response => this.eventos = response);
+    'cosmic' === this.themeService.currentTheme
+      ? (this.cosmic = true)
+      : (this.cosmic = false);
   }
-
-  next() {
-    this.eventoService.getByNameWithLimitWithStart(
-      last(this.eventos)).subscribe(response => response.lenght ? this.eventos = response : this.eventos);
-  }
-
-  prev() {
-    this.eventoService.getByNameWithLimitWithEnd(
-      first(this.eventos))
-      .subscribe(response => response.lenght ? this.eventos = response : this.eventos);
-  }
-
 }
