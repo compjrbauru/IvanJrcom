@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
@@ -7,7 +8,10 @@ import { Subject } from 'rxjs/Subject';
 export class QueryService {
   data: any;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private storage: AngularFireStorage,
+  ) {}
 
   categoriaAsync(cat$: Subject<any>) {
     const queryObservable = cat$.pipe(
@@ -32,8 +36,13 @@ export class QueryService {
   }
 
   eventoIdAsync(cat$: Subject<any>) {
-    const queryObservable = cat$.pipe(switchMap(cat =>
-      this.db.collection('/Evento', ref => ref.where('id', '==', cat)).valueChanges()));
+    const queryObservable = cat$.pipe(
+      switchMap(cat =>
+        this.db
+          .collection('/Evento', ref => ref.where('id', '==', cat))
+          .valueChanges(),
+      ),
+    );
     return queryObservable;
   }
 
@@ -55,5 +64,9 @@ export class QueryService {
           .endAt(data + '\uf8ff'),
       )
       .valueChanges();
+  }
+
+  sendImage(path: any, file: any) {
+    return this.storage.upload(path, file);
   }
 }

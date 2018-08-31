@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 
-
 @Component({
   selector: 'ngx-create-event',
   templateUrl: './create-event.component.html',
@@ -14,10 +13,11 @@ export class CreateEventComponent implements OnInit {
   form: any = {};
   categorias: Observable<any>;
   categoria: any;
+  formReset = false;
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.categorias = this.categoriaService.getCategoria();
@@ -28,16 +28,16 @@ export class CreateEventComponent implements OnInit {
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
     this.eventoService.addData(form);
-    this.categoria = this.categoriaService.searchrcategoriabynome(form.categoria).subscribe(
-      (res: any) => {
+    this.categoria = this.categoriaService
+      .searchrcategoriabynome(form.categoria)
+      .subscribe((res: any) => {
         this.categoriaService.patchCategoria(res[0], form);
         this.categoria.unsubscribe();
-      },
-    );
+      });
 
     alert('Evento criado com sucesso!');
 
     this.form['formEvent'].reset();
-   }
-
+    this.formReset = !this.formReset;
+  }
 }

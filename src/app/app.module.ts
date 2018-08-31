@@ -7,7 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ToastrModule } from 'ngx-toastr';
 
 import { config } from '../app/config/config';
@@ -37,6 +38,8 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     TableModule,
     AngularFireModule.initializeApp(config.fire),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
