@@ -1,8 +1,8 @@
-import { NbMenuService, NbMenuItem } from '@nebular/theme';
-import { AuthService } from './../services/auth.service';
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbMenuItem, NbMenuService } from '@nebular/theme';
 
+import { AuthService } from './../services/auth.service';
 import { MENU_ITEMS } from './home-menu';
 
 @Component({

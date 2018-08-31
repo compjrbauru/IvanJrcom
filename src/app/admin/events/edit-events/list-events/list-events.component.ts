@@ -53,7 +53,6 @@ export class ListEventsComponent implements OnInit {
    }
 
    deleteForm(form: any) {
-      console.log(form);
    }
 
 }
