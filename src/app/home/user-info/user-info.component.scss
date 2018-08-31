@@ -1,0 +1,28 @@
+.div-pos-left {
+    float: left;
+    margin-right: 15px;
+}
+
+.div-size-1 {
+    width: 300px;
+}
+
+.div-size-2 {
+    width: auto;
+    margin-left: 15px;
+    margin-right: 0;
+    margin: 0 0 30px;
+}
+
+.label {
+    font-weight: bold;
+    display: inline-block;
+    text-align: left;
+    width: 200px;
+}
+
+.value {
+    display: inline-block;
+    text-align: left;
+    word-wrap: break-word;
+}
