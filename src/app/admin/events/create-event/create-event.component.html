@@ -2,10 +2,9 @@
 <nb-card>
   <nb-card-header>Criar Evento</nb-card-header>
   <nb-card-body>
-    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" "
-      >
-      </ngx-form-evento>
-      <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
+    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [formReset]="formReset">
+    </ngx-form-evento>
+    <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
       " type="submit ">Criar</button>
-    </nb-card-body>
+  </nb-card-body>
 </nb-card>

@@ -13,6 +13,7 @@ export class CreateEventComponent implements OnInit {
   form: any = {};
   categorias: Observable<any>;
   categoria: any;
+  formReset = false;
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
@@ -37,5 +38,6 @@ export class CreateEventComponent implements OnInit {
     alert('Evento criado com sucesso!');
 
     this.form['formEvent'].reset();
+    this.formReset = !this.formReset;
   }
 }

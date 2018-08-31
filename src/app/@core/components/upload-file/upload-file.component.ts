@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
@@ -13,6 +13,14 @@ import { QueryService } from '../../../services/query.service';
 export class UploadFileComponent {
   @Output()
   uploadEmitter = new EventEmitter<any>();
+  @Input()
+  set formReset(value: boolean) {
+    value = !value;
+    this.percentage = null;
+    this.snapshot = null;
+    this.task = null;
+    this.path = '';
+  }
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;

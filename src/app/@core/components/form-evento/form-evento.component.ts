@@ -11,6 +11,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
   categorias: Observable<any>;
   @Input()
+  formReset: boolean;
+  @Input()
   resolvedEvento: any = null;
   @Output()
   formEmitter = new EventEmitter<any>();
