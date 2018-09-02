@@ -8,6 +8,7 @@ import { EventoService } from '../../services/evento.service';
 import { ShowEvento2Module } from './../../@core/components/show-evento2/show-evento2.module';
 import { CarouselLocalModule } from './carousel/carousel-local.module';
 import { MainComponent } from './main.component';
+import { RouterModule } from '@angular/router';
 
 const MAIN_COMPONENTS = [MainComponent];
 const MAIN_MODULES = [
@@ -16,6 +17,7 @@ const MAIN_MODULES = [
   CarouselLocalModule,
   SearchBarModule,
   ShowEvento2Module,
+  RouterModule,
 ];
 
 @NgModule({
