@@ -2,31 +2,42 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TableService {
+  basic = {
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
+  };
+  evento = {
+    columns: {
+      categoria: {
+        title: 'Categoria',
+        type: 'string',
+      },
+      nome: {
+        title: 'Nome',
+        type: 'string',
+      },
+    },
+  };
+
   constructor() { }
 
-  getColumnsEvento() {
-    return {
-      edit: {
-        editButtonContent: '<i class="nb-edit"></i>',
-        saveButtonContent: '<i class="nb-checkmark"></i>',
-        cancelButtonContent: '<i class="nb-close"></i>',
-      },
-      actions: {
-        add: false,
-        edit: false,
-        delete: false,
-      },
-      columns: {
-        categoria: {
-          title: 'Categoria',
-          type: 'string',
-        },
-        nome: {
-          title: 'Nome',
-          type: 'string',
-        },
-      },
-    };
+  getColumns(tipo: any) {
+    let column: any;
+    switch (tipo) {
+      case 'evento': {
+        column = this.evento;
+        break;
+      }
+    }
+    return  { ...this.basic, ...column } ;
   }
 
   getAddButton() {
