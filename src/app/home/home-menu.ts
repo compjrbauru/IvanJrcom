@@ -7,4 +7,10 @@ export let MENU_ITEMS: NbMenuItem[] = [
     link: '/home/main',
     home: true,
   },
+  {
+    title: 'Eventos',
+    icon: 'nb-tables',
+    link: '/home/todos-eventos',
+    home: true,
+  },
 ];

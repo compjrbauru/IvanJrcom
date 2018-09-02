@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todos-eventos.component.scss'],
 })
 export class TodosEventosComponent implements OnInit {
-
+  eventos: any;
   constructor() { }
 
   ngOnInit() {
