@@ -17,11 +17,11 @@ import { Subject } from 'rxjs';
 })
 
 export class TableComponent implements OnInit {
-  @Input() dataAsync: Observable<any>;
-  @Input() dataIdAsync: Observable<any>;
-  @Input() cat$: Subject<string>;
+  @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
+  @Input() dataIdAsync: Observable<any>; // Observable que indica para busca de objeto com id especifico
+  @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
   @Input() deleteData: any = [];
-  @Output() editE = new EventEmitter();
+  @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   keysSettings: any = [];
   dataSource: any = [];
   dataSync: any;
@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
-    this.settings = this.tableService.getColumnsEvento();
+    this.settings = this.tableService.getColumns('evento');
     for (const key in this.settings.columns) {
       if (this.settings.columns[key]) {
         this.keysSettings.push(key);
