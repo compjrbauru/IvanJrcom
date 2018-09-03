@@ -66,10 +66,7 @@ export class UploadFileComponent {
   }
 
   excluirimg() {
-    this.storage
-      .ref(this.path)
-      .delete()
-      .subscribe(res => {
+      this.queryservice.deleteImage(this.path).subscribe(res => {
         this.percentage = null;
         this.snapshot = null;
         this.task = null;

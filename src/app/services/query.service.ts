@@ -69,4 +69,8 @@ export class QueryService {
   sendImage(path: any, file: any) {
     return this.storage.upload(path, file);
   }
+
+  deleteImage(path: any) {
+    return this.storage.ref(path).delete();
+  }
 }
