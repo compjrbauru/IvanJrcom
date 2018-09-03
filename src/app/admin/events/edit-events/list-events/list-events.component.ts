@@ -1,9 +1,10 @@
-import { QueryService } from './../../../../services/query.service';
-import { EventoService } from './../../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+
 import { CategoriaService } from '../../../../services/categoria.service';
+import { EventoService } from './../../../../services/evento.service';
+import { QueryService } from './../../../../services/query.service';
 
 @Component({
   selector: 'ngx-list-events',
@@ -22,7 +23,7 @@ export class ListEventsComponent implements OnInit {
     private eventoService: EventoService,
     private queryService: QueryService,
     private categoriaService: CategoriaService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
@@ -39,20 +40,20 @@ export class ListEventsComponent implements OnInit {
     form.data = new Date(form.data);
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
+    console.log(form);
+    console.log(this.eventoResolver.id);
     this.eventoService.patchData(form, this.eventoResolver.id);
-    this.categoria = this.categoriaService.searchrcategoriabynome(form.categoria).subscribe(
-      (res: any) => {
+    this.categoria = this.categoriaService
+      .searchrcategoriabynome(form.categoria)
+      .subscribe((res: any) => {
         this.categoriaService.patchCategoria(res[0], form);
         this.categoria.unsubscribe();
-      },
-    );
+      });
 
     alert('Evento editado com sucesso!');
     this.eventoResolver = [];
     this.form['formEvent'].reset();
-   }
+  }
 
-   deleteForm(form: any) {
-   }
-
+  deleteForm(form: any) {}
 }

@@ -51,7 +51,10 @@ export class UploadFileComponent {
           .ref(this.path)
           .getDownloadURL()
           .subscribe(ref => {
-            this.uploadEmitter.emit(ref);
+            this.uploadEmitter.emit({
+              url: ref,
+              pathurl: this.path,
+            });
             this.imgenviada = true;
           });
       }),
