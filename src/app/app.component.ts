@@ -28,6 +28,8 @@ export class AppComponent implements OnInit {
       const [atual] = theme;
       this.themeService.changeTheme(atual.tema);
       this.analytics.trackEvent('switchTheme');
+      this.unsubscribe.next();
+      this.unsubscribe.complete();
     });
   }
 }
