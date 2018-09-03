@@ -22,6 +22,7 @@ import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
 import { AuthService } from './services/auth.service';
+import { ThemeService } from './services/theme.service';
 
 /**
  * @license
@@ -59,6 +60,7 @@ import { AuthService } from './services/auth.service';
     AngularFireAuth,
     CategoriaService,
     NotificacaoService,
+    ThemeService,
     AuthService,
   ],
 })

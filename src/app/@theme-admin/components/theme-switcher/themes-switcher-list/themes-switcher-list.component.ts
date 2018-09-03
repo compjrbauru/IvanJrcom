@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
-import { NbThemeService, NbPopoverDirective } from '@nebular/theme';
-import { AnalyticsService } from '../../../../@core/utils/analytics.service';
+import { Component, Input } from '@angular/core';
+import { NbPopoverDirective } from '@nebular/theme';
 import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
+
+import { ThemeService } from './../../../../services/theme.service';
 
 @Component({
   selector: 'ngx-theme-switcher-list',
@@ -39,13 +40,11 @@ export class ThemeSwitcherListComponent {
   ];
 
   constructor(
-    private themeService: NbThemeService,
-    private analyticsService: AnalyticsService,
+    private themeCService: ThemeService,
   ) {}
 
   onToggleTheme(themeKey: string) {
-    this.themeService.changeTheme(themeKey);
-    this.analyticsService.trackEvent('switchTheme');
+    this.themeCService.changeTheme(themeKey, 'RZq8bps3NmeOFgAeMZX5');
     this.popover.hide();
   }
 }
