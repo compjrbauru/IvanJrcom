@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
 import { CategoriaService } from '../../../../services/categoria.service';
@@ -55,5 +55,16 @@ export class ListEventsComponent implements OnInit {
     this.form['formEvent'].reset();
   }
 
-  deleteForm(form: any) {}
+  deleteForm(form: any) {
+    this.categoriaService
+      .searchrcategoriabynome(form.categoria)
+      .subscribe(categoria => {
+        [this.categoria] = categoria;
+        forkJoin(
+          this.categoriaService.patchDeleteEventCategoria(this.categoria, form),
+          this.eventoService.removeData(form.id),
+          this.queryService.deleteImage(form.pathurl),
+        ).subscribe();
+      });
+  }
 }
