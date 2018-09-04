@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EdicaoHomeComponent } from './edicao-home.component';
 import { EdicaoHomeRoutingModule } from './edicao-home-routing.module';
+import { EdicaoSobreModule } from './edicao-sobre/edicao-sobre.module';
+import { ThemeModule } from '../../@theme-home/theme.module';
 
 @NgModule({
   imports: [
+    ThemeModule,
+    EdicaoSobreModule,
     EdicaoHomeRoutingModule,
     CommonModule,
   ],
-  declarations: [EdicaoHomeComponent]
+  declarations: [EdicaoHomeComponent],
 })
 export class EdicaoHomeModule { }
