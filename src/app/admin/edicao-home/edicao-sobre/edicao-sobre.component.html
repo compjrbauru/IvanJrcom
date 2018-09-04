@@ -4,8 +4,8 @@
   </nb-card-header>
 
   <nb-card-body>
-    <div class="col-sm-12 input-group">
-      <textarea [(ngModel)]="sobre" placeholder="Sobre Nos" id="sobrenos" class="form-control" rows="5"></textarea>
+    <div class="col-sm-12">
+      <ngx-tiny-mce [text]="sobre" (editorKeyup)="getData($event)"></ngx-tiny-mce>
     </div>
     <br>
     <div class="col">

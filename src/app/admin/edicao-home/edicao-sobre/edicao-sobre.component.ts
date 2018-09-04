@@ -7,9 +7,10 @@ import { NotificacaoService } from '../../../services/notificacao.service';
   templateUrl: './edicao-sobre.component.html',
 })
 export class EdicaoSobreComponent implements OnInit, OnDestroy {
-  sobre: any;
+  sobre: any; // Contem o texto a ser atualizado
   sub: any;
   id: any;
+  initialeditortext: string; // Variavel para o texto inicial
 
   constructor(private sobreService: SobreService, private notificao: NotificacaoService) { }
 
@@ -17,6 +18,8 @@ export class EdicaoSobreComponent implements OnInit, OnDestroy {
     this.sub = this.sobreService.getAll().subscribe(res => {
       this.sobre = res[0]['sobre'];
       this.id = res[0]['id'];
+
+      this.initialeditortext = this.sobre;
     });
   }
 
@@ -31,4 +34,9 @@ export class EdicaoSobreComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  getData(text) { // Recebe o evento de tecla do editor de texto e joga na variavel
+    this.sobre = text;
+  }
+
 }
