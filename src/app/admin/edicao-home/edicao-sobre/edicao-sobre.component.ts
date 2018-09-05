@@ -10,16 +10,16 @@ export class EdicaoSobreComponent implements OnInit, OnDestroy {
   sobre: any; // Contem o texto a ser atualizado
   sub: any;
   id: any;
-  initialeditortext: string; // Variavel para o texto inicial
+  initialeditortext = 'Carregando Texto...';
 
   constructor(private sobreService: SobreService, private notificao: NotificacaoService) { }
 
   ngOnInit() {
-    this.sub = this.sobreService.getAll().subscribe(res => {
-      this.sobre = res[0]['sobre'];
-      this.id = res[0]['id'];
+    this.sub = this.sobreService.getSobre().subscribe(res => {
+    this.sobre = res['sobre'];
+    this.id = res['id'];
 
-      this.initialeditortext = this.sobre;
+    this.initialeditortext = this.sobre;
     });
   }
 

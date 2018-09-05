@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { pluck } from 'rxjs/operators';
 
 @Injectable()
 export class SobreService {
 
 constructor(private db: AngularFirestore) {}
 
-  getAll() {
-    return this.db.collection('/Sobre').valueChanges();
-  }
-
-  getSobre(id) {
-    return this.db.collection('/Sobre').doc(id).valueChanges();
+  getSobre() {
+    return this.db.collection('/Sobre').valueChanges().pipe(pluck('0'));
   }
 
   patchSobre(id, texto) {

@@ -10,7 +10,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
 
   @Input()
   set text(text: string) {
-    if (text)
+    if (text && this.editor)
       this.editor.setContent(text);
   }
 
