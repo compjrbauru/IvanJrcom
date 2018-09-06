@@ -40,8 +40,9 @@ export class ListEventsComponent implements OnInit {
     form.data = new Date(form.data);
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
-    console.log(form);
-    console.log(this.eventoResolver.id);
+    if (form.pathurl !== this.eventoResolver.pathurl) {
+      this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+    }
     this.eventoService.patchData(form, this.eventoResolver.id);
     this.categoria = this.categoriaService
       .searchrcategoriabynome(form.categoria)

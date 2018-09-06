@@ -42,6 +42,10 @@ export class UploadFileComponent {
       console.error('unsupported file type :( ');
       return;
     }
+    this.uploadEmitter.emit({
+      url: null,
+      pathurl: null,
+    });
     this.path = `Eventos/${new Date().getTime()}_${file.name}`;
     this.task = this.queryservice.sendImage(this.path, file);
     this.percentage = this.task.percentageChanges();
@@ -69,13 +73,15 @@ export class UploadFileComponent {
   }
 
   excluirimg() {
-      this.queryservice.deleteImage(this.path).subscribe(res => {
-        this.percentage = null;
-        this.snapshot = null;
-        this.task = null;
-        this.path = '';
-        this.uploadEmitter.emit(this.path);
-        this.imgenviada = false;
-      });
+    this.queryservice.deleteImage(this.path).subscribe(res => {
+      this.percentage = null;
+      this.snapshot = null;
+      this.task = null;
+      this.path = '';
+      this.uploadEmitter.emit(this.path);
+      this.imgenviada = false;
+    });
   }
+
+
 }

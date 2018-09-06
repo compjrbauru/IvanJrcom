@@ -1,4 +1,3 @@
-import { AngularFireAuth } from 'angularfire2/auth';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -7,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ToastrModule } from 'ngx-toastr';
@@ -17,11 +17,12 @@ import { ThemeModule } from './@theme/theme.module';
 import { TableModule } from './admin/table/table.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
+import { AuthService } from './services/auth.service';
 import { CategoriaService } from './services/categoria.service';
 import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
-import { AuthService } from './services/auth.service';
 
 /**
  * @license
@@ -60,6 +61,7 @@ import { AuthService } from './services/auth.service';
     CategoriaService,
     NotificacaoService,
     AuthService,
+    CanDeactivateGuard,
   ],
 })
 export class AppModule {}
