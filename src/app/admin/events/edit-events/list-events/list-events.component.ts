@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { forkJoin, Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
 
+import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { CategoriaService } from '../../../../services/categoria.service';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
@@ -23,6 +26,7 @@ export class ListEventsComponent implements OnInit {
     private eventoService: EventoService,
     private queryService: QueryService,
     private categoriaService: CategoriaService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -67,5 +71,30 @@ export class ListEventsComponent implements OnInit {
           this.queryService.deleteImage(form.pathurl),
         ).subscribe();
       });
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (
+      this.form['formEvent'] &&
+      this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
+    ) {
+      const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+        width: '40%',
+        data: {
+          header: 'Aviso!',
+          text: 'Você enviou uma imagem, tem certeza que deseja sair ?',
+        },
+        disableClose: true,
+      });
+      return dialogRef.afterClosed().pipe(
+        tap(res => {
+          if (res === true) {
+            this.queryService.deleteImage(this.form['formEvent'].value.pathurl);
+          }
+        }),
+      );
+    } else {
+      return true;
+    }
   }
 }

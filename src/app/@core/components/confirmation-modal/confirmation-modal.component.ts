@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 @Component({
   selector: 'ngx-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
+  styleUrls: ['./confirmation-modal.component.scss'],
 })
 export class ConfirmationModalComponent {
   constructor(
@@ -16,7 +17,7 @@ export class ConfirmationModalComponent {
     this.dialogRef.close('false');
   }
 
-  exit() {
-    this.dialogRef.close(true);
+  exit(verif: boolean) {
+    this.dialogRef.close(verif);
   }
 }

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
 import { QueryService } from '../../../services/query.service';
+import { NotificacaoService } from './../../../services/notificacao.service';
 
 @Component({
   selector: 'ngx-upload-file',
@@ -21,6 +22,9 @@ export class UploadFileComponent {
     this.task = null;
     this.path = '';
   }
+  @Input()
+  localName: string;
+
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
@@ -28,8 +32,8 @@ export class UploadFileComponent {
   imgenviada = false;
   path: string;
   constructor(
-    private storage: AngularFireStorage,
     private queryservice: QueryService,
+    private notific: NotificacaoService,
   ) {}
 
   toggleHover(event: boolean) {
@@ -39,28 +43,25 @@ export class UploadFileComponent {
   startUpload(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ');
+      this.notific.ngxtoaster('OPS!', 'Este arquivo não é uma imagem.', false);
       return;
     }
     this.uploadEmitter.emit({
       url: null,
       pathurl: null,
     });
-    this.path = `Eventos/${new Date().getTime()}_${file.name}`;
+    this.path = this.localName + `/${new Date().getTime()}_${file.name}`;
     this.task = this.queryservice.sendImage(this.path, file);
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       finalize(() => {
-        this.storage
-          .ref(this.path)
-          .getDownloadURL()
-          .subscribe(ref => {
-            this.uploadEmitter.emit({
-              url: ref,
-              pathurl: this.path,
-            });
-            this.imgenviada = true;
+        this.queryservice.getUrlImage(this.path).subscribe(ref => {
+          this.uploadEmitter.emit({
+            url: ref,
+            pathurl: this.path,
           });
+          this.imgenviada = true;
+        });
       }),
     );
   }
@@ -82,6 +83,4 @@ export class UploadFileComponent {
       this.imgenviada = false;
     });
   }
-
-
 }
