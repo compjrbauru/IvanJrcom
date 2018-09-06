@@ -1,3 +1,4 @@
+import { MostrarhomeModule } from './mostrarhome/mostrarhome.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EdicaoHomeComponent } from './edicao-home.component';
@@ -8,6 +9,7 @@ import { ThemeModule } from '../../@theme-home/theme.module';
 @NgModule({
   imports: [
     ThemeModule,
+    MostrarhomeModule,
     EdicaoSobreModule,
     EdicaoHomeRoutingModule,
     CommonModule,
