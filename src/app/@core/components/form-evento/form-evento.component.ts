@@ -1,6 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-evento',
@@ -9,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
-  categorias: Observable<any>;
+  categorias: any;
   @Input()
   formReset: boolean;
   @Input()

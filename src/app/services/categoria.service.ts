@@ -28,25 +28,24 @@ export class CategoriaService {
       categoria.idsevento = [];
       categoria.busca = categoria.nome.toLowerCase();
       this.CategoriasCollection.doc(categoria.id).set({
-      ...categoria,
+        ...categoria,
       });
     }
 
-    patchCategoria(categoria: any, evento: any) {
+    patchCategoria(categorias: any, evento: any) {
+      const categoria = categorias.find(cat => cat.nome === evento.categoria);
       categoria.count++;
       categoria.idsevento.push(evento.id);
-      this.CategoriasCollection.doc(categoria.id)
-        .set({
-            ...categoria,
-        });
+      this.CategoriasCollection.doc(categoria.id).set({
+        ...categoria,
+      });
     }
 
     patchDeleteEventCategoria(categoria: any, evento: any) {
       categoria.idsevento.splice( categoria.idsevento.indexOf(evento.id), 1 );
       categoria.count--;
-      return this.CategoriasCollection.doc(categoria.id)
-      .set({
-          ...categoria,
+      return this.CategoriasCollection.doc(categoria.id).set({
+        ...categoria,
       });
     }
 
