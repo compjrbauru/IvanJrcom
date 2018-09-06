@@ -21,7 +21,10 @@ export class TableComponent implements OnInit {
   @Input() dataIdAsync: Observable<any>; // Observable que indica para busca de objeto com id especifico
   @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
   @Input() deleteData: any = [];
+  @Input() columns: string; // Determina colunas mostradas
+  @Input() edit: boolean = false; // Ativa ou desativa a edicao
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
+  @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   keysSettings: any = [];
   dataSource: any = [];
   dataSync: any;
@@ -33,7 +36,8 @@ export class TableComponent implements OnInit {
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
-    this.settings = this.tableService.getColumns('evento');
+    this.tableService.setEdit(this.edit);
+    this.settings = this.tableService.getColumns(this.columns);
     for (const key in this.settings.columns) {
       if (this.settings.columns[key]) {
         this.keysSettings.push(key);
@@ -69,6 +73,15 @@ export class TableComponent implements OnInit {
 
   foundObject(event: any) {
     this.cat$.next(find(this.dataSync, event.data).id);
+  }
+
+  emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
+    const eventData = find(this.dataSync, event.data); // Informacoes necessarias do evento
+    const resp = {
+      event, // Dados sobre a edicao
+      eventData,
+    };
+    this.editConfirm.emit(resp); // Emite o evento para ser tratado no pai
   }
 
 }
