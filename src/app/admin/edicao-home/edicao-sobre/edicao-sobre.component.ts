@@ -38,5 +38,4 @@ export class EdicaoSobreComponent implements OnInit, OnDestroy {
   getData(text) { // Recebe o evento de tecla do editor de texto e joga na variavel
     this.sobre = text;
   }
-
 }

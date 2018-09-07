@@ -31,6 +31,7 @@ export class TinyMCEComponent implements OnDestroy, AfterViewInit {
       },
       height: '320',
     });
+    this.editor.setContent('Carregando texto...');
   }
 
   ngOnDestroy() {
