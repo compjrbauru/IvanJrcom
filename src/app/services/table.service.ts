@@ -46,6 +46,24 @@ export class TableService {
       },
     },
   };
+  categorias = {
+    columns: {
+      showhome: {
+        title: 'Mostra Home',
+        type: 'string',
+        editor: { // Opcoes de edicao para a coluna
+          type: 'list', // Tipo lista (select)
+          config: {
+            list: [{title: 'True', value: true}, {title: 'False', value: false}],
+          },
+        },
+      },
+      nome: {
+        title: 'Nome',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -62,6 +80,10 @@ export class TableService {
       }
       case 'mostrarhome': {
         column = this.mostrarhome;
+        break;
+      }
+      case 'categorias': {
+        column = this.categorias;
         break;
       }
     }

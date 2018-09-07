@@ -1,3 +1,4 @@
+import { EdicaoCategoriasModule } from './edicao-categorias/edicao-categorias.module';
 import { MostrarhomeModule } from './mostrarhome/mostrarhome.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { ThemeModule } from '../../@theme-home/theme.module';
     EdicaoSobreModule,
     EdicaoHomeRoutingModule,
     CommonModule,
+    EdicaoCategoriasModule,
   ],
   declarations: [EdicaoHomeComponent],
 })
