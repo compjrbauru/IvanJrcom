@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class CategoriaService {
@@ -14,8 +16,15 @@ export class CategoriaService {
     searchrcategoriabynome(query: string): any {
       return this.db.collection('Categorias', ref => ref.where('busca', '==', query.toLowerCase()))
         .valueChanges();
-      }
+    }
 
+    getCategoriaID(cat$: Subject<any>) {
+      return cat$.pipe(
+        switchMap( cat =>
+          this.db.collection('/Categorias', ref => ref.where('id', '==', cat)).valueChanges(),
+        ),
+      );
+    }
 
     getCategoria() {
       const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
@@ -30,6 +39,10 @@ export class CategoriaService {
       this.CategoriasCollection.doc(categoria.id).set({
       ...categoria,
       });
+    }
+
+    editCategoria(categoria) {
+      return this.CategoriasCollection.doc(categoria.id).set(categoria);
     }
 
     patchCategoria(categoria: any, evento: any) {
