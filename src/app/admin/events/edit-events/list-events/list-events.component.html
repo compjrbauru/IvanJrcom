@@ -1,4 +1,4 @@
-<ngx-table [dataAsync]="eventoAsync" [dataIdAsync]="eventoIdAsync" [cat$]="catID$" (editE)="resolver($event)">
+<ngx-table [dataAsync]="eventoAsync" [dataIdAsync]="eventoIdAsync" [cat$]="catID$" (editE)="resolver($event)" columns='evento'>
 </ngx-table>
 
 <nb-card *ngIf="eventoResolver">
