@@ -25,6 +25,10 @@ export class TableService {
         title: 'Nome',
         type: 'string',
       },
+      local: {
+        title: 'Local',
+        type: 'string',
+      },
     },
   };
   mostrarhome = {
