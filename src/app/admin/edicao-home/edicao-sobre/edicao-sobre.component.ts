@@ -7,24 +7,21 @@ import { NotificacaoService } from '../../../services/notificacao.service';
   templateUrl: './edicao-sobre.component.html',
 })
 export class EdicaoSobreComponent implements OnInit, OnDestroy {
-  sobre: any; // Contem o texto a ser atualizado
+  sobredata;
   sub: any;
-  id: any;
   initialeditortext = 'Carregando Texto...';
 
   constructor(private sobreService: SobreService, private notificao: NotificacaoService) { }
 
   ngOnInit() {
     this.sub = this.sobreService.getSobre().subscribe(res => {
-    this.sobre = res['sobre'];
-    this.id = res['id'];
-
-    this.initialeditortext = this.sobre;
+      this.sobredata = res;
+      this.initialeditortext = res['sobre'];
     });
   }
 
   submit() {
-    this.sobreService.patchSobre(this.id, this.sobre).then(res => {
+    this.sobreService.patchSobre(this.sobredata.id, this.sobredata.sobre).then(res => {
       this.notificao.ngxtoaster('Editar Sobre', 'Editado com Sucesso!', true);
     }).catch(err => {
       this.notificao.ngxtoaster('Editar Sobre', 'Falha na edição!', false);
@@ -36,6 +33,6 @@ export class EdicaoSobreComponent implements OnInit, OnDestroy {
   }
 
   getData(text) { // Recebe o evento de tecla do editor de texto e joga na variavel
-    this.sobre = text;
+    this.sobredata.sobre = text;
   }
 }
