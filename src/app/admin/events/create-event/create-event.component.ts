@@ -5,12 +5,11 @@ import { tap } from 'rxjs/operators';
 
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
 import { QueryService } from '../../../services/query.service';
+// tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 
-// tslint:disable-next-line:max-line-length
-// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-create-event',
   templateUrl: './create-event.component.html',

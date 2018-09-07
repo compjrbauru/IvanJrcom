@@ -12,11 +12,6 @@ export class ConfirmationModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
-  onNoClick(): void {
-    console.log('teste');
-    this.dialogRef.close('false');
-  }
-
   exit(verif: boolean) {
     this.dialogRef.close(verif);
   }

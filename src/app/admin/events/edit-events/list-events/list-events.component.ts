@@ -4,6 +4,7 @@ import { forkJoin, Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 
+// tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { CategoriaService } from '../../../../services/categoria.service';
 import { EventoService } from './../../../../services/evento.service';
