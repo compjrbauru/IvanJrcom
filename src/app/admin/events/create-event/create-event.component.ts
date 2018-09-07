@@ -9,6 +9,8 @@ import { ConfirmationModalComponent } from './../../../@core/components/confirma
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 
+// tslint:disable-next-line:max-line-length
+// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-create-event',
   templateUrl: './create-event.component.html',
@@ -49,7 +51,11 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.form['formEvent'] && this.form['formEvent'].value.pathurl !== '') {
+    if (
+      this.form['formEvent'] &&
+      this.form['formEvent'].value.pathurl !== '' &&
+      this.form['formEvent'].value.pathurl !== null
+    ) {
       const dialogRef = this.dialog.open(ConfirmationModalComponent, {
         width: '40%',
         data: {

@@ -21,6 +21,7 @@ export class ListEventsComponent implements OnInit {
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
   catID$ = new Subject<string>();
+  formReset = false;
 
   constructor(
     private eventoService: EventoService,
@@ -56,6 +57,7 @@ export class ListEventsComponent implements OnInit {
       });
 
     alert('Evento editado com sucesso!');
+    this.formReset = !this.formReset;
     this.eventoResolver = [];
     this.form['formEvent'].reset();
   }
