@@ -1,6 +1,5 @@
 import { NotificacaoService } from './../../../services/notificacao.service';
 import { TableModule } from './../../table/table.module';
-import { TableComponent } from './../../table/table.component';
 import { EventoService } from './../../../services/evento.service';
 import { ThemeModule } from './../../../@theme-home/theme.module';
 import { NgModule } from '@angular/core';
