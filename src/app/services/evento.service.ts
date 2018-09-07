@@ -55,7 +55,7 @@ export class EventoService {
   }
 
   patchData(evento: any, id: string) {
-    this.EventoCollection.doc(id).set({
+    return this.EventoCollection.doc(id).set({
       ...evento,
       id: id,
     });

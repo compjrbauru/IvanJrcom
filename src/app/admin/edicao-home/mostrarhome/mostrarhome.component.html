@@ -1,0 +1,8 @@
+<ngx-table
+    [dataAsync]="eventos"
+    [dataIdAsync]="eventoIdAsync"
+    [cat$]="catID$"
+    edit='true'
+    columns='mostrarhome'
+    (editConfirm)="editmostrarhome($event)"
+></ngx-table>

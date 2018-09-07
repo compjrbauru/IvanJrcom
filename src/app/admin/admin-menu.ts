@@ -25,4 +25,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Editar Home',
+    link: '/admin/edicao-home',
+    icon: 'nb-home',
+  },
 ];
