@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
@@ -9,18 +10,23 @@ import { EventoService } from './../../../services/evento.service';
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss'],
 })
-export class CreateEventComponent implements OnInit {
+export class CreateEventComponent implements OnInit, OnDestroy {
   form: any = {};
-  categorias: Observable<any>;
+  categorias: any;
   categoria: any;
   formReset = false;
+  categoriaSelected: any = {};
+  private unsubscribeCategoria: Subject<void> = new Subject();
+
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
   ) {}
 
   ngOnInit() {
-    this.categorias = this.categoriaService.getCategoria();
+    this.categoriaService.getCategoria().pipe(takeUntil(this.unsubscribeCategoria)).subscribe(categorias => {
+      this.categorias = categorias;
+    });
   }
 
   submit(form: any) {
@@ -28,16 +34,16 @@ export class CreateEventComponent implements OnInit {
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
     this.eventoService.addData(form);
-    this.categoria = this.categoriaService
-      .searchrcategoriabynome(form.categoria)
-      .subscribe((res: any) => {
-        this.categoriaService.patchCategoria(res[0], form);
-        this.categoria.unsubscribe();
-      });
+    this.categoriaService.patchCategoria(this.categorias, form);
 
     alert('Evento criado com sucesso!');
 
     this.form['formEvent'].reset();
     this.formReset = !this.formReset;
   }
+
+  ngOnDestroy() {
+    this.unsubscribeCategoria.next();
+    this.unsubscribeCategoria.complete();
+   }
 }
