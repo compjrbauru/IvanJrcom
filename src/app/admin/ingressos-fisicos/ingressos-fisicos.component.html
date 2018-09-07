@@ -1,3 +1,12 @@
-<p>
-  ingressos-fisicos works!
-</p>
+<ngx-table
+[dataAsync]="eventoAsync"
+[dataIdAsync]="eventoIdAsync"
+[cat$]="catID$"
+(editE)="resolver($event)"
+>
+</ngx-table>
+<nb-card>
+    <nb-card-header>Gerar Ingressos Físicos</nb-card-header>
+    <nb-card-body>
+    </nb-card-body>
+  </nb-card>
