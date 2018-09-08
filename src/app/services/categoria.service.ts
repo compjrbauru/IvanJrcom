@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class CategoriaService {
@@ -14,8 +16,15 @@ export class CategoriaService {
     searchrcategoriabynome(query: string): any {
       return this.db.collection('Categorias', ref => ref.where('busca', '==', query.toLowerCase()))
         .valueChanges();
-      }
+    }
 
+    getCategoriaID(cat$: Subject<any>) {
+      return cat$.pipe(
+        switchMap( cat =>
+          this.db.collection('/Categorias', ref => ref.where('id', '==', cat)).valueChanges(),
+        ),
+      );
+    }
 
     getCategoria() {
       const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
@@ -28,25 +37,28 @@ export class CategoriaService {
       categoria.idsevento = [];
       categoria.busca = categoria.nome.toLowerCase();
       this.CategoriasCollection.doc(categoria.id).set({
-      ...categoria,
+        ...categoria,
       });
     }
 
-    patchCategoria(categoria: any, evento: any) {
+    editCategoria(categoria) {
+      return this.CategoriasCollection.doc(categoria.id).set(categoria);
+    }
+
+    patchCategoria(categorias: any, evento: any) {
+      const categoria = categorias.find(cat => cat.nome === evento.categoria);
       categoria.count++;
       categoria.idsevento.push(evento.id);
-      this.CategoriasCollection.doc(categoria.id)
-        .set({
-            ...categoria,
-        });
+      this.CategoriasCollection.doc(categoria.id).set({
+        ...categoria,
+      });
     }
 
     patchDeleteEventCategoria(categoria: any, evento: any) {
       categoria.idsevento.splice( categoria.idsevento.indexOf(evento.id), 1 );
       categoria.count--;
-      return this.CategoriasCollection.doc(categoria.id)
-      .set({
-          ...categoria,
+      return this.CategoriasCollection.doc(categoria.id).set({
+        ...categoria,
       });
     }
 

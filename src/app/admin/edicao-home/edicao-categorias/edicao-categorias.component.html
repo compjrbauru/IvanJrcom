@@ -1,0 +1,8 @@
+<ngx-table
+    [dataAsync]="categorias"
+    [dataIdAsync]="categoriasID"
+    [cat$]="catID$"
+    edit='true'
+    columns='categorias'
+    (editConfirm)="editcategoria($event)"
+></ngx-table>

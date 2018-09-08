@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: './events/events.module#EventsModule',
       },
       {
+        path: 'edicao-home',
+        loadChildren: './edicao-home/edicao-home.module#EdicaoHomeModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },
