@@ -17,7 +17,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Output()
   formEmitter = new EventEmitter<any>();
   formEvent: FormGroup = null;
-
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -44,6 +43,12 @@ export class FormEventoComponent implements OnInit, DoCheck {
           disponiveis: [],
           valor: [],
         }),
+        payment: this.formBuilder.group({
+          boleto: [],
+          cartaocredito: [],
+          deposito: [],
+          vendafisica: [],
+        }),
         compramax: ['', Validators.required],
       }),
       mostraHome: null,
@@ -56,11 +61,9 @@ export class FormEventoComponent implements OnInit, DoCheck {
 
     this.onFormValueChanges();
   }
-
   ngDoCheck() {
     this.patchValues(this.resolvedEvento);
   }
-
   resolveData(data: any) {
     if (data && data.hasOwnProperty('seconds') && !(typeof data === 'string')) {
       data = data.toDate();
