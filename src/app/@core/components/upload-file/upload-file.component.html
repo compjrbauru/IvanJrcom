@@ -29,15 +29,8 @@
       {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
     </div>
   </div>
-  <!-- <div class="row justify-content-center">
-    <div class="col-4">
-      <button (click)="task.pause()" class="btn btn-hero-warning btn-demo" [disabled]="!isActive(snap)">Pause</button>
-      <button (click)="task.cancel()" class="btn btn-hero-danger btn-demo" [disabled]="!isActive(snap)">Cancel</button>
-      <button (click)="task.resume()" class="btn btn-hero-info btn-demo" [disabled]="!(snap?.state === 'paused')">Resume</button>
-    </div>
-  </div> -->
   <div *ngIf="imgenviada">
-    <button (click)="excluirimg()" class="btn btn-hero-danger btn-demo">Excluir imagem</button>
+    <button (click)="excluirimg()" class="btn btn-hero-danger btn-demo float-right">Excluir imagem</button>
   </div>
 
 </div>

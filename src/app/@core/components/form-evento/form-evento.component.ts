@@ -47,6 +47,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
       }),
       mostraHome: null,
       url: ['', Validators.required],
+      pathurl: ['', Validators.required],
       id: [''],
       nomeBusca: null,
       localBusca: null,
@@ -86,7 +87,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
   }
 
   imagemupdate(event: any) {
-    this.formEvent.controls['url'].setValue(event);
+    this.formEvent.controls['url'].setValue(event.url);
+    this.formEvent.controls['pathurl'].setValue(event.pathurl);
   }
 
   onFormValueChanges() {
