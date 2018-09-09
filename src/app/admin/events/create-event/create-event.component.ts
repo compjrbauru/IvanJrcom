@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Observable, Subject  } from 'rxjs';
-import { tap, takeUntil  } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { tap, takeUntil } from 'rxjs/operators';
 
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
 import { QueryService } from '../../../services/query.service';
@@ -15,7 +15,8 @@ import { EventoService } from './../../../services/evento.service';
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss'],
 })
-export class CreateEventComponent implements OnInit, CanComponentDeactivate, OnDestroy {
+export class CreateEventComponent
+  implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
   categorias: any;
   categoria: any;
@@ -31,9 +32,12 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate, OnD
   ) {}
 
   ngOnInit() {
-    this.categoriaService.getCategoria().pipe(takeUntil(this.unsubscribeCategoria)).subscribe(categorias => {
-      this.categorias = categorias;
-    });
+    this.categoriaService
+      .getCategoria()
+      .pipe(takeUntil(this.unsubscribeCategoria))
+      .subscribe(categorias => {
+        this.categorias = categorias;
+      });
   }
 
   submit(form: any) {
@@ -59,7 +63,7 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate, OnD
         width: '40%',
         data: {
           header: 'Aviso!',
-          text: 'Você enviou uma imagem, tem certeza que deseja sair ?',
+          text: 'Você enviou uma imagem, tem certeza que deseja sair?',
         },
         disableClose: true,
       });
@@ -78,5 +82,5 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate, OnD
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
-   }
+  }
 }

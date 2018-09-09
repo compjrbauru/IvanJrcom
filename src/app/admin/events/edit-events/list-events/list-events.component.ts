@@ -10,7 +10,6 @@ import { CategoriaService } from '../../../../services/categoria.service';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
 
-// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-list-events',
   templateUrl: './list-events.component.html',
@@ -75,7 +74,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
         width: '40%',
         data: {
           header: 'Aviso!',
-          text: 'Você enviou uma imagem, tem certeza que deseja sair ?',
+          text: 'Você enviou uma imagem, tem certeza que deseja sair?',
         },
         disableClose: true,
       });
