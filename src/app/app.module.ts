@@ -18,7 +18,7 @@ import { TableModule } from './admin/table/table.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
-import { AuthService, AuthService } from './services/auth.service';
+import { AuthService } from './services/auth.service';
 import { CategoriaService } from './services/categoria.service';
 import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';

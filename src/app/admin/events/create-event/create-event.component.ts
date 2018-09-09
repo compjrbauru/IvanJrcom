@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, Subject  } from 'rxjs';
+import { tap, takeUntil  } from 'rxjs/operators';
 
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
 import { QueryService } from '../../../services/query.service';
@@ -15,11 +15,14 @@ import { EventoService } from './../../../services/evento.service';
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss'],
 })
-export class CreateEventComponent implements OnInit, CanComponentDeactivate {
+export class CreateEventComponent implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
-  categorias: Observable<any>;
+  categorias: any;
   categoria: any;
   formReset = false;
+  categoriaSelected: any = {};
+  private unsubscribeCategoria: Subject<void> = new Subject();
+
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
@@ -28,7 +31,9 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
-    this.categorias = this.categoriaService.getCategoria();
+    this.categoriaService.getCategoria().pipe(takeUntil(this.unsubscribeCategoria)).subscribe(categorias => {
+      this.categorias = categorias;
+    });
   }
 
   submit(form: any) {
@@ -36,12 +41,7 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate {
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
     this.eventoService.addData(form);
-    this.categoria = this.categoriaService
-      .searchrcategoriabynome(form.categoria)
-      .subscribe((res: any) => {
-        this.categoriaService.patchCategoria(res[0], form);
-        this.categoria.unsubscribe();
-      });
+    this.categoriaService.patchCategoria(this.categorias, form);
 
     alert('Evento criado com sucesso!');
 
@@ -74,4 +74,9 @@ export class CreateEventComponent implements OnInit, CanComponentDeactivate {
       return true;
     }
   }
+
+  ngOnDestroy() {
+    this.unsubscribeCategoria.next();
+    this.unsubscribeCategoria.complete();
+   }
 }

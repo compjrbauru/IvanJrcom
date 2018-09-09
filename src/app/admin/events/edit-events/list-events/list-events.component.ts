@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { forkJoin, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -10,19 +10,22 @@ import { CategoriaService } from '../../../../services/categoria.service';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
 
+// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-list-events',
   templateUrl: './list-events.component.html',
 })
-export class ListEventsComponent implements OnInit {
+export class ListEventsComponent implements OnInit, OnDestroy {
   form: any = {};
-  categorias: Observable<any>;
+  categorias: any;
   categoria: any;
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
   catID$ = new Subject<string>();
   formReset = false;
+  private unsubscribeCategoria: Subject<void> = new Subject();
+  categoriaSelected: any = {};
 
   constructor(
     private eventoService: EventoService,
@@ -35,7 +38,12 @@ export class ListEventsComponent implements OnInit {
     this.eventoAsync = this.eventoService.getAll();
     this.catID$.next('');
     this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
-    this.categorias = this.categoriaService.getCategoria();
+    this.categoriaService
+      .getCategoria()
+      .pipe(takeUntil(this.unsubscribeCategoria))
+      .subscribe(categorias => {
+        this.categorias = categorias;
+      });
   }
 
   resolver(event) {
@@ -50,30 +58,12 @@ export class ListEventsComponent implements OnInit {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
     this.eventoService.patchData(form, this.eventoResolver.id);
-    this.categoria = this.categoriaService
-      .searchrcategoriabynome(form.categoria)
-      .subscribe((res: any) => {
-        this.categoriaService.patchCategoria(res[0], form);
-        this.categoria.unsubscribe();
-      });
+    this.categoriaService.patchCategoria(this.categorias, form);
 
     alert('Evento editado com sucesso!');
     this.formReset = !this.formReset;
     this.eventoResolver = [];
     this.form['formEvent'].reset();
-  }
-
-  deleteForm(form: any) {
-    this.categoriaService
-      .searchrcategoriabynome(form.categoria)
-      .subscribe(categoria => {
-        [this.categoria] = categoria;
-        forkJoin(
-          this.categoriaService.patchDeleteEventCategoria(this.categoria, form),
-          this.eventoService.removeData(form.id),
-          this.queryService.deleteImage(form.pathurl),
-        ).subscribe();
-      });
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
@@ -99,5 +89,20 @@ export class ListEventsComponent implements OnInit {
     } else {
       return true;
     }
+  }
+  deleteForm(form: any) {
+    this.categoriaService
+      .searchrcategoriabynome(form.categoria)
+      .subscribe(categoria => {
+        [this.categoria] = categoria;
+        this.categoriaService.patchDeleteEventCategoria(this.categoria, form);
+        this.eventoService.removeData(form.id);
+        this.queryService.deleteImage(form.pathurl);
+      });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeCategoria.next();
+    this.unsubscribeCategoria.complete();
   }
 }
