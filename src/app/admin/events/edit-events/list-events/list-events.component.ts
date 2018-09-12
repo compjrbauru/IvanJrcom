@@ -57,7 +57,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
     this.eventoService.patchData(form, this.eventoResolver.id);
-    this.categoriaService.patchCategoria(this.categorias, form);
+    this.categoriaService.patchEditCategoria(this.categorias, form, this.eventoResolver);
 
     alert('Evento editado com sucesso!');
     this.formReset = !this.formReset;
