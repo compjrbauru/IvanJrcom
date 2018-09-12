@@ -5,8 +5,14 @@
 (editE)="resolver($event)"
 >
 </ngx-table>
-<nb-card>
+<nb-card *ngIf="eventoResolver">
     <nb-card-header>Gerar Ingressos Físicos</nb-card-header>
     <nb-card-body>
+      <ngx-form-ingressos 
+      (formEmitter)="form['formIngressos']=$event"
+      [resolvedEvento]="eventoResolver ? eventoResolver : null">
+      </ngx-form-ingressos>
+      <button [disabled]="!form?.formIngressos?.valid" (click)="submit(form['formIngressos']?.value) " class="btn btn-primary
+      " type="submit ">Gerar</button>
     </nb-card-body>
   </nb-card>

@@ -14,8 +14,6 @@ import { Observable } from 'rxjs/Observable';
 export class IngressosFisicosComponent implements OnInit {
 
   form: any = {};
-  categorias: Observable<any>;
-  categoria: any;
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
@@ -31,11 +29,14 @@ export class IngressosFisicosComponent implements OnInit {
     this.eventoAsync = this.eventoService.getAll();
     this.catID$.next('');
     this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
-    this.categorias = this.categoriaService.getCategoria();
   }
 
   resolver(event) {
     this.eventoResolver = event ? event[0] : null;
+  }
+
+  submit(form: any){
+    console.log(form);
   }
 
 

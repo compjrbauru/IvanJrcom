@@ -1,3 +1,48 @@
-<p>
-  form-ingressos works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <form [formGroup]="formIngressos">
+        <div class="form-group">
+            <div class="row full-name-inputs">
+              <div class="col input-group">
+                <input formControlName="nomeEvento" placeholder="Nome" id="nome" class="form-control" type="text" disabled="disabled">
+              </div>
+            </div>
+            <div class="row input-group">
+              <div class="col input-group">
+
+                <label>Masculino:</label>
+                <div class="row input-group">
+                    <div formGroupName = "numeroIngressos" class="col input-group">
+                      <input formControlName="masculino" class="form-control" placeholder="n° de ingressos" type="number">
+                    </div>
+                    <div formGroupName = "valor" class="col input-group">
+                      <input formControlName="masculino" class="form-control" placeholder="preço" type="number">
+                    </div>
+                </div>
+
+                <label>Feminino:</label>
+                <div class="row input-group">
+                    <div formGroupName = "numeroIngressos" class="col input-group">
+                      <input formControlName="feminino" class="form-control" placeholder="n° de ingressos" type="number">
+                    </div>
+                    <div formGroupName = "valor" class="col input-group">
+                      <input formControlName="feminino" class="form-control" placeholder="preço" type="number">
+                    </div>
+                </div>
+
+                <label>Unissex:</label>
+                <div class="row input-group">
+                    <div formGroupName = "numeroIngressos" class="col input-group">
+                      <input formControlName="unisex" class="form-control" placeholder="n° de ingressos" type="number">
+                    </div>
+                    <div formGroupName = "valor" class="col input-group">
+                      <input formControlName="unisex" class="form-control" placeholder="preço" type="number">
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+    </form>
+  </div>
+</div>
