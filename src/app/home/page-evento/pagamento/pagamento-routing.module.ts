@@ -1,15 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { PageEventoComponent } from './page-evento.component';
+import { PagamentoComponent } from './pagamento.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PageEventoComponent,
-  },
-  {
-    path: 'comprar',
-    loadChildren: './pagamento/pagamento.module#PagamentoModule',
+    component: PagamentoComponent,
   },
   { path: '**', redirectTo: '' },
 ];
@@ -18,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PageEventoRoutingModule {}
+export class PagamentoRoutingModule {}

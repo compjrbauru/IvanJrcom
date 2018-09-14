@@ -5,6 +5,7 @@ import { MatSnackBarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
@@ -42,6 +43,7 @@ import { ThemeService } from './services/theme.service';
     AngularFireModule.initializeApp(config.fire),
     AngularFirestoreModule,
     AngularFireStorageModule,
+    LocalStorageModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
