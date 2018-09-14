@@ -3,12 +3,10 @@ select.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
     border: 2px solid red;
 }
-.checkbox {
-text-align: center;
-
-}
 
 .fa {
-text-align: left;
+    text-align: left;
+    font-size: 1.5em;
+    padding: 0.5em;
+};
 
-}

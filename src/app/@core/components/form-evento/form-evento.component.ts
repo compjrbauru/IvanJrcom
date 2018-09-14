@@ -1,5 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-evento',
@@ -8,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
-  categorias: any;
+  categorias: Observable<any>;
   @Input()
   formReset: boolean;
   @Input()
@@ -16,6 +17,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Output()
   formEmitter = new EventEmitter<any>();
   formEvent: FormGroup = null;
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -60,9 +62,11 @@ export class FormEventoComponent implements OnInit, DoCheck {
 
     this.onFormValueChanges();
   }
+
   ngDoCheck() {
     this.patchValues(this.resolvedEvento);
   }
+
   resolveData(data: any) {
     if (data && data.hasOwnProperty('seconds') && !(typeof data === 'string')) {
       data = data.toDate();
@@ -98,3 +102,4 @@ export class FormEventoComponent implements OnInit, DoCheck {
     });
   }
 }
+

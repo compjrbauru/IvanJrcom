@@ -67,45 +67,35 @@
                                 <input formControlName="compramax" id="compramax" placeholder="max." class="form-control" type="number" min="1">
                             </div>
                         </div>
-                        <div class="col input-group">
-                            <div formGroupName="payment">
+                         <div formGroupName="payment">
                             <label>Formas de Pagamento:</label><br>
-                                <div class ="checkbox">                           
-                                  <br><i class="fa fa-barcode" style="font-size:24px"></i><label><input formControlName="boleto" 
-                                  id="boleto" class="form-control" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">Boleto</label>
-                                </div>
-                                <div class ="checkbox">
-                                  <br><i class="fa fa-credit-card" style="font-size:24px"></i><label><input formControlName="cartaocredito" 
-                                  id="cartaocredito" class="form-control" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">Cartão</label>
-                                </div>
-                                <div class ="checkbox">
-                                  <br><i class="fa fa-bank" style="font-size:24px"></i><label><input formControlName="deposito" 
-                                  id="deposito" class="form-control" type="checkbox"ng-true-value="'YES'" ng-false-value="'NO'">Depósito</label>
-                                </div>
-                                <div class ="checkbox">
-                                  <br><i class="fa fa-money" style="font-size:24px"></i><label><input formControlName="vendafisica" 
-                                   id="vendafisica" class="form-control" type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">Venda-Física</label>
+                                 <div class="col-sm-6">                         
+                                  <i class="fa fa-barcode"></i><label><input formControlName="boleto" 
+                                  id="boleto" class="form-control" type="checkbox">Boleto</label>
+                                  <i class="fa fa-credit-card"></i><label><input formControlName="cartaocredito" 
+                                  id="cartaocredito" class="form-control" type="checkbox">Cartão</label>
+                                  <i class="fa fa-bank"></i><label><input formControlName="deposito" 
+                                  id="deposito" class="form-control" type="checkbox">Depósito</label>
+                                  <i class="fa fa-money"></i><label><input formControlName="vendafisica" 
+                                   id="vendafisica" class="form-control" type="checkbox">Venda-Física</label>
                                 </div>
                             </div>
+                         </div>
                        </div>
                     </div>
-                </div>
                 <br>
                 <label for="mostraHome">Onde este evento será mostrado</label>
                     <select formControlName="mostraHome" class="form-control">
                         <option value="Carousel">Carousel</option>
                         <option value="Inicio">Inicio</option>
                     </select>
-                </div>
                 <label>Enviar Imagem:</label>
                 <ngx-upload-file [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
         </form>
     </div>
 </div>
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> origin/master
+
