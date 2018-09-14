@@ -5,7 +5,9 @@
           <form [formGroup]="formCategoria">
             <div class="col input-group">
               <input formControlName="nome" placeholder="Nome da categoria"  class="form-control" type="text">
-          </div>
+              <label><input formControlName="mostrarHome" 
+              id="mostrarHome" class="form-control" type="checkbox">Mostrar Home</label> 
+            </div>
           </form>
         <button [disabled]="!formCategoria.valid" (click)="OnSubmit(formCategoria.value)" class="btn btn-primary" type="submit">Criar</button>
       </div>
