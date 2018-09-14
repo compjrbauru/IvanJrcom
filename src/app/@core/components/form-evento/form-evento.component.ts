@@ -1,5 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -21,6 +21,14 @@ export class FormEventoComponent implements OnInit, DoCheck {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    const numeroIngressosValidation: ValidatorFn = (form: AbstractControl) => {
+      const error = { numeroIngressos: 'O número de ingressos disponíveis não é a soma de ingressos por gênero' };
+      // tslint:disable-next-line:max-line-length
+      const soma = +form.get('ingressos').get('feminino').get('disponiveis').value + +form.get('ingressos').get('masculino').get('disponiveis').value + +form.get('ingressos').get('unisex').get('disponiveis').value;
+      // tslint:disable-next-line:max-line-length
+      return +form.get('ingressos').get('lote').get('disponiveis').value === soma ? null : error;
+    };
+
     this.formEvent = this.formBuilder.group({
       nome: ['', Validators.required],
       categoria: [null, Validators.required],
@@ -54,10 +62,12 @@ export class FormEventoComponent implements OnInit, DoCheck {
       }),
       mostraHome: null,
       url: ['', Validators.required],
+      pathurl: ['', Validators.required],
       id: [''],
       nomeBusca: null,
       localBusca: null,
-    });
+    },
+    { validator: numeroIngressosValidation });
     this.patchValues(this.resolvedEvento);
 
     this.onFormValueChanges();
@@ -93,7 +103,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
   }
 
   imagemupdate(event: any) {
-    this.formEvent.controls['url'].setValue(event);
+    this.formEvent.controls['url'].setValue(event.url);
+    this.formEvent.controls['pathurl'].setValue(event.pathurl);
   }
 
   onFormValueChanges() {

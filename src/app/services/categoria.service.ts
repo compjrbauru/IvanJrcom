@@ -54,6 +54,23 @@ export class CategoriaService {
       });
     }
 
+    patchEditCategoria(categorias: any, evento: any, eventoResolver: any) {
+        const categoria = categorias.fund(cat => cat.nome === evento.categoria);
+        const categoriaAnterior = categorias.fund(cat => cat.nome === eventoResolver.categoria);
+        if (categoria.nome !== categoriaAnterior.nome) {
+          categoriaAnterior.count--;
+          categoria.count++;
+          categoria.idsevento.push(evento.id);
+          categoriaAnterior.idsevento.splice( categoriaAnterior.idsevento.indexOf(eventoResolver.id), 1 );
+          this.CategoriasCollection.doc(categoria.id).set({
+            ...categoria,
+          });
+          this.CategoriasCollection.doc(categoriaAnterior.id).set({
+            ...categoriaAnterior,
+          });
+        }
+    }
+
     patchDeleteEventCategoria(categoria: any, evento: any) {
       categoria.idsevento.splice( categoria.idsevento.indexOf(evento.id), 1 );
       categoria.count--;

@@ -36,6 +36,7 @@
                                     <label for="lote">Lote</label>
                                     <input formControlName="numero" id="lote-numero" placeholder="numero" class="form-control" type="number" min="0">
                                     <input formControlName="disponiveis" id="lote-disponiveis" placeholder="disponiveis" class="form-control" type="number" min="1">
+                                    <div *ngIf="formEvent.hasError('numeroIngressos')" class="alert alert-danger" >{{ formEvent.getError('numeroIngressos') }}</div>
                                 </div>
                             </div>
                             <div class="col input-group">
@@ -90,7 +91,12 @@
                         <option value="Inicio">Inicio</option>
                     </select>
                 <label>Enviar Imagem:</label>
+<<<<<<< HEAD
                 <ngx-upload-file [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+=======
+                <ngx-upload-file localName="Eventos" [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+            </div>
+>>>>>>> origin/master
         </form>
     </div>
 </div>
