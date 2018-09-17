@@ -24,25 +24,16 @@ export class FormEventoComponent implements OnInit, DoCheck {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    /*  let geocoder = new Geocoder('nominatim', {
+    const geocoder = new Geocoder('nominatim', {
       provider: 'osm',
-      lang: 'en',
-      placeholder: 'Search for ...',
-      limit: 5,
-      debug: false,
-      autoComplete: true,
-      keepOpen: true,
-    }); */
-    let geocoder = new Geocoder('nominatim', {
-      provider: 'osm',
-      lang: 'en',
-      placeholder: 'Search for ...',
+      lang: 'pt-br',
+      placeholder: 'Pesquisar endereco ...',
       limit: 5,
       debug: false,
       autoComplete: true,
       keepOpen: true,
     });
-    let map = new Map({
+    const map = new Map({
       target: 'map',
       layers: [
         new TileLayer({
@@ -56,6 +47,9 @@ export class FormEventoComponent implements OnInit, DoCheck {
       }),
     });
     map.addControl(geocoder);
+    geocoder.on('addresschosen', function(evt) {
+      console.info(evt);
+    });
     const numeroIngressosValidation: ValidatorFn = (form: AbstractControl) => {
       const error = {
         numeroIngressos:

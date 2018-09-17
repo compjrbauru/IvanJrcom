@@ -5,6 +5,7 @@
     <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [formReset]="formReset">
     </ngx-form-evento>
     <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
-      " type="submit ">Criar</button>
+      "
+      type="submit ">Criar</button>
   </nb-card-body>
 </nb-card>
