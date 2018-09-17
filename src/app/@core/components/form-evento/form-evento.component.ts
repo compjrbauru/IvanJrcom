@@ -1,10 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import Geocoder from 'ol-geocoder';
-import TileLayer from 'ol/layer/Tile';
-import Map from 'ol/Map';
-import OSM from 'ol/source/OSM';
-import View from 'ol/View';
+
 
 @Component({
   selector: 'ngx-form-evento',
@@ -24,32 +20,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    const geocoder = new Geocoder('nominatim', {
-      provider: 'osm',
-      lang: 'pt-br',
-      placeholder: 'Pesquisar endereco ...',
-      limit: 5,
-      debug: false,
-      autoComplete: true,
-      keepOpen: true,
-    });
-    const map = new Map({
-      target: 'map',
-      layers: [
-        new TileLayer({
-          title: 'Global Imagery',
-          source: new OSM(),
-        }),
-      ],
-      view: new View({
-        center: [0, 0],
-        zoom: 2,
-      }),
-    });
-    map.addControl(geocoder);
-    geocoder.on('addresschosen', function(evt) {
-      console.info(evt);
-    });
     const numeroIngressosValidation: ValidatorFn = (form: AbstractControl) => {
       const error = {
         numeroIngressos:

@@ -4,6 +4,9 @@
   <nb-card-body>
     <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [formReset]="formReset">
     </ngx-form-evento>
+    <br>
+    <label>Local:</label>
+    <ngx-map></ngx-map>
     <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
       "
       type="submit ">Criar</button>
