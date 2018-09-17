@@ -90,13 +90,14 @@
                 <br>
                 <label>Enviar Imagem:</label>
                 <ngx-upload-file localName="Eventos" [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
-
+                <br>
+                <label>Local:</label>
+                <div id="map" class="map"></div>
             </div>
         </form>
     </div>
 </div>
 <div class="row">
     <div class="col-12">
-        <div id="map" class="map"></div>
     </div>
 </div>
