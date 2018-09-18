@@ -10,8 +10,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
   categorias: any;
   @Input()
-  formReset: boolean;
-  @Input()
   resolvedEvento: any = null;
   @Output()
   formEmitter = new EventEmitter<any>();
@@ -86,6 +84,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
     this.patchValues(this.resolvedEvento);
 
     this.onFormValueChanges();
+    this.formEmitter.emit(this.formEvent);
   }
 
   ngDoCheck() {
@@ -115,11 +114,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
         ...resolvedEvento,
       });
     }
-  }
-
-  imagemupdate(event: any) {
-    this.formEvent.controls['url'].setValue(event.url);
-    this.formEvent.controls['pathurl'].setValue(event.pathurl);
   }
 
   onFormValueChanges() {

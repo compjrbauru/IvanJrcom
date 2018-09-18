@@ -45,7 +45,6 @@ export class MapComponent implements OnInit {
     });
     this.map.addControl(this.geocoder);
     this.geocoder.on('addresschosen', evt => {
-      console.log(evt);
       this.mapEmitter.emit({
         local:
           evt.address.original.details.addressLine +
@@ -58,7 +57,7 @@ export class MapComponent implements OnInit {
     });
   }
 
-  reset() {
+  resetMap() {
     this.geocoder.getSource().clear();
   }
 }

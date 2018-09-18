@@ -24,8 +24,8 @@
                         <textarea formControlName="descricao" placeholder="Descrição" id="descricao" class="form-control"
                             rows="5"></textarea>
                     </div>
-
                 </div>
+                <br>
                 <div class="Ingressos">
                     <label for="ingressos">Ingressos:</label>
                     <div formGroupName="ingressos">
@@ -84,9 +84,7 @@
                         <option value="Inicio">Inicio</option>
                     </select>
                 </div>
-                <br>
-                <label>Enviar Imagem:</label>
-                <ngx-upload-file localName="Eventos" [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+
             </div>
         </form>
     </div>
