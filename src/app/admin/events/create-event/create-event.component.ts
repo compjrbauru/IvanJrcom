@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
 import { QueryService } from '../../../services/query.service';
-// tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 
+// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-create-event',
   templateUrl: './create-event.component.html',
@@ -82,5 +82,11 @@ export class CreateEventComponent
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+  }
+
+  mapUpdate(event: any) {
+    this.form['formEvent'].controls['local'].setValue(event.local);
+    this.form['formEvent'].controls['coordenadas'].setValue(event.coordenadas);
+    console.log(event);
   }
 }

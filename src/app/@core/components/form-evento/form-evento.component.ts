@@ -1,7 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'ngx-form-evento',
   templateUrl: './form-evento.component.html',
@@ -55,6 +54,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
         data: ['', Validators.required],
         descricao: ['', Validators.required],
         local: ['', Validators.required],
+        coordenadas: ['', Validators.required],
         ingressos: this.formBuilder.group({
           lote: this.formBuilder.group({
             disponiveis: ['', Validators.required],

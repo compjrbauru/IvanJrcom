@@ -6,7 +6,7 @@
     </ngx-form-evento>
     <br>
     <label>Local:</label>
-    <ngx-map></ngx-map>
+    <ngx-map (mapEmitter)="mapUpdate($event)"></ngx-map>
     <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
       "
       type="submit ">Criar</button>

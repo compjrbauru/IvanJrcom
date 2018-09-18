@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import Geocoder from 'ol-geocoder';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
@@ -13,10 +13,14 @@ import { config } from '../../../config/config';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  @Output()
+  mapEmitter = new EventEmitter<any>();
+  geocoder: any;
+  map: any;
   constructor() {}
 
   ngOnInit() {
-    const geocoder = new Geocoder('nominatim', {
+    this.geocoder = new Geocoder('nominatim', {
       provider: 'bing',
       key: config.bing.key,
       lang: 'pt-br',
@@ -26,7 +30,7 @@ export class MapComponent implements OnInit {
       autoComplete: true,
       keepOpen: true,
     });
-    const map = new Map({
+    this.map = new Map({
       target: 'map',
       layers: [
         new TileLayer({
@@ -39,9 +43,22 @@ export class MapComponent implements OnInit {
         zoom: 2,
       }),
     });
-    map.addControl(geocoder);
-    geocoder.on('addresschosen', function(evt) {
-      console.info(evt);
+    this.map.addControl(this.geocoder);
+    this.geocoder.on('addresschosen', evt => {
+      console.log(evt);
+      this.mapEmitter.emit({
+        local:
+          evt.address.original.details.addressLine +
+          ', ' +
+          evt.address.original.details.locality +
+          ' - ' +
+          evt.address.original.details.adminDistrict,
+        coordenadas: evt.coordinate,
+      });
     });
+  }
+
+  reset() {
+    this.geocoder.getSource().clear();
   }
 }

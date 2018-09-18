@@ -3,10 +3,10 @@
         <form [formGroup]="formEvent">
             <div class="form-group">
                 <div class="row full-name-inputs">
-                    <div class="col-sm-3 input-group">
+                    <div class="col-sm-4 input-group">
                         <input formControlName="nome" placeholder="Nome" id="nome" class="form-control" type="text">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select formControlName="categoria" class="form-control">
                             <option [ngValue]="null">Selecionar categoria</option>
                             <option *ngFor="let categoria of categorias" [ngValue]="categoria.nome">
@@ -14,10 +14,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-sm-3 input-group">
-                        <input formControlName="local" placeholder="Cidade" id="local" class="form-control" type="text">
-                    </div>
-                    <div class="col-sm-3 input-group">
+                    <div class="col-sm-4 input-group">
                         <input formControlName="data" placeholder="Data e Hora" id="data" class="form-control" type="datetime-local">
                     </div>
                 </div>
