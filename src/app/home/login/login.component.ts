@@ -59,6 +59,12 @@ export class LoginComponent implements OnInit {
         } else if (typeof res === 'object') {
           this.usuarioService.addUsuario(res);
           this.router.navigate(['/home']);
+          this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
+          this.notificacao.ngxtoaster(
+            'Registro incompleto',
+            'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
+            false,
+          );
         } else {
           this.notificacao.ngxtoaster('Erro Login', 'Login Falhou!', false);
         }
