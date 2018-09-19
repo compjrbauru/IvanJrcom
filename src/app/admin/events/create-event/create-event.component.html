@@ -17,8 +17,7 @@
     <ngx-map (mapEmitter)="mapUpdate($event)"></ngx-map>
     <br>
     <br>
-    <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary
-      "
+    <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary"
       type="submit ">Criar</button>
   </nb-card-body>
 </nb-card>

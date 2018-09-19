@@ -8,6 +8,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { UploadFileComponent } from '../../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from '../../../../services/categoria.service';
+import { MapComponent } from './../../../../@core/components/map/map.component';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
 
@@ -25,6 +26,8 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   catID$ = new Subject<string>();
   @ViewChild(UploadFileComponent)
   private upload: UploadFileComponent;
+  @ViewChild(MapComponent)
+  private map: MapComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
   categoriaSelected: any = {};
 
@@ -69,6 +72,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
     this.eventoResolver = [];
     this.form['formEvent'].reset();
     this.upload.resetUpload();
+    this.map.resetMap();
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
