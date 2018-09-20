@@ -14,7 +14,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Output()
   formEmitter = new EventEmitter<any>();
   formEvent: FormGroup = null;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     const numeroIngressosValidation: ValidatorFn = (form: AbstractControl) => {
@@ -24,25 +24,11 @@ export class FormEventoComponent implements OnInit, DoCheck {
       };
       // tslint:disable-next-line:max-line-length
       const soma =
-        +form
-          .get('ingressos')
-          .get('feminino')
-          .get('disponiveis').value +
-        +form
-          .get('ingressos')
-          .get('masculino')
-          .get('disponiveis').value +
-        +form
-          .get('ingressos')
-          .get('unisex')
-          .get('disponiveis').value;
+        +form.get('ingressos').get('feminino').get('disponiveis').value +
+        +form.get('ingressos').get('masculino').get('disponiveis').value +
+        +form.get('ingressos').get('unisex').get('disponiveis').value;
       // tslint:disable-next-line:max-line-length
-      return +form
-        .get('ingressos')
-        .get('lote')
-        .get('disponiveis').value === soma
-        ? null
-        : error;
+      return +form.get('ingressos').get('lote').get('disponiveis').value === soma ? null : error;
     };
 
     this.formEvent = this.formBuilder.group(

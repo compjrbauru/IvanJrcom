@@ -8,12 +8,9 @@ import { switchMap } from 'rxjs/operators';
 @Injectable()
 export class CategoriaService {
   datePipe = new DatePipe('pt-BR');
+  private CategoriasCollection: AngularFirestoreCollection<any> = this.db.collection('/Categorias');
 
-  private CategoriasCollection: AngularFirestoreCollection<
-    any
-  > = this.db.collection('/Categorias');
-
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
   searchrcategoriabynome(query: string): any {
     return this.db
@@ -34,9 +31,7 @@ export class CategoriaService {
   }
 
   getCategoria() {
-    const collections$: Observable<
-      any
-    > = this.CategoriasCollection.valueChanges();
+    const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
     return collections$;
   }
 
@@ -72,25 +67,16 @@ export class CategoriaService {
       categoriaAnterior.count--;
       categoria.count++;
       categoria.idsevento.push(evento.id);
-      categoriaAnterior.idsevento.splice(
-        categoriaAnterior.idsevento.indexOf(eventoResolver.id),
-        1,
-      );
-      this.CategoriasCollection.doc(categoria.id).set({
-        ...categoria,
-      });
-      this.CategoriasCollection.doc(categoriaAnterior.id).set({
-        ...categoriaAnterior,
-      });
+      categoriaAnterior.idsevento.splice(categoriaAnterior.idsevento.indexOf(eventoResolver.id), 1);
+      this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
+      this.CategoriasCollection.doc(categoriaAnterior.id).set({ ...categoriaAnterior });
     }
   }
 
   patchDeleteEventCategoria(categoria: any, evento: any) {
     categoria.idsevento.splice(categoria.idsevento.indexOf(evento.id), 1);
     categoria.count--;
-    return this.CategoriasCollection.doc(categoria.id).set({
-      ...categoria,
-    });
+    return this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
   }
 
   removeCategoria(id: any) {
