@@ -1,12 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
+import { MapComponent } from '../../../@core/components/map/map.component';
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
 import { QueryService } from '../../../services/query.service';
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { UploadFileComponent } from './../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
 
@@ -20,8 +22,11 @@ export class CreateEventComponent
   form: any = {};
   categorias: any;
   categoria: any;
-  formReset = false;
   categoriaSelected: any = {};
+  @ViewChild(MapComponent)
+  private map: MapComponent;
+  @ViewChild(UploadFileComponent)
+  private upload: UploadFileComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
 
   constructor(
@@ -48,14 +53,13 @@ export class CreateEventComponent
     this.categoriaService.patchCategoria(this.categorias, form);
 
     alert('Evento criado com sucesso!');
-
+    this.upload.resetUpload();
+    this.map.resetMap();
     this.form['formEvent'].reset();
-    this.formReset = !this.formReset;
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (
-      this.form['formEvent'] &&
       this.form['formEvent'].value.pathurl !== '' &&
       this.form['formEvent'].value.pathurl !== null
     ) {
@@ -82,5 +86,15 @@ export class CreateEventComponent
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+  }
+
+  mapUpdate(event: any) {
+    this.form['formEvent'].controls['local'].setValue(event.local);
+    this.form['formEvent'].controls['coordenadas'].setValue(event.coordenadas);
+  }
+
+  imagemupdate(event: any) {
+    this.form['formEvent'].controls['url'].setValue(event.url);
+    this.form['formEvent'].controls['pathurl'].setValue(event.pathurl);
   }
 }
