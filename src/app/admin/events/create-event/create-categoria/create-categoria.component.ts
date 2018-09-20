@@ -26,6 +26,7 @@ export class CreateCategoriaComponent implements OnInit {
         idsevento: [''],
         nome: ['', Validators.required],
         busca: [''],
+        mostrarHome: [''],
     });
   }
 
