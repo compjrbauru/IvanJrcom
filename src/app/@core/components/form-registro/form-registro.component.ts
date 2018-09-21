@@ -1,8 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ValidatorNumMin } from './Validators/ValidatorNumMin';
-import { ValidatorSenha } from './Validators/ValidatorSenha';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-form-registro',
@@ -17,6 +14,24 @@ export class FormRegistroComponent implements OnInit, DoCheck {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    const RGvalidator: ValidatorFn = (form: AbstractControl) => {
+      const error = {
+        RGvalidator: 'O número de RG não é valido',
+      };
+      return (form.get('RG').value.length < 9 && !form.get('RG').untouched) ? error : null;
+    };
+    const CPFvalidator: ValidatorFn = (form: AbstractControl) => {
+      const error = {
+        CPFvalidator: 'O número de CPF não é valido',
+      };
+      return (form.get('CPF').value.length < 11 && !form.get('CPF').untouched) ? error : null;
+    };
+    const PassValidator: ValidatorFn = (form: AbstractControl) => {
+      const error = {
+        PassValidator: 'As senhas não combinam',
+      };
+      return (form.get('Senha').value !== form.get('ConfirmarSenha').value) ? error : null;
+    };
     this.formEvent = this.formBuilder.group(
       {
         Senha: ['', Validators.required],
@@ -49,12 +64,7 @@ export class FormRegistroComponent implements OnInit, DoCheck {
         Cidade: ['', Validators.required],
         Estado: ['', Validators.required],
       },
-      {
-        validator: [
-          ValidatorSenha.MesmaSenha,
-          ValidatorNumMin.DigitosRestantes,
-        ],
-      },
+      { validator: [RGvalidator, CPFvalidator, PassValidator] },
     );
     this.patchValues(this.resolvedEvento);
     this.onFormValueChanges();

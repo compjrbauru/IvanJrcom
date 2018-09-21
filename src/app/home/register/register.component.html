@@ -5,7 +5,6 @@
             <nb-card-body>
                 <ngx-form-registro (formEmitter)="form['formEvent']=$event"></ngx-form-registro>
                 <br>
-                <button (click)="teste()">teste</button>
                 <button class="btn text-white" (click)="submit(form[ 'formEvent']) " [disabled]="!form?.formEvent?.valid"
                     [@buttonregister]="!form?.formEvent?.valid">Submit</button>
             </nb-card-body>

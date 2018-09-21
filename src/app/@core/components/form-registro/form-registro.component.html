@@ -12,8 +12,8 @@
     <div class="col-sm-3">
       <label for="nome">Digite a senha novamente</label>
       <input formControlName="ConfirmarSenha" type="password" id="ConfirmarSenha" placeholder="Repita a senha" class="form-control" />
-      <div class="alert alert-danger" *ngIf="formEvent.controls['ConfirmarSenha'].errors?.MesmaSenha">As senhas não
-        são iguais</div>
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('PassValidator')">{{
+        formEvent.getError('PassValidator') }}</div>
     </div>
   </div>
   <br />
@@ -35,16 +35,15 @@
     <div class="col-sm-4">
       <label for="cpf">CPF (Somente números)</label>
       <input formControlName="CPF" maxlength="11" id="cpf" placeholder="CPF" class="form-control" />
-      <div class="alert alert-danger" *ngIf="formEvent.controls['CPF'].errors?.DigitosRestantes">
-        Falta{{formEvent.value.CPF.length!=10? "m" : ""}} {{ 11 - formEvent.value.CPF.length }}
-        dígito{{formEvent.value.CPF.length!=10? "s" : ""}}.</div>
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('CPFvalidator')">
+        {{formEvent.getError('CPFvalidator') }} </div>
     </div>
     <div class="col-sm-4">
       <label for="rg">RG (Somente números)</label>
       <input formControlName="RG" maxlength="9" id="rg" placeholder="RG" class="form-control" />
-      <div class="alert alert-danger" *ngIf="formEvent.controls['RG'].errors?.DigitosRestantes">
-        Falta{{formEvent.value.RG.length!=8? "m" : ""}} {{ 9 - formEvent.value.RG.length }}
-        dígito{{formEvent.value.RG.length!=8? "s" : ""}}.</div>
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('RGvalidator')">
+        {{ formEvent.getError('RGvalidator') }}
+      </div>
 
     </div>
     <div class="col-sm-4">
