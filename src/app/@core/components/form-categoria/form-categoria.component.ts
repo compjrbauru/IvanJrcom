@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { CategoriaService } from '../../../services/categoria.service';
 
 @Component({
   selector: 'ngx-form-categoria',
@@ -9,29 +7,36 @@ import { CategoriaService } from '../../../services/categoria.service';
   styleUrls: ['./form-categoria.component.scss'],
 })
 export class FormCategoriaComponent implements OnInit {
-  categoria: any;
   formCategoria: FormGroup;
+  @Input() resolvedEvento: any = null;
+  @Output() formEmitter = new EventEmitter<any>();
 
-  constructor(
-    private categoriaService: CategoriaService,
-    private formBuilder: FormBuilder,
-  ) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.formCategoria = this.formBuilder.group({
-      id: [''],
-      count: [''],
-      idsevento: [''],
       nome: ['', Validators.required],
-      busca: [''],
-      mostrarHome: [''],
+      mostrarHome: [false, Validators.required],
+      url: ['', Validators.required],
+      pathurl: ['', Validators.required],
+    });
+    this.patchValues(this.resolvedEvento);
+    this.onFormValueChanges();
+    this.formEmitter.emit(this.formCategoria);
+  }
+
+  onFormValueChanges() {
+    this.formCategoria.valueChanges.subscribe(() => {
+      this.formEmitter.emit(this.formCategoria);
     });
   }
 
-  OnSubmit(form: any) {
-    this.categoriaService.addCategoria(form);
-    this.formCategoria.reset();
+  patchValues(resolvedEvento: any = []) {
+    if (resolvedEvento) {
+      this.formCategoria.patchValue({
+        ...resolvedEvento,
+      });
+    }
   }
-
 
 }
