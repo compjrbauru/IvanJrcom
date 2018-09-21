@@ -8,7 +8,6 @@ import { ThemeModule } from '../../../@theme-admin/theme.module';
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { MapModule } from './../../../@core/components/map/map.module';
-import { CreateCategoriaModule } from './create-categoria/create-caregoria.module';
 import { CreateEventComponent } from './create-event.component';
 
 const CREATEEVENT_COMPONENTS = [CreateEventComponent];
@@ -17,7 +16,6 @@ const CREATEEVENT_COMPONENTS = [CreateEventComponent];
   entryComponents: [ConfirmationModalComponent],
   imports: [
     ThemeModule,
-    CreateCategoriaModule,
     FormEventoModule,
     ConfirmationModalModule,
     MatDialogModule,
@@ -26,4 +24,4 @@ const CREATEEVENT_COMPONENTS = [CreateEventComponent];
   ],
   declarations: [...CREATEEVENT_COMPONENTS],
 })
-export class CreateEventModule {}
+export class CreateEventModule { }

@@ -21,7 +21,6 @@ export class CreateEventComponent
   implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
   categorias: any;
-  categoria: any;
   categoriaSelected: any = {};
   @ViewChild(MapComponent)
   private map: MapComponent;
@@ -32,9 +31,9 @@ export class CreateEventComponent
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private queryservice: QueryService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categoriaService
