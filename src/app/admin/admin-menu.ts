@@ -26,6 +26,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Categorias',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Criar Categoria',
+        link: '/admin/categorias/create',
+      },
+      {
+        title: 'Editar Eventos',
+        link: '/admin/categorias/edit',
+      },
+    ],
+  },
+  {
     title: 'Editar Home',
     link: '/admin/edicao-home',
     icon: 'nb-home',
