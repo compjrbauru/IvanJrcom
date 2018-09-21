@@ -1,3 +1,15 @@
-<p>
-  edit-categorias works!
-</p>
+<ngx-table [dataAsync]="categorias" [dataIdAsync]="categoriasID" [cat$]="catID$" columns='categoriasEdit' (editE)="resolver($event)"></ngx-table>
+<nb-card *ngIf="eventoResolver">
+  <nb-card-header>Editar Categoria</nb-card-header>
+  <nb-card-body>
+    <ngx-form-categoria (formEmitter)="form['formCategoria']=$event" [resolvedEvento]="eventoResolver ? eventoResolver : null"></ngx-form-categoria>
+    <br>
+    <br>
+    <label>Enviar Imagem:</label>
+    <ngx-upload-file localName="Categorias" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+    <br>
+    <br>
+    <button [disabled]="!form['formCategoria'].valid" (click)="Submit(form['formCategoria'])" class="btn btn-primary"
+      type="submit">Criar</button>
+  </nb-card-body>
+</nb-card>

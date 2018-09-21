@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,8 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './form-categoria.component.html',
   styleUrls: ['./form-categoria.component.scss'],
 })
-export class FormCategoriaComponent implements OnInit {
+export class FormCategoriaComponent implements OnInit, DoCheck {
   formCategoria: FormGroup;
+  resolvedaux: any;
+  verified = false;
   @Input() resolvedEvento: any = null;
   @Output() formEmitter = new EventEmitter<any>();
 
@@ -16,6 +18,10 @@ export class FormCategoriaComponent implements OnInit {
   ngOnInit() {
     this.formCategoria = this.formBuilder.group({
       nome: ['', Validators.required],
+      id: [''],
+      busca: [''],
+      count: [''],
+      idsevento: [''],
       mostrarHome: [false, Validators.required],
       url: ['', Validators.required],
       pathurl: ['', Validators.required],
@@ -31,11 +37,17 @@ export class FormCategoriaComponent implements OnInit {
     });
   }
 
+  ngDoCheck() {
+    this.patchValues(this.resolvedEvento);
+  }
+
   patchValues(resolvedEvento: any = []) {
-    if (resolvedEvento) {
+    if (resolvedEvento && resolvedEvento.length !== 0 && resolvedEvento !== this.resolvedaux) {
+      this.resolvedaux = resolvedEvento;
       this.formCategoria.patchValue({
         ...resolvedEvento,
       });
+      this.verified = true;
     }
   }
 

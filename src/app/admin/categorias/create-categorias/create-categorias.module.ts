@@ -5,10 +5,10 @@ import { ConfirmationModalModule } from '../../../@core/components/confirmation-
 import { FormCategoriaModule } from '../../../@core/components/form-categoria/form-categoria.module';
 import { UploadFileModule } from '../../../@core/components/upload-file/upload-file.module';
 import { ThemeModule } from '../../../@theme-admin/theme.module';
+// tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { CreateCategoriasComponent } from './create-categorias.component';
 
-// tslint:disable-next-line:max-line-length
 
 const CREATECATEGORIAS_COMPONENTS = [CreateCategoriasComponent];
 

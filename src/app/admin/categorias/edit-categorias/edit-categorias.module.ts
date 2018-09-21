@@ -6,6 +6,8 @@ import { UploadFileModule } from '../../../@core/components/upload-file/upload-f
 import { ThemeModule } from '../../../@theme-admin/theme.module';
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { FormCategoriaModule } from './../../../@core/components/form-categoria/form-categoria.module';
+import { TableModule } from './../../table/table.module';
 import { EditCategoriasComponent } from './edit-categorias.component';
 
 
@@ -17,8 +19,10 @@ const EDITCATEGORIAS_COMPONENTS = [EditCategoriasComponent];
     imports: [
         ThemeModule,
         ConfirmationModalModule,
+        FormCategoriaModule,
         MatDialogModule,
         UploadFileModule,
+        TableModule,
     ],
     declarations: [...EDITCATEGORIAS_COMPONENTS],
 })

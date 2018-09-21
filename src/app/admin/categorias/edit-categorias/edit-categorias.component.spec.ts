@@ -8,9 +8,9 @@ describe('EditCategoriasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCategoriasComponent ]
+      declarations: [EditCategoriasComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

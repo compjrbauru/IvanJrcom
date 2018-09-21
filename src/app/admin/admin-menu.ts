@@ -34,7 +34,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/admin/categorias/create',
       },
       {
-        title: 'Editar Eventos',
+        title: 'Editar Categorias',
         link: '/admin/categorias/edit',
       },
     ],

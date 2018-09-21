@@ -19,7 +19,7 @@ const routes: Routes = [
             {
                 path: 'edit',
                 component: EditCategoriasComponent,
-                /* canDeactivate: [CanDeactivateGuard], */
+                canDeactivate: [CanDeactivateGuard],
             },
         ],
     },
