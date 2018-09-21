@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { buttonVerified } from '../../@core/animations/animations';
-import { AuthService } from './../../services/auth.service';
-import { NotificacaoService } from './../../services/notificacao.service';
-import { UsuarioService } from './../../services/usuario.service';
-import { ValidatorNumMin } from './Validators/ValidatorNumMin';
-import { ValidatorSenha } from './Validators/ValidatorSenha';
+import { AuthService } from '../../services/auth.service';
+import { NotificacaoService } from '../../services/notificacao.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'ngx-register',
@@ -16,67 +13,28 @@ import { ValidatorSenha } from './Validators/ValidatorSenha';
   animations: [buttonVerified('buttonregister')],
 })
 export class RegisterComponent implements OnInit {
-  public novoRegistro: FormGroup;
+  form: any = {};
 
   constructor(
-    private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private notificacao: NotificacaoService,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    this.novoRegistro = this.formBuilder.group(
-      {
-        Senha: ['', Validators.required],
-        ConfirmarSenha: ['', Validators.required],
-        registroCompleto: [true, Validators.required],
-        nome: ['', Validators.required],
-        sobrenome: ['', Validators.required],
-        CPF: ['', Validators.required],
-        RG: ['', Validators.required],
-        telefone: this.formBuilder.group({
-          dd: [
-            '',
-            [
-              Validators.required,
-              Validators.minLength(2),
-              Validators.maxLength(2),
-            ],
-          ],
-          numero: [
-            '',
-            [
-              Validators.required,
-              Validators.minLength(8),
-              Validators.maxLength(9),
-            ],
-          ],
-        }),
-        nascimento: ['', Validators.required],
-        email: ['', [Validators.email, Validators.required]],
-        Cidade: ['', Validators.required],
-        Estado: ['', Validators.required],
-      },
-      {
-        validator: [
-          ValidatorSenha.MesmaSenha,
-          ValidatorNumMin.DigitosRestantes,
-        ],
-      },
-    );
-  }
+
+  ngOnInit() { }
+
 
   submit() {
-    const email = this.novoRegistro.value.email;
-    const pass = this.novoRegistro.value.Senha;
+    const email = this.form['formEvent'].value.email;
+    const pass = this.form['formEvent'].value.Senha;
     this.authService.signupUser(email, pass).then(res => {
       if (res === 'success') {
         const user = this.authService.getUser();
 
         user.sendEmailVerification().then(() => {
-          const form = this.novoRegistro.value;
+          const form = this.form['formEvent'].value;
 
           this.usuarioService.addUsuario(form); // Adiciona o usuario
 
