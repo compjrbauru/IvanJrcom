@@ -9,4 +9,4 @@ import { FormEventoComponent } from './form-evento.component';
   declarations: [FormEventoComponent],
   exports: [FormEventoComponent],
 })
-export class FormEventoModule { }
+export class FormEventoModule {}

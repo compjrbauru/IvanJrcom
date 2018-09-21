@@ -93,7 +93,7 @@ export class TableService {
       case 'categorias': {
         column = this.categorias;
         break;
-      },
+      }
       case 'categoriasEdit': {
         column = this.categoriasEdit;
         break;

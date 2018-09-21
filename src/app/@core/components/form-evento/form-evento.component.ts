@@ -75,7 +75,6 @@ export class FormEventoComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.patchValues(this.resolvedEvento);
-
   }
 
   resolveData(data: any) {
