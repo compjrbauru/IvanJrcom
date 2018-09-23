@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   template:
   `
   <div>
-  <button (click)="openCheckout()">Comprar com cartão</button>
+  <button class="btn btn-success" (click)="openCheckout()">Comprar com cartão</button>
   </div>
   `,
 })
