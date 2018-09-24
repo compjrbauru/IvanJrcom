@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -6,7 +6,9 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { UploadFileComponent } from '../../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from '../../../../services/categoria.service';
+import { MapComponent } from './../../../../@core/components/map/map.component';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
 
@@ -22,7 +24,10 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
   catID$ = new Subject<string>();
-  formReset = false;
+  @ViewChild(UploadFileComponent)
+  private upload: UploadFileComponent;
+  @ViewChild(MapComponent)
+  private map: MapComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
   categoriaSelected: any = {};
 
@@ -57,17 +62,22 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
     this.eventoService.patchData(form, this.eventoResolver.id);
-    this.categoriaService.patchEditCategoria(this.categorias, form, this.eventoResolver);
+    this.categoriaService.patchEditCategoria(
+      this.categorias,
+      form,
+      this.eventoResolver,
+    );
 
     alert('Evento editado com sucesso!');
-    this.formReset = !this.formReset;
     this.eventoResolver = [];
     this.form['formEvent'].reset();
+    this.upload.resetUpload();
+    this.map.resetMap();
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (
-      this.form['formEvent'] &&
+      this.form['formEvent'].value.pathurl !== '' &&
       this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
     ) {
       const dialogRef = this.dialog.open(ConfirmationModalComponent, {
@@ -103,5 +113,15 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+  }
+
+  mapUpdate(event: any) {
+    this.form['formEvent'].controls['local'].setValue(event.local);
+    this.form['formEvent'].controls['coordenadas'].setValue(event.coordenadas);
+  }
+
+  imagemupdate(event: any) {
+    this.form['formEvent'].controls['url'].setValue(event.url);
+    this.form['formEvent'].controls['pathurl'].setValue(event.pathurl);
   }
 }

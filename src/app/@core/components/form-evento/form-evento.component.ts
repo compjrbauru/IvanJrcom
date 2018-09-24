@@ -1,6 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-form-evento',
@@ -9,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
-  categorias: Observable<any>;
+  categorias: any;
   @Input()
   resolvedEvento: any = null;
   @Output()
@@ -76,8 +75,9 @@ export class FormEventoComponent implements OnInit, DoCheck {
         id: [''],
         nomeBusca: null,
         localBusca: null,
-        }),
-    { validator: numeroIngressosValidation };
+      },
+      { validator: numeroIngressosValidation },
+    );
     this.patchValues(this.resolvedEvento);
 
     this.onFormValueChanges();

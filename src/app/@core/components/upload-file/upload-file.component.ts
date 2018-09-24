@@ -15,14 +15,6 @@ export class UploadFileComponent {
   @Output()
   uploadEmitter = new EventEmitter<any>();
   @Input()
-  set formReset(value: boolean) {
-    value = !value;
-    this.percentage = null;
-    this.snapshot = null;
-    this.task = null;
-    this.path = '';
-  }
-  @Input()
   localName: string;
 
   task: AngularFireUploadTask;
@@ -35,6 +27,13 @@ export class UploadFileComponent {
     private queryservice: QueryService,
     private notific: NotificacaoService,
   ) {}
+
+  resetUpload() {
+    this.percentage = null;
+    this.snapshot = null;
+    this.task = null;
+    this.path = '';
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -75,11 +74,11 @@ export class UploadFileComponent {
 
   excluirimg() {
     this.queryservice.deleteImage(this.path).subscribe(res => {
-      this.percentage = null;
-      this.snapshot = null;
-      this.task = null;
-      this.path = '';
-      this.uploadEmitter.emit(this.path);
+      this.resetUpload();
+      this.uploadEmitter.emit({
+        url: '',
+        pathurl: '',
+      });
       this.imgenviada = false;
     });
   }

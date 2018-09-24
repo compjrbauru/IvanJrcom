@@ -1,0 +1,82 @@
+<form [formGroup]="formEvent">
+
+  <div class="row full-name-inputs">
+    <div class="col-sm-6">
+      <label for="email">E-mail</label>
+      <input formControlName="email" type="email" id="email" placeholder="E-mail" class="form-control" />
+    </div>
+    <div class="col-sm-3">
+      <label for="nome">Senha</label>
+      <input formControlName="Senha" type="password" id="senha" placeholder="Senha" class="form-control" />
+    </div>
+    <div class="col-sm-3">
+      <label for="nome">Digite a senha novamente</label>
+      <input formControlName="ConfirmarSenha" type="password" id="ConfirmarSenha" placeholder="Repita a senha" class="form-control" />
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('PassValidator')">{{
+        formEvent.getError('PassValidator') }}</div>
+    </div>
+  </div>
+  <br />
+
+  <div class="row full-name-inputs">
+    <div class="col-sm-4">
+      <label for="nome">Primeiro nome</label>
+      <input formControlName="nome" id="nome" placeholder="Primeiro nome" class="form-control" />
+    </div>
+    <div class="col-sm-8">
+      <label for="sobrenome">Sobrenome</label>
+      <input formControlName="sobrenome" id="sobrenome" placeholder="Sobrenome" class="form-control" />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row full-name-inputs">
+    <div class="col-sm-4">
+      <label for="cpf">CPF (Somente números)</label>
+      <input formControlName="CPF" maxlength="11" id="cpf" placeholder="CPF" class="form-control" />
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('CPFvalidator')">
+        {{formEvent.getError('CPFvalidator') }} </div>
+    </div>
+    <div class="col-sm-4">
+      <label for="rg">RG (Somente números)</label>
+      <input formControlName="RG" maxlength="9" id="rg" placeholder="RG" class="form-control" />
+      <div class="alert alert-danger" *ngIf="formEvent.hasError('RGvalidator')">
+        {{ formEvent.getError('RGvalidator') }}
+      </div>
+
+    </div>
+    <div class="col-sm-4">
+      <label for="nascimento">Data de nascimento</label>
+      <input formControlName="nascimento" type="date" id="nascimento" placeholder="Data de nascimento" class="form-control" />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row full-name-inputs">
+    <div class="col-sm-1">
+      <label for="dd">DDD</label>
+      <input [formControl]="formEvent.controls['telefone'].controls['dd']" id="dd" placeholder="DDD" class="form-control" />
+    </div>
+    <div class="col-sm-5">
+      <label for="numero">Telefone/Celular</label>
+      <input [formControl]="formEvent.controls['telefone'].controls['numero']" id="numero" placeholder="Número do telefone/celular"
+        class="form-control" />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row full-name-inputs">
+    <div class="col-sm-4">
+      <label for="cidade">Cidade</label>
+      <input formControlName="Cidade" id="cidade" placeholder="Cidade" class="form-control" />
+    </div>
+    <div class="col-sm-4">
+      <label for="estado">Estado</label>
+      <input formControlName="Estado" id="estado" placeholder="Estado" class="form-control" />
+    </div>
+  </div>
+  <br />
+</form>

@@ -1,25 +1,30 @@
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
 
 @Injectable()
 export class AuthService {
   token: string;
 
-  constructor(private firebaseAuth: AngularFireAuth) { }
+  constructor(private firebaseAuth: AngularFireAuth) {}
 
   signInWithEmail(email, password) {
-    return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
-      if (this.isVerified()) {
-        this.getToken();
-        return 'sucesso';
-      } else {
-        this.firebaseAuth.auth.signOut();
-        return 'Email nao verificado!';
-      }
-    }, err => {
-      return err.code; // Retorna o erro do firebase para ser tratado no componente
-    });
+    return this.firebaseAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(
+        res => {
+          if (this.isVerified()) {
+            this.getToken();
+            return 'sucesso';
+          } else {
+            this.firebaseAuth.auth.signOut();
+            return 'Email nao verificado!';
+          }
+        },
+        err => {
+          return err.code; // Retorna o erro do firebase para ser tratado no componente
+        },
+      );
   }
 
   signout() {
@@ -28,7 +33,8 @@ export class AuthService {
   }
 
   getToken() {
-    this.firebaseAuth.auth.currentUser.getIdToken()
+    this.firebaseAuth.auth.currentUser
+      .getIdToken()
       .then((token: string) => (this.token = token));
     return this.token;
   }
@@ -50,41 +56,54 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-    return this.firebaseAuth.auth.sendPasswordResetEmail(email).then(res => {
-      return 'success';
-    }).catch(err => {
-      return err.code;
-    });
+    return this.firebaseAuth.auth
+      .sendPasswordResetEmail(email)
+      .then(res => {
+        return 'success';
+      })
+      .catch(err => {
+        return err.code;
+      });
   }
 
   signupUser(email: string, password: string) {
-    return this.firebaseAuth.auth.createUserWithEmailAndPassword(email, password).then(res => {
-      return 'success'; // pro componente saber se deu certo
-    }).catch(err => {
-      return err.code; // Retorna o erro para ser tratado no componente registrar
-    });
+    return this.firebaseAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        return 'success'; // pro componente saber se deu certo
+      })
+      .catch(err => {
+        return err.code; // Retorna o erro para ser tratado no componente registrar
+      });
   }
 
   authFacebook() {
-    return this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(res => {
-      const user = res.user;
-      const info = res.additionalUserInfo;
-      const profile: any = info.profile;
+    return this.firebaseAuth.auth
+      .signInWithPopup(new auth.FacebookAuthProvider())
+      .then(
+        res => {
+          const user = res.user;
+          const info = res.additionalUserInfo;
+          const profile: any = info.profile;
 
-      if (info.isNewUser) {
-        const userdata = { // Dados recebidos do Facebook
-          nome: profile.first_name,
-          sobrenome: profile.last_name,
-          email: profile.email,
-          id: user.uid,
-        };
-        return userdata;
-      } else {
-        this.getToken();
-        return 'sucesso';
-      }
-    }, (error) => {
-      return error.code;
-    });
+          if (info.isNewUser) {
+            const userdata = {
+              // Dados recebidos do Facebook
+              nome: profile.first_name,
+              sobrenome: profile.last_name,
+              email: profile.email,
+              id: user.uid,
+              registroCompleto: false,
+            };
+            return userdata;
+          } else {
+            this.getToken();
+            return 'sucesso';
+          }
+        },
+        error => {
+          return error.code;
+        },
+      );
   }
 }

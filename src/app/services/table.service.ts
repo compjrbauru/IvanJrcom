@@ -35,7 +35,7 @@ export class TableService {
         editor: { // Opcoes de edicao para a coluna
           type: 'list', // Tipo lista (select)
           config: {
-            list: [{title: 'Inicio', value: 'Inicio'}, {title: 'Carousel', value: 'Carousel'}],
+            list: [{ title: 'Inicio', value: 'Inicio' }, { title: 'Carousel', value: 'Carousel' }],
           },
         },
       },
@@ -54,10 +54,18 @@ export class TableService {
         editor: { // Opcoes de edicao para a coluna
           type: 'list', // Tipo lista (select)
           config: {
-            list: [{title: 'True', value: true}, {title: 'False', value: false}],
+            list: [{ title: 'True', value: true }, { title: 'False', value: false }],
           },
         },
       },
+      nome: {
+        title: 'Nome',
+        type: 'string',
+      },
+    },
+  };
+  categoriasEdit = {
+    columns: {
       nome: {
         title: 'Nome',
         type: 'string',
@@ -86,8 +94,12 @@ export class TableService {
         column = this.categorias;
         break;
       }
+      case 'categoriasEdit': {
+        column = this.categoriasEdit;
+        break;
+      }
     }
-    return  { ...this.basic, ...column } ;
+    return { ...this.basic, ...column };
   }
 
   getAddButton() {
