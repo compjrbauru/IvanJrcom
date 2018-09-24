@@ -80,6 +80,6 @@ export class CategoriaService {
   }
 
   removeCategoria(id: any) {
-    return this.db.doc(`/Categorias/${id}`);
+    return this.db.doc(`/Categorias/${id}`).delete();
   }
 }

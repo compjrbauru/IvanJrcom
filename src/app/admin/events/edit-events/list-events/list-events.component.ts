@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { takeUntil, tap } from 'rxjs/operators';
 
-// tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { UploadFileComponent } from '../../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from '../../../../services/categoria.service';
@@ -12,6 +11,7 @@ import { MapComponent } from './../../../../@core/components/map/map.component';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
 
+// tslint:disable-next-line:max-line-length
 @Component({
   selector: 'ngx-list-events',
   templateUrl: './list-events.component.html',
@@ -36,7 +36,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
@@ -91,7 +91,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       return dialogRef.afterClosed().pipe(
         tap(res => {
           if (res === true) {
-            this.queryService.deleteImage(this.form['formEvent'].value.pathurl);
+            this.queryService.deleteImage(this.form['formEvent'].value.pathurl).subscribe();
           }
         }),
       );
@@ -106,7 +106,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
         [this.categoria] = categoria;
         this.categoriaService.patchDeleteEventCategoria(this.categoria, form);
         this.eventoService.removeData(form.id);
-        this.queryService.deleteImage(form.pathurl);
+        this.queryService.deleteImage(form.pathurl).subscribe();
       });
   }
 
