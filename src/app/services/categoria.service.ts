@@ -46,6 +46,7 @@ export class CategoriaService {
   }
 
   editCategoria(categoria) {
+    categoria.busca = categoria.nome.toLowerCase();
     return this.CategoriasCollection.doc(categoria.id).set(categoria);
   }
 
