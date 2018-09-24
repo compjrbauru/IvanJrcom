@@ -1,0 +1,14 @@
+<nb-card>
+  <nb-card-header>Criar Categoria</nb-card-header>
+  <nb-card-body>
+    <ngx-form-categoria (formEmitter)="form['formCategoria']=$event"></ngx-form-categoria>
+    <br>
+    <br>
+    <label>Enviar Imagem:</label>
+    <ngx-upload-file localName="Categorias" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+    <br>
+    <br>
+    <button [disabled]="!form['formCategoria'].valid" (click)="Submit(form['formCategoria'])" class="btn btn-primary"
+      type="submit">Criar</button>
+  </nb-card-body>
+</nb-card>

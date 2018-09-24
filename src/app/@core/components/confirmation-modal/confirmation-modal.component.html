@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h1>{{data.header}}</h1>
+                <br>
+                <h6>{{data.text}}</h6>
+            </div>
+            <br>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <button class="btn btn-hero-danger btn-demo " (click)="exit(false)">Não</button>
+                    <button class="btn btn-hero-success btn-demo" (click)="exit(true)">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
