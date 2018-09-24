@@ -1,4 +1,11 @@
-<ngx-table [dataAsync]="categorias" [dataIdAsync]="categoriasID" [cat$]="catID$" columns='categoriasEdit' (editE)="resolver($event)"></ngx-table>
+<ngx-table
+  [dataAsync]="categorias"
+  [dataIdAsync]="categoriasID"
+  [cat$]="catID$"
+  columns='categoriasEdit'
+  (editE)="resolver($event)"
+  [titulo]="'Tabela de Categorias'">
+</ngx-table>
 <nb-card *ngIf="eventoResolver">
   <nb-card-header>Editar Categoria</nb-card-header>
   <nb-card-body>

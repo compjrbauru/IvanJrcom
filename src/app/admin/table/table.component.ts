@@ -24,6 +24,8 @@ export class TableComponent implements OnInit, OnDestroy {
   @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
   @Input() deleteData: any = [];
   @Input() columns: string; // Determina colunas mostradas
+  @Input() titulo: string; // Determina titulo da table
+  @Input() tipoId: string = 'id'; // Determina tipo do id a ser chamado
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
@@ -76,7 +78,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   foundObject(event: any) {
-    this.cat$.next(find(this.dataSync, event.data).id);
+    this.cat$.next(find(this.dataSync, event.data)[this.tipoId]);
   }
 
   emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
