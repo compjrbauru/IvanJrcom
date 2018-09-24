@@ -27,6 +27,15 @@ export class TableService {
     },
   };
 
+  ingressos = {
+    columns: {
+      nomeEvento:{
+        title: 'Nome',
+        tipe: 'string',
+      }
+    }
+  };
+
   constructor() { }
 
   getColumns(tipo: any) {
@@ -34,6 +43,10 @@ export class TableService {
     switch (tipo) {
       case 'evento': {
         column = this.evento;
+        break;
+      }
+      case 'ingressos': {
+        column = this.ingressos;
         break;
       }
     }

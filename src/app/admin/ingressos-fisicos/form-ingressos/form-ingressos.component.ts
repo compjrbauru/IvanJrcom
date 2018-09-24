@@ -1,16 +1,13 @@
 import { cloneDeep } from 'lodash';
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-ingressos',
   templateUrl: './form-ingressos.component.html',
-  styleUrls: ['./form-ingressos.component.scss']
+  styleUrls: ['./form-ingressos.component.scss'],
 })
-export class FormIngressosComponent implements OnInit, OnChanges{
-  
-
+export class FormIngressosComponent implements OnInit, OnChanges {
   @Input()
   formReset: boolean;
   @Input()
@@ -41,19 +38,15 @@ export class FormIngressosComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    
     const evento = cloneDeep(changes.resolvedEvento.currentValue);
-    
-    if(!changes.resolvedEvento.isFirstChange())
-      if(evento != changes.resolvedEvento.previousValue.nome){
+    if (!changes.resolvedEvento.isFirstChange())
+      if (evento !== changes.resolvedEvento.previousValue.nome) {
         this.patchNome(this.resolvedEvento);
       }
   }
-  
 
-
-  patchNome(resolvedEvento: any=[]) {
-    this.formIngressos.patchValue({
+  patchNome(resolvedEvento: any = []) {
+    this.formIngressos.patchValue( {
       nomeEvento: resolvedEvento.nome,
       idEvento: resolvedEvento.id,
       numeroIngressos: {

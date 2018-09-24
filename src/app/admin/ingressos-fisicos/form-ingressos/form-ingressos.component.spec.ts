@@ -11,7 +11,7 @@ describe('FormIngressosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormIngressosComponent ]
+      declarations: [ FormIngressosComponent ],
     })
     .compileComponents();
   }));

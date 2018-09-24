@@ -1,8 +1,7 @@
-import { CategoriaService } from './../../services/categoria.service';
 import { EventoService } from './../../services/evento.service';
 import { QueryService } from './../../services/query.service';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -22,7 +21,6 @@ export class IngressosFisicosComponent implements OnInit {
   constructor(
     private eventoService: EventoService,
     private queryService: QueryService,
-    private categoriaService: CategoriaService,
   ) { }
 
   ngOnInit() {
@@ -35,8 +33,8 @@ export class IngressosFisicosComponent implements OnInit {
     this.eventoResolver = event ? event[0] : null;
   }
 
-  submit(form: any){
-    console.log(form);
+  submit(form: any) {
+
   }
 
 

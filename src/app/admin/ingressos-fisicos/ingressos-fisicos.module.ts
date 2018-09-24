@@ -5,9 +5,10 @@ import { IngressosFisicosRoutingModule } from './ingressos-fisicos-routing.modul
 import { IngressosFisicosComponent } from './ingressos-fisicos.component';
 import { NgModule } from '@angular/core';
 import { IngressosGeradosComponent } from './ingressos-gerados/ingressos-gerados.component';
+import { IngressosGeradosModule } from './ingressos-gerados/ingressos-gerados.module';
 
 @NgModule({
-    imports: [IngressosFisicosRoutingModule, TableModule, ThemeModule, FormIngressosModule],
-    declarations: [IngressosFisicosComponent, IngressosGeradosComponent],
+    imports: [IngressosFisicosRoutingModule, TableModule, ThemeModule, FormIngressosModule, IngressosGeradosModule],
+    declarations: [IngressosFisicosComponent],
   })
   export class IngressosFisicosModule {}

@@ -11,7 +11,7 @@ describe('IngressosGeradosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IngressosGeradosComponent ]
+      declarations: [ IngressosGeradosComponent ],
     })
     .compileComponents();
   }));
