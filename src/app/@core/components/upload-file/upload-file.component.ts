@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs/Observable';
 import { finalize } from 'rxjs/operators';
 
 import { QueryService } from '../../../services/query.service';
+import { NotificacaoService } from './../../../services/notificacao.service';
 
 @Component({
   selector: 'ngx-upload-file',
@@ -14,13 +15,8 @@ export class UploadFileComponent {
   @Output()
   uploadEmitter = new EventEmitter<any>();
   @Input()
-  set formReset(value: boolean) {
-    value = !value;
-    this.percentage = null;
-    this.snapshot = null;
-    this.task = null;
-    this.path = '';
-  }
+  localName: string;
+
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
@@ -28,9 +24,16 @@ export class UploadFileComponent {
   imgenviada = false;
   path: string;
   constructor(
-    private storage: AngularFireStorage,
     private queryservice: QueryService,
+    private notific: NotificacaoService,
   ) {}
+
+  resetUpload() {
+    this.percentage = null;
+    this.snapshot = null;
+    this.task = null;
+    this.path = '';
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -39,21 +42,25 @@ export class UploadFileComponent {
   startUpload(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ');
+      this.notific.ngxtoaster('OPS!', 'Este arquivo não é uma imagem.', false);
       return;
     }
-    this.path = `Eventos/${new Date().getTime()}_${file.name}`;
+    this.uploadEmitter.emit({
+      url: null,
+      pathurl: null,
+    });
+    this.path = this.localName + `/${new Date().getTime()}_${file.name}`;
     this.task = this.queryservice.sendImage(this.path, file);
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       finalize(() => {
-        this.storage
-          .ref(this.path)
-          .getDownloadURL()
-          .subscribe(ref => {
-            this.uploadEmitter.emit(ref);
-            this.imgenviada = true;
+        this.queryservice.getUrlImage(this.path).subscribe(ref => {
+          this.uploadEmitter.emit({
+            url: ref,
+            pathurl: this.path,
           });
+          this.imgenviada = true;
+        });
       }),
     );
   }
@@ -66,13 +73,13 @@ export class UploadFileComponent {
   }
 
   excluirimg() {
-      this.queryservice.deleteImage(this.path).subscribe(res => {
-        this.percentage = null;
-        this.snapshot = null;
-        this.task = null;
-        this.path = '';
-        this.uploadEmitter.emit(this.path);
-        this.imgenviada = false;
+    this.queryservice.deleteImage(this.path).subscribe(res => {
+      this.resetUpload();
+      this.uploadEmitter.emit({
+        url: '',
+        pathurl: '',
       });
+      this.imgenviada = false;
+    });
   }
 }

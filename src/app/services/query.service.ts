@@ -84,4 +84,8 @@ export class QueryService {
   deleteImage(path: any) {
     return this.storage.ref(path).delete();
   }
+
+  getUrlImage(path: any) {
+    return this.storage.ref(path).getDownloadURL();
+  }
 }

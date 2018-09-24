@@ -1,23 +1,30 @@
-
 <ngx-table
-[dataAsync]="eventoAsync"
-[dataIdAsync]="eventoIdAsync"
-[cat$]="catID$"
-(editE)="resolver($event)"
->
+  [dataAsync]="eventoAsync"
+  [dataIdAsync]="eventoIdAsync"
+  [cat$]="catID$"
+  (editE)="resolver($event)"
+  columns='evento'
+  [titulo]="'Tabela de Eventos'">
 </ngx-table>
 
 <nb-card *ngIf="eventoResolver">
   <nb-card-header>Editar Evento</nb-card-header>
   <nb-card-body>
-    <ngx-form-evento
-      (formEmitter)="form['formEvent']=$event"
-      [categorias]="categorias"
-      [resolvedEvento]="eventoResolver ? eventoResolver : null"
-    >
+    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [resolvedEvento]="eventoResolver ? eventoResolver : null">
     </ngx-form-evento>
+    <ngx-upload-file localName="Eventos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+    <br>
+    <br>
+    <br>
+    <div>
+      <label>Local: {{this.form['formEvent'].controls['local'].value}} </label>
+    </div>
+    <ngx-map (mapEmitter)="mapUpdate($event)"></ngx-map>
+    <br>
+    <br>
     <div class="row">
-      <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary" type="submit">Salvar</button>
+      <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary"
+        type="submit">Salvar</button>
       <button (click)="deleteForm(form['formEvent']?.value)" class="btn btn-danger" type="button">Deletar</button>
     </div>
   </nb-card-body>

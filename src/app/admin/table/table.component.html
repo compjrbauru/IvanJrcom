@@ -1,13 +1,15 @@
 <nb-card>
   <nb-card-header>
-    Tabela de Eventos
+    {{ titulo }}
   </nb-card-header>
 
   <nb-card-body>
     <ng2-smart-table
       [settings]="settings"
       [source]="source"
-      (rowSelect)="foundObject($event)">
+      (rowSelect)="foundObject($event)"
+      (editConfirm)="emitConfirm($event)"
+      >
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>

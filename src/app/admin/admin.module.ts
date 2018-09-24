@@ -12,4 +12,4 @@ const ADMIN_COMPONENTS = [AdminComponent];
   imports: [AdminRoutingModule, ThemeModule, DataModule, TableModule],
   declarations: [...ADMIN_COMPONENTS ],
 })
-export class AdminModule {}
+export class AdminModule { }
