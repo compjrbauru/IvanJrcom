@@ -36,7 +36,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
@@ -91,7 +91,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       return dialogRef.afterClosed().pipe(
         tap(res => {
           if (res === true) {
-            this.queryService.deleteImage(this.form['formEvent'].value.pathurl);
+            this.queryService.deleteImage(this.form['formEvent'].value.pathurl).subscribe();
           }
         }),
       );
@@ -106,7 +106,15 @@ export class ListEventsComponent implements OnInit, OnDestroy {
         [this.categoria] = categoria;
         this.categoriaService.patchDeleteEventCategoria(this.categoria, form);
         this.eventoService.removeData(form.id);
-        this.queryService.deleteImage(form.pathurl);
+        if (
+          this.form['formEvent'].value.pathurl !== '' &&
+          this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
+        ) {
+          this.queryService.deleteImage(form.pathurl).subscribe();
+          this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+        } else {
+          this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+        }
       });
   }
 

@@ -16,7 +16,12 @@
     <ngx-upload-file localName="Categorias" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
     <br>
     <br>
-    <button [disabled]="!form['formCategoria'].valid" (click)="Submit(form['formCategoria'])" class="btn btn-primary"
-      type="submit">Criar</button>
+    <br>
+    <br>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-hero-danger btn-demo" (click)="excluirCatergoria()">Excluir</button>
+      <button [disabled]="!form['formCategoria'].valid" (click)="Submit(form['formCategoria'])" class="btn btn-hero-success btn-demo"
+        type="submit">Editar</button>
+    </div>
   </nb-card-body>
 </nb-card>
