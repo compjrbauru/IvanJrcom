@@ -80,6 +80,27 @@ export class EditCategoriasComponent implements OnInit {
     this.notific.ngxtoaster('Categoria editada com sucesso!', '', true);
   }
 
-
+  excluirCatergoria() {
+    if (this.eventoResolver.idsevento.length === 0) {
+      if (
+        this.form['formCategoria'].value.pathurl !== '' &&
+        this.form['formCategoria'].value.pathurl !== this.eventoResolver.pathurl
+      ) {
+        this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+        this.queryService.deleteImage(this.form['formCategoria'].value.pathurl).subscribe();
+      } else {
+        this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+      }
+      this.categoriaService.removeCategoria(this.eventoResolver.id);
+      this.upload.resetUpload();
+      this.notific.ngxtoaster('Categoria removida com sucesso!', '', true);
+    } else {
+      this.notific.ngxtoaster(
+        'Ainda existe eventos com essa categoria.',
+        'Por favor, altere as categorias dos eventos para exlui-la',
+        false,
+      );
+    }
+  }
 
 }
