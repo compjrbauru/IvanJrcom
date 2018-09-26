@@ -21,7 +21,6 @@ export class StripeComponent implements OnInit {
       key: config.stripe.key,
       locale: 'auto',
       token: function (token: any) {
-        console.log(token);
       },
     });
 
