@@ -1,4 +1,4 @@
-<div class="row" *ngIf="compraAsync | async as compra">
+<div class="row" *ngIf="compra">
   <div class="col col-md-4">
     <nb-card>
       <nb-card-header>
@@ -13,7 +13,7 @@
       <nb-card-body>
         <div class="content">
           <div class="header">
-            <ngx-stripe></ngx-stripe>
+            <ngx-stripe [preco]="compra.preco"></ngx-stripe>
           </div>
         </div>
     </nb-card-body>
@@ -25,7 +25,7 @@
           <div class="content">
               <div class="font-row font-secondary">
                 <div class="header">
-                  <div class="fa fa-credit-card"> Compre com o Cartão</div>
+                  <div class="fa fa-credit-card"> Compre com Boleto</div>
                 </div>
               </div>
           </div>
@@ -45,7 +45,7 @@
           <div class="content">
               <div class="font-row font-secondary">
                 <div class="header">
-                  <div class="fa fa-credit-card"> Compre com o Cartão</div>
+                  <div class="fa fa-credit-card"> Compre com Depósito</div>
                 </div>
               </div>
           </div>

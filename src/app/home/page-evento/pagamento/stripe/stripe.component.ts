@@ -1,5 +1,5 @@
 import { config } from './../../../../config/config';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ngx-stripe',
@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class StripeComponent implements OnInit {
+  @Input() preco: any;
   constructor() { }
 
   ngOnInit() { }
@@ -27,7 +28,7 @@ export class StripeComponent implements OnInit {
     handler.open({
       name: 'Comprar Ingresso',
       currency: 'brl',
-      amount: 2000,
+      amount: this.preco,
     });
   }
 }
