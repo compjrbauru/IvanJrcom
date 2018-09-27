@@ -59,6 +59,10 @@
                 </tbody>
               </table>
             </div>
+            <div *ngIf="cosmic; else default" class="hover focus botaoComprarCosmic" type="button" routerLink="/home/evento/{{evento.id}}">Comprar</div>
+            <ng-template #default>
+            <button class="hover focus botaoComprar" type="button" routerLink="/home/evento/{{evento.id}}">Comprar</button>
+            </ng-template>
           </nb-card-body>
         </nb-card>
       </div>
