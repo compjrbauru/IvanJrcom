@@ -1,5 +1,6 @@
 .botaoComprar {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 2.5rem;
     color: #696969;
     text-align: center;
@@ -15,7 +16,8 @@
     border: 3px solid #dadfe6;
 }
 .botaoComprarCosmic {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 2.5rem;
     color: #ffffff;
     text-align: center;
@@ -32,9 +34,9 @@
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0 3px 0 0 #7e4ddb, 0 2px 8px 0 #9259ff, 0 4px 10px 0 rgba(33, 7, 77, 0.5);
 }
-.botaoComprar:hover, .botaoComprar:focus{
-    background-color: #D3D3D3;
+.botaoComprar:hover, .botaoComprar:focus {
+    background-color: #d3d3d3;
 }
-.botaoComprarCosmic:hover, .botaoComprarCosmic:focus{
+.botaoComprarCosmic:hover, .botaoComprarCosmic:focus {
     background-color:rgba(146, 89, 255, 0.1);
 }
