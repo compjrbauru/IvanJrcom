@@ -8,7 +8,7 @@ describe('CategoriasDestaqueComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoriasDestaqueComponent ]
+      declarations: [ CategoriasDestaqueComponent ],
     })
     .compileComponents();
   }));
