@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CategoriaService } from './../../../services/categoria.service';
 
@@ -8,12 +9,12 @@ import { CategoriaService } from './../../../services/categoria.service';
   styleUrls: ['./categorias-destaque.component.scss'],
 })
 export class CategoriasDestaqueComponent implements OnInit {
-  categoriasDestaque: any;
+  categoriasAsync: Observable<any>;
 
   constructor(private categoriaservice: CategoriaService) { }
 
   ngOnInit() {
-    this.categoriaservice.getCategoriaDestaque().subscribe(res => this.categoriasDestaque = res);
+    this.categoriasAsync = this.categoriaservice.getCategoriaDestaque();
   }
 
 }
