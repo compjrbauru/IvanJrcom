@@ -78,6 +78,7 @@
     "ngx-spinner": "^6.1.2",
     "ngx-toastr": "^9.0.2",
     "normalize.css": "6.0.0",
+    "npm": "^6.4.1",
     "ol": "^5.2.0",
     "ol-geocoder": "^3.2.0",
     "pace-js": "1.0.2",
