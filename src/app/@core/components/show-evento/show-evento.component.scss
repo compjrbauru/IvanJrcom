@@ -8,12 +8,14 @@
     font-weight: bold;
     border-radius: 0.375rem;
     width: 30%;
-    position: relative;
-    left: 33%;
     padding: 2rem;
     margin: 2rem;
     background-color: transparent;
     border: 3px solid #dadfe6;
+    display: inline-block;
+    position: relative;
+    left: 10%;
+    top: -4.5rem;
 }
 .botaoComprarCosmic {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
@@ -25,18 +27,54 @@
     font-weight: bold;
     border-radius: 0.375rem;
     width: 30%;
-    position: relative;
-    left: 33%;
     padding: 2rem;
     margin: 2rem;
     background-color: transparent;
     border: 3px solid #8970ff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0 3px 0 0 #7e4ddb, 0 2px 8px 0 #9259ff, 0 4px 10px 0 rgba(33, 7, 77, 0.5);
+    display: inline-block;
+    position: relative;
+    left: 10%;
+    top: -4.5rem;
 }
 .botaoComprar:hover, .botaoComprar:focus {
     background-color: #d3d3d3;
 }
 .botaoComprarCosmic:hover, .botaoComprarCosmic:focus {
     background-color:rgba(146, 89, 255, 0.1);
+}
+.infoEvento{
+    width: 80%;
+    position: relative;
+    left: 10%;
+    margin: 2.5rem 0;
+}
+.descricaoInfo {
+    text-align: justify; 
+}
+.infoEvento h4, .infoEvento h5 {
+    position: relative;
+    left: 1%;
+}
+.infoEvento h4 {
+    position: relative;
+    top: -4px;
+}
+.infoEvento h5 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+.table-responsive {
+    width: 50%;
+    position: relative;
+    left: 8%;
+    display: inline-block;
+}
+nb-card-header h2 {
+    text-align: center;
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+    font-size: 250%;
+    font-weight: bold;
 }
