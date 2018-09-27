@@ -35,6 +35,10 @@ export class CategoriaService {
     return collections$;
   }
 
+  getCategoriaDestaque() {
+    return this.db.collection('/Categorias', ref => ref.where('mostrarHome', '==', true)).valueChanges();
+  }
+
   addCategoria(categoria: any) {
     categoria.id = this.db.createId();
     categoria.count = 0;
