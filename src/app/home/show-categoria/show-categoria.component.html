@@ -1,3 +1,10 @@
-<p>
-  show-categoria works!
-</p>
+<nb-card>
+  <nb-card-header>Categorias</nb-card-header>
+  <nb-card-body>
+    <ul class="list-group">
+      <a (click)="navigateToCategoria(categoria.nome)" class="list-group-item" style="cursor: pointer" *ngFor="let categoria of categoriasAsync | async">
+        {{ categoria.nome }}
+      </a>
+    </ul>
+  </nb-card-body>
+</nb-card>
