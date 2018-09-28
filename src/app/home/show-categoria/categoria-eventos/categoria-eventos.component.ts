@@ -7,7 +7,7 @@ import { EventoService } from './../../../services/evento.service';
 @Component({
   selector: 'ngx-categoria-eventos',
   templateUrl: './categoria-eventos.component.html',
-  styleUrls: ['./categoria-eventos.component.scss']
+  styleUrls: ['./categoria-eventos.component.scss'],
 })
 export class CategoriaEventosComponent implements OnInit {
   eventosAsync: Observable<any>;
