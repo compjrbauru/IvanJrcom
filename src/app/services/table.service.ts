@@ -72,6 +72,26 @@ export class TableService {
       },
     },
   };
+  contasDepositoEdit = {
+    columns: {
+      nome: {
+        title: 'Nome',
+        type: 'string',
+      },
+      agencia: {
+        title: 'Agência',
+        type: 'string',
+      },
+      conta: {
+        title: 'Conta',
+        type: 'string',
+      },
+      tipo: {
+        title: 'Tipo',
+        type: 'string',
+      },
+    },
+  };
 
   constructor() { }
 
@@ -96,6 +116,10 @@ export class TableService {
       }
       case 'categoriasEdit': {
         column = this.categoriasEdit;
+        break;
+      }
+      case 'contasDepositoEdit': {
+        column = this.contasDepositoEdit;
         break;
       }
     }
