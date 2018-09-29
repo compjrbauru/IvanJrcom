@@ -86,13 +86,15 @@
                 </div>
                 <br>
                 <label for="mostraHome">Onde este evento será mostrado</label>
+                <div class="col-sm-12 input-group">
                     <select formControlName="mostraHome" class="form-control">
                         <option value="Carousel">Carousel</option>
                         <option value="Inicio">Inicio</option>
                     </select>
+                </div>
                     <br>
                     <label>Enviar Imagem:</label>
-                <ngx-upload-file localName="Eventos" [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
-            </form>
+                    <ngx-upload-file localName="Eventos" [formReset]="formReset" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+                </form>
         </div>
     </div>
