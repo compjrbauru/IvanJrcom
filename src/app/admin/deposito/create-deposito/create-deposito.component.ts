@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-deposito.component.scss']
 })
 export class CreateDepositoComponent implements OnInit {
+  form: any = {};
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  Submit(form: any) {
+    console.log(form);
+  }
 }

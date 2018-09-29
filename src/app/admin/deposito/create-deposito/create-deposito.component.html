@@ -1,3 +1,10 @@
-<p>
-  create-deposito works!
-</p>
+<nb-card>
+  <nb-card-header>Criar Conta</nb-card-header>
+  <nb-card-body>
+    <ngx-form-deposito (formEmitter)="form['formDeposito']=$event"></ngx-form-deposito>
+    <br>
+    <br>
+    <button [disabled]="!form['formDeposito'].valid" (click)="Submit(form['formDeposito'])" class="btn btn-primary"
+      type="submit">Criar</button>
+  </nb-card-body>
+</nb-card>
