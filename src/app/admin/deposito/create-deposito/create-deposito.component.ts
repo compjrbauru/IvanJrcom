@@ -6,12 +6,12 @@ import { DepositoService } from './../../../services/deposito.service';
 @Component({
   selector: 'ngx-create-deposito',
   templateUrl: './create-deposito.component.html',
-  styleUrls: ['./create-deposito.component.scss']
+  styleUrls: ['./create-deposito.component.scss'],
 })
 export class CreateDepositoComponent implements OnInit {
   form: any = {};
 
-  constructor(private depositoservice: DepositoService, private notific: NotificacaoService, ) { }
+  constructor(private depositoservice: DepositoService, private notific: NotificacaoService) { }
 
   ngOnInit() {
   }

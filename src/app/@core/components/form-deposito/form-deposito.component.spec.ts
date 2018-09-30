@@ -8,7 +8,7 @@ describe('FormDepositoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormDepositoComponent ]
+      declarations: [ FormDepositoComponent ],
     })
     .compileComponents();
   }));
