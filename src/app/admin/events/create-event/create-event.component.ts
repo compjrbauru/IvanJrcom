@@ -5,6 +5,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 import { MapComponent } from '../../../@core/components/map/map.component';
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
+import { DepositoService } from '../../../services/deposito.service';
 import { QueryService } from '../../../services/query.service';
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -21,18 +22,21 @@ export class CreateEventComponent
   implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
   categorias: any;
+  contasDeposito: any;
   categoriaSelected: any = {};
   @ViewChild(MapComponent)
   private map: MapComponent;
   @ViewChild(UploadFileComponent)
   private upload: UploadFileComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
+  private unsubscribeContasDeposito: Subject<void> = new Subject();
 
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
     private dialog: MatDialog,
     private queryservice: QueryService,
+    private depositoservice: DepositoService,
   ) { }
 
   ngOnInit() {
@@ -41,6 +45,12 @@ export class CreateEventComponent
       .pipe(takeUntil(this.unsubscribeCategoria))
       .subscribe(categorias => {
         this.categorias = categorias;
+      });
+    this.depositoservice
+      .getContaDeposito()
+      .pipe(takeUntil(this.unsubscribeContasDeposito))
+      .subscribe(contasDeposito => {
+        this.contasDeposito = contasDeposito;
       });
   }
 
@@ -85,6 +95,8 @@ export class CreateEventComponent
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+    this.unsubscribeContasDeposito.next();
+    this.unsubscribeContasDeposito.complete();
   }
 
   mapUpdate(event: any) {
