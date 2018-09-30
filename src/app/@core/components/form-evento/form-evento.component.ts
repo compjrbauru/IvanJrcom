@@ -58,6 +58,17 @@ export class FormEventoComponent implements OnInit, DoCheck {
           }),
           compramax: ['', Validators.required],
         }),
+        unisex: this.formBuilder.group({
+          disponiveis: [],
+          valor: [],
+        }),
+        payment: this.formBuilder.group({
+          boleto: [],
+          cartaocredito: [],
+          deposito: [],
+          vendafisica: [],
+        }),
+        compramax: ['', Validators.required],
         mostraHome: null,
         url: ['', Validators.required],
         pathurl: ['', Validators.required],
@@ -108,3 +119,4 @@ export class FormEventoComponent implements OnInit, DoCheck {
     });
   }
 }
+
