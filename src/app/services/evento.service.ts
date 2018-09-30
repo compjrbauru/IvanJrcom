@@ -29,6 +29,10 @@ export class EventoService {
     return this.db.collection(`Evento`, ref => ref.where('mostraHome', '==', 'Carousel')).valueChanges();
   }
 
+  getcontasDepositoId(id: string): Observable<any> {
+    return this.db.collection(`Evento`, ref => ref.where('pagamento.contaDeposito', '==', id)).valueChanges();
+  }
+
   getByNameWithLimit(limit: number): Observable<any> {
     return this.db.collection(`/Evento`, ref => ref.orderBy('nome').limit(limit)).valueChanges();
   }
