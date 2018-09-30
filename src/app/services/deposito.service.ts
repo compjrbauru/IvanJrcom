@@ -29,9 +29,14 @@ export class DepositoService {
     return conta$.pipe(
       switchMap(conta =>
         this.db
-          .collection('/Categorias', ref => ref.where('id', '==', conta))
+          .collection('/ContasDeposito', ref => ref.where('id', '==', conta))
           .valueChanges(),
       ),
     );
   }
+
+  removeContaDeposito(id: any) {
+    return this.db.doc(`/ContasDeposito/${id}`).delete();
+  }
+
 }

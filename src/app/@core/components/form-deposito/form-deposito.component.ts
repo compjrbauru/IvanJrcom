@@ -21,6 +21,7 @@ export class FormDepositoComponent implements OnInit, DoCheck {
       conta: ['', Validators.required],
       agencia: ['', Validators.required],
       tipo: ['corrente', Validators.required],
+      id: [''],
     });
     this.patchValues(this.resolvedEvento);
     this.onFormValueChanges();

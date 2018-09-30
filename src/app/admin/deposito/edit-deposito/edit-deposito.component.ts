@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+import { NotificacaoService } from '../../../services/notificacao.service';
 import { DepositoService } from './../../../services/deposito.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class EditDepositoComponent implements OnInit {
   contasID: Observable<any>;
   eventoResolver: any = [];
 
-  constructor(private depositoservice: DepositoService) { }
+  constructor(private depositoservice: DepositoService, private notific: NotificacaoService) { }
 
   ngOnInit() {
     this.contas = this.depositoservice.getContaDeposito();
@@ -28,9 +29,15 @@ export class EditDepositoComponent implements OnInit {
   }
 
   Submit(form: any) {
+    this.depositoservice.editContaDeposito(form.value);
+    this.eventoResolver = [];
+    this.form['formDeposito'].reset();
+    this.notific.ngxtoaster('Conta editada com sucesso!', '', true);
   }
 
   excluirConta() {
+    this.depositoservice.removeContaDeposito(this.eventoResolver.id);
+    this.notific.ngxtoaster('Conta excluida com sucesso!', '', true);
   }
 
 }

@@ -78,12 +78,12 @@ export class TableService {
         title: 'Nome',
         type: 'string',
       },
-      agencia: {
-        title: 'Agência',
-        type: 'string',
-      },
       conta: {
         title: 'Conta',
+        type: 'string',
+      },
+      agencia: {
+        title: 'Agência',
         type: 'string',
       },
       tipo: {
