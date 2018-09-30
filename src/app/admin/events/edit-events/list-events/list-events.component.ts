@@ -8,6 +8,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { UploadFileComponent } from '../../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from '../../../../services/categoria.service';
+import { DepositoService } from '../../../../services/deposito.service';
 import { MapComponent } from './../../../../@core/components/map/map.component';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
@@ -20,6 +21,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   form: any = {};
   categorias: any;
   categoria: any;
+  contasDeposito: any;
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
@@ -29,6 +31,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   @ViewChild(MapComponent)
   private map: MapComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
+  private unsubscribeContasDeposito: Subject<void> = new Subject();
   categoriaSelected: any = {};
 
   constructor(
@@ -36,6 +39,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
+    private depositoservice: DepositoService,
   ) { }
 
   ngOnInit() {
@@ -47,6 +51,18 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeCategoria))
       .subscribe(categorias => {
         this.categorias = categorias;
+      });
+    this.depositoservice
+      .getContaDeposito()
+      .pipe(takeUntil(this.unsubscribeContasDeposito))
+      .subscribe(contasDeposito => {
+        this.contasDeposito = contasDeposito;
+      });
+    this.depositoservice
+      .getContaDeposito()
+      .pipe(takeUntil(this.unsubscribeContasDeposito))
+      .subscribe(contasDeposito => {
+        this.contasDeposito = contasDeposito;
       });
   }
 
@@ -121,6 +137,8 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+    this.unsubscribeContasDeposito.next();
+    this.unsubscribeContasDeposito.complete();
   }
 
   mapUpdate(event: any) {

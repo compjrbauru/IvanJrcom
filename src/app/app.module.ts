@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoriaService } from './services/categoria.service';
+import { DepositoService } from './services/deposito.service';
 import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
@@ -64,6 +65,7 @@ import { ThemeService } from './services/theme.service';
     ThemeService,
     AuthService,
     CanDeactivateGuard,
+    DepositoService,
   ],
 })
-export class AppModule {}
+export class AppModule { }
