@@ -12,4 +12,9 @@ export let MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-tables',
     link: '/home/todos-eventos',
   },
+  {
+    title: 'Categorias',
+    icon: 'nb-grid-a-outline',
+    link: '/home/categoria',
+  },
 ];

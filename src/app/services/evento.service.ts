@@ -17,6 +17,10 @@ export class EventoService {
     return this.db.collection('/Evento', ref => ref.where('id', '==', id)).valueChanges();
   }
 
+  getCategoria(cat: any) {
+    return this.db.collection('/Evento', ref => ref.where('categoria', '==', cat)).valueChanges();
+  }
+
   getAll(): Observable<any> {
     return this.EventoCollection.valueChanges();
   }
