@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { CategoriaService } from './../../../services/categoria.service';
@@ -12,7 +11,7 @@ import { CategoriaService } from './../../../services/categoria.service';
 export class CategoriasDestaqueComponent implements OnInit {
   categoriasAsync: Observable<any>;
 
-  constructor(private categoriaservice: CategoriaService, private router: Router) { }
+  constructor(private categoriaservice: CategoriaService) { }
 
   ngOnInit() {
     this.categoriasAsync = this.categoriaservice.getCategoriaDestaque();
