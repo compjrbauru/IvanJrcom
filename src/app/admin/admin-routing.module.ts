@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: './categorias/categorias.module#CategoriasModule',
       },
       {
+        path: 'deposito',
+        loadChildren: './deposito/deposito.module#DepositoModule',
+      },
+      {
         path: 'edicao-home',
         loadChildren: './edicao-home/edicao-home.module#EdicaoHomeModule',
       },

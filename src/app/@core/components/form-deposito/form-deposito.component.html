@@ -1,0 +1,17 @@
+<form class="row" [formGroup]="formDeposito">
+  <div class="col-md-3 input-group">
+    <input formControlName="nome" placeholder="Nome" class="form-control" type="text">
+  </div>
+  <div class="col-md-3">
+    <input type="text" formControlName="conta" class="form-control" placeholder="Conta">
+  </div>
+  <div class="col-md-3">
+    <input type="text" formControlName="agencia" class="form-control" placeholder="Agência">
+  </div>
+  <div class="col-md-3">
+    <select formControlName="tipo" class="form-control">
+      <option value="poupanca">Poupança</option>
+      <option value="corrente">Corrente</option>
+    </select>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<ngx-table [dataAsync]="contas" [dataIdAsync]="contasID" [cat$]="contasID$" columns='contasDepositoEdit' (editE)="resolver($event)"
+  [titulo]="'Tabela de Contas'">
+</ngx-table>
+<nb-card *ngIf="eventoResolver">
+  <nb-card-header>Editar Contas</nb-card-header>
+  <nb-card-body>
+    <ngx-form-deposito (formEmitter)="form['formDeposito']=$event" [resolvedEvento]="eventoResolver ? eventoResolver : null"></ngx-form-deposito>
+    <br>
+    <br>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-hero-danger btn-demo" (click)="excluirConta()">Excluir</button>
+      <button [disabled]="!form['formDeposito'].valid" (click)="Submit(form['formDeposito'])" class="btn btn-hero-success btn-demo"
+        type="submit">Editar</button>
+    </div>
+  </nb-card-body>
+</nb-card>
