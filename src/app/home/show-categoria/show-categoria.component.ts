@@ -18,8 +18,4 @@ export class ShowCategoriaComponent implements OnInit {
     this.categoriasAsync = this.categoriaservice.getCategoria();
   }
 
-  navigateToCategoria(categoria: string) {
-    this.router.navigate([`/home/categoria/${categoria}`]);
-  }
-
 }

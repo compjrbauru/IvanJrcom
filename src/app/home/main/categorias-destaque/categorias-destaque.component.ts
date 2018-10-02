@@ -18,8 +18,4 @@ export class CategoriasDestaqueComponent implements OnInit {
     this.categoriasAsync = this.categoriaservice.getCategoriaDestaque();
   }
 
-  navigateToCategoria(categoria: string) {
-    this.router.navigate([`/home/categoria/${categoria}`]);
-  }
-
 }
