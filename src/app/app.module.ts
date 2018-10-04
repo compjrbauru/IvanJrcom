@@ -25,6 +25,7 @@ import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
 import { ThemeService } from './services/theme.service';
+import { UsuarioService } from './services/usuario.service';
 
 /**
  * @license
@@ -66,6 +67,7 @@ import { ThemeService } from './services/theme.service';
     AuthService,
     CanDeactivateGuard,
     DepositoService,
+    UsuarioService,
   ],
 })
 export class AppModule { }

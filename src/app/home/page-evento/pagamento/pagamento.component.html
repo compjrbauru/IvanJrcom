@@ -1,33 +1,100 @@
-<div class="row" *ngIf="compra">
-  <div class="col col-md-4">
-    <nb-card>
-      <nb-card-header>
-        <div class="content">
+<div *ngIf="compra && userInfo">
+  <nb-card>
+    <nb-card-header>Dados</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-md-3">
+          <label><strong>Nome</strong></label>
+          <p>{{userInfo.nome}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Sobrenome</strong></label>
+          <p>{{userInfo.sobrenome}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Telefone</strong></label>
+          <p>({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Data de nascimento</strong></label>
+          <p>{{userInfo.nascimento}}</p>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-3">
+          <label><strong>RG</strong></label>
+          <p>{{userInfo.RG}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>CPF</strong></label>
+          <p>{{userInfo.CPF}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Estado</strong></label>
+          <p>{{userInfo.Estado}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Cidade</strong></label>
+          <p>{{userInfo.Cidade}}</p>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-3">
+          <label><strong>Email</strong></label>
+          <p>{{userInfo.email}}</p>
+        </div>
+        <div class="col-md-3">
+          <label><strong>Ingressos</strong></label>
+          <p *ngIf="compra.masculino > 0">Masculino:{{compra.masculino}}</p>
+          <br>
+          <p *ngIf="compra.feminino > 0">Feminino{{compra.femino}}</p>
+          <br>
+          <p *ngIf="compra.unisex > 0">Unisex{{compra.unisex}}</p>
+        </div>
+        <div class="col-md-6">
+          <label><strong>Valor Total</strong></label>
+          <p>{{compra.preco}}</p>
+        </div>
+        <div class="col-md-12 text-center">
+          <form [formGroup]="reCaptcha">
+            <ngx-recaptcha2 siteKey="6Lceg3MUAAAAAMEpmbKF-6mQSGfGId9_BgQyGNQ-" size="normal" hl="en" theme="light" type="image"
+              formControlName="recaptcha">
+            </ngx-recaptcha2>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <div class="row">
+    <div class="col col-md-4">
+      <nb-card>
+        <nb-card-header>
+          <div class="content">
             <div class="font-row font-secondary">
               <div class="header">
                 <div class="fa fa-credit-card"> Compre com o Cartão</div>
               </div>
             </div>
-        </div>
-      </nb-card-header>
-      <nb-card-body>
-        <div class="content">
-          <div class="header">
-            <ngx-stripe [preco]="compra.preco"></ngx-stripe>
           </div>
-        </div>
-    </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col col-md-4">
-    <nb-card>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="content">
+            <div class="header">
+              <ngx-stripe [preco]="compra.preco"></ngx-stripe>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col col-md-4">
+      <nb-card>
         <nb-card-header>
           <div class="content">
-              <div class="font-row font-secondary">
-                <div class="header">
-                  <div class="fa fa-credit-card"> Compre com Boleto</div>
-                </div>
+            <div class="font-row font-secondary">
+              <div class="header">
+                <div class="fa fa-credit-card"> Compre com Boleto</div>
               </div>
+            </div>
           </div>
         </nb-card-header>
         <nb-card-body>
@@ -36,27 +103,28 @@
               <ngx-stripe></ngx-stripe>
             </div>
           </div>
-      </nb-card-body>
+        </nb-card-body>
       </nb-card>
-  </div>
-  <div class="col col-md-4">
-    <nb-card>
+    </div>
+    <div class="col col-md-4">
+      <nb-card>
         <nb-card-header>
           <div class="content">
-              <div class="font-row font-secondary">
-                <div class="header">
-                  <div class="fa fa-credit-card"> Compre com Depósito</div>
-                </div>
+            <div class="font-row font-secondary">
+              <div class="header">
+                <div class="fa fa-credit-card"> Compre com Depósito</div>
               </div>
+            </div>
           </div>
         </nb-card-header>
         <nb-card-body>
           <div class="content">
             <div class="header">
-              <ngx-stripe></ngx-stripe>
+              <button routerLink="deposito">deposito</button>
             </div>
           </div>
-      </nb-card-body>
+        </nb-card-body>
       </nb-card>
+    </div>
   </div>
 </div>
