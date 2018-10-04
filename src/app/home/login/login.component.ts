@@ -7,6 +7,7 @@ import { enterComponent } from '../../@core/animations/animations';
 import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from './../../services/auth.service';
 import { NotificacaoService } from './../../services/notificacao.service';
+import { MENU_ITEMS } from './../home-menu';
 import { ResetPassComponent } from './reset-pass.component';
 
 @Component({
@@ -17,6 +18,12 @@ import { ResetPassComponent } from './reset-pass.component';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
+  menu = MENU_ITEMS;
+  conta = {
+    title: 'Conta',
+    icon: 'nb-email',
+    link: '/home/conta',
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,7 +32,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService,
     private dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formLogin = this.formBuilder.group({
@@ -46,6 +53,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         if (res === 'sucesso') {
           this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
+          this.menu.push(this.conta);
           this.router.navigate(['/home']);
           this.getUserData().subscribe((res1: any) => {
             if (res1[0].registroCompleto === false) {
@@ -65,6 +73,7 @@ export class LoginComponent implements OnInit {
             'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
             false,
           );
+          this.menu.push(this.conta);
         } else {
           this.notificacao.ngxtoaster('Erro Login', 'Login Falhou!', false);
         }
