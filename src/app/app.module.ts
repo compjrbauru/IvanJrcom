@@ -25,7 +25,11 @@ import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
 import { ThemeService } from './services/theme.service';
+<<<<<<< HEAD
 import { IngressosService } from './services/ingressos.service';
+=======
+import { UsuarioService } from './services/usuario.service';
+>>>>>>> #160973071: avanços
 
 /**
  * @license
@@ -68,6 +72,7 @@ import { IngressosService } from './services/ingressos.service';
     IngressosService,
     CanDeactivateGuard,
     DepositoService,
+    UsuarioService,
   ],
 })
 export class AppModule { }
