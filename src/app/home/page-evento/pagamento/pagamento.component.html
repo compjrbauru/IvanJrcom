@@ -2,48 +2,48 @@
   <nb-card>
     <nb-card-header>Dados</nb-card-header>
     <nb-card-body>
-      <div class="row">
-        <div class="col-md-3">
+      <div class="row ">
+        <div class="col-md-3 text-center">
           <label><strong>Nome</strong></label>
           <p>{{userInfo.nome}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>Sobrenome</strong></label>
           <p>{{userInfo.sobrenome}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>Telefone</strong></label>
           <p>({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>Data de nascimento</strong></label>
           <p>{{userInfo.nascimento}}</p>
         </div>
         <br>
         <br>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>RG</strong></label>
           <p>{{userInfo.RG}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>CPF</strong></label>
           <p>{{userInfo.CPF}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>Estado</strong></label>
           <p>{{userInfo.Estado}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
           <label><strong>Cidade</strong></label>
           <p>{{userInfo.Cidade}}</p>
         </div>
         <br>
         <br>
-        <div class="col-md-3">
+        <div class="col-md-4 text-center">
           <label><strong>Email</strong></label>
           <p>{{userInfo.email}}</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4 text-center">
           <label><strong>Ingressos</strong></label>
           <p *ngIf="compra.masculino > 0">Masculino:{{compra.masculino}}</p>
           <br>
@@ -51,14 +51,14 @@
           <br>
           <p *ngIf="compra.unisex > 0">Unisex{{compra.unisex}}</p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4 text-center">
           <label><strong>Valor Total</strong></label>
           <p>{{compra.preco}}</p>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-12">
           <form [formGroup]="reCaptcha">
-            <ngx-recaptcha2 siteKey="6Lceg3MUAAAAAMEpmbKF-6mQSGfGId9_BgQyGNQ-" size="normal" hl="en" theme="light" type="image"
-              formControlName="recaptcha">
+            <ngx-recaptcha2 class="d-flex justify-content-center" siteKey="6Lceg3MUAAAAAMEpmbKF-6mQSGfGId9_BgQyGNQ-"
+              size="normal" hl="en" theme="light" type="image" formControlName="recaptcha">
             </ngx-recaptcha2>
           </form>
         </div>
@@ -120,7 +120,7 @@
         <nb-card-body>
           <div class="content">
             <div class="header">
-              <button routerLink="deposito">deposito</button>
+              <ngx-deposito-confirmation [valid]="reCaptcha.valid"></ngx-deposito-confirmation>
             </div>
           </div>
         </nb-card-body>
