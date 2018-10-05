@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { UsuarioService } from '../../../services/usuario.service';
+import { config } from './../../../config/config';
 import { AuthService } from './../../../services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from './../../../services/auth.service';
   styleUrls: ['./pagamento.component.scss'],
 })
 export class PagamentoComponent implements OnInit, OnDestroy {
+  recaptchaKey = config.recaptcha.key;
   compra: any;
   userInfo: any;
   protected reCaptcha: FormGroup;
@@ -31,7 +33,7 @@ export class PagamentoComponent implements OnInit, OnDestroy {
       this.localStorage.clear();
     });
     this.usuarioservice.getUsuarioEmail(this.authservice.ReturnEmail()).subscribe(res => {
-      this.userInfo = res[0];
+      [this.userInfo] = res;
     });
   }
 
