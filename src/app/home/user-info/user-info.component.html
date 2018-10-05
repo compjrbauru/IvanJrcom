@@ -1,22 +1,52 @@
-<nb-card>
+<nb-card *ngIf="userInfo">
   <nb-card-header>
     <h3>Minha Conta</h3>
   </nb-card-header>
 
-  <nb-card-body> 
+  <nb-card-body>
 
     <div class="div-pos-left div-size-1">
       <nb-card accent="info">
-        <nb-card-header>Dados da conta</nb-card-header>
+        <nb-card-header>
+          Dados da conta
+          <div class="float-right">
+            <i class="nb-gear"></i>
+          </div>
+        </nb-card-header>
         <nb-card-body>
           <p>
             <span class="label">Usuário (e-mail): </span>
-            <span class="value">teste@teste.com</span>
+            <span class="value">{{userInfo.email}}</span>
           </p>
           <p>
             <span class="label">Nome: </span>
-            <span class="value">Teste dos Santos</span>
+            <span class="value">{{userInfo.nome}} {{userInfo.sobrenome}}</span>
           </p>
+          <p>
+            <span class="label">Data de nascimento: </span>
+            <span class="value">{{userInfo.nascimento}}</span>
+          </p>
+          <p>
+            <span class="label">RG: </span>
+            <span class="value">{{userInfo.RG}}</span>
+          </p>
+          <p>
+            <span class="label">CPF: </span>
+            <span class="value">{{userInfo.CPF}}</span>
+          </p>
+          <p>
+            <span class="label">Telefone: </span>
+            <span class="value">({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</span>
+          </p>
+          <p>
+            <span class="label">Estado: </span>
+            <span class="value">{{userInfo.Estado}}</span>
+          </p>
+          <p>
+            <span class="label">Cidade: </span>
+            <span class="value">{{userInfo.Cidade}}</span>
+          </p>
+
         </nb-card-body>
       </nb-card>
     </div>
