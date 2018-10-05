@@ -24,11 +24,10 @@ export class PagamentoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.reCaptcha = this.fb.group({
-      recaptcha: ['', Validators.required]
+      recaptcha: ['', Validators.required],
     });
     this.localStorage.getItem('compra').subscribe(response => {
       this.compra = response;
-      console.log(this.compra);
       this.localStorage.clear();
     });
     this.usuarioservice.getUsuarioEmail(this.authservice.ReturnEmail()).subscribe(res => {
