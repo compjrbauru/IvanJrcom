@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
+import { RouterHelper } from '../../../@core/utils/helpers/router-helper';
 import { UsuarioService } from '../../../services/usuario.service';
 import { config } from './../../../config/config';
 import { AuthService } from './../../../services/auth.service';
@@ -22,18 +24,17 @@ export class PagamentoComponent implements OnInit, OnDestroy {
     private usuarioservice: UsuarioService,
     private authservice: AuthService,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.userInfo = RouterHelper.getValues(this.route, 'userInfo');
     this.reCaptcha = this.fb.group({
       recaptcha: ['', Validators.required],
     });
     this.localStorage.getItem('compra').subscribe(response => {
       this.compra = response;
       this.localStorage.clear();
-    });
-    this.usuarioservice.getUsuarioEmail(this.authservice.ReturnEmail()).subscribe(res => {
-      [this.userInfo] = res;
     });
   }
 

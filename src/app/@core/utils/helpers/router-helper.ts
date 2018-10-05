@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+
 export class RouterHelper {
 
   static getParams(activatedRoute: ActivatedRoute, name: string): any {
@@ -6,9 +7,10 @@ export class RouterHelper {
     return resolvedData ? resolvedData.params : null;
   }
 
-  static getValues(activatedRoute: ActivatedRoute): any {
-    const resolvedData = activatedRoute.snapshot.data;
-    return resolvedData ? resolvedData.params : null;
+  static getValues(activatedRoute: ActivatedRoute, name: string): any {
+    const resolvedData = activatedRoute.snapshot.data[name];
+    console.log(resolvedData);
+    return resolvedData ? resolvedData : null;
   }
 
 }
