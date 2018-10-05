@@ -9,6 +9,7 @@ import { DepositoConfirmationComponent } from './deposito-confirmation.component
 
 @NgModule({
     imports: [CommonModule, ThemeModule],
+    exports: [DepositoConfirmationComponent],
     declarations: [DepositoConfirmationComponent],
 })
 export class DepositoConfirmationModule { }
