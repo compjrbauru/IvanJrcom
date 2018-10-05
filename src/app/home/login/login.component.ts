@@ -62,10 +62,11 @@ export class LoginComponent implements OnInit {
                 'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
                 false,
               );
+              this.authService.setLocal(res1[0]);
             }
           });
         } else if (typeof res === 'object') {
-          this.usuarioService.addUsuario(res);
+          this.usuarioService.addUsuario(res).subscribe(user => this.authService.setLocal(user));
           this.router.navigate(['/home']);
           this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
           this.notificacao.ngxtoaster(
@@ -92,6 +93,9 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithEmail(form.email, form.password).then(res => {
       if (res === 'sucesso') {
         this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
+        this.getUserData().subscribe(userData => {
+          this.authService.setLocal(userData[0]);
+        });
         this.router.navigate(['/home']);
       } else if (res === 'auth/invalid-email') {
         // Email invalido
