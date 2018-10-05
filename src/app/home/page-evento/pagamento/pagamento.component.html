@@ -57,8 +57,8 @@
         </div>
         <div class="col-md-12">
           <form [formGroup]="reCaptcha">
-            <ngx-recaptcha2 class="d-flex justify-content-center" siteKey="6Lceg3MUAAAAAMEpmbKF-6mQSGfGId9_BgQyGNQ-"
-              size="normal" hl="en" theme="light" type="image" formControlName="recaptcha">
+            <ngx-recaptcha2 class="d-flex justify-content-center" [siteKey]='recaptchaKey' size="normal" hl="en" theme="light"
+              type="image" formControlName="recaptcha">
             </ngx-recaptcha2>
           </form>
         </div>
