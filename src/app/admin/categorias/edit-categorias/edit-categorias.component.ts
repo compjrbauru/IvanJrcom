@@ -80,9 +80,6 @@ export class EditCategoriasComponent implements OnInit {
     this.notific.ngxtoaster('Categoria editada com sucesso!', '', true);
   }
 
-<<<<<<< HEAD
-
-=======
   excluirCatergoria() {
     if (this.eventoResolver.idsevento.length === 0) {
       if (
@@ -105,6 +102,5 @@ export class EditCategoriasComponent implements OnInit {
       );
     }
   }
->>>>>>> origin/master
 
 }

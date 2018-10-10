@@ -5,10 +5,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 import { MapComponent } from '../../../@core/components/map/map.component';
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
-<<<<<<< HEAD
-=======
 import { DepositoService } from '../../../services/deposito.service';
->>>>>>> origin/master
 import { QueryService } from '../../../services/query.service';
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from './../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -25,30 +22,21 @@ export class CreateEventComponent
   implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
   categorias: any;
-<<<<<<< HEAD
-=======
   contasDeposito: any;
->>>>>>> origin/master
   categoriaSelected: any = {};
   @ViewChild(MapComponent)
   private map: MapComponent;
   @ViewChild(UploadFileComponent)
   private upload: UploadFileComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
-<<<<<<< HEAD
-=======
   private unsubscribeContasDeposito: Subject<void> = new Subject();
->>>>>>> origin/master
 
   constructor(
     private eventoService: EventoService,
     private categoriaService: CategoriaService,
     private dialog: MatDialog,
     private queryservice: QueryService,
-<<<<<<< HEAD
-=======
     private depositoservice: DepositoService,
->>>>>>> origin/master
   ) { }
 
   ngOnInit() {
@@ -58,15 +46,12 @@ export class CreateEventComponent
       .subscribe(categorias => {
         this.categorias = categorias;
       });
-<<<<<<< HEAD
-=======
     this.depositoservice
       .getContaDeposito()
       .pipe(takeUntil(this.unsubscribeContasDeposito))
       .subscribe(contasDeposito => {
         this.contasDeposito = contasDeposito;
       });
->>>>>>> origin/master
   }
 
   submit(form: any) {
@@ -110,11 +95,8 @@ export class CreateEventComponent
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
-<<<<<<< HEAD
-=======
     this.unsubscribeContasDeposito.next();
     this.unsubscribeContasDeposito.complete();
->>>>>>> origin/master
   }
 
   mapUpdate(event: any) {

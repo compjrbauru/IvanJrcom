@@ -7,10 +7,7 @@ import { enterComponent } from '../../@core/animations/animations';
 import { UsuarioService } from '../../services/usuario.service';
 import { AuthService } from './../../services/auth.service';
 import { NotificacaoService } from './../../services/notificacao.service';
-<<<<<<< HEAD
-=======
 import { MENU_ITEMS } from './../home-menu';
->>>>>>> origin/master
 import { ResetPassComponent } from './reset-pass.component';
 
 @Component({
@@ -56,10 +53,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         if (res === 'sucesso') {
           this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
-<<<<<<< HEAD
-=======
           this.menu.push(this.conta);
->>>>>>> origin/master
           this.router.navigate(['/home']);
           this.getUserData().subscribe((res1: any) => {
             if (res1[0].registroCompleto === false) {
@@ -79,10 +73,7 @@ export class LoginComponent implements OnInit {
             'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
             false,
           );
-<<<<<<< HEAD
-=======
           this.menu.push(this.conta);
->>>>>>> origin/master
         } else {
           this.notificacao.ngxtoaster('Erro Login', 'Login Falhou!', false);
         }

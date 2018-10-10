@@ -10,6 +10,8 @@ export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
   categorias: any;
   @Input()
+  contasDeposito: any;
+  @Input()
   resolvedEvento: any = null;
   @Output()
   formEmitter = new EventEmitter<any>();
@@ -30,7 +32,26 @@ export class FormEventoComponent implements OnInit, DoCheck {
       // tslint:disable-next-line:max-line-length
       return +form.get('ingressos').get('lote').get('disponiveis').value === soma ? null : error;
     };
-
+    const pagamentoValidation: ValidatorFn = (form: AbstractControl) => {
+      const error = {
+        pagamento: 'Selecione pelo menos um meio de pagamento',
+      };
+      return (
+        form.get('pagamento').get('boleto').value === false &&
+        form.get('pagamento').get('credito').value === false &&
+        form.get('pagamento').get('deposito').value === false &&
+        form.get('pagamento').get('fisica').value === false
+      ) ? error : null;
+    };
+    const depositoValidation: ValidatorFn = (form: AbstractControl) => {
+      const error = {
+        deposito: 'Selecione uma conta para deposito',
+      };
+      return (
+        form.get('pagamento').get('deposito').value === true &&
+        form.get('pagamento').get('contaDeposito').value === ''
+      ) ? error : null;
+    };
     this.formEvent = this.formBuilder.group(
       {
         nome: ['', Validators.required],
@@ -61,11 +82,18 @@ export class FormEventoComponent implements OnInit, DoCheck {
         mostraHome: null,
         url: ['', Validators.required],
         pathurl: ['', Validators.required],
+        pagamento: this.formBuilder.group({
+          boleto: [false, Validators.required],
+          credito: [false, Validators.required],
+          deposito: [false, Validators.required],
+          fisica: [false, Validators.required],
+          contaDeposito: [''],
+        }),
         id: [''],
         nomeBusca: null,
         localBusca: null,
       },
-      { validator: numeroIngressosValidation },
+      { validator: [numeroIngressosValidation, pagamentoValidation, depositoValidation] },
     );
     this.patchValues(this.resolvedEvento);
 
@@ -75,6 +103,12 @@ export class FormEventoComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.patchValues(this.resolvedEvento);
+    if (
+      this.formEvent.get('pagamento').get('deposito').value === false &&
+      this.formEvent.get('pagamento').get('contaDeposito').value !== ''
+    ) {
+      this.formEvent.get('pagamento').get('contaDeposito').setValue('');
+    }
   }
 
   resolveData(data: any) {
@@ -107,4 +141,5 @@ export class FormEventoComponent implements OnInit, DoCheck {
       this.formEmitter.emit(this.formEvent);
     });
   }
+
 }

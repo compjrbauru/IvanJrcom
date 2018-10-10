@@ -35,26 +35,6 @@ export class CategoriaService {
     return collections$;
   }
 
-<<<<<<< HEAD
-  addCategoria(categoria: any) {
-    categoria.id = this.db.createId();
-    categoria.count = 0;
-    categoria.idsevento = [];
-    categoria.busca = categoria.nome.toLowerCase();
-    this.CategoriasCollection.doc(categoria.id).set({
-      ...categoria,
-    });
-  }
-
-  editCategoria(categoria) {
-    return this.CategoriasCollection.doc(categoria.id).set(categoria);
-  }
-
-  patchCategoria(categorias: any, evento: any) {
-    const categoria = categorias.find(cat => cat.nome === evento.categoria);
-    categoria.count++;
-    categoria.idsevento.push(evento.id);
-=======
   getCategoriaDestaque() {
     return this.db.collection('/Categorias', ref => ref.where('mostrarHome', '==', true)).valueChanges();
   }
@@ -64,13 +44,10 @@ export class CategoriaService {
     categoria.count = 0;
     categoria.idsevento = [];
     categoria.busca = categoria.nome.toLowerCase();
->>>>>>> origin/master
     this.CategoriasCollection.doc(categoria.id).set({
       ...categoria,
     });
   }
-<<<<<<< HEAD
-=======
 
   editCategoria(categoria) {
     categoria.busca = categoria.nome.toLowerCase();
@@ -85,7 +62,6 @@ export class CategoriaService {
       ...categoria,
     });
   }
->>>>>>> origin/master
 
   patchEditCategoria(categorias: any, evento: any, eventoResolver: any) {
     const categoria = categorias.find(cat => cat.nome === evento.categoria);
@@ -109,10 +85,6 @@ export class CategoriaService {
   }
 
   removeCategoria(id: any) {
-<<<<<<< HEAD
-    return this.db.doc(`/Categorias/${id}`);
-=======
     return this.db.doc(`/Categorias/${id}`).delete();
->>>>>>> origin/master
   }
 }

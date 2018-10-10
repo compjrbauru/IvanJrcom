@@ -72,7 +72,6 @@ export class TableService {
       },
     },
   };
-<<<<<<< HEAD
 
   ingressos = {
     columns: {
@@ -83,8 +82,9 @@ export class TableService {
       data: {
         title: 'Data e Hora',
         type: 'string',
-      }
-=======
+      },
+    },
+  };
   contasDepositoEdit = {
     columns: {
       nome: {
@@ -103,7 +103,6 @@ export class TableService {
         title: 'Tipo',
         type: 'string',
       },
->>>>>>> origin/master
     },
   };
 
@@ -132,13 +131,12 @@ export class TableService {
         column = this.categoriasEdit;
         break;
       }
-<<<<<<< HEAD
       case 'ingressos': {
         column = this.ingressos;
-=======
+        break;
+      }
       case 'contasDepositoEdit': {
         column = this.contasDepositoEdit;
->>>>>>> origin/master
         break;
       }
     }
