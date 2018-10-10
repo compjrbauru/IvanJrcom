@@ -1,9 +1,10 @@
 <ngx-table
-[dataAsync]="eventoAsync"
-[dataIdAsync]="eventoIdAsync"
-[cat$]="catID$"
-(editE)="resolver($event)"
->
+  [dataAsync]="eventoAsync"
+  [dataIdAsync]="eventoIdAsync"
+  [cat$]="catID$"
+  (editE)="resolver($event)"
+  columns='evento'
+  [titulo]="'Tabela de Eventos'">
 </ngx-table>
 <nb-card *ngIf="eventoResolver">
     <nb-card-header>Gerar Ingressos Físicos</nb-card-header>

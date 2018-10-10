@@ -20,6 +20,9 @@ export class FormIngressosComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.formIngressos = this.formBuilder.group({
+      id: [''],
+      data: [''],
+      ingressos: [''],
       idEvento: [''],
       nomeEvento: [''],
       numeroIngressos: this.formBuilder.group({
@@ -47,6 +50,9 @@ export class FormIngressosComponent implements OnInit, OnChanges {
 
   patchNome(resolvedEvento: any = []) {
     this.formIngressos.patchValue( {
+      id: '',
+      data: '',
+      ingressos: '',
       nomeEvento: resolvedEvento.nome,
       idEvento: resolvedEvento.id,
       numeroIngressos: {

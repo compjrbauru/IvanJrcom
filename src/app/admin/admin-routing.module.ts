@@ -18,17 +18,16 @@ const routes: Routes = [
         loadChildren: './events/events.module#EventsModule',
       },
       {
-<<<<<<< HEAD
         path: 'ingressos-fisicos',
         loadChildren: './ingressos-fisicos/ingressos-fisicos.module#IngressosFisicosModule',
-=======
+      },
+      {
         path: 'categorias',
         loadChildren: './categorias/categorias.module#CategoriasModule',
       },
       {
         path: 'edicao-home',
         loadChildren: './edicao-home/edicao-home.module#EdicaoHomeModule',
->>>>>>> origin/master
       },
       {
         path: '**',

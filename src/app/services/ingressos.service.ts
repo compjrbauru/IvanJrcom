@@ -18,4 +18,27 @@ export class IngressosService {
       }
     
 
+    private resolveIngressos(evento: any){
+
+      var ingressos = new Array<Object>();
+      var j = 0;
+      for(var key in evento.numeroIngressos){
+        for(var i=0; i<evento.numeroIngressos[key]; i++){
+          ingressos.push({
+            id: this.db.createId(),
+            tipo: key,
+            valor: evento.valor[key],
+          });
+        }
+      }
+      return ingressos;
+    }
+
+    addData(evento: any) {
+        evento.id = this.db.createId();
+        evento.ingressos = this.resolveIngressos(evento);
+        this.IngressosFisicosCollection.doc(evento.id).set({
+          ...evento,
+        });
+      }
 }

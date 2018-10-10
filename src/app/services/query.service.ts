@@ -50,7 +50,7 @@ export class QueryService {
     const queryObservable = cat$.pipe(
       switchMap(cat =>
         this.db
-          .collection('/IngressosFisicos', ref => ref.where('id', '==', cat))
+          .collection('/IngressosFisicos', ref => ref.where('idEvento', '==', cat))
           .valueChanges(),
       ),
     );

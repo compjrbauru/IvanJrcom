@@ -26,13 +26,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-<<<<<<< HEAD
     title: 'Ingressos Físicos',
     icon: 'fa fa-ticket',
     children: [
       {
-      title: 'Gerar Ingressos Físicos',
-      link: '/admin/ingressos-fisicos/gerar-ingressos-fisicos',
+        title: 'Gerar Ingressos Físicos',
+        link: '/admin/ingressos-fisicos/gerar-ingressos-fisicos',
       },
       {
         title: 'Ingressos Gerados',
@@ -40,7 +39,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-=======
+  {
     title: 'Categorias',
     icon: 'nb-tables',
     children: [
@@ -59,5 +58,4 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/admin/edicao-home',
     icon: 'nb-home',
   },
->>>>>>> origin/master
 ];

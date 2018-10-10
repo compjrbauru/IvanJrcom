@@ -1,8 +1,20 @@
 <ngx-table
-[dataAsync]="eventoAsync"
-[dataIdAsync]="eventoIdAsync"
-[cat$]="catID$"
-[tipo]="tipo"
-(editE)="resolver($event)"
->
+  [dataAsync]="eventoAsync"
+  [dataIdAsync]="eventoIdAsync"
+  [cat$]="catID$"
+  (editE)="resolver($event)"
+  columns='ingressos'
+  [titulo]="'Tabela de Ingressos Gerados'"
+  [tipoId]="'idEvento'">
 </ngx-table>
+
+<nb-card *ngIf="eventoResolver">
+    <nb-card-header>Gerar novamente os ingressos do evento: {{eventoResolver.nomeEvento}} </nb-card-header>
+    <nb-card-body>
+        <ngx-ingressos-pdf [ingresso]="eventoResolver"></ngx-ingressos-pdf>
+    </nb-card-body>
+</nb-card>
+
+
+
+

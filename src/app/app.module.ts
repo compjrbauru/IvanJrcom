@@ -64,11 +64,8 @@ import { IngressosService } from './services/ingressos.service';
     NotificacaoService,
     ThemeService,
     AuthService,
-<<<<<<< HEAD
     IngressosService,
-=======
     CanDeactivateGuard,
->>>>>>> origin/master
   ],
 })
 export class AppModule {}

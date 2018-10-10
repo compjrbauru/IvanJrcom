@@ -14,9 +14,8 @@ export class IngressosGeradosComponent implements OnInit {
   form: any = {};
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
-  eventoResolver: any = [];
+  eventoResolver: any = null;
   catID$ = new Subject<string>();
-  tipo: string = "ingressos";
 
   constructor(
     private ingressosService: IngressosService,
