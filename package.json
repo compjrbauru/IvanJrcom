@@ -51,7 +51,11 @@
     "@nebular/security": "2.0.0-rc.9",
     "@nebular/theme": "2.0.0-rc.9",
     "@ng-bootstrap/ng-bootstrap": "1.0.0",
+<<<<<<< HEAD
     "@ngx-pwa/local-storage": "^6.1.1",
+=======
+    "@ngx-pwa/local-storage": "^6.1.0",
+>>>>>>> master
     "@swimlane/ngx-charts": "7.0.1",
     "@types/html2canvas": "0.0.34",
     "@types/jspdf": "^1.1.31",

@@ -84,7 +84,34 @@
                         <option value="Inicio">Inicio</option>
                     </select>
                 </div>
+<<<<<<< HEAD
 
+=======
+                <br>
+                <br>
+                <div formGroupName="pagamento">
+                    <label>Meios de pagamento: </label>
+                    <div class="form-group validation-checkboxes row">
+                        <nb-checkbox status="success" formControlName="boleto" class="col-sm-3 text-center">Boleto</nb-checkbox>
+                        <nb-checkbox status="success" formControlName="credito" class="col-sm-3 text-center">Cartão de
+                            Crédito</nb-checkbox>
+                        <nb-checkbox status="success" formControlName="deposito" class="col-sm-3 text-center">Depósito</nb-checkbox>
+                        <nb-checkbox status="success" formControlName="fisica" class="col-sm-3 text-center">Venda
+                            Física</nb-checkbox>
+                    </div>
+                    <div *ngIf="formEvent.get('pagamento').get('deposito').value">
+                        <br>
+                        <br>
+                        <label>Conta para depósito</label>
+                        <div class="col-sm-12 input-group">
+                            <select formControlName="contaDeposito" class="form-control">
+                                <option value="">Escolha uma conta</option>
+                                <option *ngFor="let contaDeposito of contasDeposito" [value]="contaDeposito.id">{{contaDeposito.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> master
             </div>
         </form>
     </div>
