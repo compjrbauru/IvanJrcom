@@ -18,7 +18,7 @@
           <div class="row">
             <i class="fa fa-asterisk"></i>
             <p style="padding-left: 5px">{{evento?.categoria}}</p>
-          </div> 
+          </div>
         </div>
     </div>
   </nb-card-header>
@@ -31,12 +31,12 @@
             <div>
               <i class="fa fa-bars fa-2x"></i>
             </div>
-            <h4 style="padding-left: 5px">Descricao do evento?</h4> 
+            <h4 style="padding-left: 5px">Descrição do evento</h4>
           </div>
           <p>{{evento?.descricao}}</p>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="header row">
             <div><i class="fa fa-ticket fa-2x"></i></div>
@@ -110,10 +110,11 @@
                 </div>
                 <h5 style="padding-left: 10px; padding-right: 10px">{{preco}} R$</h5>
               </div>
-              
-            </div>
 
-            
+            </div>
+            <div>
+              <button type="button" class="btn btn-success" (click)="comprar()" >Compre</button>
+            </div>
           </div>
       </div>
    </div>

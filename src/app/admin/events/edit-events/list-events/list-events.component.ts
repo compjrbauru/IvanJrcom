@@ -8,6 +8,10 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
 import { UploadFileComponent } from '../../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from '../../../../services/categoria.service';
+<<<<<<< HEAD
+=======
+import { DepositoService } from '../../../../services/deposito.service';
+>>>>>>> origin/master
 import { MapComponent } from './../../../../@core/components/map/map.component';
 import { EventoService } from './../../../../services/evento.service';
 import { QueryService } from './../../../../services/query.service';
@@ -20,6 +24,7 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   form: any = {};
   categorias: any;
   categoria: any;
+  contasDeposito: any;
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
@@ -29,6 +34,10 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   @ViewChild(MapComponent)
   private map: MapComponent;
   private unsubscribeCategoria: Subject<void> = new Subject();
+<<<<<<< HEAD
+=======
+  private unsubscribeContasDeposito: Subject<void> = new Subject();
+>>>>>>> origin/master
   categoriaSelected: any = {};
 
   constructor(
@@ -36,7 +45,12 @@ export class ListEventsComponent implements OnInit, OnDestroy {
     private queryService: QueryService,
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
+<<<<<<< HEAD
   ) {}
+=======
+    private depositoservice: DepositoService,
+  ) { }
+>>>>>>> origin/master
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
@@ -48,6 +62,21 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       .subscribe(categorias => {
         this.categorias = categorias;
       });
+<<<<<<< HEAD
+=======
+    this.depositoservice
+      .getContaDeposito()
+      .pipe(takeUntil(this.unsubscribeContasDeposito))
+      .subscribe(contasDeposito => {
+        this.contasDeposito = contasDeposito;
+      });
+    this.depositoservice
+      .getContaDeposito()
+      .pipe(takeUntil(this.unsubscribeContasDeposito))
+      .subscribe(contasDeposito => {
+        this.contasDeposito = contasDeposito;
+      });
+>>>>>>> origin/master
   }
 
   resolver(event) {
@@ -91,7 +120,11 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       return dialogRef.afterClosed().pipe(
         tap(res => {
           if (res === true) {
+<<<<<<< HEAD
             this.queryService.deleteImage(this.form['formEvent'].value.pathurl);
+=======
+            this.queryService.deleteImage(this.form['formEvent'].value.pathurl).subscribe();
+>>>>>>> origin/master
           }
         }),
       );
@@ -106,13 +139,30 @@ export class ListEventsComponent implements OnInit, OnDestroy {
         [this.categoria] = categoria;
         this.categoriaService.patchDeleteEventCategoria(this.categoria, form);
         this.eventoService.removeData(form.id);
+<<<<<<< HEAD
         this.queryService.deleteImage(form.pathurl);
+=======
+        if (
+          this.form['formEvent'].value.pathurl !== '' &&
+          this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
+        ) {
+          this.queryService.deleteImage(form.pathurl).subscribe();
+          this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+        } else {
+          this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+        }
+>>>>>>> origin/master
       });
   }
 
   ngOnDestroy() {
     this.unsubscribeCategoria.next();
     this.unsubscribeCategoria.complete();
+<<<<<<< HEAD
+=======
+    this.unsubscribeContasDeposito.next();
+    this.unsubscribeContasDeposito.complete();
+>>>>>>> origin/master
   }
 
   mapUpdate(event: any) {

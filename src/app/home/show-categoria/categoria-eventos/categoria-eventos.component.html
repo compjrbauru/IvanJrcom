@@ -1,0 +1,8 @@
+<div *ngFor="let evento of eventosAsync | async">
+  <ngx-show-evento [evento]="evento">
+  </ngx-show-evento>
+</div>
+<div>
+  <ngx-paginacao [limit]="5" (eventosEmit)="eventos=$event">
+  </ngx-paginacao>
+</div>

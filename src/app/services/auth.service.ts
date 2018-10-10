@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { LocalStorage } from '@ngx-pwa/local-storage';
+>>>>>>> origin/master
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
@@ -6,7 +10,14 @@ import { auth } from 'firebase/app';
 export class AuthService {
   token: string;
 
+<<<<<<< HEAD
   constructor(private firebaseAuth: AngularFireAuth) {}
+=======
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    public localStorage: LocalStorage,
+  ) {}
+>>>>>>> origin/master
 
   signInWithEmail(email, password) {
     return this.firebaseAuth.auth
@@ -85,6 +96,7 @@ export class AuthService {
           const user = res.user;
           const info = res.additionalUserInfo;
           const profile: any = info.profile;
+<<<<<<< HEAD
 
           if (info.isNewUser) {
             const userdata = {
@@ -105,5 +117,35 @@ export class AuthService {
           return error.code;
         },
       );
+=======
+
+          if (info.isNewUser) {
+            const userdata = {
+              // Dados recebidos do Facebook
+              nome: profile.first_name,
+              sobrenome: profile.last_name,
+              email: profile.email,
+              id: user.uid,
+              registroCompleto: false,
+            };
+            return userdata;
+          } else {
+            this.getToken();
+            return 'sucesso';
+          }
+        },
+        error => {
+          return error.code;
+        },
+      );
+  }
+
+  setLocal(user: any) {
+    return this.localStorage.setItemSubscribe('user', user);
+  }
+
+  getResolvedUser() {
+    return this.localStorage.getItem('user');
+>>>>>>> origin/master
   }
 }

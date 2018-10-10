@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: PageEventoComponent,
   },
+  {
+    path: 'comprar',
+    loadChildren: './pagamento/pagamento.module#PagamentoModule',
+  },
   { path: '**', redirectTo: '' },
 ];
 

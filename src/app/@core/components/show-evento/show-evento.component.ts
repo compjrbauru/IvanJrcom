@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NbThemeService } from '@nebular/theme';
 
 
 @Component({
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ShowEventoComponent implements OnInit {
   @Input() evento: any;
+  cosmic: boolean;
 
-  constructor() { }
+  constructor(private themeService: NbThemeService) {}
 
   ngOnInit() {
+    'cosmic' === this.themeService.currentTheme
+      ? (this.cosmic = true)
+      : (this.cosmic = false);
   }
 }

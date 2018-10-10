@@ -18,14 +18,24 @@ const routes: Routes = [
         loadChildren: './events/events.module#EventsModule',
       },
       {
+<<<<<<< HEAD
         path: 'ingressos-fisicos',
         loadChildren: './ingressos-fisicos/ingressos-fisicos.module#IngressosFisicosModule',
       },
       {
+=======
+>>>>>>> origin/master
         path: 'categorias',
         loadChildren: './categorias/categorias.module#CategoriasModule',
       },
       {
+<<<<<<< HEAD
+=======
+        path: 'deposito',
+        loadChildren: './deposito/deposito.module#DepositoModule',
+      },
+      {
+>>>>>>> origin/master
         path: 'edicao-home',
         loadChildren: './edicao-home/edicao-home.module#EdicaoHomeModule',
       },

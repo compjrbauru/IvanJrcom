@@ -1,6 +1,7 @@
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { EventoService } from '../../services/evento.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-page-evento',
@@ -17,7 +18,7 @@ export class PageEventoComponent implements OnInit, OnDestroy {
     masculino: number,
     unisex: number,
   };
-  preco: any;
+  preco: number = 0;
 
   minus(type: string) {
     if (this.qty[type] > 0) {
@@ -31,7 +32,12 @@ export class PageEventoComponent implements OnInit, OnDestroy {
     this.preco += +this.evento.ingressos[type].valor;
   }
 
-  constructor(private route: ActivatedRoute, private eventoService: EventoService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private eventoService: EventoService,
+    private localStorage: LocalStorage,
+    ) { }
 
   ngOnInit() {
     this.qty = {
@@ -51,6 +57,13 @@ export class PageEventoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
     this.eventsub.unsubscribe();
+    this.localStorage.clear();
+  }
+
+  comprar(): void {
+     this.localStorage.setItemSubscribe('compra', { ...this.qty, preco: this.preco, id: this.evento.id });
+    // Posteriormente enviar forma de pagamento
+     this.router.navigate([`/home/evento/${this.evento.id}/comprar`]);
   }
 
 }

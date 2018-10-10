@@ -17,6 +17,10 @@ export class EventoService {
     return this.db.collection('/Evento', ref => ref.where('id', '==', id)).valueChanges();
   }
 
+  getCategoria(cat: any) {
+    return this.db.collection('/Evento', ref => ref.where('categoria', '==', cat)).valueChanges();
+  }
+
   getAll(): Observable<any> {
     return this.EventoCollection.valueChanges();
   }
@@ -27,6 +31,10 @@ export class EventoService {
 
   getCarousel(): Observable<any> {
     return this.db.collection(`Evento`, ref => ref.where('mostraHome', '==', 'Carousel')).valueChanges();
+  }
+
+  getcontasDepositoId(id: string): Observable<any> {
+    return this.db.collection(`Evento`, ref => ref.where('pagamento.contaDeposito', '==', id)).valueChanges();
   }
 
   getByNameWithLimit(limit: number): Observable<any> {
