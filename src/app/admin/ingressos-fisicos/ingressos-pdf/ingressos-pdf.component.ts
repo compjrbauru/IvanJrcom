@@ -69,13 +69,13 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
         elementsY+=10;
         pdf.text(this.evento.nome, 105, elementsY, 'center');
         elementsY+=8;
-        pdf.text(formatDate((this.evento.data.seconds * 1000),'d MMM, y - HH:mm','pt-BR'), 105, elementsY, 'center');
+        pdf.text(formatDate((this.evento.data.seconds * 1000),'d MMM, y - HH:mm','en-US'), 105, elementsY, 'center');
         pdf.addImage(res,'PNG', 160, elementsY-5, 35, 35);
         pdf.setFontStyle("normal");
         pdf.setFontSize(15);
         elementsY+=15;
         pdf.text("Tipo: "+i.tipo, 12, elementsY);
-        pdf.text("Valor: "+i.valor.toString(), 12, elementsY+8);
+        pdf.text("Valor: "+i.valor.toString()+" R$", 12, elementsY+8);
         elementsY+=20;
         pdf.text(this.evento.id, 198, elementsY, 'right');
         elementsY = borderY;

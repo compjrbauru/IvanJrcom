@@ -25,6 +25,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  
+  {
+    title: 'Ingressos Físicos',
+    icon: 'fa fa-ticket',
+    children: [
+      {
+      title: 'Gerar Ingressos Físicos',
+      link: '/admin/ingressos-fisicos/gerar-ingressos-fisicos',
+      },
+      {
+        title: 'Ingressos Gerados',
+        link: '/admin/ingressos-fisicos/ingressos-gerados',
+      },
+    ],
+  },
+
   {
     title: 'Categorias',
     icon: 'nb-tables',
