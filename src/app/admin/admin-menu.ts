@@ -25,7 +25,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  
+
   {
     title: 'Ingressos Físicos',
     icon: 'fa fa-ticket',

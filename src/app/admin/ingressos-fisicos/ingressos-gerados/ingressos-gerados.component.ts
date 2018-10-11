@@ -1,5 +1,4 @@
 import { QueryService } from './../../../services/query.service';
-import { EventoService } from './../../../services/evento.service';
 import { Observable, Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IngressosService } from '../../../services/ingressos.service';

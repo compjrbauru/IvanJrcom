@@ -1,7 +1,7 @@
 import { IngressosService } from './../../services/ingressos.service';
 import { EventoService } from './../../services/evento.service';
 import { QueryService } from './../../services/query.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
@@ -36,16 +36,16 @@ export class IngressosFisicosComponent implements OnInit {
     this.eventoResolver = event ? event[0] : null;
   }
 
-  resolveData(time: Date){
-    return  ('0' + time.getDate()).slice(-2)+"/"
-    +('0' + (time.getMonth() + 1)).slice(-2)+"/"
-    +time.getFullYear()+"-"
-    +('0' + time.getHours()).slice(-2)+":"
-    +('0' + time.getMinutes()).slice(-2)+":"
-    +('0' + time.getSeconds()).slice(-2);
+  resolveData(time: Date) {
+    return  ('0' + time.getDate()).slice(-2) + '/'
+    + ('0' + (time.getMonth() + 1)).slice(-2) + '/'
+    + time.getFullYear() + '-'
+    + ('0' + time.getHours()).slice(-2) + ':'
+    + ('0' + time.getMinutes()).slice(-2) + ':'
+    + ('0' + time.getSeconds()).slice(-2);
   }
 
-  resolveHTML(event: any){
+  resolveHTML(event: any) {
     this.resolvedHTML = event;
   }
 

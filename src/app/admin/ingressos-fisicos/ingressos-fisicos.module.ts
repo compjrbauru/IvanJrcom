@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
 import { IngressosGeradosModule } from './ingressos-gerados/ingressos-gerados.module';
 
 @NgModule({
-    imports: 
+    imports:
     [
       IngressosFisicosRoutingModule,
       TableModule,

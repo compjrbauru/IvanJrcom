@@ -75,7 +75,7 @@ export class TableService {
 
   ingressos = {
     columns: {
-      nomeEvento:{
+      nomeEvento: {
         title: 'Nome do Evento',
         type: 'string',
       },

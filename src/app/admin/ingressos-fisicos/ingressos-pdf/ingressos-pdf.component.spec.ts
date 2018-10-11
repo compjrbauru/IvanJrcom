@@ -11,7 +11,7 @@ describe('IngressosPdfComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IngressosPdfComponent ]
+      declarations: [ IngressosPdfComponent ],
     })
     .compileComponents();
   }));
