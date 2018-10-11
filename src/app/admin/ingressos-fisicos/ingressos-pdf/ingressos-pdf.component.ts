@@ -3,7 +3,6 @@ import { EventoService } from './../../../services/evento.service';
 import { OnInit, Input, OnChanges, SimpleChanges, Component } from '@angular/core';
 import * as jspdf from 'jspdf';
 import * as QRCode from 'qrcode';
-import { createElement } from '@angular/core/src/view/element';
 
 
 @Component({
@@ -51,11 +50,12 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
     let borderY = 0;
     let lastIndex = '';
 
-    for(let i in this.ingresso.ingressos) {
-      lastIndex = i;
+    for (const i in this.ingresso.ingressos) {
+      if (this.ingresso.ingressos.hasOwnProperty(i))
+        lastIndex = i;
     }
 
-    for(let i of this.ingresso.ingressos) {
+    for (const i of this.ingresso.ingressos) {
 
       this.gerarQRCode(i.id).then(res => {
         pdf.rect(0, borderY, 210, 59.4, 's');
@@ -76,12 +76,12 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
         elementsY += 20;
         pdf.text(this.evento.id, 198, elementsY, 'right');
         elementsY = borderY;
-        if(borderY === 297) {
+        if (borderY === 297) {
           pdf.addPage();
           elementsY = 0;
           borderY = 0;
         }
-        if(i.id === this.ingresso.ingressos[lastIndex].id)
+        if (i.id === this.ingresso.ingressos[lastIndex].id)
           pdf.save(this.evento.nome);
       });
     }

@@ -9,7 +9,7 @@ import { IngressosService } from '../../../services/ingressos.service';
   styleUrls: ['./ingressos-gerados.component.scss'],
 })
 export class IngressosGeradosComponent implements OnInit {
-  
+
   form: any = {};
   eventoAsync: Observable<any>;
   eventoIdAsync: Observable<any>;

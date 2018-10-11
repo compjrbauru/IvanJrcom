@@ -18,16 +18,17 @@ export class IngressosService {
 
     private resolveIngressos(evento: any) {
 
-      let ingressos = new Array<Object>();
+      const ingressos = new Array<Object>();
 
-      for(let key in evento.numeroIngressos){
-        for(let i=0; i<evento.numeroIngressos[key]; i++) {
-          ingressos.push( {
-            id: this.db.createId(),
-            tipo: key,
-            valor: evento.valor[key],
-          });
-        }
+      for (const key in evento.numeroIngressos) {
+        if (evento.numeroIngressos.hasOwnProperty(key)) {
+          for (let i = 0; i < evento.numeroIngressos[key]; i++) {
+            ingressos.push( {
+              id: this.db.createId(),
+              tipo: key,
+              valor: evento.valor[key],
+            });
+          }}
       }
       return ingressos;
     }
