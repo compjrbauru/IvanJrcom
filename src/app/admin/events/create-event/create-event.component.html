@@ -1,21 +1,21 @@
 <nb-card>
-    <nb-card-header>Criar Evento</nb-card-header>
-    <nb-card-body>
-      <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [contasDeposito]="contasDeposito"></ngx-form-evento>
-      <br>
-      <br>
-      <label>Enviar Imagem:</label>
-      <ngx-upload-file localName="Eventos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
-      <br>
-      <br>
-      <br>
-      <div>
-        <label>Local: {{this.form['formEvent'].controls['local'].value}} </label>
-      </div>
-      <ngx-map (mapEmitter)="mapUpdate($event)"></ngx-map>
-      <br>
-      <br>
-      <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary"
-        type="submit ">Criar</button>
-    </nb-card-body>
-  </nb-card>
+  <nb-card-header>Criar Evento</nb-card-header>
+  <nb-card-body>
+    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [contasDeposito]="contasDeposito"></ngx-form-evento>
+    <br>
+    <br>
+    <label>Enviar Imagem:</label>
+    <ngx-upload-file localName="Eventos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+    <br>
+    <br>
+    <br>
+    <div>
+      <label>Local: {{this.form['formEvent'].controls['local'].value}} </label>
+    </div>
+    <ngx-map (mapEmitter)="mapUpdate($event)"></ngx-map>
+    <br>
+    <br>
+    <button [disabled]="!form?.formEvent?.valid " (click)="submit(form[ 'formEvent']?.value) " class="btn btn-primary"
+      type="submit ">Criar</button>
+  </nb-card-body>
+</nb-card>

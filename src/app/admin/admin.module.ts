@@ -10,6 +10,6 @@ const ADMIN_COMPONENTS = [AdminComponent];
 
 @NgModule({
   imports: [AdminRoutingModule, ThemeModule, DataModule, TableModule],
-  declarations: [...ADMIN_COMPONENTS ],
+  declarations: [...ADMIN_COMPONENTS],
 })
 export class AdminModule { }
