@@ -20,9 +20,9 @@ export class IngressosService {
 
       const ingressos = new Array<Object>();
 
-      Object.keys(evento.numeroIngressos).map(x =>{
+      Object.keys(evento.numeroIngressos).map(x => {
         let i = 0;
-        while( i < evento.numeroIngressos[x]){
+        while ( i < evento.numeroIngressos[x] ) {
           ingressos.push( {
             id: this.db.createId(),
             tipo: x,

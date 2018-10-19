@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { formatDate } from '@angular/common';
-import { EventoService } from './../../../services/evento.service';
-import { OnInit, Input, SimpleChanges, Component } from '@angular/core';
+import { OnInit, Input, Component } from '@angular/core';
 import * as jspdf from 'jspdf';
 import * as QRCode from 'qrcode';
 import { from } from 'rxjs/internal/observable/from';
@@ -15,7 +14,7 @@ import { from } from 'rxjs/internal/observable/from';
 export class IngressosPdfComponent implements OnInit {
   @Input() ingresso: any;
 
-  constructor(private eventoService: EventoService) { }
+  constructor() { }
 
   ngOnInit() { }
 
@@ -54,7 +53,8 @@ export class IngressosPdfComponent implements OnInit {
         elementsY += 10;
         pdf.text(this.ingresso.nomeEvento, 105, elementsY, 'center');
         elementsY += 8;
-        pdf.text(formatDate((this.ingresso.dataEvento.seconds * 1000), 'd MMM, y - HH:mm', 'en-US'), 105, elementsY, 'center');
+        pdf.text(formatDate((this.ingresso.dataEvento.seconds * 1000), 'd MMM, y - HH:mm', 'en-US'),
+          105, elementsY, 'center');
         pdf.addImage(res, 'PNG', 160, elementsY - 5, 35, 35);
         pdf.setFontStyle('normal');
         pdf.setFontSize(15);
