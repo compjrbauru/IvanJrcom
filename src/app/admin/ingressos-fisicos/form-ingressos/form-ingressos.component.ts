@@ -22,6 +22,7 @@ export class FormIngressosComponent implements OnInit, OnChanges {
     this.formIngressos = this.formBuilder.group({
       id: [''],
       data: [''],
+      dataEvento: [''],
       ingressos: [''],
       idEvento: [''],
       nomeEvento: [''],
@@ -52,6 +53,7 @@ export class FormIngressosComponent implements OnInit, OnChanges {
     this.formIngressos.patchValue( {
       id: '',
       data: '',
+      dataEvento: resolvedEvento.data,
       ingressos: '',
       nomeEvento: resolvedEvento.nome,
       idEvento: resolvedEvento.id,

@@ -1,4 +1,4 @@
-<div *ngIf= "evento && ingresso">
+<div *ngIf= "ingresso">
 <div class="row">
   <div class="col-md-12">
     <nb-card>
@@ -6,9 +6,9 @@
         <div id="ingresso">
           <div class="row">
             <div class="col-md-12 text-center">
-              <h1 class="text-center">{{evento.nome | uppercase}}</h1>
+              <h1 class="text-center">{{ingresso.nomeEvento | uppercase}}</h1>
               <br>
-              <h1 class="text-center">{{evento.data.seconds * 1000 | date:'d MMM, y - HH:mm' | uppercase}}</h1>
+              <h1 class="text-center">{{ingresso.dataEvento.seconds * 1000 | date:'d MMM, y - HH:mm' | uppercase}}</h1>
             </div>
           </div>
           <br>
@@ -19,10 +19,10 @@
             </div>
             <div class="col-md-3 text-justify">
               <div class="qrcode">
-                <qrcode id="code" [qrdata]="evento.id" [size]="128" [level]="'M'"></qrcode>
+                <qrcode id="code" [qrdata]="ingresso.idEvento" [size]="128" [level]="'M'"></qrcode>
               </div>
               <br>
-              <p class="text-justify">{{evento.id}}</p>
+              <p class="text-justify">{{ingresso.idEvento}}</p>
             </div>
           </div>
           <hr/>

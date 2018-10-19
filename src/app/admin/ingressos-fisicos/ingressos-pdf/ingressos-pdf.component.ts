@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { formatDate } from '@angular/common';
 import { EventoService } from './../../../services/evento.service';
-import { OnInit, Input, OnChanges, SimpleChanges, Component } from '@angular/core';
+import { OnInit, Input, SimpleChanges, Component } from '@angular/core';
 import * as jspdf from 'jspdf';
 import * as QRCode from 'qrcode';
+import { from } from 'rxjs/internal/observable/from';
 
 
 @Component({
@@ -10,30 +12,16 @@ import * as QRCode from 'qrcode';
   templateUrl: './ingressos-pdf.component.html',
   styleUrls: ['./ingressos-pdf.component.scss'],
 })
-export class IngressosPdfComponent implements OnInit, OnChanges {
-  @Input() evento: any;
+export class IngressosPdfComponent implements OnInit {
   @Input() ingresso: any;
 
   constructor(private eventoService: EventoService) { }
 
-  ngOnInit() {
-    this.resolveEvento();
-   }
+  ngOnInit() { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.resolveEvento();
-  }
-
-  resolveEvento() {
-    const evento = this.eventoService.getID(this.ingresso.idEvento).subscribe(res => {
-      this.evento = res[0];
-      evento.unsubscribe();
-    });
-  }
-
-  async gerarQRCode(text: string): Promise<any> {
+   gerarQRCode(text: string): Observable<any> {
       try {
-        const url = await QRCode.toDataURL(text);
+        const url = from(QRCode.toDataURL(text));
         return url;
       } catch (err) {
         console.error(err);
@@ -57,16 +45,16 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
 
     for (const i of this.ingresso.ingressos) {
 
-      this.gerarQRCode(i.id).then(res => {
+        this.gerarQRCode(i.id).subscribe(res => {
         pdf.rect(0, borderY, 210, 59.4, 's');
         borderY += 59.4;
         pdf.setFont('Courier');
         pdf.setFontStyle('bold');
         pdf.setFontSize(20);
         elementsY += 10;
-        pdf.text(this.evento.nome, 105, elementsY, 'center');
+        pdf.text(this.ingresso.nomeEvento, 105, elementsY, 'center');
         elementsY += 8;
-        pdf.text(formatDate((this.evento.data.seconds * 1000), 'd MMM, y - HH:mm', 'en-US'), 105, elementsY, 'center');
+        pdf.text(formatDate((this.ingresso.dataEvento.seconds * 1000), 'd MMM, y - HH:mm', 'en-US'), 105, elementsY, 'center');
         pdf.addImage(res, 'PNG', 160, elementsY - 5, 35, 35);
         pdf.setFontStyle('normal');
         pdf.setFontSize(15);
@@ -74,7 +62,7 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
         pdf.text('Tipo: ' + i.tipo, 12, elementsY);
         pdf.text('Valor: ' + i.valor.toString() + ' R$', 12, elementsY + 8);
         elementsY += 20;
-        pdf.text(this.evento.id, 198, elementsY, 'right');
+        pdf.text(this.ingresso.idEvento, 198, elementsY, 'right');
         elementsY = borderY;
         if (borderY === 297) {
           pdf.addPage();
@@ -82,7 +70,7 @@ export class IngressosPdfComponent implements OnInit, OnChanges {
           borderY = 0;
         }
         if (i.id === this.ingresso.ingressos[lastIndex].id)
-          pdf.save(this.evento.nome);
+          pdf.save(this.ingresso.nomeEvento);
       });
     }
   }

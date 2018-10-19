@@ -20,16 +20,18 @@ export class IngressosService {
 
       const ingressos = new Array<Object>();
 
-      for (const key in evento.numeroIngressos) {
-        if (evento.numeroIngressos.hasOwnProperty(key)) {
-          for (let i = 0; i < evento.numeroIngressos[key]; i++) {
-            ingressos.push( {
-              id: this.db.createId(),
-              tipo: key,
-              valor: evento.valor[key],
-            });
-          }}
-      }
+      Object.keys(evento.numeroIngressos).map(x =>{
+        let i = 0;
+        while( i < evento.numeroIngressos[x]){
+          ingressos.push( {
+            id: this.db.createId(),
+            tipo: x,
+            valor: evento.valor[x],
+          });
+          i++;
+        }
+      });
+
       return ingressos;
     }
 
