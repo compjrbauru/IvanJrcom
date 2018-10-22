@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoriaService } from './services/categoria.service';
+import { CompraService } from './services/compra.service';
 import { DepositoService } from './services/deposito.service';
 import { EventoService } from './services/evento.service';
 import { NotificacaoService } from './services/notificacao.service';
@@ -68,6 +69,7 @@ import { UsuarioService } from './services/usuario.service';
     CanDeactivateGuard,
     DepositoService,
     UsuarioService,
+    CompraService,
   ],
 })
 export class AppModule { }

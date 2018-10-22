@@ -9,7 +9,6 @@ export class RouterHelper {
 
   static getValues(activatedRoute: ActivatedRoute, name: string): any {
     const resolvedData = activatedRoute.snapshot.data[name];
-    console.log(resolvedData);
     return resolvedData ? resolvedData : null;
   }
 
