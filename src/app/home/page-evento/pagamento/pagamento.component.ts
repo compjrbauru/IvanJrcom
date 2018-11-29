@@ -36,6 +36,8 @@ export class PagamentoComponent implements OnInit, OnDestroy {
       this.compra = response;
       this.localStorage.clear();
     });
+    console.log(this.compra);
+    console.log(this.userInfo);
   }
 
   ngOnDestroy() {
