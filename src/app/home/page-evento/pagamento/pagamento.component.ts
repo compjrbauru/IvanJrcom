@@ -4,9 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { RouterHelper } from '../../../@core/utils/helpers/router-helper';
-import { UsuarioService } from '../../../services/usuario.service';
 import { config } from './../../../config/config';
-import { AuthService } from './../../../services/auth.service';
 
 @Component({
   selector: 'ngx-pagamento',
@@ -21,8 +19,6 @@ export class PagamentoComponent implements OnInit, OnDestroy {
 
   constructor(
     private localStorage: LocalStorage,
-    private usuarioservice: UsuarioService,
-    private authservice: AuthService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
   ) { }
@@ -36,8 +32,6 @@ export class PagamentoComponent implements OnInit, OnDestroy {
       this.compra = response;
       this.localStorage.clear();
     });
-    console.log(this.compra);
-    console.log(this.userInfo);
   }
 
   ngOnDestroy() {

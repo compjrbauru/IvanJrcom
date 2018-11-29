@@ -112,12 +112,10 @@ export class AuthService {
   }
 
   setLocal(user: any) {
-    console.log(user);
     return this.localStorage.setItemSubscribe('user', user);
   }
 
   getResolvedUser() {
-    console.log(this.localStorage.getItem('user'));
     return this.localStorage.getItem('user');
   }
 }
