@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: PagamentoComponent,
-    resolve: { userInfo: UserResolverService }
+    resolve: { userInfo: UserResolverService },
   },
   { path: '**', redirectTo: '' },
 ];
