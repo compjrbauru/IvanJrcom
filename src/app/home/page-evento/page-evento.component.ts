@@ -58,12 +58,12 @@ export class PageEventoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
     this.eventsub.unsubscribe();
-    this.localStorage.clear();
   }
 
   comprar(): void {
     // tslint:disable-next-line:max-line-length
     this.localStorage.setItemSubscribe('compra', { ...this.qty, preco: this.preco, idevento: this.evento.id, nomeEvento: this.evento.nome });
+    this.localStorage.setItemSubscribe('eventoCompra', { ...this.evento });
     // Posteriormente enviar forma de pagamento
     this.router.navigate([`/home/evento/${this.evento.id}/comprar`]);
   }
