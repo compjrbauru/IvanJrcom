@@ -12,10 +12,6 @@ export class IngressosService {
 
     constructor(private db: AngularFirestore) { }
 
-    getAll(): Observable<any> {
-        return this.IngressosFisicosCollection.valueChanges();
-      }
-
     private resolveIngressos(evento: any) {
 
       const ingressos = new Array<Object>();
@@ -35,11 +31,11 @@ export class IngressosService {
       return ingressos;
     }
 
-    addData(evento: any) {
-        evento.id = this.db.createId();
-        evento.ingressos = this.resolveIngressos(evento);
-        this.IngressosFisicosCollection.doc(evento.id).set({
-          ...evento,
-        });
-      }
+    addData(ingressosFisicos: any) {
+      ingressosFisicos.id = this.db.createId();
+      ingressosFisicos.ingressos = this.resolveIngressos(ingressosFisicos);
+      this.IngressosFisicosCollection.doc(ingressosFisicos.id).set({
+        ...ingressosFisicos,
+      });
+    }
 }

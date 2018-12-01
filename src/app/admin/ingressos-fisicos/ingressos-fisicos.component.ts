@@ -45,13 +45,9 @@ export class IngressosFisicosComponent implements OnInit {
     + ('0' + time.getSeconds()).slice(-2);
   }
 
-  resolveHTML(event: any) {
-    this.resolvedHTML = event;
-  }
-
-  submit(form: any) {
-    form.data = this.resolveData(new Date());
-    this.ingressosService.addData(form);
+  submit(formValue: any) {
+    const newDate = this.resolveData(new Date());
+    this.ingressosService.addData({ ...formValue, data: newDate });
     alert('Ingressos gerados com sucesso!');
     this.form['formIngressos'].reset();
   }

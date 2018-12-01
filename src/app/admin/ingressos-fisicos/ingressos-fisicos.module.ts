@@ -5,7 +5,6 @@ import { TableModule } from './../table/table.module';
 import { IngressosFisicosRoutingModule } from './ingressos-fisicos-routing.module';
 import { IngressosFisicosComponent } from './ingressos-fisicos.component';
 import { NgModule } from '@angular/core';
-import { IngressosGeradosModule } from './ingressos-gerados/ingressos-gerados.module';
 
 @NgModule({
     imports:
@@ -14,7 +13,6 @@ import { IngressosGeradosModule } from './ingressos-gerados/ingressos-gerados.mo
       TableModule,
       ThemeModule,
       FormIngressosModule,
-      IngressosGeradosModule,
       IngressosPdfModule],
     declarations: [IngressosFisicosComponent],
   })
