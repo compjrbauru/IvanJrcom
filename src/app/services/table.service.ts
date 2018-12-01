@@ -72,6 +72,19 @@ export class TableService {
       },
     },
   };
+
+  ingressos = {
+    columns: {
+      nomeEvento: {
+        title: 'Nome do Evento',
+        type: 'string',
+      },
+      data: {
+        title: 'Data e Hora',
+        type: 'string',
+      },
+    },
+  };
   contasDepositoEdit = {
     columns: {
       nome: {
@@ -116,6 +129,10 @@ export class TableService {
       }
       case 'categoriasEdit': {
         column = this.categoriasEdit;
+        break;
+      }
+      case 'ingressos': {
+        column = this.ingressos;
         break;
       }
       case 'contasDepositoEdit': {

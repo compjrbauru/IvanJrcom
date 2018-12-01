@@ -18,6 +18,10 @@ const routes: Routes = [
         loadChildren: './events/events.module#EventsModule',
       },
       {
+        path: 'ingressos-fisicos',
+        loadChildren: './ingressos-fisicos/ingressos-fisicos.module#IngressosFisicosModule',
+      },
+      {
         path: 'categorias',
         loadChildren: './categorias/categorias.module#CategoriasModule',
       },

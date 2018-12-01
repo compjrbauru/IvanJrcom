@@ -46,6 +46,17 @@ export class QueryService {
     return queryObservable;
   }
 
+  ingressoIdAsync(cat$: Subject<any>) {
+    const queryObservable = cat$.pipe(
+      switchMap(cat =>
+        this.db
+          .collection('/IngressosFisicos', ref => ref.where('idEvento', '==', cat))
+          .valueChanges(),
+      ),
+    );
+    return queryObservable;
+  }
+
   eventoOrder(ord$: Subject<string>) {
     const queryObservable = ord$.pipe(
       switchMap(cat =>
