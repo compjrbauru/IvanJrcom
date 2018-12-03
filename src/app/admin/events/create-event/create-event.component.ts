@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { MapComponent } from '../../../@core/components/map/map.component';
 import { CanComponentDeactivate } from '../../../guards/can-deactivate-guard.service';
@@ -21,8 +21,8 @@ import { EventoService } from './../../../services/evento.service';
 export class CreateEventComponent
   implements OnInit, CanComponentDeactivate, OnDestroy {
   form: any = {};
-  categorias: any;
   contasDeposito: any;
+  dependencies: any;
   categoriaSelected: any = {};
   @ViewChild(MapComponent)
   private map: MapComponent;
@@ -40,18 +40,9 @@ export class CreateEventComponent
   ) { }
 
   ngOnInit() {
-    this.categoriaService
-      .getCategoria()
-      .pipe(takeUntil(this.unsubscribeCategoria))
-      .subscribe(categorias => {
-        this.categorias = categorias;
-      });
-    this.depositoservice
-      .getContaDeposito()
-      .pipe(takeUntil(this.unsubscribeContasDeposito))
-      .subscribe(contasDeposito => {
-        this.contasDeposito = contasDeposito;
-      });
+    const categoriaAsync = this.categoriaService.getCategoria();
+    const depositoAsync = this.depositoservice.getContaDeposito();
+    this.dependencies = { categoria: categoriaAsync, deposito: depositoAsync };
   }
 
   submit(form: any) {
@@ -59,7 +50,7 @@ export class CreateEventComponent
     form.nomeBusca = form.nome.toLowerCase();
     form.localBusca = form.local.toLowerCase();
     this.eventoService.addData(form);
-    this.categoriaService.patchCategoria(this.categorias, form);
+    this.categoriaService.patchCategoria(form);
 
     alert('Evento criado com sucesso!');
     this.upload.resetUpload();

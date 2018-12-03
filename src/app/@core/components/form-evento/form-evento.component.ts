@@ -8,9 +8,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 })
 export class FormEventoComponent implements OnInit, DoCheck {
   @Input()
-  categorias: any;
-  @Input()
-  contasDeposito: any;
+  dependencies: any;
   @Input()
   resolvedEvento: any = null;
   @Output()

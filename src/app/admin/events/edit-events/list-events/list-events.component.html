@@ -1,11 +1,17 @@
-<ngx-table [dataAsync]="eventoAsync" [dataIdAsync]="eventoIdAsync" [cat$]="catID$" (editE)="resolver($event)" columns='evento'
+<ngx-table 
+  [dataAsync]="eventoAsync" 
+  [cat$]="catID$" 
+  (editE)="resolver($event)" 
+  columns='evento'
   [titulo]="'Tabela de Eventos'">
 </ngx-table>
 
 <nb-card *ngIf="eventoResolver">
   <nb-card-header>Editar Evento</nb-card-header>
   <nb-card-body>
-    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [contasDeposito]="contasDeposito"
+    <ngx-form-evento 
+      (formEmitter)="form['formEvent']=$event" 
+      [dependencies]="dependencies" 
       [resolvedEvento]="eventoResolver ? eventoResolver : null">
     </ngx-form-evento>
     <ngx-upload-file localName="Eventos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>

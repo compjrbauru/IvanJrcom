@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 // tslint:disable-next-line:max-line-length
 import { ConfirmationModalComponent } from '../../../../@core/components/confirmation-modal/confirmation-modal.component';
@@ -17,21 +17,18 @@ import { QueryService } from './../../../../services/query.service';
   selector: 'ngx-list-events',
   templateUrl: './list-events.component.html',
 })
-export class ListEventsComponent implements OnInit, OnDestroy {
+export class ListEventsComponent implements OnInit {
   form: any = {};
   categorias: any;
   categoria: any;
-  contasDeposito: any;
   eventoAsync: Observable<any>;
-  eventoIdAsync: Observable<any>;
   eventoResolver: any = [];
   catID$ = new Subject<string>();
+  dependencies: any;
   @ViewChild(UploadFileComponent)
   private upload: UploadFileComponent;
   @ViewChild(MapComponent)
   private map: MapComponent;
-  private unsubscribeCategoria: Subject<void> = new Subject();
-  private unsubscribeContasDeposito: Subject<void> = new Subject();
   categoriaSelected: any = {};
 
   constructor(
@@ -45,25 +42,9 @@ export class ListEventsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
     this.catID$.next('');
-    this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
-    this.categoriaService
-      .getCategoria()
-      .pipe(takeUntil(this.unsubscribeCategoria))
-      .subscribe(categorias => {
-        this.categorias = categorias;
-      });
-    this.depositoservice
-      .getContaDeposito()
-      .pipe(takeUntil(this.unsubscribeContasDeposito))
-      .subscribe(contasDeposito => {
-        this.contasDeposito = contasDeposito;
-      });
-    this.depositoservice
-      .getContaDeposito()
-      .pipe(takeUntil(this.unsubscribeContasDeposito))
-      .subscribe(contasDeposito => {
-        this.contasDeposito = contasDeposito;
-      });
+    const categoriaAsync = this.categoriaService.getCategoria();
+    const depositoAsync = this.depositoservice.getContaDeposito();
+    this.dependencies = { categoria: categoriaAsync, deposito: depositoAsync };
   }
 
   resolver(event) {
@@ -78,13 +59,10 @@ export class ListEventsComponent implements OnInit, OnDestroy {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
     this.eventoService.patchData(form, this.eventoResolver.id);
-    this.categoriaService.patchEditCategoria(
-      this.categorias,
-      form,
-      this.eventoResolver,
-    );
+    this.categoriaService.patchEditCategoria(form, this.eventoResolver);
 
     alert('Evento editado com sucesso!');
+
     this.eventoResolver = [];
     this.form['formEvent'].reset();
     this.upload.resetUpload();
@@ -132,13 +110,6 @@ export class ListEventsComponent implements OnInit, OnDestroy {
           this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
         }
       });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribeCategoria.next();
-    this.unsubscribeCategoria.complete();
-    this.unsubscribeContasDeposito.next();
-    this.unsubscribeContasDeposito.complete();
   }
 
   mapUpdate(event: any) {
