@@ -7,7 +7,7 @@
     <ng2-smart-table
       [settings]="settings"
       [source]="source"
-      (rowSelect)="foundObject($event)"
+      (userRowSelect)="this.editE.emit($event.data)"
       (editConfirm)="emitConfirm($event)"
       >
     </ng2-smart-table>

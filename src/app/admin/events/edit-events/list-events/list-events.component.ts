@@ -48,7 +48,7 @@ export class ListEventsComponent implements OnInit {
   }
 
   resolver(event) {
-    this.eventoResolver = event ? event[0] : null;
+    this.eventoResolver = event;
   }
 
   submit(form: any) {
