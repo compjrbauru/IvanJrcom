@@ -20,21 +20,17 @@ import { TableService } from './../../services/table.service';
 
 export class TableComponent implements OnInit, OnDestroy {
   @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
-  @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
-  @Input() deleteData: any = [];
-  @Input() columns: string; // Determina colunas mostradas
   @Input() titulo: string; // Determina titulo da table
+  @Input() columns: string; // Determina colunas mostradas
   @Input() tipoId: string = 'id'; // Determina tipo do id a ser chamado
+  @Input() deleteData: any = [];
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
-  keysSettings: any = [];
   dataSync: any;
   source: LocalDataSource = new LocalDataSource();
   settings: any = [];
-  editEvento: boolean = false;
-  eventoResolved: any = [];
 
   constructor(private tableService: TableService) { }
 
@@ -59,20 +55,18 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
-    const eventData = find(this.dataSync, event.data); // Informacoes necessarias do evento
+  emitConfirm(event: any) { 
+    const eventData = find(this.dataSync, event.data);
     const resp = {
-      event, // Dados sobre a edicao
+      event,
       eventData,
     };
-    this.editConfirm.emit(resp); // Emite o evento para ser tratado no pai
+    this.editConfirm.emit(resp);
   }
 
   ngOnDestroy() {
     this.unsubscribeData.next();
     this.unsubscribeData.complete();
-    this.cat$.next();
-    this.cat$.complete();
   }
 
 }

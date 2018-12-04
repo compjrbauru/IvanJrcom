@@ -63,10 +63,9 @@ export class EventoService {
   }
 
   patchData(evento: any, id: string) {
-    return this.EventoCollection.doc(id).set({
-      ...evento,
-      id: id,
-    });
+    const patchEvento = { ...evento, id: id };
+    this.EventoCollection.doc(id).set(patchEvento);
+    return patchEvento;
   }
 
   removeData(id: any) {

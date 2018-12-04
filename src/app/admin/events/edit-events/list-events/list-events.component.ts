@@ -25,6 +25,7 @@ export class ListEventsComponent implements OnInit {
   eventoResolver: any = [];
   catID$ = new Subject<string>();
   dependencies: any;
+  update: any;
   @ViewChild(UploadFileComponent)
   private upload: UploadFileComponent;
   @ViewChild(MapComponent)
@@ -41,7 +42,6 @@ export class ListEventsComponent implements OnInit {
 
   ngOnInit() {
     this.eventoAsync = this.eventoService.getAll();
-    this.catID$.next('');
     const categoriaAsync = this.categoriaService.getCategoria();
     const depositoAsync = this.depositoservice.getContaDeposito();
     this.dependencies = { categoria: categoriaAsync, deposito: depositoAsync };
@@ -58,7 +58,7 @@ export class ListEventsComponent implements OnInit {
     if (form.pathurl !== this.eventoResolver.pathurl) {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
-    this.eventoService.patchData(form, this.eventoResolver.id);
+    this.update = this.eventoService.patchData(form, this.eventoResolver.id);
     this.categoriaService.patchEditCategoria(form, this.eventoResolver);
 
     alert('Evento editado com sucesso!');
