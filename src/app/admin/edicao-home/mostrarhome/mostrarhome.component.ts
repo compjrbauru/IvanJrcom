@@ -12,8 +12,6 @@ import { NotificacaoService } from '../../../services/notificacao.service';
 })
 export class MostrarhomeComponent implements OnInit {
   eventos: Observable<any>;
-  catID$ = new Subject<string>();
-  eventoIdAsync: Observable<any>;
 
   constructor(
     private eventoService: EventoService,
@@ -23,8 +21,6 @@ export class MostrarhomeComponent implements OnInit {
 
   ngOnInit() {
     this.eventos = this.eventoService.getAll();
-    this.catID$.next('');
-    this.eventoIdAsync = this.queryService.eventoIdAsync(this.catID$);
   }
 
   editmostrarhome(data) {

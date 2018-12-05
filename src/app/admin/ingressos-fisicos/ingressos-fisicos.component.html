@@ -1,7 +1,5 @@
 <ngx-table
   [dataAsync]="eventoAsync"
-  [dataIdAsync]="eventoIdAsync"
-  [cat$]="catID$"
   (editE)="resolver($event)"
   columns='evento'
   [titulo]="'Tabela de Eventos'">

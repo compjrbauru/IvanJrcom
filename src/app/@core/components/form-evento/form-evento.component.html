@@ -9,7 +9,7 @@
                     <div class="col-sm-4">
                         <select formControlName="categoria" class="form-control">
                             <option [ngValue]="null">Selecionar categoria</option>
-                            <option *ngFor="let categoria of dependencies.categoria | async" [ngValue]="categoria.nome">
+                            <option *ngFor="let categoria of dependencies.categoria | async" [ngValue]="categoria.id">
                                 {{categoria.nome}}
                             </option>
                         </select>

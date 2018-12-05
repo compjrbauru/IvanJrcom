@@ -10,8 +10,6 @@ import { CategoriaService } from '../../../services/categoria.service';
 })
 export class EdicaoCategoriasComponent implements OnInit {
   categorias: Observable<any>;
-  catID$ = new Subject<string>();
-  categoriasID: Observable<any>;
 
   constructor(
     private categoriaService: CategoriaService,
@@ -20,8 +18,6 @@ export class EdicaoCategoriasComponent implements OnInit {
 
   ngOnInit() {
     this.categorias = this.categoriaService.getCategoria();
-    this.catID$ = new Subject<string>();
-    this.categoriasID = this.categoriaService.getCategoriaID(this.catID$);
   }
 
   editcategoria(data) {
@@ -32,7 +28,7 @@ export class EdicaoCategoriasComponent implements OnInit {
     categoria.nome = nome;
     const res = old === 'true' || old === true ? true : false;
     categoria.showhome = res;
-    this.categoriaService.editCategoria(categoria).then(ok => {
+    this.categoriaService.patchCategoriaEvento(categoria).then(ok => {
       this.notificao.ngxtoaster('Categoria', 'Categoria editada com sucesso!', true);
     }).catch(fail => {
       this.notificao.ngxtoaster('Categoria', 'Categoria editada com sucesso!', true);
