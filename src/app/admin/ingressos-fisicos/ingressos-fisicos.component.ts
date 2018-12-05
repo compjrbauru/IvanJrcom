@@ -1,9 +1,8 @@
 import { IngressosService } from './../../services/ingressos.service';
 import { EventoService } from './../../services/evento.service';
-import { QueryService } from './../../services/query.service';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import { NotificacaoService } from '../../services/notificacao.service';
 
 
 @Component({
@@ -20,8 +19,8 @@ export class IngressosFisicosComponent implements OnInit {
 
   constructor(
     private eventoService: EventoService,
-    private queryService: QueryService,
     private ingressosService: IngressosService,
+    private notific: NotificacaoService,
   ) { }
 
   ngOnInit() {
@@ -44,7 +43,7 @@ export class IngressosFisicosComponent implements OnInit {
   submit(formValue: any) {
     const newDate = this.resolveData(new Date());
     this.ingressosService.addData({ ...formValue, data: newDate });
-    alert('Ingressos gerados com sucesso!');
+    this.notific.ngxtoaster('Aviso', 'Ingressos gerados com sucesso.', true);
     this.form['formIngressos'].reset();
   }
 

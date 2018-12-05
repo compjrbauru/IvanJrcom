@@ -38,6 +38,7 @@ export class ListEventsComponent implements OnInit {
     private categoriaService: CategoriaService,
     public dialog: MatDialog,
     private depositoservice: DepositoService,
+    private notificacaoService: NotificacaoService,
   ) { }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class ListEventsComponent implements OnInit {
     this.update = this.eventoService.patchData(form, this.eventoResolver.id);
     this.categoriaService.patchEditCategoria(form, this.eventoResolver);
 
-    alert('Evento editado com sucesso!');
+    this.notificacaoService.ngxtoaster('Aviso', 'Evento editado com sucesso!', true);
 
     this.eventoResolver = [];
     this.form['formEvent'].reset();

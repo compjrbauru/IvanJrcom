@@ -12,6 +12,7 @@ import { ConfirmationModalComponent } from './../../../@core/components/confirma
 import { UploadFileComponent } from './../../../@core/components/upload-file/upload-file.component';
 import { CategoriaService } from './../../../services/categoria.service';
 import { EventoService } from './../../../services/evento.service';
+import { NotificacaoService } from '../../../services/notificacao.service';
 
 @Component({
   selector: 'ngx-create-event',
@@ -37,6 +38,7 @@ export class CreateEventComponent
     private dialog: MatDialog,
     private queryservice: QueryService,
     private depositoservice: DepositoService,
+    private notificacaoService: NotificacaoService,
   ) { }
 
   ngOnInit() {
@@ -52,7 +54,7 @@ export class CreateEventComponent
     this.eventoService.addData(form);
     this.categoriaService.patchCategoria(form);
 
-    alert('Evento criado com sucesso!');
+    this.notificacaoService.ngxtoaster('Aviso', 'Evento criado com sucesso!', true);
     this.upload.resetUpload();
     this.map.resetMap();
     this.form['formEvent'].reset();
