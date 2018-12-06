@@ -93,6 +93,7 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithEmail(form.email, form.password).then(res => {
       if (res === 'sucesso') {
         this.notificacao.ngxtoaster('Login', 'Realizado com Sucesso!', true);
+        this.menu.push(this.conta);
         this.getUserData().subscribe(userData => {
           this.authService.setLocal(userData[0]);
         });

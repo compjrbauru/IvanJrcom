@@ -19,17 +19,20 @@ export class PageEventoComponent implements OnInit, OnDestroy {
     masculino: number,
     unisex: number,
   };
+  qtyTotal: number = 0;
   preco: number = 0;
 
   minus(type: string) {
     if (this.qty[type] > 0) {
       this.preco -= +this.evento.ingressos[type].valor;
       this.qty[type]--;
+      this.qtyTotal--;
     }
   }
 
   plus(type: string) {
     this.qty[type]++;
+    this.qtyTotal++;
     this.preco += +this.evento.ingressos[type].valor;
   }
 
@@ -62,8 +65,12 @@ export class PageEventoComponent implements OnInit, OnDestroy {
 
   comprar(): void {
     // tslint:disable-next-line:max-line-length
-    this.localStorage.setItemSubscribe('compra', { ...this.qty, preco: this.preco, idevento: this.evento.id, nomeEvento: this.evento.nome });
-    this.localStorage.setItemSubscribe('eventoCompra', { ...this.evento });
+    this.localStorage.setItemSubscribe('compra', {
+      ingressos: this.qty,
+      valorTotal: this.preco,
+      evento: this.evento,
+      ingressosTotal: this.qtyTotal,
+    });
     // Posteriormente enviar forma de pagamento
     this.router.navigate([`/home/evento/${this.evento.id}/comprar`]);
   }

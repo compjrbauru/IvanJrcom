@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorage } from '@ngx-pwa/local-storage';
 
 import { CompraService } from './../../../../services/compra.service';
 import { EventoService } from './../../../../services/evento.service';
+import { IngressoService } from './../../../../services/ingresso.service';
 import { NotificacaoService } from './../../../../services/notificacao.service';
 
 @Component({
@@ -24,25 +24,29 @@ export class DepositoConfirmationComponent implements OnInit {
     private compraservice: CompraService,
     private notific: NotificacaoService,
     private route: Router,
-    private localStorage: LocalStorage,
     private eventoservice: EventoService,
+    private ingressoService: IngressoService,
   ) { }
 
   ngOnInit() {
   }
 
   compraDeposito() {
+    const { ingressos: ingressos, evento: evento, ingressosTotal: ingressosTotal, ...valorTotal } = this.compraInfo;
+    const idIngressos = this.ingressoService.addIngressos(ingressos, evento);
+    for (const tipoIngresso of Object.keys(ingressos)) {
+      evento.ingressos[tipoIngresso].disponiveis = evento.ingressos[tipoIngresso].disponiveis - ingressos[tipoIngresso];
+    }
+    evento.ingressos.lote.disponiveis = evento.ingressos.lote.disponiveis - ingressosTotal;
+    this.eventoservice.patchData(evento, evento.id);
     const compra = {
       userid: this.userInfo.id,
-      ...this.compraInfo,
+      idEvento: evento.id,
+      nomeEvento: evento.nome,
+      idIngressos: idIngressos,
       compraVerificada: false,
-    };
-    this.localStorage.getItem('eventoCompra').subscribe(res => {
-      res.ingressos.masculino.disponiveis = res.ingressos.masculino.disponiveis - this.compraInfo.masculino;
-      res.ingressos.feminino.disponiveis = res.ingressos.feminino.disponiveis - this.compraInfo.feminino;
-      res.ingressos.unisex.disponiveis = res.ingressos.unisex.disponiveis - this.compraInfo.unisex;
-      this.eventoservice.patchData(res, res.id);
-    });
+      ...valorTotal,
+    }
     this.compraservice.addCompra(compra);
     this.notific.ngxtoaster(
       'Compra realizada com sucesso!',
@@ -53,10 +57,3 @@ export class DepositoConfirmationComponent implements OnInit {
   }
 
 }
-
-    /*    this.eventoservice.getID(this.compraInfo.idevento).pipe(map(res => res = res[0])).subscribe((res: any) => {
-         res.ingressos.masculino.disponiveis = res.ingressos.masculino.disponiveis - this.compraInfo.masculino;
-         res.ingressos.feminino.disponiveis = res.ingressos.feminino.disponiveis - this.compraInfo.feminino;
-         res.ingressos.unisex.disponiveis = res.ingressos.unisex.disponiveis - this.compraInfo.unisex;
-         this.eventoservice.patchData(res, res.id);
-       }); */

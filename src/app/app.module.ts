@@ -23,6 +23,7 @@ import { CategoriaService } from './services/categoria.service';
 import { CompraService } from './services/compra.service';
 import { DepositoService } from './services/deposito.service';
 import { EventoService } from './services/evento.service';
+import { IngressoService } from './services/ingresso.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
 import { ThemeService } from './services/theme.service';
@@ -75,6 +76,7 @@ import { UsuarioService } from './services/usuario.service';
     DepositoService,
     UsuarioService,
     CompraService,
+    IngressoService,
   ],
 })
 export class AppModule { }
