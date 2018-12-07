@@ -9,6 +9,7 @@ export class IngressosService {
 
   private IngressosFisicosCollection: AngularFirestoreCollection<any> = this.db.collection('/IngressosFisicos');
   private IngressosCollection: AngularFirestoreCollection<any> = this.db.collection('/Ingressos');
+
   constructor(private db: AngularFirestore) { }
 
 
@@ -30,31 +31,49 @@ export class IngressosService {
     return idIngressos;
   }
 
+    private postIngressosFisicos(ingressosGerados: any[]) {
+      ingressosGerados.forEach(ingresso => {
+        this.IngressosCollection.doc(ingresso.id).set(ingresso);
+      });
+      return ingressosGerados.map(ingresso => ingresso.id);
+    }
 
-  private resolveIngressos(evento: any) {
-
-    const ingressos = new Array<Object>();
-
-    Object.keys(evento.numeroIngressos).map(x => {
-      let i = 0;
-      while (i < evento.numeroIngressos[x]) {
-        ingressos.push({
+    geraIngressos(ingressosFisiscos: any) {
+      const ingressosGeradosMasculino = Array(ingressosFisiscos.numero.masculino)
+        .fill({
           id: this.db.createId(),
-          tipo: x,
-          valor: evento.valor[x],
+          tipo: 'masculino',
+          valor: ingressosFisiscos.valor.masculino,
+          fisico: true,
+          lido: false,
         });
-        i++;
-      }
-    });
+      const ingressosGeradosFeminino = Array(ingressosFisiscos.numero.feminino)
+      .fill({
+        id: this.db.createId(),
+        tipo: 'feminino',
+        valor: ingressosFisiscos.valor.feminino,
+        fisico: true,
+        lido: false,
+      });
+      const ingressosGeradosUnisex = Array(ingressosFisiscos.numero.unisex)
+      .fill({
+        id: this.db.createId(),
+        tipo: 'unisex',
+        valor: ingressosFisiscos.valor.unisex,
+        fisico: true,
+        lido: false,
+      });
+      return [ ...ingressosGeradosMasculino, ...ingressosGeradosFeminino, ...ingressosGeradosUnisex ];
+    }
 
-    return ingressos;
-  }
+    addData(ingressosFisicos: any) {
+      ingressosFisicos.id = this.db.createId();
+      const ingressosGerados = this.geraIngressos({ numero: ingressosFisicos.numeroIngressos, valor: ingressosFisicos.valor });
+      ingressosFisicos.ingressos = this.postIngressosFisicos(ingressosGerados);
+      this.IngressosFisicosCollection.doc(ingressosFisicos.id).set({
+        ...ingressosFisicos,
+      });
+    }
 
-  addData(ingressosFisicos: any) {
-    ingressosFisicos.id = this.db.createId();
-    ingressosFisicos.ingressos = this.resolveIngressos(ingressosFisicos);
-    this.IngressosFisicosCollection.doc(ingressosFisicos.id).set({
-      ...ingressosFisicos,
-    });
-  }
+
 }

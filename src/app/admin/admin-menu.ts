@@ -31,8 +31,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-ticket',
     children: [
       {
-      title: 'Gerar Ingressos Físicos',
-      link: '/admin/ingressos-fisicos/gerar-ingressos-fisicos',
+        title: 'Gerar Ingressos Físicos',
+        link: '/admin/ingressos-fisicos/criar-ingressos-fisicos',
+      },
+      {
+        title: 'Ingressos Físicos Gerados',
+        link: '/admin/ingressos-fisicos/ingressos-gerados',
       },
     ],
   },

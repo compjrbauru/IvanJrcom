@@ -1,16 +1,16 @@
-import { IngressosService } from './../../services/ingressos.service';
-import { EventoService } from './../../services/evento.service';
+import { IngressosService } from '../../../services/ingressos.service';
+import { EventoService } from '../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NotificacaoService } from '../../services/notificacao.service';
+import { NotificacaoService } from '../../../services/notificacao.service';
 
 
 @Component({
-  selector: 'ngx-ingressos-fisicos',
-  templateUrl: './ingressos-fisicos.component.html',
-  styleUrls: ['./ingressos-fisicos.component.scss'],
+  selector: 'ngx-criar-ingressos-fisicos',
+  templateUrl: './criar-ingressos-fisicos.component.html',
+  styleUrls: ['./criar-ingressos-fisicos.component.scss'],
 })
-export class IngressosFisicosComponent implements OnInit {
+export class CriarIngressosFisicosComponent implements OnInit {
 
   form: any = {};
   eventoAsync: Observable<any>;
