@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { pluck, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
@@ -66,7 +66,7 @@ export class IngressosService {
         .fill({
           id: this.db.createId(),
           tipo: 'unisex',
-          idEvento: ingressosFisiscos.idEvento, 
+          idEvento: ingressosFisiscos.idEvento,
           valor: ingressosFisiscos.valor.unisex,
           fisico: true,
           lido: false,

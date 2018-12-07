@@ -28,7 +28,6 @@ export class IngressosPdfComponent implements OnChanges {
 
   criaModelo() {
     this.ingressosService.getOne(this.resolvedIngressoGerados.ingressos[0]).subscribe(response => {
-      console.log(response);
       this.ingresso = response;
     });
   }
