@@ -81,6 +81,7 @@
     "nebular-icons": "1.0.8",
     "ng2-ckeditor": "1.1.13",
     "ng2-smart-table": "1.2.2",
+    "ngx-captcha": "^5.0.4",
     "ngx-echarts": "2.0.1",
     "ngx-spinner": "^6.1.2",
     "ngx-toastr": "^9.0.2",

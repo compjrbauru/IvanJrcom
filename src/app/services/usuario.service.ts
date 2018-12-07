@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Subject } from 'rxjs';
+import { Observable, of as observableOf, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class UsuarioService {
   private UsuarioCollection: AngularFirestoreCollection<
     any
-  > = this.db.collection('/Usuario');
+    > = this.db.collection('/Usuario');
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
-  addUsuario(usuario: any) {
+  addUsuario(usuario: any): Observable<any> {
     usuario.id = this.db.createId();
     this.UsuarioCollection.doc(usuario.id).set({
       ...usuario,
     });
+    return observableOf([...usuario]);
   }
+
+  patchUsuario(usuario: any, id) {
+    return this.UsuarioCollection.doc(id).set({
+      ...usuario,
+      id: id,
+    });
+  }
+
 
   getUsuarioEmailAsync(cat$: Subject<any>) {
     return cat$.pipe(

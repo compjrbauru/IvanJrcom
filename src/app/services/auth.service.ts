@@ -1,5 +1,5 @@
-import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Injectable } from '@angular/core';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
 
@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     private firebaseAuth: AngularFireAuth,
     public localStorage: LocalStorage,
-  ) {}
+  ) { }
 
   signInWithEmail(email, password) {
     return this.firebaseAuth.auth

@@ -20,12 +20,14 @@ import { AppComponent } from './app.component';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoriaService } from './services/categoria.service';
+import { CompraService } from './services/compra.service';
 import { DepositoService } from './services/deposito.service';
 import { EventoService } from './services/evento.service';
+import { IngressosService } from './services/ingressos.service';
 import { NotificacaoService } from './services/notificacao.service';
 import { QueryService } from './services/query.service';
 import { ThemeService } from './services/theme.service';
-import { IngressosService } from './services/ingressos.service';
+import { UsuarioService } from './services/usuario.service';
 
 /**
  * @license
@@ -68,6 +70,8 @@ import { IngressosService } from './services/ingressos.service';
     IngressosService,
     CanDeactivateGuard,
     DepositoService,
+    UsuarioService,
+    CompraService,
   ],
 })
 export class AppModule { }
