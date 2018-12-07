@@ -1,36 +1,35 @@
-<div *ngIf= "ingresso">
-<div class="row">
-  <div class="col-md-12">
-    <nb-card>
-      <nb-card-body>
-        <div id="ingresso">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <h1 class="text-center">{{ingresso.nomeEvento | uppercase}}</h1>
-              <br>
-              <h1 class="text-center">{{ingresso.dataEvento.seconds * 1000 | date:'d MMM, y - HH:mm' | uppercase}}</h1>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-9 text-justify">
-              <h2>  Ingresso: {{ingresso.ingressos[0].tipo}}</h2>
-              <h2>  Valor: {{ingresso.ingressos[0].valor}} R$</h2>
-            </div>
-            <div class="col-md-3 text-justify">
-              <div class="qrcode">
-                <qrcode id="code" [qrdata]="ingresso.idEvento" [size]="128" [level]="'M'"></qrcode>
+<div *ngIf="ingresso">
+  <div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-card-body>
+          <div id="ingresso">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h1 class="text-center">{{ ingresso.idEvento | docToKey: 'Evento':'nome' | async | uppercase }}</h1>
+                <br>
+                <h1 class="text-center">{{ ingresso.idEvento | docToKey: 'Evento':'data' | async | secondsToDate | date: 'short' }}</h1>
               </div>
-              <br>
-              <p class="text-justify">{{ingresso.idEvento}}</p>
             </div>
+            <br>
+            <div class="row">
+              <div class="col-md-9 text-justify">
+                <h2> Ingresso: {{ingresso.tipo}}</h2>
+                <h2> Valor: {{ingresso.valor}} R$</h2>
+              </div>
+              <div class="col-md-3 text-justify">
+                <div class="qrcode">
+                  <qrcode id="code" [qrdata]="ingresso.idEvento" [size]="128" [level]="'M'"></qrcode>
+                </div>
+                <br>
+                <p class="text-justify">{{ingresso.idEvento}}</p>
+              </div>
+            </div>
+            <hr />
           </div>
-          <hr/>
-        </div>
-      </nb-card-body>
-    </nb-card>
+        </nb-card-body>
+      </nb-card>
+    </div>
   </div>
 </div>
-</div>
-  <button (click)="gerarPDF()" class="btn btn-primary
-  " type="submit ">Imprimir</button>
+<button (click)="gerarPDF()" class="btn btn-primary" type="submit ">Imprimir Ingressos</button>

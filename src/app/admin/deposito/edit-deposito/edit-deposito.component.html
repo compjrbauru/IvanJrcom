@@ -1,6 +1,9 @@
-<ngx-table [dataAsync]="contas" [dataIdAsync]="contasID" [cat$]="contasID$" columns='contasDepositoEdit' (editE)="resolver($event)"
+<ngx-table 
+  [dataAsync]="contas"
+  columns='contasDepositoEdit'
+  (editE)="resolver($event)"
   [titulo]="'Tabela de Contas'">
-</ngx-table>
+</ngx-table> 
 <nb-card *ngIf="eventoResolver">
   <nb-card-header>Editar Contas</nb-card-header>
   <nb-card-body>

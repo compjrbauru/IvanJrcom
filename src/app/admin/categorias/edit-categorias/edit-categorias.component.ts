@@ -18,7 +18,6 @@ export class EditCategoriasComponent implements OnInit {
   form: any = {};
   categorias: Observable<any>;
   catID$ = new Subject<string>();
-  categoriasID: Observable<any>;
   eventoResolver: any = [];
   @ViewChild(UploadFileComponent) private upload: UploadFileComponent;
 
@@ -31,8 +30,6 @@ export class EditCategoriasComponent implements OnInit {
 
   ngOnInit() {
     this.categorias = this.categoriaService.getCategoria();
-    this.catID$ = new Subject<string>();
-    this.categoriasID = this.categoriaService.getCategoriaID(this.catID$);
   }
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
@@ -61,7 +58,7 @@ export class EditCategoriasComponent implements OnInit {
   }
 
   resolver(event) {
-    this.eventoResolver = event ? event[0] : null;
+    this.eventoResolver = event;
   }
 
   imagemupdate(event: any) {
@@ -73,7 +70,7 @@ export class EditCategoriasComponent implements OnInit {
     if (form.value.pathurl !== this.eventoResolver.pathurl) {
       this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
     }
-    this.categoriaService.editCategoria(form.value);
+    this.categoriaService.patchCategoriaEvento(form.value);
     this.eventoResolver = [];
     this.form['formCategoria'].reset();
     this.upload.resetUpload();

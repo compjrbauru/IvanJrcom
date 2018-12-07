@@ -1,0 +1,10 @@
+<ngx-table
+  [dataAsync]="ingressosAsync"
+  [columns]="'ingressosFisicos'"
+  (editE)="resolver($event)"
+  [titulo]="'Eventos com Ingressos Gerados'">
+</ngx-table> 
+
+<ngx-ingressos-pdf
+  [resolvedIngressoGerados]="resolvedIngressoGerados">
+</ngx-ingressos-pdf>

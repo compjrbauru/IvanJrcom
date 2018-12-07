@@ -20,52 +20,30 @@ import { TableService } from './../../services/table.service';
 
 export class TableComponent implements OnInit, OnDestroy {
   @Input() dataAsync: Observable<any>; // Observable que indica para a busca dos objetos da tabela
-  @Input() dataIdAsync: Observable<any>; // Observable que indica para busca de objeto com id especifico
-  @Input() cat$: Subject<string>; // Subject que indica ID a ser buscado
-  @Input() deleteData: any = [];
-  @Input() columns: string; // Determina colunas mostradas
   @Input() titulo: string; // Determina titulo da table
+  @Input() columns: string; // Determina colunas mostradas
   @Input() tipoId: string = 'id'; // Determina tipo do id a ser chamado
+  @Input() deleteData: any = [];
   @Input() edit: boolean = false; // Ativa ou desativa a edicao
   @Output() editE = new EventEmitter(); // Objeto com id especifico emitido para ser tratado no component pai
   @Output() editConfirm = new EventEmitter(); // Retorna objeto com informacoes sobre a linha editada
   private unsubscribeData: Subject<void> = new Subject();
-  private unsubscribeDataId: Subject<void> = new Subject();
-  keysSettings: any = [];
-  dataSource: any = [];
   dataSync: any;
   source: LocalDataSource = new LocalDataSource();
   settings: any = [];
-  editEvento: boolean = false;
-  eventoResolved: any = [];
 
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
+    this.initializeComponent();
+  }
+
+  initializeComponent() {
     this.tableService.setEdit(this.edit);
     this.settings = this.tableService.getColumns(this.columns);
-    for (const key in this.settings.columns) {
-      if (this.settings.columns[key]) {
-        this.keysSettings.push(key);
-      }
-    }
     this.dataAsync.pipe(takeUntil(this.unsubscribeData)).subscribe(res => {
       this.dataSync = cloneDeep(res);
-      this.dataSource = res.map(response => {
-        for (const key in response) {
-          if (!this.keysSettings.includes(key)) {
-            delete response[key];
-          }
-        }
-        return response;
-      });
-      this.source.load(this.dataSource);
-    });
-    this.dataIdAsync.pipe(takeUntil(this.unsubscribeDataId)).subscribe(response => {
-      this.eventoResolved = response;
-      const emitter = cloneDeep(this.eventoResolved);
-      this.editE.emit(emitter);
-      this.editEvento = true;
+      this.source.load(res);
     });
   }
 
@@ -77,26 +55,18 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  foundObject(event: any) {
-    this.cat$.next(find(this.dataSync, event.data)[this.tipoId]);
-  }
-
-  emitConfirm(event: any) { // Emite o evento recebido da table com as info do evento escolhido
-    const eventData = find(this.dataSync, event.data); // Informacoes necessarias do evento
+  emitConfirm(event: any) {
+    const eventData = find(this.dataSync, event.data);
     const resp = {
-      event, // Dados sobre a edicao
+      event,
       eventData,
     };
-    this.editConfirm.emit(resp); // Emite o evento para ser tratado no pai
+    this.editConfirm.emit(resp);
   }
 
   ngOnDestroy() {
     this.unsubscribeData.next();
-    this.unsubscribeDataId.next();
     this.unsubscribeData.complete();
-    this.unsubscribeDataId.complete();
-    this.cat$.next();
-    this.cat$.complete();
   }
 
 }

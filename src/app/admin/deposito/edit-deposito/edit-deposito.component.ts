@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { EventoService } from '../../../services/evento.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
@@ -13,8 +13,6 @@ import { DepositoService } from './../../../services/deposito.service';
 export class EditDepositoComponent implements OnInit {
   form: any = {};
   contas: Observable<any>;
-  contasID$ = new Subject<string>();
-  contasID: Observable<any>;
   eventoResolver: any = [];
 
   constructor(
@@ -25,12 +23,10 @@ export class EditDepositoComponent implements OnInit {
 
   ngOnInit() {
     this.contas = this.depositoservice.getContaDeposito();
-    this.contasID$ = new Subject<string>();
-    this.contasID = this.depositoservice.getContaDepositoID(this.contasID$);
   }
 
   resolver(event) {
-    this.eventoResolver = event ? event[0] : null;
+    this.eventoResolver = event;
   }
 
   Submit(form: any) {

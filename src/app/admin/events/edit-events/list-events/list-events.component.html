@@ -1,11 +1,16 @@
-<ngx-table [dataAsync]="eventoAsync" [dataIdAsync]="eventoIdAsync" [cat$]="catID$" (editE)="resolver($event)" columns='evento'
+<ngx-table 
+  [dataAsync]="eventoAsync" 
+  (editE)="resolver($event)" 
+  columns='evento'
   [titulo]="'Tabela de Eventos'">
 </ngx-table>
 
 <nb-card *ngIf="eventoResolver">
   <nb-card-header>Editar Evento</nb-card-header>
   <nb-card-body>
-    <ngx-form-evento (formEmitter)="form['formEvent']=$event" [categorias]="categorias" [contasDeposito]="contasDeposito"
+    <ngx-form-evento 
+      (formEmitter)="form['formEvent']=$event" 
+      [dependencies]="dependencies" 
       [resolvedEvento]="eventoResolver ? eventoResolver : null">
     </ngx-form-evento>
     <ngx-upload-file localName="Eventos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
@@ -21,7 +26,7 @@
     <div class="row">
       <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary"
         type="submit">Salvar</button>
-      <button (click)="deleteForm(form['formEvent']?.value)" class="btn btn-danger" type="button">Deletar</button>
+      <button (click)="deleteEvento(form['formEvent']?.value)" class="btn btn-danger" type="button">Excluir</button>
     </div>
   </nb-card-body>
 </nb-card>

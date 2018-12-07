@@ -1,12 +1,17 @@
-import { IngressosFisicosComponent } from './ingressos-fisicos.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { IngressosGeradosComponent } from './ingressos-gerados/ingressos-gerados.component';
+import { CriarIngressosFisicosComponent } from './criar-ingressos-fisicos/criar-ingressos-fisicos.component';
 
 
 const routes: Routes = [
   {
-    path: 'gerar-ingressos-fisicos',
-    component: IngressosFisicosComponent,
+    path: 'ingressos-gerados',
+    component: IngressosGeradosComponent,
+  },
+  {
+    path: 'criar-ingressos-fisicos',
+    component: CriarIngressosFisicosComponent,
   },
   { path: '**', redirectTo: '' },
 ];
