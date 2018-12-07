@@ -19,6 +19,14 @@ export class UsuarioService {
     return observableOf([...usuario]);
   }
 
+  patchUsuario(usuario: any, id) {
+    return this.UsuarioCollection.doc(id).set({
+      ...usuario,
+      id: id,
+    });
+  }
+
+
   getUsuarioEmailAsync(cat$: Subject<any>) {
     return cat$.pipe(
       switchMap(cat =>

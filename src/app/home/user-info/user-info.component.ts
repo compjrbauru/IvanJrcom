@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { RouterHelper } from './../../@core/utils/helpers/router-helper';
-import { AuthService } from './../../services/auth.service';
-import { UsuarioService } from './../../services/usuario.service';
+import { CompraService } from './../../services/compra.service';
 
 @Component({
   selector: 'ngx-user-info',
@@ -12,15 +11,16 @@ import { UsuarioService } from './../../services/usuario.service';
 })
 export class UserInfoComponent implements OnInit {
   userInfo: any;
+  comprasAsync: any;
 
   constructor(
-    private usuarioservice: UsuarioService,
-    private authservice: AuthService,
     private route: ActivatedRoute,
+    private compraService: CompraService,
   ) { }
 
   ngOnInit() {
     this.userInfo = RouterHelper.getValues(this.route, 'userInfo');
+    this.comprasAsync = this.compraService.getComprasId(this.userInfo.id);
   }
 
 }

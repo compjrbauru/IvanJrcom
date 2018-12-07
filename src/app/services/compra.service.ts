@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class CompraService {
@@ -12,6 +14,10 @@ export class CompraService {
         this.ContasDepositoCollection.doc(compra.id).set({
             ...compra,
         });
+    }
+
+    getComprasId(id: string): Observable<any> {
+        return this.db.collection(`Compras`, ref => ref.where('userid', '==', id)).valueChanges().pipe(take(1));
     }
 
 }

@@ -45,8 +45,9 @@ export class DepositoConfirmationComponent implements OnInit {
       nomeEvento: evento.nome,
       idIngressos: idIngressos,
       compraVerificada: false,
+      tipo: 'desposito',
       ...valorTotal,
-    }
+    };
     this.compraservice.addCompra(compra);
     this.notific.ngxtoaster(
       'Compra realizada com sucesso!',

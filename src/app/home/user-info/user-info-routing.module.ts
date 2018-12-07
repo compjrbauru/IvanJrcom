@@ -11,8 +11,13 @@ const routes: Routes = [
     resolve: { userInfo: UserResolverService },
   },
   {
+    path: 'editar',
+    loadChildren: './user-edit/user-edit.module#UserEditModule',
+    resolve: { userInfo: UserResolverService },
+  },
+  {
     path: '**',
-    redirectTo: ''
+    redirectTo: '',
   },
 ];
 

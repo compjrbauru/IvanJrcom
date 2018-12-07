@@ -10,7 +10,7 @@
         <nb-card-header>
           Dados da conta
           <div class="float-right">
-            <i class="nb-gear"></i>
+            <i class="nb-gear" routerLink="editar"></i>
           </div>
         </nb-card-header>
         <nb-card-body>
@@ -56,7 +56,12 @@
 
     <div class="div-post-left div-size-2">
       <nb-card accent="info">
-        <nb-card-header>Ingressos comprados - Situação</nb-card-header>
+        <nb-card-header>Compras - Situação</nb-card-header>
+        <nb-card-body>
+          <div *ngFor="let compra of comprasAsync | async">
+            <p>{{compra.nomeEvento}}</p>
+          </div>
+        </nb-card-body>
       </nb-card>
     </div>
 

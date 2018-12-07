@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
         const user = this.authService.getUser();
 
         user.sendEmailVerification().then(() => {
-          const form = this.form['formEvent'].value;
+          const { senha: removedSenha, ConfirmarSenha: removedConfirmarSenha, ...form } = this.form['formEvent'].value;
 
           this.usuarioService.addUsuario(form); // Adiciona o usuario
 
