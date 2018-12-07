@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { IngressosService } from '../../../../services/ingressos.service';
 import { CompraService } from './../../../../services/compra.service';
 import { EventoService } from './../../../../services/evento.service';
-import { IngressoService } from './../../../../services/ingresso.service';
 import { NotificacaoService } from './../../../../services/notificacao.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class DepositoConfirmationComponent implements OnInit {
     private notific: NotificacaoService,
     private route: Router,
     private eventoservice: EventoService,
-    private ingressoService: IngressoService,
+    private ingressoService: IngressosService,
   ) { }
 
   ngOnInit() {
