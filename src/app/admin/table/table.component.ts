@@ -55,7 +55,7 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  emitConfirm(event: any) { 
+  emitConfirm(event: any) {
     const eventData = find(this.dataSync, event.data);
     const resp = {
       event,

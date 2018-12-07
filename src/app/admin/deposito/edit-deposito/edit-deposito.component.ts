@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { EventoService } from '../../../services/evento.service';
 import { NotificacaoService } from '../../../services/notificacao.service';

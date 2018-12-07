@@ -1,8 +1,6 @@
-import { Subject } from 'rxjs/Subject';
 import { EventoService } from './../../../services/evento.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { QueryService } from '../../../services/query.service';
 import { NotificacaoService } from '../../../services/notificacao.service';
 
 @Component({
@@ -15,7 +13,6 @@ export class MostrarhomeComponent implements OnInit {
 
   constructor(
     private eventoService: EventoService,
-    private queryService: QueryService,
     private notificao: NotificacaoService,
   ) { }
 

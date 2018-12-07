@@ -1,5 +1,5 @@
 import { NotificacaoService } from './../../../services/notificacao.service';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../../services/categoria.service';
 
