@@ -1,6 +1,6 @@
+import { NotificacaoService } from './../../../../services/notificacao.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Subject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 
@@ -23,7 +23,6 @@ export class ListEventsComponent implements OnInit {
   categoria: any;
   eventoAsync: Observable<any>;
   eventoResolver: any = [];
-  catID$ = new Subject<string>();
   dependencies: any;
   update: any;
   @ViewChild(UploadFileComponent)
@@ -94,17 +93,13 @@ export class ListEventsComponent implements OnInit {
       return true;
     }
   }
-  deleteForm(form: any) {
-    this.categoriaService
-      .searchrcategoriabynome(form.categoria)
+
+  deleteEvento(form: any) {
+    this.categoriaService.getById(form.categoria)
       .subscribe(categoria => {
-        [this.categoria] = categoria;
-        this.categoriaService.patchDeleteEventCategoria(this.categoria, form);
+        this.categoriaService.patchDeleteEventCategoria(categoria, form);
         this.eventoService.removeData(form.id);
-        if (
-          this.form['formEvent'].value.pathurl !== '' &&
-          this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
-        ) {
+        if (this.form['formEvent'].value.pathurl !== '' && this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl) {
           this.queryService.deleteImage(form.pathurl).subscribe();
           this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
         } else {

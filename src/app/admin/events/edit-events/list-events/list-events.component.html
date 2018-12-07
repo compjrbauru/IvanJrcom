@@ -1,6 +1,5 @@
 <ngx-table 
   [dataAsync]="eventoAsync" 
-  [cat$]="catID$" 
   (editE)="resolver($event)" 
   columns='evento'
   [titulo]="'Tabela de Eventos'">
@@ -27,7 +26,7 @@
     <div class="row">
       <button [disabled]="!form?.formEvent?.valid" (click)="submit(form['formEvent']?.value)" class="btn btn-primary"
         type="submit">Salvar</button>
-      <button (click)="deleteForm(form['formEvent']?.value)" class="btn btn-danger" type="button">Deletar</button>
+      <button (click)="deleteEvento(form['formEvent']?.value)" class="btn btn-danger" type="button">Excluir</button>
     </div>
   </nb-card-body>
 </nb-card>

@@ -9,6 +9,7 @@ import { switchMap, map } from 'rxjs/operators';
 export class CategoriaService {
   datePipe = new DatePipe('pt-BR');
   private CategoriasCollection: AngularFirestoreCollection<any> = this.db.collection('/Categorias');
+  // private EventosCollection: AngularFirestoreCollection<any> = this.db.collection('/Evento');
 
   constructor(private db: AngularFirestore) { }
 
@@ -30,6 +31,10 @@ export class CategoriaService {
     );
   }
 
+  getById(id: string) {
+    return this.CategoriasCollection.doc(id).valueChanges();
+  }
+
   getCategoria() {
     const collections$: Observable<any> = this.CategoriasCollection.valueChanges();
     return collections$;
@@ -49,13 +54,13 @@ export class CategoriaService {
     });
   }
 
-  editCategoria(categoria) {
-    categoria.busca = categoria.nome.toLowerCase();
-    return this.CategoriasCollection.doc(categoria.id).set(categoria);
-  }
-
   findByName(nomeCategoria: any) {
     return this.db.collection('/Categorias', ref => ref.where('nome', '==', nomeCategoria)).valueChanges();
+  }
+
+  patchCategoriaEvento(categoria) {
+    const newCategoria = { busca: categoria.nome.toLowerCase(), ...categoria };
+    return this.CategoriasCollection.doc(newCategoria.id).set(newCategoria);
   }
 
   patchCategoria(evento: any) {
@@ -71,7 +76,6 @@ export class CategoriaService {
 
   patchEditCategoria(evento: any, eventoResolver: any) {
     if (evento.categoria !== eventoResolver.categoria) {
-      // tslint:disable-next-line:max-line-length
       forkJoin([
         this.findByName(evento.categoria),
         this.findByName(eventoResolver.categoria)])
