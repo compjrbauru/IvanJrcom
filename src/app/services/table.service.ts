@@ -73,7 +73,7 @@ export class TableService {
     },
   };
 
-  ingressos = {
+  ingressosFisicos = {
     columns: {
       nomeEvento: {
         title: 'Nome do Evento',
@@ -131,8 +131,8 @@ export class TableService {
         column = this.categoriasEdit;
         break;
       }
-      case 'ingressos': {
-        column = this.ingressos;
+      case 'ingressosFisicos': {
+        column = this.ingressosFisicos;
         break;
       }
       case 'contasDepositoEdit': {

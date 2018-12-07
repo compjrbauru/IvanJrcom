@@ -1,14 +1,17 @@
-import { DocToNomePipe } from './docToNome.pipe';
+import { DocToKeyPipe } from './docToKey.pipe';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { SecondsToDatePiPe } from './secondsToDate.pipe';
 
 @NgModule({
   imports: [],
   declarations: [
-    DocToNomePipe,
+    DocToKeyPipe,
+    SecondsToDatePiPe,
   ],
   exports: [
-    DocToNomePipe,
+    DocToKeyPipe,
+    SecondsToDatePiPe,
   ],
   providers: [
     DatePipe,

@@ -9,18 +9,19 @@ import { Observable } from 'rxjs';
 
 export class IngressosGeradosComponent implements OnInit {
   ingressosAsync: Observable<any>;
+  resolvedIngressoGerados: any;
 
   constructor(
     private ingressosService: IngressosService,
   ) { }
 
   ngOnInit() {
-  //   this.ingressosAsync = this.ingressosService.getAllIngressosFisiscos();
+    this.ingressosAsync = this.ingressosService.getAllIngressosFisiscos();
   }
 
-  // resolver(event) {
-    
-  // }
+  resolver(event) {
+    this.resolvedIngressoGerados = event;
+  }
 
 }
 

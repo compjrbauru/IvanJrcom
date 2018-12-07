@@ -35,7 +35,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/admin/ingressos-fisicos/criar-ingressos-fisicos',
       },
       {
-        title: 'Ingressos Físicos Gerados',
+        title: 'Imprimir Ingressos',
         link: '/admin/ingressos-fisicos/ingressos-gerados',
       },
     ],
