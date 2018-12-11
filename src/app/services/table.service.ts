@@ -14,6 +14,7 @@ export class TableService {
       edit: false,
       delete: false,
     },
+    noDataMessage: 'Nenhum dado foi encontrado!',
   };
   evento = {
     columns: {
