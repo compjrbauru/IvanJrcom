@@ -5,6 +5,7 @@ import { Input, Component, OnChanges, SimpleChanges } from '@angular/core';
 import * as jspdf from 'jspdf';
 import * as QRCode from 'qrcode';
 import { from } from 'rxjs/internal/observable/from';
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { from } from 'rxjs/internal/observable/from';
 export class IngressosPdfComponent implements OnChanges {
   @Input() resolvedIngressoGerados: any;
   ingresso: any;
+  ingressos: any[];
+  hasIngressos: boolean = false;
 
   constructor(
     private ingressosService: IngressosService,
@@ -27,8 +30,15 @@ export class IngressosPdfComponent implements OnChanges {
   }
 
   criaModelo() {
-    this.ingressosService.getOne(this.resolvedIngressoGerados.ingressos[0]).subscribe(response => {
-      this.ingresso = response;
+    this.hasIngressos = false;
+    combineLatest(
+      this.ingressosService.getAllfisicos(this.resolvedIngressoGerados.idEvento),
+      this.ingressosService.transformIdIn(this.resolvedIngressoGerados.idEvento, 'nome'),
+      this.ingressosService.transformIdIn(this.resolvedIngressoGerados.idEvento, 'data'),
+    ).subscribe(([ingressos, nomeEvento, data]) => {
+      this.ingresso = { ...ingressos[0], nomeEvento: nomeEvento, dataEvento: data };
+      this.ingressos = ingressos;
+      this.hasIngressos = true;
     });
   }
 
@@ -44,13 +54,10 @@ export class IngressosPdfComponent implements OnChanges {
     let borderY = 0;
     let lastIndex = '';
 
-    for (const i in this.ingresso.ingressos) {
-      if (this.ingresso.ingressos.hasOwnProperty(i))
-        lastIndex = i;
-    }
+    lastIndex = this.ingressos[this.ingressos.length - 1].id;
 
-    for (const i of this.ingresso.ingressos) {
-      this.gerarQRCode(i.id).subscribe(res => {
+    this.ingressos.forEach(ingresso => {
+      this.gerarQRCode(ingresso.id).subscribe(res => {
         pdf.rect(0, borderY, 210, 59.4, 's');
         borderY += 59.4;
         pdf.setFont('Courier');
@@ -65,20 +72,21 @@ export class IngressosPdfComponent implements OnChanges {
         pdf.setFontStyle('normal');
         pdf.setFontSize(15);
         elementsY += 15;
-        pdf.text('Tipo: ' + i.tipo, 12, elementsY);
-        pdf.text('Valor: ' + i.valor.toString() + ' R$', 12, elementsY + 8);
+        pdf.text('Tipo: ' + ingresso.tipo, 12, elementsY);
+        pdf.text('Valor: ' + ingresso.valor.toString() + ' R$', 12, elementsY + 8);
         elementsY += 20;
-        pdf.text(this.ingresso.idEvento, 198, elementsY, 'right');
         elementsY = borderY;
         if (borderY === 297) {
           pdf.addPage();
           elementsY = 0;
           borderY = 0;
         }
-        if (i.id === this.ingresso.ingressos[lastIndex].id)
+        if (ingresso.id === lastIndex)
           pdf.save(this.ingresso.nomeEvento);
       });
-    }
+      // pdf.save(this.ingresso.nomeEvento);
+    });
+
   }
 
 }
