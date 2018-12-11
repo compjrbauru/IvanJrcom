@@ -62,8 +62,8 @@ export class LoginComponent implements OnInit {
                 'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
                 false,
               );
-              this.authService.setLocal(res1[0]);
             }
+            this.authService.setLocal(res1[0]);
           });
         } else if (typeof res === 'object') {
           this.usuarioService.addUsuario(res).subscribe(user => this.authService.setLocal(user));

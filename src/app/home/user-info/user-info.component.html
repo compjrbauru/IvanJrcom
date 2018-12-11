@@ -23,33 +23,42 @@
             <br>
             <span class="value">{{userInfo.nome}} {{userInfo.sobrenome}}</span>
           </p>
-          <p>
-            <span class="label">Data de nascimento: </span>
-            <span class="value">{{userInfo.nascimento}}</span>
-          </p>
-          <p>
-            <span class="label">RG: </span>
-            <span class="value">{{userInfo.RG}}</span>
-          </p>
-          <p>
-            <span class="label">CPF: </span>
-            <span class="value">{{userInfo.CPF}}</span>
-          </p>
-          <p>
-            <span class="label">Telefone: </span>
-            <span class="value">({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</span>
-          </p>
-          <p>
-            <span class="label">Estado: </span>
-            <br>
-            <span class="value">{{userInfo.Estado}}</span>
-          </p>
-          <p>
-            <span class="label">Cidade: </span>
-            <br>
-            <span class="value">{{userInfo.Cidade}}</span>
-          </p>
+          <ng-container *ngIf="!userInfo.registroCompleto; else elseTemplate">
+            <p>
+              <span class="label" style="color: red;">COMPLETE SEU CADASTRO!</span>
+            </p>
+          </ng-container>
 
+          <ng-template #elseTemplate>
+            
+            <p>
+              <span class="label">Data de nascimento: </span>
+              <span class="value">{{userInfo.nascimento}}</span>
+            </p>
+            <p>
+              <span class="label">RG: </span>
+              <span class="value">{{userInfo.RG}}</span>
+            </p>
+            <p>
+              <span class="label">CPF: </span>
+              <span class="value">{{userInfo.CPF}}</span>
+            </p>
+            <p>
+              <span class="label">Telefone: </span>
+              <span class="value">({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</span>
+            </p>
+            <p>
+              <span class="label">Estado: </span>
+              <br>
+              <span class="value">{{userInfo.Estado}}</span>
+            </p>
+            <p>
+              <span class="label">Cidade: </span>
+              <br>
+              <span class="value">{{userInfo.Cidade}}</span>
+            </p>
+          </ng-template>
+          
         </nb-card-body>
       </nb-card>
     </div>
