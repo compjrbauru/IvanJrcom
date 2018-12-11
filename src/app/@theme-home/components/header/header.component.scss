@@ -18,6 +18,12 @@
     flex-direction: row-reverse;
   }
 
+  .Menu {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   .logo-containter {
     display: flex;
     align-items: center;

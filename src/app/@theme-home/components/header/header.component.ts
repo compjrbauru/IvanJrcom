@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-
-import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { AuthService } from './../../../services/auth.service';
 
@@ -18,11 +16,10 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Perfil' }, { title: 'Sair' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
               private analyticsService: AnalyticsService,
               private route: Router,
               private authService: AuthService,
@@ -30,9 +27,22 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
-    this.toggleLogado();
+    this.menuService.onItemClick().subscribe(title => {
+      if (title.item.title === 'Sair') {
+        this.sair();
+      } else if (title.item.title === 'Perfil') {
+        this.route.navigate(['/home/conta']);
+      }
+    });
+    this.authService.onStateChange().subscribe(isLogged => { // Escuta mudanças de login do usuario
+      if (isLogged) {
+        this.authService.getResolvedUser().subscribe(user => {
+          this.user = user;
+          this.logado = true;
+        });
+      } else
+        this.sair();
+    });
   }
 
   toggleSidebar(): boolean {
@@ -59,6 +69,12 @@ export class HeaderComponent implements OnInit {
 
   loadadmin() {
     this.route.navigate(['/pages']);
+  }
+
+  sair() {
+    this.authService.signout();
+    this.route.navigate(['/home']);
+    window.location.reload();
   }
 
   login() {
