@@ -64,7 +64,7 @@
     "angularx-qrcode": "^1.2.2",
     "bootstrap": "4.0.0",
     "chart.js": "^2.7.2",
-    "ckeditor": "4.7.3",
+    "ckeditor": ">=4.11.0",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
     "echarts": "^4.0.2",
