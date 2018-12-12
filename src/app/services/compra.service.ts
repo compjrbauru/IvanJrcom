@@ -16,8 +16,12 @@ export class CompraService {
         });
     }
 
-    getComprasId(id: string): Observable<any> {
+    getComprasIdUser(id: string): Observable<any> {
         return this.db.collection(`Compras`, ref => ref.where('userid', '==', id)).valueChanges().pipe(take(1));
     }
 
+
+    getCompraId(id: string): Observable<any> {
+        return this.db.collection(`Compras`, ref => ref.where('id', '==', id)).valueChanges().pipe(take(1));
+    }
 }
