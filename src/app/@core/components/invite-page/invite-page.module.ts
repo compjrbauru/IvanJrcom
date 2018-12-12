@@ -4,9 +4,10 @@ import { QRCodeModule } from 'angularx-qrcode';
 
 import { ThemeModule } from './../../../@theme-home/theme.module';
 import { InvitePageComponent } from './invite-page.component';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
-  imports: [ThemeModule, CommonModule, QRCodeModule],
+  imports: [ThemeModule, CommonModule, QRCodeModule, PipesModule],
   declarations: [InvitePageComponent],
   exports: [InvitePageComponent],
 })

@@ -3,7 +3,7 @@
     <div id="ingresso">
       <div class="row">
         <div class="col-md-12 text-center">
-          <h3 class="text-center">nome do evento - data do evento</h3>
+          <h3 class="text-center">{{ ingresso.idEvento | docToKey: 'Evento':'nome' | async | uppercase }} - {{ ingresso.idEvento | docToKey: 'Evento':'data' | async | secondsToDate | date: 'short' }}</h3>
         </div>
         <br>
         <br>
