@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import {switchMap, take, tap } from 'rxjs/operators';
 
 import { IngressosService } from '../../../services/ingressos.service';
 import { CompraService } from './../../../services/compra.service';
