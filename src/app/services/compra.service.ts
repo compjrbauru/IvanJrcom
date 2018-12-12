@@ -20,8 +20,7 @@ export class CompraService {
         return this.db.collection(`Compras`, ref => ref.where('userid', '==', id)).valueChanges().pipe(take(1));
     }
 
-
-    getCompraId(id: string): Observable<any> {
-        return this.db.collection(`Compras`, ref => ref.where('id', '==', id)).valueChanges().pipe(take(1));
+    getOne(id: string): Observable<any> {
+        return this.ContasDepositoCollection.doc(id).valueChanges().pipe(take(1));
     }
 }

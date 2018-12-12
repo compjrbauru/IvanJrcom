@@ -19,7 +19,7 @@
           <h5>VALOR: {{ ingresso.valor }}R$</h5>
         </div>
         <div class="col-md-4">
-          <div class="qrcodecenter">
+          <div *ngIf="compraVerificada" class="qrcodecenter">
             <qrcode [qrdata]="ingresso.id" [size]="128" [level]="'M'"></qrcode>
           </div>
           <br />

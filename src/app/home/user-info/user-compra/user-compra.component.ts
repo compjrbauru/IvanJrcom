@@ -25,28 +25,17 @@ export class UserCompraComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = RouterHelper.getValues(this.route, 'userInfo');
-    this.route.paramMap
-      .pipe(
-        switchMap(
-          (params: ParamMap) =>
-            (this.compraAsync = this.compraService
-              .getCompraId(params.get('idCompra'))
-              .pipe(
-                map(compra => compra[0]),
-                tap(
-                  compra =>
-                    (this.ingressosAsync = compra.idIngressos.map(
-                      idIngresso =>
-                        this.ingressosService
-                          .getingresso(idIngresso)
-                          .pipe(map(ingresso => ingresso[0])),
-                    )),
-                ),
-              )),
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => (this.compraAsync = this.compraService.getOne(params.get('idCompra')).pipe(
+        tap(compra => (this.ingressosAsync = compra.idIngressos
+          .map(
+            idIngresso => this.ingressosService.getOne(idIngresso),
+          )),
         ),
-        take(1),
-      )
-      .subscribe();
+      )),
+      ),
+      take(1),
+    ).subscribe();
   }
 
   imagemupdate($event: any) {

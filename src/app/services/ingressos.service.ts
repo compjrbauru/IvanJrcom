@@ -18,9 +18,6 @@ export class IngressosService {
     return this.IngressosCollection.doc(id).valueChanges();
   }
 
-  getingresso(id: string) {
-    return this.db.collection(`Ingressos`, ref => ref.where('id', '==', id)).valueChanges().pipe(take(1));
-  }
 
   addIngressos(qtyIngressos: any, evento: any, fisico = false): string[] {
     const idIngressos: string[] = [];
