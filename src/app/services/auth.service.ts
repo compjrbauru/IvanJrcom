@@ -24,7 +24,7 @@ export class AuthService {
             return 'sucesso';
           } else {
             this.firebaseAuth.auth.signOut();
-            this.isLogged$.next('false');
+            this.isLogged$.next(false);
             return 'Email nao verificado!';
           }
         },
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   signout() {
-    this.isLogged$.next('false');
+    this.isLogged$.next(false);
     this.firebaseAuth.auth.signOut();
     this.token = null;
     this.localStorage.clearSubscribe();
@@ -121,7 +121,7 @@ export class AuthService {
   }
 
   setLocal(user: any) {
-    return this.localStorage.setItem('user', user).subscribe(ok => this.isLogged$.next('true'));
+    return this.localStorage.setItem('user', user).subscribe(() => this.isLogged$.next(true));
   }
 
   getResolvedUser() {

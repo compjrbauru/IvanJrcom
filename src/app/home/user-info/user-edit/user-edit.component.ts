@@ -32,12 +32,12 @@ export class UserEditComponent implements OnInit {
 
 
     submit() {
-        const form = {
+        const formValue = {
             ...this.form['formEvent'].value,
             registroCompleto: true, // Se conseguiu emitir form, cadastro está completo
         };
-        this.usuarioService.patchUsuario(form, this.ResolvedUser.id);
-        this.authService.setLocal({ ...form, ...this.ResolvedUser.id });
+        this.usuarioService.patchUsuario(formValue, this.ResolvedUser.id);
+        this.authService.setLocal({ ...formValue, ...this.ResolvedUser.id });
         this.notificacao.ngxtoaster('Dados edidatos com sucesso!', '', true);
     }
 }

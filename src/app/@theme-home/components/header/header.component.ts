@@ -1,9 +1,10 @@
+import { MENU_ITEMS } from './../../../home/home-menu';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { AuthService } from './../../../services/auth.service';
-
+import { filter, tap, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -11,6 +12,12 @@ import { AuthService } from './../../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   logado = false;
+  menu = MENU_ITEMS;
+  conta = {
+    title: 'Conta',
+    icon: 'nb-email',
+    link: '/home/conta',
+  };
 
   @Input() position = 'normal';
 
@@ -34,14 +41,19 @@ export class HeaderComponent implements OnInit {
         this.route.navigate(['/home/conta']);
       }
     });
-    this.authService.onStateChange().subscribe(isLogged => { // Escuta mudanças de login do usuario
-      if (isLogged) {
-        this.authService.getResolvedUser().subscribe(user => {
-          this.user = user;
-          this.logado = true;
-        });
-      } else
-        this.sair();
+    this.authService.onStateChange().pipe(
+      tap( isLogged => {
+        if (!isLogged && this.logado)
+          this.sair();
+      }),
+      filter(isLogged => {
+        return isLogged === true;
+      }),
+      mergeMap(() => this.authService.getResolvedUser()),
+    ).subscribe( (user) => {
+      this.menu.push(this.conta);
+      this.user = user;
+      this.logado = true;
     });
   }
 
@@ -72,9 +84,10 @@ export class HeaderComponent implements OnInit {
   }
 
   sair() {
+    this.menu.pop();
+    this.logado = false;
     this.authService.signout();
     this.route.navigate(['/home']);
-    window.location.reload();
   }
 
   login() {
