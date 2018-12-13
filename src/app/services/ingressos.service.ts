@@ -22,6 +22,9 @@ export class IngressosService {
     return this.IngressosCollection.doc(id).valueChanges();
   }
 
+  getAllfisicos(idEvento: string) {
+    return this.db.collection('/Ingressos', ref => ref.where('idEvento', '==', idEvento).where('fisico', '==', true)).valueChanges();
+  }
 
   addIngressos(qtyIngressos: any, evento: any, fisico = false): string[] {
     const idIngressos: string[] = [];
@@ -51,30 +54,36 @@ export class IngressosService {
   geraIngressos(ingressosFisiscos: any) {
     const ingressosGeradosMasculino = Array(ingressosFisiscos.numero.masculino)
       .fill({
-        id: this.db.createId(),
         tipo: 'masculino',
         idEvento: ingressosFisiscos.idEvento,
         valor: ingressosFisiscos.valor.masculino,
         fisico: true,
         lido: false,
+      })
+      .map(ingresso => {
+        return { ...ingresso, id: this.db.createId() };
       });
     const ingressosGeradosFeminino = Array(ingressosFisiscos.numero.feminino)
       .fill({
-        id: this.db.createId(),
         tipo: 'feminino',
         idEvento: ingressosFisiscos.idEvento,
         valor: ingressosFisiscos.valor.feminino,
         fisico: true,
         lido: false,
+      })
+      .map(ingresso => {
+        return { ...ingresso, id: this.db.createId() };
       });
     const ingressosGeradosUnisex = Array(ingressosFisiscos.numero.unisex)
       .fill({
-        id: this.db.createId(),
         tipo: 'unisex',
         idEvento: ingressosFisiscos.idEvento,
         valor: ingressosFisiscos.valor.unisex,
         fisico: true,
         lido: false,
+      })
+      .map(ingresso => {
+        return { ...ingresso, id: this.db.createId() };
       });
     return [ ...ingressosGeradosMasculino, ...ingressosGeradosFeminino, ...ingressosGeradosUnisex ];
   }
