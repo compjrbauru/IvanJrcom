@@ -18,6 +18,7 @@ export class IngressosService {
     return this.IngressosCollection.doc(id).valueChanges();
   }
 
+
   addIngressos(qtyIngressos: any, evento: any, fisico = false): string[] {
     const idIngressos: string[] = [];
     for (const tipoIngresso of Object.keys(qtyIngressos)) {

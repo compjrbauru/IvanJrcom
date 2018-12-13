@@ -45,7 +45,7 @@ export class DepositoConfirmationComponent implements OnInit {
       nomeEvento: evento.nome,
       idIngressos: idIngressos,
       compraVerificada: false,
-      tipo: 'desposito',
+      tipo: 'Deposito',
       ...valorTotal,
     };
     this.compraservice.addCompra(compra);

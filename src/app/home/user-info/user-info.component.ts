@@ -20,7 +20,7 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = RouterHelper.getValues(this.route, 'userInfo');
-    this.comprasAsync = this.compraService.getComprasId(this.userInfo.id);
+    this.comprasAsync = this.compraService.getComprasIdUser(this.userInfo.id);
   }
 
 }
