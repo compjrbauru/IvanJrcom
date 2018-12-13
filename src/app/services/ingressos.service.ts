@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { take, pluck } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
+import { pluck, take } from 'rxjs/operators';
 
 
 @Injectable()
@@ -22,8 +22,12 @@ export class IngressosService {
     return this.IngressosCollection.doc(id).valueChanges();
   }
 
-  getAllfisicos(idEvento: string) {
-    return this.db.collection('/Ingressos', ref => ref.where('idEvento', '==', idEvento).where('fisico', '==', true)).valueChanges();
+  getAllfisicos(resolvedIngressoGerados: any) {
+    const ingressosAsync: any = [];
+    resolvedIngressoGerados.ingressos.forEach(ingresso => {
+      ingressosAsync.push(this.db.collection('/Ingressos').doc(ingresso).valueChanges());
+    });
+    return zip(...ingressosAsync);
   }
 
   addIngressos(qtyIngressos: any, evento: any, fisico = false): string[] {

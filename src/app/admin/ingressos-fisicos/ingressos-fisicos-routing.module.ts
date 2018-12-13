@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'criar-ingressos-fisicos',
     component: CriarIngressosFisicosComponent,
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'ingressos-gerados' },
 ];
 
 @NgModule({

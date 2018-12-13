@@ -16,7 +16,7 @@ import { combineLatest } from 'rxjs';
 export class IngressosPdfComponent implements OnChanges {
   @Input() resolvedIngressoGerados: any;
   ingresso: any;
-  ingressos: any[];
+  ingressos: any;
   hasIngressos: boolean = false;
 
   constructor(
@@ -32,10 +32,10 @@ export class IngressosPdfComponent implements OnChanges {
   criaModelo() {
     this.hasIngressos = false;
     combineLatest(
-      this.ingressosService.getAllfisicos(this.resolvedIngressoGerados.idEvento),
+      this.ingressosService.getAllfisicos(this.resolvedIngressoGerados),
       this.ingressosService.transformIdIn(this.resolvedIngressoGerados.idEvento, 'nome'),
       this.ingressosService.transformIdIn(this.resolvedIngressoGerados.idEvento, 'data'),
-    ).subscribe(([ingressos, nomeEvento, data]) => {
+    ).subscribe(([ingressos, nomeEvento, data]): any => {
       this.ingresso = { ...ingressos[0], nomeEvento: nomeEvento, dataEvento: data };
       this.ingressos = ingressos;
       this.hasIngressos = true;
