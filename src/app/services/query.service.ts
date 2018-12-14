@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class QueryService {
   data: any;
+  formValue: any;
+  order: any;
 
   constructor(
     private db: AngularFirestore,
@@ -67,15 +69,24 @@ export class QueryService {
     return queryObservable;
   }
 
-  searchEvento(data: any, order: any) {
-    return this.db
-      .collection('/Evento', ref =>
-        ref
-          .orderBy(order)
-          .startAt(data)
-          .endAt(data + '\uf8ff'),
-      )
-      .valueChanges();
+  searchEvento(formValue: any, order: string[]): Observable<any> {
+    this.formValue = formValue;
+    this.order = order;
+    return this.db.collection('/Eventos', this.search).valueChanges();
+  }
+
+  private search = (): any => {
+    let search: any = this.db.collection('/Evento').ref;
+    if (this.formValue.evento !== '') {
+      search = search.orderBy(this.order[0]).startAt(this.formValue.evento).endAt(`${this.formValue.evento}\uf8ff`);
+    }
+    if (this.formValue.local !== '') {
+      search = search.orderBy(this.order[1]).startAt(this.formValue.local).endAt(`${this.formValue.local}\uf8ff`);
+    }
+    if (this.formValue.categoria !== null) {
+      search = search.where('categoria', '==', this.formValue.categoria);
+    }
+    return search;
   }
 
   sendImage(path: any, file: any) {

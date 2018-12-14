@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
   }
 
   verificaPesquisa(event: boolean) {
-    event === true ? (this.search = true) : (this.search = false);
+    this.search = event;
     this.eventosAsync = this.eventoService.getByDate();
   }
 }

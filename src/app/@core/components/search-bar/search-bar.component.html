@@ -10,7 +10,7 @@
             <input class="searchinput form-control" placeholder="Cidade" type="text" formControlName="local">
           </div>
           <select class="searchinput form-control" formControlName="categoria">
-            <option [value]="null">Selecionar categoria</option>
+            <option value="null">Selecionar categoria</option>
             <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
               {{categoria.nome }}
             </option>
@@ -21,11 +21,11 @@
   </nb-card-body>
 </nb-card>
 <ngx-spinner bdColor="rgba(255,255,255,0)" size="large" color="#3dcc6d" type="ball-scale-ripple-multiple"></ngx-spinner>
-<div *ngIf="eventos == 'NAO ENCONTRADO'; else encontrado">
+<div *ngIf="!eventos && search; else encontrado">
   <nb-card>
     <nb-card-body>
       <div class="text-center">
-        <h1>OPS! Nenhum evento foi encontrado.</h1>
+        <h1>Nenhum evento foi encontrado</h1>
       </div>
     </nb-card-body>
   </nb-card>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, tap, map, switchMap } from 'rxjs/operators';
 
 import { CategoriaService } from './../../../services/categoria.service';
 import { QueryService } from './../../../services/query.service';
@@ -15,8 +15,8 @@ export class SearchBarComponent implements OnInit {
   categorias: any;
   searchForm: FormGroup;
   eventos: any;
-  @Output()
-  pesquisa: EventEmitter<any> = new EventEmitter();
+  search: boolean = false;
+  @Output() pesquisa: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -32,65 +32,44 @@ export class SearchBarComponent implements OnInit {
       categoria: new FormControl('null', [Validators.required]),
     });
     this.categorias = this.categoriaservice.getCategoria();
-    this.formOnChanges();
+    this.onFormValueChanges();
   }
 
   date_sort(a: any, b: any) {
     return a.data.seconds - b.data.seconds;
   }
 
-  formOnChanges() {
-    const formChanges = this.searchForm.valueChanges;
-    formChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-      )
-      .subscribe(res => {
-        if (res.evento.length > 1 || res.local.length > 1) {
-          this.eventos = null;
-          this.pesquisa.emit(true);
-          this.spinner.show();
-          res.evento = res.evento.toLowerCase();
-          res.local = res.local.toLowerCase();
-          if (res.evento !== '') {
-            this.searchservice
-              .searchEvento(res.evento, 'nomeBusca')
-              .subscribe(res1 => {
-                if (res.local !== '') {
-                  res1 = res1.filter((el: any) => {
-                    return el.localBusca.indexOf(res.local) > -1;
-                  });
-                }
-                if (res.categoria !== 'null') {
-                  res1 = res1.filter((el: any) => {
-                    return el.categoria.indexOf(res.categoria) > -1;
-                  });
-                }
-                this.spinner.hide();
-                res1.length === 0
-                  ? (this.eventos = 'NAO ENCONTRADO')
-                  : (this.eventos = res1.sort(this.date_sort));
-              });
-          } else {
-            this.searchservice
-              .searchEvento(res.local, 'localBusca')
-              .subscribe(res2 => {
-                if (res.categoria !== 'null') {
-                  res2 = res2.filter((el: any) => {
-                    return el.categoria.indexOf(res.categoria) > -1;
-                  });
-                }
-                this.spinner.hide();
-                res2.length === 0
-                  ? (this.eventos = 'NAO ENCONTRADO')
-                  : (this.eventos = res2.sort(this.date_sort));
-              });
-          }
-        } else {
-          this.pesquisa.emit(false);
-          this.eventos = null;
-        }
-      });
+  onFormValueChanges() {
+    this.searchForm.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged((previous, current) => previous.evento === current.evento && previous.local === current.local && previous.categoria === current.categoria),
+      tap(this.notHasLenght),
+      filter(response => response.evento.length > 1 || response.local.length > 1 || response.categoria !== null),
+      tap(this.showSpinner),
+      map((response) => {
+        response.evento = response.evento.toLowerCase();
+        response.local = response.local.toLowerCase();
+        return response;
+      }),
+      switchMap((formValue) => {
+        return this.searchservice.searchEvento(formValue, ['nomeBusca', 'localBusca']);
+      }),
+    ).subscribe((response: any) => {
+      this.search = true;
+      this.eventos = response;
+      this.spinner.hide();
+    });
+  }
+
+  private notHasLenght = (response: any): void => {
+    if (response.evento.length < 1 && response.local.length > 1 && response.categoria === null) {
+      this.pesquisa.emit(false);
+      this.eventos = null;
+    }
+  }
+
+  private showSpinner = (): void => {
+    this.spinner.show();
+    this.pesquisa.emit(true);
   }
 }
