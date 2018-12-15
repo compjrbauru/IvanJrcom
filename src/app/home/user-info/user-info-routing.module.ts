@@ -16,6 +16,11 @@ const routes: Routes = [
     resolve: { userInfo: UserResolverService },
   },
   {
+    path: 'compra/:idCompra',
+    loadChildren: './user-compra/user-compra.module#UserCompraModule',
+    resolve: { userInfo: UserResolverService },
+  },
+  {
     path: '**',
     redirectTo: '',
   },

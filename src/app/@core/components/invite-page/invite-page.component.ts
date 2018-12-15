@@ -8,11 +8,13 @@ import * as jspdf from 'jspdf';
   styleUrls: ['./invite-page.component.scss'],
 })
 export class InvitePageComponent implements OnInit {
-  @Input()
-  evento: any;
+  @Input() ingresso: any;
+  @Input() compraVerificada: any;
+  @Input() userName: any;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   gerarPDF() {
     const ingresso = document.getElementById('ingresso');
@@ -23,7 +25,7 @@ export class InvitePageComponent implements OnInit {
       const pdf = new jspdf('p', 'mm', 'a4');
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save(this.evento.id);
+      pdf.save(ingresso.id);
     });
   }
 }

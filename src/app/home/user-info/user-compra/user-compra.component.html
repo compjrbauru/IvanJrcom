@@ -1,0 +1,71 @@
+<div *ngIf="(compraAsync | async) as compra">
+  <nb-card *ngIf="!compra.compraVerificada">
+    <nb-card-header>COMPRA NÃO VERIFICADA</nb-card-header>
+    <nb-card-body *ngIf="compra.tipo === 'Deposito'">
+      <H3>INSIRA O COMPROVANTE DE DEPOSITO AQUI: </H3>
+      <br>
+      <ngx-upload-file localName="Depositos" (uploadEmitter)="imagemupdate($event)"></ngx-upload-file>
+      <button class= "btn btn-primary">ENVIAR</button>
+    </nb-card-body>
+  </nb-card>
+  <nb-card accent="info">
+    <nb-card-header>Compra - {{ compra.nomeEvento }}</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-xl-3">
+          <p>
+            <span class="label">Número de ingressos: </span> <br />
+            <span class="value">{{ compra.idIngressos.length }}</span>
+          </p>
+        </div>
+        <div class="col-xl-3">
+          <p>
+            <span class="label">Valor Total: </span> <br />
+            <span class="value">{{ compra.valorTotal }}R$</span>
+          </p>
+        </div>
+        <div class="col-xl-3">
+          <p>
+            <span class="label">Meio de Pagamento: </span> <br />
+            <span class="value">{{ compra.tipo }}</span>
+          </p>
+        </div>
+        <div class="col-xl-2">
+          <p>
+            <span class="label">Compra Verificada: </span> <br />
+            <span
+              *ngIf="compra.compraVerificada; else: naoVerificada"
+              class="value"
+              >Sim</span
+            >
+            <ng-template #naoVerificada>
+              <span class="value">Não</span>
+            </ng-template>
+          </p>
+        </div>
+      </div>
+      <br />
+      <br />
+      <hr />
+      <div class="font-row font-main">
+        <div class="header">
+          <div class="name bold text-center">Ingressos</div>
+        </div>
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div *ngFor="let ingressoAsync of ingressosAsync">
+        <div *ngIf="(ingressoAsync | async) as ingresso">
+          <ngx-invite-page
+            [compraVerificada]="compra.compraVerificada"
+            [ingresso]="ingresso"
+            userName="{{userInfo.nome}} {{userInfo.sobrenome}}"
+          ></ngx-invite-page>
+        </div>
+        <hr />
+        <br />
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

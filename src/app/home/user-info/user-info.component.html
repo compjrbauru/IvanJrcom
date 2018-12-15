@@ -1,79 +1,138 @@
 <nb-card *ngIf="userInfo">
-  <nb-card-header>
-    <h3>Minha Conta</h3>
-  </nb-card-header>
-
+  <nb-card-header> <h3>Minha Conta</h3> </nb-card-header>
   <nb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <nb-card accent="info">
+          <nb-card-header>
+            Dados da conta
+            <div class="float-right">
+              <i class="nb-gear" routerLink="editar"></i>
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-xl-4">
+                <p>
+                  <span class="label">Usuário (e-mail): </span> <br />
+                  <span class="value">{{ userInfo.email }}</span>
+                </p>
+                <p>
+                  <span class="label">Nome: </span> <br />
+                  <span class="value"
+                    >{{ userInfo.nome }} {{ userInfo.sobrenome }}</span
+                  >
+                </p>
+                <p>
+                  <span class="label">Data de nascimento: </span> <br />
+                  <span class="value">{{ userInfo.nascimento }}</span>
+                </p>
+              </div>
 
-    <div class="div-pos-left div-size-1">
-      <nb-card accent="info">
-        <nb-card-header>
-          Dados da conta
-          <div class="float-right">
-            <i class="nb-gear" routerLink="editar"></i>
-          </div>
-        </nb-card-header>
-        <nb-card-body>
-          <p>
-            <span class="label">Usuário (e-mail): </span>
-            <span class="value">{{userInfo.email}}</span>
-          </p>
-          <p>
-            <span class="label">Nome: </span>
-            <br>
-            <span class="value">{{userInfo.nome}} {{userInfo.sobrenome}}</span>
-          </p>
-          <ng-container *ngIf="!userInfo.registroCompleto; else elseTemplate">
-            <p>
-              <span class="label" style="color: red;">COMPLETE SEU CADASTRO!</span>
-            </p>
-          </ng-container>
+              <ng-container *ngIf="!userInfo.registroCompleto; else elseTemplate">
+                <div class="col-xl-4">
+                  <p>
+                    <span class="label" style="color: red;">COMPLETE SEU CADASTRO!</span>
+                  </p>
+                </div>
+              </ng-container>
 
-          <ng-template #elseTemplate>
-            
-            <p>
-              <span class="label">Data de nascimento: </span>
-              <span class="value">{{userInfo.nascimento}}</span>
-            </p>
-            <p>
-              <span class="label">RG: </span>
-              <span class="value">{{userInfo.RG}}</span>
-            </p>
-            <p>
-              <span class="label">CPF: </span>
-              <span class="value">{{userInfo.CPF}}</span>
-            </p>
-            <p>
-              <span class="label">Telefone: </span>
-              <span class="value">({{userInfo.telefone.dd}}) {{userInfo.telefone.numero}}</span>
-            </p>
-            <p>
-              <span class="label">Estado: </span>
-              <br>
-              <span class="value">{{userInfo.Estado}}</span>
-            </p>
-            <p>
-              <span class="label">Cidade: </span>
-              <br>
-              <span class="value">{{userInfo.Cidade}}</span>
-            </p>
-          </ng-template>
-          
-        </nb-card-body>
-      </nb-card>
+              <ng-template #elseTemplate>
+                  <div class="col-xl-4">
+                    <p>
+                      <span class="label">RG: </span> <br />
+                      <span class="value">{{ userInfo.RG }}</span>
+                    </p>
+                    <p>
+                      <span class="label">CPF: </span> <br />
+                      <span class="value">{{ userInfo.CPF }}</span>
+                    </p>
+                    <p>
+                      <span class="label">Telefone: </span> <br />
+                      <span class="value"
+                        >({{ userInfo.telefone.dd }})
+                        {{ userInfo.telefone.numero }}</span
+                      >
+                    </p>
+                  </div>
+                  <div class="col-xl-4">
+                    <p>
+                      <span class="label">Estado: </span> <br />
+                      <span class="value">{{ userInfo.Estado }}</span>
+                    </p>
+                    <p>
+                      <span class="label">Cidade: </span> <br />
+                      <span class="value">{{ userInfo.Cidade }}</span>
+                    </p>
+                  </div>
+              </ng-template>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
-
-    <div class="div-post-left div-size-2">
-      <nb-card accent="info">
-        <nb-card-header>Compras - Situação</nb-card-header>
-        <nb-card-body>
-          <div *ngFor="let compra of comprasAsync | async">
-            <p>{{compra.nomeEvento}}</p>
-          </div>
-        </nb-card-body>
-      </nb-card>
+    <div class="row">
+      <div class="col-md-12">
+        <nb-card accent="info">
+          <nb-card-header>Compras - Situação </nb-card-header>
+          <nb-card-body>
+            <div *ngFor="let compra of (comprasAsync | async)">
+              <div class="content">
+                <div class="font-row font-main">
+                  <div class="header">
+                    <div class="name bold text-center">
+                      {{ compra.nomeEvento }}
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <div class="content">
+                  <div class="row">
+                    <div class="col-xl-3">
+                      <p>
+                        <span class="label">Número de ingressos: </span> <br />
+                        <span class="value">{{
+                          compra.idIngressos.length
+                        }}</span>
+                      </p>
+                    </div>
+                    <div class="col-xl-3">
+                      <p>
+                        <span class="label">Valor Total: </span> <br />
+                        <span class="value">{{ compra.valorTotal }}R$</span>
+                      </p>
+                    </div>
+                    <div class="col-xl-3">
+                      <p>
+                        <span class="label">Meio de Pagamento: </span> <br />
+                        <span class="value">{{ compra.tipo }}</span>
+                      </p>
+                    </div>
+                    <div class="col-xl-2">
+                        <p>
+                          <span class="label">Compra Verificada: </span> <br/>
+                          <span *ngIf="compra.compraVerificada; else naoVerificada" class="value">Sim</span>
+                          <ng-template #naoVerificada>
+                            <span class='value'>Não</span>
+                          </ng-template>
+                        </p>
+                      </div>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="row">
+                      <div class="col-12">
+                          <button class="btn btn-demo btn-primary btn-hero" [routerLink]="['/home/conta/compra', compra.id]">Ver mais</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
-
   </nb-card-body>
-
 </nb-card>

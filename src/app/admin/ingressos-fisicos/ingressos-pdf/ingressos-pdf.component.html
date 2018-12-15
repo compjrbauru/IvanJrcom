@@ -6,9 +6,9 @@
           <div id="ingresso">
             <div class="row">
               <div class="col-md-12 text-center">
-                <h1 class="text-center">{{ ingresso.idEvento | docToKey: 'Evento':'nome' | async | uppercase }}</h1>
+                <h1 class="text-center">{{ ingresso.nomeEvento | uppercase }}</h1>
                 <br>
-                <h1 class="text-center">{{ ingresso.idEvento | docToKey: 'Evento':'data' | async | secondsToDate | date: 'short' }}</h1>
+                <h1 class="text-center">{{ ingresso.dataEvento | secondsToDate | date: 'short' }}</h1>
               </div>
             </div>
             <br>
@@ -32,4 +32,4 @@
     </div>
   </div>
 </div>
-<button (click)="gerarPDF()" class="btn btn-primary" type="submit ">Imprimir Ingressos</button>
+<button [disabled]="!hasIngressos" (click)="gerarPDF()" class="btn btn-primary" type="submit">Imprimir Ingressos</button>
