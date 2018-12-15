@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -6,6 +7,7 @@ import { auth } from 'firebase/app';
 @Injectable()
 export class AuthService {
   token: string;
+  isLogged$ = new Subject<any>();
 
   constructor(
     private firebaseAuth: AngularFireAuth,
@@ -22,6 +24,7 @@ export class AuthService {
             return 'sucesso';
           } else {
             this.firebaseAuth.auth.signOut();
+            this.isLogged$.next(false);
             return 'Email nao verificado!';
           }
         },
@@ -32,8 +35,10 @@ export class AuthService {
   }
 
   signout() {
+    this.isLogged$.next(false);
     this.firebaseAuth.auth.signOut();
     this.token = null;
+    this.localStorage.clearSubscribe();
   }
 
   getToken() {
@@ -85,10 +90,11 @@ export class AuthService {
     return this.firebaseAuth.auth
       .signInWithPopup(new auth.FacebookAuthProvider())
       .then(
-        res => {
+        (res: any) => {
           const user = res.user;
           const info = res.additionalUserInfo;
           const profile: any = info.profile;
+          this.token = res.credential.accessToken;
 
           if (info.isNewUser) {
             const userdata = {
@@ -101,7 +107,6 @@ export class AuthService {
             };
             return userdata;
           } else {
-            this.getToken();
             return 'sucesso';
           }
         },
@@ -111,8 +116,12 @@ export class AuthService {
       );
   }
 
+  onStateChange() {
+    return this.isLogged$;
+  }
+
   setLocal(user: any) {
-    return this.localStorage.setItemSubscribe('user', user);
+    return this.localStorage.setItem('user', user).subscribe(() => this.isLogged$.next(true));
   }
 
   getResolvedUser() {

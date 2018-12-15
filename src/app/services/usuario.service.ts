@@ -16,7 +16,7 @@ export class UsuarioService {
     this.UsuarioCollection.doc(usuario.id).set({
       ...usuario,
     });
-    return observableOf([...usuario]);
+    return observableOf(usuario);
   }
 
   patchUsuario(usuario: any, id) {

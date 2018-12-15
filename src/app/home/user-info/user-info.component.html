@@ -28,33 +28,44 @@
                   <span class="value">{{ userInfo.nascimento }}</span>
                 </p>
               </div>
-              <div class="col-xl-4">
-                <p>
-                  <span class="label">RG: </span> <br />
-                  <span class="value">{{ userInfo.RG }}</span>
-                </p>
-                <p>
-                  <span class="label">CPF: </span> <br />
-                  <span class="value">{{ userInfo.CPF }}</span>
-                </p>
-                <p>
-                  <span class="label">Telefone: </span> <br />
-                  <span class="value"
-                    >({{ userInfo.telefone.dd }})
-                    {{ userInfo.telefone.numero }}</span
-                  >
-                </p>
-              </div>
-              <div class="col-xl-4">
-                <p>
-                  <span class="label">Estado: </span> <br />
-                  <span class="value">{{ userInfo.Estado }}</span>
-                </p>
-                <p>
-                  <span class="label">Cidade: </span> <br />
-                  <span class="value">{{ userInfo.Cidade }}</span>
-                </p>
-              </div>
+
+              <ng-container *ngIf="!userInfo.registroCompleto; else elseTemplate">
+                <div class="col-xl-4">
+                  <p>
+                    <span class="label" style="color: red;">COMPLETE SEU CADASTRO!</span>
+                  </p>
+                </div>
+              </ng-container>
+
+              <ng-template #elseTemplate>
+                  <div class="col-xl-4">
+                    <p>
+                      <span class="label">RG: </span> <br />
+                      <span class="value">{{ userInfo.RG }}</span>
+                    </p>
+                    <p>
+                      <span class="label">CPF: </span> <br />
+                      <span class="value">{{ userInfo.CPF }}</span>
+                    </p>
+                    <p>
+                      <span class="label">Telefone: </span> <br />
+                      <span class="value"
+                        >({{ userInfo.telefone.dd }})
+                        {{ userInfo.telefone.numero }}</span
+                      >
+                    </p>
+                  </div>
+                  <div class="col-xl-4">
+                    <p>
+                      <span class="label">Estado: </span> <br />
+                      <span class="value">{{ userInfo.Estado }}</span>
+                    </p>
+                    <p>
+                      <span class="label">Cidade: </span> <br />
+                      <span class="value">{{ userInfo.Cidade }}</span>
+                    </p>
+                  </div>
+              </ng-template>
             </div>
           </nb-card-body>
         </nb-card>
