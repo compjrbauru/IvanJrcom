@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
                 'Registro incompleto',
                 'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
                 false,
+                { timeOut: 10750, easeTime: 1000 },
               );
             }
             this.authService.setLocal(res1[0]);
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
             'Registro incompleto',
             'Por favor, para realizar compras complete seu registro nas configurações de usuário.',
             false,
+            { timeOut: 10750, easeTime: 1000 },
           );
         } else {
           this.notificacao.ngxtoaster('Erro Login', 'Login Falhou!', false);
