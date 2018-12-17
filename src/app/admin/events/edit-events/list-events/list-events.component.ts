@@ -19,16 +19,15 @@ import { QueryService } from './../../../../services/query.service';
 })
 export class ListEventsComponent implements OnInit {
   form: any = {};
+  formDeleteValue: any = [];
   categorias: any;
   categoria: any;
   eventoAsync: Observable<any>;
   eventoResolver: any = [];
   dependencies: any;
   update: any;
-  @ViewChild(UploadFileComponent)
-  private upload: UploadFileComponent;
-  @ViewChild(MapComponent)
-  private map: MapComponent;
+  @ViewChild(UploadFileComponent) private upload: UploadFileComponent;
+  @ViewChild(MapComponent) private map: MapComponent;
   categoriaSelected: any = {};
 
   constructor(
@@ -94,18 +93,34 @@ export class ListEventsComponent implements OnInit {
     }
   }
 
-  deleteEvento(form: any) {
-    this.categoriaService.getById(form.categoria)
-      .subscribe(categoria => {
-        this.categoriaService.patchDeleteEventCategoria(categoria, form);
-        this.eventoService.removeData(form.id);
+  deleteEvento(formValue: any) {
+    this.formDeleteValue = formValue;
+    const dialogRef = this.dialog.open(ConfirmationModalComponent, {
+      width: '40%',
+      data: {
+        header: 'Aviso!',
+        text: 'Se você excluir o evento excluirá todos os registros ligados à este evento como: ingressos, imagens e registros de compra, tem certeza que deseja excluir?',
+      },
+      disableClose: true,
+    });
+    return dialogRef.afterClosed().pipe(
+      tap(this.deleteEventoAll),
+    );
+  }
+
+  private deleteEventoAll = (response: any): void => {
+    if (response === true) {
+      this.categoriaService.getById(this.formDeleteValue.categoria).subscribe(categoria => {
+        this.categoriaService.patchDeleteEventCategoria(categoria, this.formDeleteValue);
+        this.eventoService.removeData(this.formDeleteValue.id);
         if (this.form['formEvent'].value.pathurl !== '' && this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl) {
-          this.queryService.deleteImage(form.pathurl).subscribe();
+          this.queryService.deleteImage(this.formDeleteValue.pathurl).subscribe();
           this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
         } else {
           this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
         }
       });
+    }
   }
 
   mapUpdate(event: any) {
