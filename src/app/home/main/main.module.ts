@@ -20,7 +20,6 @@ const MAIN_MODULES = [
   SearchBarModule,
   ShowEvento2Module,
   RouterModule,
-  SobreNosModule,
   CategoriasDestaquModule,
 ];
 

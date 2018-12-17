@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SobreService } from '../../../services/sobre.service';
 
 @Component({
   selector: 'ngx-footer',
   styleUrls: ['./footer.component.scss'],
-  template: `
-  <span class="created-by">Criado com ♥ por <b><a href="http://www.jrcom.com.br/"
-  target="_blank">Jr.Com </a></b>2018</span>
-`,
+  templateUrl: './footer.component.html',
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+  sobre;
+
+  constructor( private sobreService: SobreService) { }
+
+  ngOnInit(): void {
+    this.sobreService.getSobre().subscribe(res => {
+      this.sobre = res['sobre'];
+    });
+  }
 }

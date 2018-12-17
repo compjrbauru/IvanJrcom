@@ -1,25 +1,20 @@
-<nb-card>
-  <nb-card-body>
-    <form [formGroup]="searchForm">
-      <div class="row">
-        <div class="col-sm-12 form-inline">
-          <div class="has-search-icon">
-            <input class="searchinput form-control" placeholder="Eventos" type="text" formControlName="evento">
-          </div>
-          <div class="has-location-icon">
-            <input class="searchinput form-control" placeholder="Cidade" type="text" formControlName="local">
-          </div>
-          <select class="searchinput form-control" formControlName="categoria">
-            <option [value]="null">Selecionar categoria</option>
-            <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
-              {{categoria.nome }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </form>
-  </nb-card-body>
-</nb-card>
+
+<form class="home-content" style="padding-bottom: 25px;" [formGroup]="searchForm">
+  <div class="col-sm-12 form-inline">
+    <div class="has-search-icon">
+      <input class="searchinput form-control" placeholder="Eventos" type="text" formControlName="evento">
+    </div>
+    <div class="has-location-icon">
+      <input class="searchinput form-control" placeholder="Cidade" type="text" formControlName="local">
+    </div>
+    <select class="searchinput form-control" formControlName="categoria">
+      <option [value]="null">Selecionar categoria</option>
+      <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
+        {{categoria.nome }}
+      </option>
+    </select>
+  </div>
+</form>
 <ngx-spinner bdColor="rgba(255,255,255,0)" size="large" color="#3dcc6d" type="ball-scale-ripple-multiple"></ngx-spinner>
 <div *ngIf="eventos == 'NAO ENCONTRADO'; else encontrado">
   <nb-card>

@@ -1,13 +1,19 @@
 <div class="header-container"
      [class.left]="position === 'normal'"
      [class.right]="position === 'inverse'">
-  <div class="logo-containter">
+  <!-- <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
     <div class="logo" (click)="goToHome()">Ivan<span>-JRCOM</span></div>
   </div>
- <!--  <ngx-theme-switcher></ngx-theme-switcher> -->
+  <ngx-theme-switcher></ngx-theme-switcher> -->
   <button class="btn btn-hero-secondary" (click)="admin()">Admin</button>
 </div>
+
+
+<div class="header-container">
+  <img class="main-logo-img" (click)="goToHome()" src="../../../../assets/lemon_logo_transparent.png">
+</div>
+
 
 <div class="header-container">
   <ng-container *ngIf="!logado; else logadoTemplate">

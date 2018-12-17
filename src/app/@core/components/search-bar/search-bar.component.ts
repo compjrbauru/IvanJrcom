@@ -9,7 +9,7 @@ import { QueryService } from './../../../services/query.service';
 @Component({
   selector: 'ngx-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
+  styleUrls: ['./search-bar.component.scss', '../../../../style.css'],
 })
 export class SearchBarComponent implements OnInit {
   categorias: any;

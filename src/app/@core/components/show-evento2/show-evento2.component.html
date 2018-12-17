@@ -1,7 +1,9 @@
 <div class="row">
   <div *ngFor="let evento of eventos; index as i" class="col-md-4">
     <div class="card img">
-      <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%; max-height:180px">
+      <div class="img-container">
+        <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap">
+      </div>
       <button *ngIf="cosmic; else default" [ngClass]="mouseOvered[i] ?'btn btn-hero-info btn-demo' : 'btn btn-hero-danger btn-demo'"
         (mouseover)="mouseOvered[i]=true" (mouseout)="mouseOvered[i]=false" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
       <ng-template #default>

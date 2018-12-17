@@ -7,6 +7,22 @@
   justify-content: space-between;
   width: 100%;
 
+  .main-logo-text {
+    font-size: 1.75rem;
+    transition: all .2s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+  }
+
+  .main-logo-img {
+    height: 60px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   .left {
     display: flex;
     width: 100%;

@@ -21,16 +21,7 @@ import { StateService } from '../../../@core/data/state.service';
         <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar"
-                   tag="menu-sidebar"
-                   responsive
-                   [end]="sidebar.id === 'end'">
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-        </nb-sidebar-header>
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
-
-      <nb-layout-column class="main-content">
+      <nb-layout-column [ngClass]="background" class="main-content">
         <ng-content select="router-outlet"></ng-content>
       </nb-layout-column>
 
@@ -92,7 +83,7 @@ export class SampleLayoutComponent implements OnDestroy {
   ];
   layout: any = {};
   sidebar: any = {};
-
+  background = 'noise';
   private alive = true;
 
   currentTheme: string;
@@ -104,6 +95,7 @@ export class SampleLayoutComponent implements OnDestroy {
     protected bpService: NbMediaBreakpointsService,
     protected sidebarService: NbSidebarService,
   ) {
+
     this.stateService
       .onLayoutState()
       .pipe(takeWhile(() => this.alive))

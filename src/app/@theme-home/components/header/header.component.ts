@@ -51,7 +51,8 @@ export class HeaderComponent implements OnInit {
       }),
       mergeMap(() => this.authService.getResolvedUser()),
     ).subscribe( (user) => {
-      this.menu.push(this.conta);
+      if (!this.logado)
+        this.menu.push(this.conta);
       this.user = user;
       this.logado = true;
     });
@@ -72,7 +73,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    this.route.navigate(['/home']);
   }
 
   startSearch() {

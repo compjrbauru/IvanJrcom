@@ -7,6 +7,48 @@
     flex: 0.15 !important;
   }
 
+  .quadrados {
+    background-image: url('../../../../assets/qbkls.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .carbon {
+    background-image: url('../../../../assets/subtle_carbon_@2X.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .carbon1 {
+    background-image: url('../../../../assets/subtle_carbon.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .office2 {
+    background-image: url('../../../../assets/office.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .bedge {
+    background-image: url('../../../../assets/bedge_grunge.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .grid {
+    background-image: url('../../../../assets/grid.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .noise {
+    background-image: url('../../../../assets/light_noise_diagonal.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
   nb-sidebar.settings-sidebar {
     $sidebar-width: 7.5rem;
 
