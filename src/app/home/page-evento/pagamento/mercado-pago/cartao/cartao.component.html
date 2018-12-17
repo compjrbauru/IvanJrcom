@@ -1,0 +1,52 @@
+<form [action]="postLink" [formGroup]="cardForm" #payForm method="post" id="pay" name="pay">
+    <fieldset>
+        <ul>
+            <li>
+                <label for="cardNumber">Número do Cartão:</label>
+                <input type="text" formControlName="cardNumber" id="cardNumber" data-checkout="cardNumber" placeholder="4509 9535 6623 3704"
+                    onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                    onDrag="return false" onDrop="return false" autocomplete=off />
+            </li>
+            <li>
+                <label for="securityCode">Código de Segurança:</label>
+                <input type="text" formControlName="securityCode" id="securityCode" data-checkout="securityCode"
+                    placeholder="123" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                    onDrag="return false" onDrop="return false" autocomplete=off />
+            </li>
+            <li>
+                <label for="cardExpirationMonth">Mês de Expiração:</label>
+                <input type="text" formControlName="cardExpirationMonth" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+                    placeholder="12" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                    onDrag="return false" onDrop="return false" autocomplete=off />
+            </li>
+            <li>
+                <label for="cardExpirationYear">Ano de Expiração:</label>
+                <input type="text" formControlName="cardExpirationYear" id="cardExpirationYear" data-checkout="cardExpirationYear"
+                    placeholder="2025" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false"
+                    onDrag="return false" onDrop="return false" autocomplete=off />
+            </li>
+            <li>
+                <label for="cardholderName">Nome do proprietário do Cartão:</label>
+                <input type="text" formControlName="cardholderName" id="cardholderName" data-checkout="cardholderName"
+                    placeholder="APRO" />
+            </li>
+            <li>
+                <label for="docType">Tipo de Documento:</label>
+                <select id="docType" data-checkout="docType"></select>
+            </li>
+            <li>
+                <label for="docNumber">Número do Documento:</label>
+                <input type="text" formControlName="docNumber" id="docNumber" data-checkout="docNumber" placeholder="12345678" />
+            </li>
+            <li [formGroup]="paymentForm">
+                <label for="installments">Parcelas:</label>
+                <select formControlName="installments">
+                    <option [value]=null></option>
+                    <option [ngValue]="p.installments" *ngFor="let p of parcelas">{{ p.recommended_message }}</option>
+                </select>
+            </li>
+        </ul>
+        <input #paymentMethod formControlName="paymentMethodId" type="hidden" name="paymentMethodId" />
+        <input type="submit" [disabled]="!cardForm.valid" value="PAY!" (click)="sendPaymentInfo($event)" />
+    </fieldset>
+</form>
