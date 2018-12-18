@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { tap, switchMap, filter } from 'rxjs/operators';
+import { tap, switchMap, filter, takeLast, catchError } from 'rxjs/operators';
 import { UploadFileComponent } from '../../../@core/components/upload-file/upload-file.component';
 import { MapComponent } from '../../../@core/components/map/map.component';
 import { EventoService } from '../../../services/evento.service';
@@ -94,6 +94,7 @@ export class EditEventsComponent implements OnInit {
   }
 
   deleteEvento(formValue: any) {
+    let hasDeleted: boolean = false;
     this.formDeleteValue = formValue;
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
       width: '40%',
@@ -104,13 +105,16 @@ export class EditEventsComponent implements OnInit {
       disableClose: true,
     });
     dialogRef.afterClosed().pipe(
+      takeLast(1),
       filter(response => response === true),
       switchMap(() => this.categoriaService.getById(this.formDeleteValue.categoria)),
       tap(this.patchDeleteCategoria),
-      tap(this.deleteImage),
       switchMap(() => this.eventoService.removeDataCascade(this.formDeleteValue.id)),
     ).subscribe(() => {
+      this.form['formEvent'].reset();
       this.eventoService.removeData(this.formDeleteValue.id);
+      this.deleteImage(hasDeleted);
+      hasDeleted = true;
     });
   }
 
@@ -118,13 +122,22 @@ export class EditEventsComponent implements OnInit {
     this.categoriaService.patchDeleteEventCategoria(categoria, this.formDeleteValue);
   }
 
-  private deleteImage = (): void => {
-    if (this.form['formEvent'].value.pathurl !== '' && this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl) {
-      this.queryService.deleteImage(this.formDeleteValue.pathurl).pipe(
-        switchMap(() => this.queryService.deleteImage(this.eventoResolver.pathurl)),
-      ).subscribe();
-    } else {
-      this.queryService.deleteImage(this.eventoResolver.pathurl).subscribe();
+  deleteImage(hasDeleted: boolean) {
+    if (!hasDeleted) {
+      if (this.form['formEvent'].value.pathurl !== '' && this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl) {
+        this.queryService.deleteImage(this.formDeleteValue.pathurl).pipe(
+          catchError(error => error),
+          switchMap(() => {
+            return this.queryService.deleteImage(this.eventoResolver.pathurl).pipe(
+              catchError(error => error),
+            );
+          }),
+        ).subscribe();
+      } else if (this.eventoResolver.pathurl) {
+        this.queryService.deleteImage(this.eventoResolver.pathurl).pipe(
+          catchError(error => error),
+        ).subscribe();
+      }
     }
   }
 

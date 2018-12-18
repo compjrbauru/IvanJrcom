@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
@@ -75,7 +75,7 @@ export class EventoService {
   }
 
   removeDataCascade(id: string): Observable<any> {
-    return forkJoin(
+    return combineLatest(
       this.db.collection(`/Compras`, ref => ref.where('idEvento', '==', id)).valueChanges(),
       this.db.collection(`/Depositos`, ref => ref.where('idEvento', '==', id)).valueChanges(),
       this.db.collection(`/IngressosFisicos`, ref => ref.where('idEvento', '==', id)).valueChanges(),
@@ -85,18 +85,18 @@ export class EventoService {
     );
   }
 
-  private removeCascade = ([compras, depositos, ingressosFisicos, ingressos]): any => {
+  private removeCascade = ([compras, depositos, ingressosFisicos, ingressos]: any[]): any => {
     compras.forEach(compra => {
-      this.db.doc(compra.id).delete();
+      this.db.collection('Compras').doc(compra.id).delete();
     });
     depositos.forEach(deposito => {
-      this.db.doc(deposito.id).delete();
+      this.db.collection('Depositos').doc(deposito.id).delete();
     });
     ingressosFisicos.forEach(ingressoFisico => {
-      this.db.doc(ingressoFisico.id).delete();
+      this.db.collection(`IngressosFisicos`).doc(ingressoFisico.id).delete();
     });
     ingressos.forEach(ingresso => {
-      this.db.doc(ingresso.id).delete();
+      this.db.collection('Ingressos').doc(ingresso.id).delete();
     });
   }
 

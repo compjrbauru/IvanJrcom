@@ -11,7 +11,6 @@ import { MapModule } from '../../../@core/components/map/map.module';
 import { ThemeModule } from '../../../@theme-admin/theme.module';
 
 
-const EDITEVENTS_COMPONENTS = [];
 
 @NgModule({
   entryComponents: [
