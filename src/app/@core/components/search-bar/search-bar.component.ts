@@ -44,25 +44,23 @@ export class SearchBarComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged((previous, current) => previous.evento === current.evento && previous.local === current.local && previous.categoria === current.categoria),
       tap(this.notHasLenght),
-      filter(response => response.evento.length > 1 || response.local.length > 1 || response.categoria !== null),
+      filter(response => response.evento.length > 1 || response.local.length > 1 || response.categoria !== 'null'),
       tap(this.showSpinner),
       map((response) => {
         response.evento = response.evento.toLowerCase();
         response.local = response.local.toLowerCase();
         return response;
       }),
-      switchMap((formValue) => {
-        return this.searchservice.searchEvento(formValue, ['nomeBusca', 'localBusca']);
-      }),
-    ).subscribe((response: any) => {
-      this.search = true;
-      this.eventos = response;
+      switchMap((formValue) => this.searchservice.searchEvento(formValue, ['nomeBusca', 'localBusca'])),
+    ).subscribe((response: any[]) => {
+      response.length ? this.eventos = response : null;
+      this.search = this.eventos ? true : false;
       this.spinner.hide();
     });
   }
 
   private notHasLenght = (response: any): void => {
-    if (response.evento.length < 1 && response.local.length > 1 && response.categoria === null) {
+    if (response.evento.length < 1 && response.local.length < 1 && response.categoria === 'null') {
       this.pesquisa.emit(false);
       this.eventos = null;
     }

@@ -3,7 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 
 @Injectable()
 export class QueryService {
@@ -70,23 +70,17 @@ export class QueryService {
   }
 
   searchEvento(formValue: any, order: string[]): Observable<any> {
-    this.formValue = formValue;
-    this.order = order;
-    return this.db.collection('/Eventos', this.search).valueChanges();
-  }
-
-  private search = (): any => {
-    let search: any = this.db.collection('/Evento').ref;
-    if (this.formValue.evento !== '') {
-      search = search.orderBy(this.order[0]).startAt(this.formValue.evento).endAt(`${this.formValue.evento}\uf8ff`);
+    const EventosAsync: any = [];
+    if (formValue.evento !== '') {
+      EventosAsync.push(this.db.collection('/Evento', ref => ref.orderBy(order[0]).startAt(formValue.evento).endAt(`${formValue.evento}\uf8ff`)).valueChanges());
     }
-    if (this.formValue.local !== '') {
-      search = search.orderBy(this.order[1]).startAt(this.formValue.local).endAt(`${this.formValue.local}\uf8ff`);
+    if (formValue.local !== '') {
+      EventosAsync.push(this.db.collection('/Evento', ref => ref.orderBy(order[1]).startAt(formValue.local).endAt(`${formValue.local}\uf8ff`)).valueChanges());
     }
-    if (this.formValue.categoria !== null) {
-      search = search.where('categoria', '==', this.formValue.categoria);
+    if (formValue.categoria !== null) {
+      EventosAsync.push(this.db.collection('/Evento', ref => ref.where('categoria', '==', formValue.categoria)).valueChanges());
     }
-    return search;
+    return merge(...EventosAsync);
   }
 
   sendImage(path: any, file: any) {

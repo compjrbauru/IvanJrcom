@@ -10,8 +10,8 @@
             <input class="searchinput form-control" placeholder="Cidade" type="text" formControlName="local">
           </div>
           <select class="searchinput form-control" formControlName="categoria">
-            <option value="null">Selecionar categoria</option>
-            <option *ngFor="let categoria of categorias | async" [value]="categoria.nome">
+            <option [value]="null">Selecionar categoria</option>
+            <option *ngFor="let categoria of categorias | async" [value]="categoria.id">
               {{categoria.nome }}
             </option>
           </select>
