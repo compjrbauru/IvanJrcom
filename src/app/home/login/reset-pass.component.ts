@@ -15,7 +15,7 @@ import { MatDialogRef } from '@angular/material';
     </div>
     <div class="modal-body">
         <label for="email">E-mail</label>
-        <input [formControl]= "email" id="email" type="email" required 
+        <input [formControl]= "email" id="email" type="email" required
          placeholder="E-mail" class="form-control"/>
     </div>
     <div class="modal-footer">
@@ -31,7 +31,7 @@ export class ResetPassComponent {
     public dialogRef: MatDialogRef<any>,
     private authService: AuthService,
     private notificacao: NotificacaoService,
-  ) { 
+  ) {
     this.email = new FormControl('', Validators.email);
   }
 
