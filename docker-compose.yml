@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+  ### NodeJS Container ###########################
+  nodejs:
+    build:
+      context: ./nodejs
+    network_mode: host
+    ports:
+      - '4200:4200'
+    volumes:
+      - './:/~/Documents/Aplicativo'
+      - '~/Documents/Aplicativo'
+    tty: false
