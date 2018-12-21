@@ -45,15 +45,15 @@
         </div>
         <div class="col-md-4 text-center">
           <label><strong>Ingressos</strong></label>
-          <p *ngIf="compra.masculino > 0">Masculino:{{compra.masculino}}</p>
+          <p *ngIf="compra.ingressos.masculino > 0">{{compra.ingressos.masculino}} x Masculino</p>
           <br>
-          <p *ngIf="compra.feminino > 0">Feminino{{compra.feminino}}</p>
+          <p *ngIf="compra.ingressos.feminino > 0">{{compra.ingressos.feminino}} x Feminino</p>
           <br>
-          <p *ngIf="compra.unisex > 0">Unisex{{compra.unisex}}</p>
+          <p *ngIf="compra.ingressos.unisex > 0">{{compra.ingressos.unisex}} x Unisex</p>
         </div>
         <div class="col-md-4 text-center">
           <label><strong>Valor Total</strong></label>
-          <p>{{compra.preco}}</p>
+          <p>{{compra.valorTotal}}</p>
         </div>
         <div class="col-md-12">
           <form [formGroup]="reCaptcha">
@@ -100,7 +100,7 @@
         <nb-card-body>
           <div class="content">
             <div class="header">
-              <ngx-stripe></ngx-stripe>
+              <ngx-boleto-mercadopago [userData]="userInfo" [paymentData]="compra"></ngx-boleto-mercadopago>
             </div>
           </div>
         </nb-card-body>

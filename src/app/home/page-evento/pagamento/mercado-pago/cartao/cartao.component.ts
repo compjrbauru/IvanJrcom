@@ -1,37 +1,27 @@
-import { AbstractControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { config } from '../../../../../config/config';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { MercadoPagoBase } from './../mercado-pago-base';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'ngx-mercadopago-cartao',
   templateUrl: './cartao.component.html',
   styleUrls: ['./cartao.component.scss'],
 })
-export class CartaoComponent implements OnInit, OnChanges {
-  @Input() userData;
-  @Input() paymentData;
+export class CartaoComponent extends MercadoPagoBase implements OnInit {
   @ViewChild('payForm') HTML_PAY_FORM;
-  MERCADOPAGO: any;
-  doSubmit = false;
-  paymentMethodControl: AbstractControl;
   cardForm: FormGroup;
-  postLink = config.mercadopago.paymentLink;
-  parcelas;
-  paymentForm: FormGroup;
+  parcelas; // Informações das parcelas para ser mostrado no select
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-  ) { }
-
-  ngOnInit() {
-    this.MERCADOPAGO = (<any>window).Mercadopago;
-    this.MERCADOPAGO.setPublishableKey(config.mercadopago.publicKey);
+  ) {
+    super();
     this.MERCADOPAGO.getIdentificationTypes();
 
     // Form para ser usado com o SDK do mercado livre para gerar um token do cartao de uso único
     this.cardForm = this.formBuilder.group({
+      // Change hardcoded strings to null
       cardNumber: ['4509 9535 6623 3704', Validators.required],
       securityCode: ['123', Validators.required],
       cardExpirationMonth: ['12', Validators.required],
@@ -45,31 +35,28 @@ export class CartaoComponent implements OnInit, OnChanges {
     // Form com todos os dados para enviar para o beq
     this.paymentForm = this.formBuilder.group({
       payer: this.formBuilder.group({
-        email: ['test_user_19653727@testuser.com', Validators.required],
+        email: [, Validators.required],
       }),
-      token: ['', Validators.required],
+      token: [, Validators.required],
       issuer_id: [],
       installments: [, Validators.required],
       payment_method_id: [, Validators.required],
       transaction_amount: [, Validators.required],
       description: [, Validators.required],
-      statement_descriptor: ['IVAN EVENTOS', Validators.required],
+      statement_descriptor: ['LemonParty eventos', Validators.required],
       additional_info: this.formBuilder.group({
         items: [, Validators.required],
         payer: this.formBuilder.group({
-          first_name: [this.userData.nome, Validators.required],
-          last_name: [this.userData.sobrenome, Validators.required],
+          first_name: [, Validators.required],
+          last_name: [, Validators.required],
           phone: this.formBuilder.group({
-            area_code: [this.userData.telefone.dd, Validators.required],
-            number: [this.userData.telefone.numero, Validators.required],
+            area_code: [, Validators.required],
+            number: [, Validators.required],
           }),
           address: this.formBuilder.group({
-            street_name: ['rua carai', Validators.required],
-            street_number: [123, Validators.required],
-            zip_code: ['5700', Validators.required],
-            // neighborhood: ['Bonfim', Validators.required],
-            // city: ['Osasco', Validators.required],
-            // federal_unit: ['SP', Validators.required],
+            street_name: [, Validators.required],
+            street_number: [, Validators.required],
+            zip_code: [, Validators.required],
           }),
         }),
       }),
@@ -89,7 +76,7 @@ export class CartaoComponent implements OnInit, OnChanges {
             this.cardForm.get('paymentMethodId').setValue(response[0].id);
             this.paymentForm.get('payment_method_id').setValue(response[0].id);
           } else {
-            // Cartao invalido / nao aceito
+            // Cartao invalido / nao aceito - avisa o erro pro usuario
           }
         });
 
@@ -101,47 +88,27 @@ export class CartaoComponent implements OnInit, OnChanges {
           if (status === 200) {
             this.parcelas = response[0].payer_costs;
             this.paymentForm.get('issuer_id').setValue(response[0].issuer.id);
-            console.log(response);
-            console.log(this.paymentForm.value);
           }
         });
       }
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('paymentData' in changes && this.paymentForm) {
-      // Set payment data in forms
-      const data = changes.paymentData.currentValue;
-      console.log(data);
-      this.paymentForm.get('transaction_amount').setValue(data.valorTotal);
-      this.paymentForm.get('description').setValue('Ingressos para ' + data.evento.nome);
-      const items_array = this.paymentForm.get('additional_info').get('items');
-      items_array.setValue(this.createItemData(data));
-    }
-  }
-
-  // Cria objeto para form array
-  createItemData(data) {
-    const ingressos = data.ingressos;
-    const items = [];
-    for (const key in ingressos) {
-      if (ingressos.hasOwnProperty(key)) {
-        if (ingressos[key] > 0) {
-          items.push({
-            id: data.evento.id,
-            title: data.evento.nome,
-            picture_url: data.evento.url,
-            description: 'Ingresso ' + key,
-            category_id: 'tickets',
-            quantity: ingressos[key],
-            unit_price: data.evento.ingressos[key].valor,
-          });
-        }
-      }
-    }
-
-    return items;
+  ngOnInit(): void {
+    this.paymentForm.get('payer').get('email').setValue('TEST@GMAIL.COM');
+    const payer = this.paymentForm.get('additional_info').get('payer');
+    payer.get('first_name').setValue(this.userData.nome);
+    payer.get('last_name').setValue(this.userData.sobrenome);
+    const address = payer.get('address');
+    address.get('street_name').setValue('rua Paulo augusto Fonseca');
+    address.get('street_number').setValue(123);
+    address.get('zip_code').setValue('17012636');
+    // address.get('neighborhood').setValue(this.userData);
+    // address.get('city').setValue(this.userData.Cidade);
+    // address.get('federal_unit').setValue(this.userData.Estado);
+    const phone = payer.get('phone');
+    phone.get('area_code').setValue(this.userData.telefone.dd);
+    phone.get('number').setValue(this.userData.telefone.numero);
   }
 
   // Executa todo o processo de pagamento, primeiro enviando os dados do cartao para o MP e depois pro back
@@ -151,32 +118,21 @@ export class CartaoComponent implements OnInit, OnChanges {
       this.MERCADOPAGO.createToken(this.HTML_PAY_FORM.nativeElement, (status, response) => {
         if (status !== 200 && status !== 201) {
           alert('Algum erro nos dados do cartao!!');
+          // Notificar usuario do erro
         } else {
-          // const card = document.createElement('input');
-          // card.setAttribute('name', 'token');
-          // card.setAttribute('type', 'hidden');
-          // card.setAttribute('value', response.id);
-          // this.paymentForm.nativeElement.appendChild(card);
           this.paymentForm.get('token').setValue(response.id);
           this.doSubmit = true;
-          console.log(this.paymentForm.value);
           this.http.post(this.postLink, this.paymentForm.value, {headers: this.getHeaders()}).subscribe(succ => {
+            // Redirecionar para tela compra efetuada e estado de pagamento
             console.log(succ);
-          }, fail => console.log(fail));
-          // this.paymentForm.nativeElement.submit();
+          }, fail => {
+            // Redirecionar para tela de erro
+            console.log(fail);
+          });
         }
       });
 
       return false;
     }
   }
-
-  getHeaders() {
-    return new HttpHeaders({
-      // 'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json; charset=utf-8',
-      'Accept':       'application/json',
-    });
-  }
-
 }

@@ -1,3 +1,4 @@
+import { MercadoPagoModule } from './mercado-pago/mercado-pago.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgxCaptchaModule } from 'ngx-captcha';
@@ -15,6 +16,7 @@ const PAGAMENTO_IMPORTS = [
   StripeModule,
   DepositoConfirmationModule,
   NgxCaptchaModule,
+  MercadoPagoModule,
 ];
 
 @NgModule({
