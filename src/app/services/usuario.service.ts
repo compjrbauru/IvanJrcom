@@ -11,6 +11,10 @@ export class UsuarioService {
 
   constructor(private db: AngularFirestore) { }
 
+  getAll() {
+    return this.UsuarioCollection.valueChanges();
+  }
+
   addUsuario(usuario: any): Observable<any> {
     usuario.id = this.db.createId();
     this.UsuarioCollection.doc(usuario.id).set({

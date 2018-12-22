@@ -106,6 +106,34 @@ export class TableService {
       },
     },
   };
+  accounts = {
+    columns: {
+      nome: {
+        title: 'Nome',
+        type: 'string',
+        editable: false,
+      },
+      email: {
+        title: 'Email',
+        type: 'string',
+        editable: false,
+      },
+      role: {
+        title: 'Cargo',
+        type: 'string',
+        editor: { // Opcoes de edicao para a coluna
+          type: 'list', // Tipo lista (select)
+          config: {
+            list: [
+              { title: 'cliente', value: 'cliente' },
+              { title: 'admin', value: 'admin' },
+              { title: 'superadmin', value: 'superadmin' },
+            ],
+          },
+        },
+      },
+    },
+  };
 
   constructor() { }
 
@@ -138,6 +166,10 @@ export class TableService {
       }
       case 'contasDepositoEdit': {
         column = this.contasDepositoEdit;
+        break;
+      }
+      case 'accounts': {
+        column = this.accounts;
         break;
       }
     }
