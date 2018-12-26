@@ -79,7 +79,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-home',
   },
   {
-    title: 'Admins',
+    title: 'Usuários',
     link: '/admin/informacoes-usuario',
     icon: 'nb-gear',
   },

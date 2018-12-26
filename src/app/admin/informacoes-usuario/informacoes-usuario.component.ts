@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./informacoes-usuario.component.scss'],
 })
 export class InformacoesUsuarioComponent implements OnInit {
-  users;
+  users: any;
 
   constructor(
     private usuario: UsuarioService,
@@ -20,9 +20,9 @@ export class InformacoesUsuarioComponent implements OnInit {
   }
 
   editAccount(data) {
-    this.usuario.patchUsuario(data.event.newData, data.event.newData.id).then( () => {
+    this.usuario.patchUsuario(data.event.newData, data.event.newData.id).subscribe( () => {
       this.notificacao.ngxtoaster('Usuário', 'Editado com Sucesso!', true);
-    }).catch( fail => {
+    }, fail => {
       this.notificacao.ngxtoaster('Usuário', 'Falha na edição: ' + fail, false);
     });
   }
