@@ -34,6 +34,10 @@ const routes: Routes = [
         loadChildren: './edicao-home/edicao-home.module#EdicaoHomeModule',
       },
       {
+        path: 'informacoes-usuario',
+        loadChildren: './informacoes-usuario/informacoes-usuario.module#InformacoesUsuarioModule',
+      },
+      {
         path: '**',
         redirectTo: 'main',
       },

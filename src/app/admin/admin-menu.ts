@@ -78,4 +78,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/admin/edicao-home',
     icon: 'nb-home',
   },
+  {
+    title: 'Usuários',
+    link: '/admin/informacoes-usuario',
+    icon: 'nb-gear',
+  },
 ];
