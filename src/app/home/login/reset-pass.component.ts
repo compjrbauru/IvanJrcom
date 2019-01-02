@@ -1,3 +1,4 @@
+import { FormControl, Validators } from '@angular/forms';
 import { NotificacaoService } from '../../services/notificacao.service';
 import { AuthService } from '../../services/auth.service';
 import { Component } from '@angular/core';
@@ -14,17 +15,17 @@ import { MatDialogRef } from '@angular/material';
     </div>
     <div class="modal-body">
         <label for="email">E-mail</label>
-        <input id="email" type="email" required [(ngModel)]="email" email
-        #EMAIL="ngModel" placeholder="E-mail" class="form-control"/>
+        <input [formControl]= "email" id="email" type="email"
+         placeholder="E-mail" class="form-control"/>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-md btn-primary" [disabled]="!EMAIL.valid" (click)="resetPass()">Resetar Senha</button>
+        <button class="btn btn-md btn-primary" [disabled]="!email.valid" (click)="resetPass(email.value)">Resetar Senha</button>
     </div>
   `,
   providers: [NotificacaoService],
 })
 export class ResetPassComponent {
-  email: string = '';
+  email = new FormControl('', Validators.compose([Validators.required, Validators.email]));
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -36,8 +37,8 @@ export class ResetPassComponent {
     this.dialogRef.close();
   }
 
-  resetPass() {
-    this.authService.resetPassword(this.email).then(res => {
+  resetPass(email: string) {
+    this.authService.resetPassword(email).then(res => {
       if (res === 'success') {
         this.notificacao.ngxtoaster('Resetar Senha', 'Instrucoes enviadas para o Email!', true);
       } else if (res === 'auth/user-not-found') {
