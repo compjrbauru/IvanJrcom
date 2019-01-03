@@ -10,6 +10,29 @@
         <button [ngClass]="mouseOvered[i] ?'btn btn-hero-success btn-demo' : 'btn btn-hero-secondary btn-demo'" (mouseover)="mouseOvered[i]=true"
           (mouseout)="mouseOvered[i]=false" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
       </ng-template>
+      <div class="container">
+        <div class="row event-data">
+          <div class="calendar-box">
+            <div class="calendar-month">
+              {{ evento.data | secondsToDate | date: 'MMM' }}
+            </div>
+            <div class="calendar-day">
+              {{ evento.data | secondsToDate | date: 'dd' }}
+            </div>
+          </div>
+
+          <div class="event-info">
+            <div class="event-time">
+              <i class="ion-clock"></i>
+              {{ evento.data | secondsToDate | date: 'HH' }}h
+            </div>
+            <div class="event-local">
+              <i class="nb-location"></i>
+              {{ evento.local | eventLocation }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

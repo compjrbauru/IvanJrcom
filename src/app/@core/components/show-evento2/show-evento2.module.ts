@@ -1,3 +1,4 @@
+import { PipesModule } from './../../../pipes/pipes.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ThemeModule } from './../../../@theme-home/theme.module';
@@ -6,7 +7,7 @@ import { ShowEvento2Component } from './show-evento2.component';
 import { PaginacaoModule } from '../paginacao/paginacao.module';
 
 @NgModule({
-  imports: [ThemeModule, CommonModule, RouterModule, PaginacaoModule],
+  imports: [ThemeModule, CommonModule, RouterModule, PipesModule, PaginacaoModule],
   declarations: [ShowEvento2Component],
   exports: [ShowEvento2Component],
 })

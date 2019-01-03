@@ -1,4 +1,3 @@
-import { SobreNosComponent } from './../home/main/sobre-nos/sobre-nos.component';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

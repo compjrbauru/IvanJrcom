@@ -1,3 +1,4 @@
+import { EventLocationPipe } from './eventLocation.pipe';
 import { DocToKeyPipe } from './docToKey.pipe';
 import { NgModule } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -8,8 +9,10 @@ import { SecondsToDatePiPe } from './secondsToDate.pipe';
   declarations: [
     DocToKeyPipe,
     SecondsToDatePiPe,
+    EventLocationPipe,
   ],
   exports: [
+    EventLocationPipe,
     DocToKeyPipe,
     SecondsToDatePiPe,
   ],
