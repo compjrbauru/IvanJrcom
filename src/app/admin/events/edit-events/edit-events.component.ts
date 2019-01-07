@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
-import { tap, switchMap, filter, takeLast, catchError } from 'rxjs/operators';
+import { tap, switchMap, filter, takeLast, catchError, take } from 'rxjs/operators';
 import { UploadFileComponent } from '../../../@core/components/upload-file/upload-file.component';
 import { MapComponent } from '../../../@core/components/map/map.component';
 import { EventoService } from '../../../services/evento.service';
@@ -70,6 +70,7 @@ export class EditEventsComponent implements OnInit {
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (
+      this.form['formEvent'] !== null &&
       this.form['formEvent'].value.pathurl !== '' &&
       this.form['formEvent'].value.pathurl !== this.eventoResolver.pathurl
     ) {
@@ -108,6 +109,7 @@ export class EditEventsComponent implements OnInit {
       takeLast(1),
       filter(response => response === true),
       switchMap(() => this.categoriaService.getById(this.formDeleteValue.categoria)),
+      take(1),
       tap(this.patchDeleteCategoria),
       switchMap(() => this.eventoService.removeDataCascade(this.formDeleteValue.id)),
     ).subscribe(() => {

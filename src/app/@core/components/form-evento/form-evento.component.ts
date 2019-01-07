@@ -122,7 +122,7 @@ export class FormEventoComponent implements OnInit, OnChanges {
   }
 
   patchValues(resolvedEvento: any = []) {
-    if (resolvedEvento && !(typeof resolvedEvento.data === 'string')) {
+    if (resolvedEvento) {
       const time = this.resolveData(resolvedEvento.data);
       resolvedEvento.data = time;
       this.formEvent.patchValue({
