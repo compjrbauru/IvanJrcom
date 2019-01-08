@@ -18,10 +18,6 @@ export class TableService {
   };
   evento = {
     columns: {
-      categoria: {
-        title: 'Categoria',
-        type: 'string',
-      },
       nome: {
         title: 'Nome',
         type: 'string',

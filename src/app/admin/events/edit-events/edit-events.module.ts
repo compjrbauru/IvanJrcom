@@ -1,15 +1,29 @@
+
+
 import { NgModule } from '@angular/core';
-
-import { ThemeModule } from '../../../@theme-admin/theme.module';
+import { MatDialogModule } from '@angular/material';
 import { EditEventsComponent } from './edit-events.component';
-import { ListEventsModule } from './list-events/list-events.module';
+import { ConfirmationModalComponent } from '../../../@core/components/confirmation-modal/confirmation-modal.component';
+import { TableModule } from '../../table/table.module';
+import { FormEventoModule } from '../../../@core/components/form-evento/form-evento.module';
+import { UploadFileModule } from '../../../@core/components/upload-file/upload-file.module';
+import { MapModule } from '../../../@core/components/map/map.module';
+import { ThemeModule } from '../../../@theme-admin/theme.module';
 
 
-
-const EDITEVENTS_COMPONENTS = [EditEventsComponent];
 
 @NgModule({
-  imports: [ThemeModule, ListEventsModule],
-  declarations: [...EDITEVENTS_COMPONENTS],
+  entryComponents: [
+    ConfirmationModalComponent,
+  ],
+  imports: [
+    ThemeModule,
+    TableModule,
+    FormEventoModule,
+    UploadFileModule,
+    MapModule,
+    MatDialogModule,
+  ],
+  declarations: [EditEventsComponent],
 })
 export class EditEventsModule {}

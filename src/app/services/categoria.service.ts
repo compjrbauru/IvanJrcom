@@ -93,9 +93,11 @@ export class CategoriaService {
   }
 
   patchDeleteEventCategoria(categoria: any, evento: any) {
-    categoria.idsevento.splice(categoria.idsevento.indexOf(evento.id), 1);
-    categoria.count--;
-    return this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
+    if ('idsevento' in categoria && categoria.idsevento.length) {
+      categoria.idsevento.splice(categoria.idsevento.indexOf(evento.id), 1);
+      categoria.count--;
+      return this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
+    }
   }
 
   removeCategoria(id: any) {

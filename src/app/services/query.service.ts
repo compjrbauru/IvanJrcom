@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class QueryService {
@@ -81,7 +82,7 @@ export class QueryService {
     return this.storage.upload(path, file);
   }
 
-  deleteImage(path: any) {
+  deleteImage(path: any): Observable<any> {
     return this.storage.ref(path).delete();
   }
 
