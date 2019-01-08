@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable, of as observableOf, Subject } from 'rxjs';
+import { Observable, of as observableOf, Subject, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
@@ -11,6 +11,10 @@ export class UsuarioService {
 
   constructor(private db: AngularFirestore) { }
 
+  getAll(): Observable<any> {
+    return this.UsuarioCollection.valueChanges();
+  }
+
   addUsuario(usuario: any): Observable<any> {
     usuario.id = this.db.createId();
     this.UsuarioCollection.doc(usuario.id).set({
@@ -19,11 +23,11 @@ export class UsuarioService {
     return observableOf(usuario);
   }
 
-  patchUsuario(usuario: any, id) {
-    return this.UsuarioCollection.doc(id).set({
+  patchUsuario(usuario: any, id): Observable<any> {
+    return from(this.UsuarioCollection.doc(id).set({
       ...usuario,
       id: id,
-    });
+    }));
   }
 
 

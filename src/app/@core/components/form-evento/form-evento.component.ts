@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
@@ -6,13 +6,10 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
   templateUrl: './form-evento.component.html',
   styleUrls: ['./form-evento.component.scss'],
 })
-export class FormEventoComponent implements OnInit, DoCheck {
-  @Input()
-  dependencies: any;
-  @Input()
-  resolvedEvento: any = null;
-  @Output()
-  formEmitter = new EventEmitter<any>();
+export class FormEventoComponent implements OnInit, OnChanges {
+  @Input() dependencies: any;
+  @Input() resolvedEvento: any = null;
+  @Output() formEmitter = new EventEmitter<any>();
   formEvent: FormGroup = null;
   constructor(private formBuilder: FormBuilder) { }
 
@@ -22,12 +19,10 @@ export class FormEventoComponent implements OnInit, DoCheck {
         numeroIngressos:
           'O número de ingressos disponíveis não é a soma de ingressos por gênero',
       };
-      // tslint:disable-next-line:max-line-length
       const soma =
         +form.get('ingressos').get('feminino').get('disponiveis').value +
         +form.get('ingressos').get('masculino').get('disponiveis').value +
         +form.get('ingressos').get('unisex').get('disponiveis').value;
-      // tslint:disable-next-line:max-line-length
       return +form.get('ingressos').get('lote').get('disponiveis').value === soma ? null : error;
     };
     const pagamentoValidation: ValidatorFn = (form: AbstractControl) => {
@@ -99,19 +94,21 @@ export class FormEventoComponent implements OnInit, DoCheck {
     this.formEmitter.emit(this.formEvent);
   }
 
-  ngDoCheck() {
-    this.patchValues(this.resolvedEvento);
-    if (
-      this.formEvent.get('pagamento').get('deposito').value === false &&
-      this.formEvent.get('pagamento').get('contaDeposito').value !== ''
-    ) {
-      this.formEvent.get('pagamento').get('contaDeposito').setValue('');
+  ngOnChanges(changes: SimpleChanges) {
+    if ('resolvedEvento' in changes && !changes.resolvedEvento.firstChange) {
+      this.patchValues(this.resolvedEvento);
+      if (
+        this.formEvent.get('pagamento').get('deposito').value === false &&
+        this.formEvent.get('pagamento').get('contaDeposito').value !== ''
+      ) {
+        this.formEvent.get('pagamento').get('contaDeposito').setValue('');
+      }
     }
   }
 
   resolveData(data: any) {
     if (data && data.hasOwnProperty('seconds') && !(typeof data === 'string')) {
-      data = data.toDate();
+      data = new Date(data.seconds * 1000);
       const mnth = ('0' + (data.getMonth() + 1)).slice(-2);
       const day = ('0' + data.getDate()).slice(-2);
       const hours = ('0' + data.getHours()).slice(-2);
@@ -125,7 +122,7 @@ export class FormEventoComponent implements OnInit, DoCheck {
   }
 
   patchValues(resolvedEvento: any = []) {
-    if (resolvedEvento && !(typeof resolvedEvento.data === 'string')) {
+    if (resolvedEvento) {
       const time = this.resolveData(resolvedEvento.data);
       resolvedEvento.data = time;
       this.formEvent.patchValue({

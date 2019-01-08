@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Subject, forkJoin } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, take } from 'rxjs/operators';
 
 @Injectable()
 export class CategoriaService {
@@ -64,7 +64,7 @@ export class CategoriaService {
   }
 
   patchCategoria(evento: any) {
-    this.findByName(evento.categoria).pipe(map((categoria: any) => {
+    this.getById(evento.categoria).pipe(take(1), map((categoria: any) => {
       const newCategoria = categoria;
       newCategoria.count++;
       newCategoria.idsevento.push(evento.id);
@@ -76,13 +76,12 @@ export class CategoriaService {
 
   patchEditCategoria(evento: any, eventoResolver: any) {
     if (evento.categoria !== eventoResolver.categoria) {
-      forkJoin([
-        this.findByName(evento.categoria),
-        this.findByName(eventoResolver.categoria)])
+      combineLatest(
+        this.getById(evento.categoria),
+        this.getById(eventoResolver.categoria))
+      .pipe(take(1))
       .subscribe(
-        ([categoriaAtual, categoriaAnterior]): any => {
-        const [newAtual] = <any>categoriaAtual;
-        const [newAnterior] = <any>categoriaAnterior;
+        ([newAtual, newAnterior]: any) => {
         newAnterior.count--;
         newAtual.count++;
         newAtual.idsevento.push(evento.id);
@@ -94,9 +93,11 @@ export class CategoriaService {
   }
 
   patchDeleteEventCategoria(categoria: any, evento: any) {
-    categoria.idsevento.splice(categoria.idsevento.indexOf(evento.id), 1);
-    categoria.count--;
-    return this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
+    if ('idsevento' in categoria && categoria.idsevento.length) {
+      categoria.idsevento.splice(categoria.idsevento.indexOf(evento.id), 1);
+      categoria.count--;
+      return this.CategoriasCollection.doc(categoria.id).set({ ...categoria });
+    }
   }
 
   removeCategoria(id: any) {

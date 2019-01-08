@@ -1,0 +1,7 @@
+<ngx-table
+  [dataAsync]="users"
+  edit='true'
+  columns='accounts'
+  (editConfirm)="editAccount($event)"
+  [titulo]="'Tabela de Contas'">
+</ngx-table>
