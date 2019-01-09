@@ -1,21 +1,9 @@
-<div class="header-container"
-     [class.left]="position === 'normal'"
-     [class.right]="position === 'inverse'">
-  <!-- <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">Ivan<span>-JRCOM</span></div>
-  </div>
-  <ngx-theme-switcher></ngx-theme-switcher> -->
-  <button class="btn btn-hero-secondary" (click)="admin()">Admin</button>
-</div>
-
-
 <div class="header-container">
   <img class="main-logo-img" (click)="goToHome()" src="../../../../assets/lemon_logo_transparent.png">
 </div>
 
 
-<div class="header-container">
+<div class="header-container opcoes">
   <ng-container *ngIf="!logado; else logadoTemplate">
     <button class="btn btn-hero-secondary" (click)="login()">Login</button>
     <button class="btn btn-hero-warning" style="margin-left: 15px;" (click)="register()">Registrar</button>
@@ -37,6 +25,32 @@
       <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
     </nb-action> -->
     </nb-actions>
+  </ng-template>
+</div>
+
+<!-- Menu para celulares (hamburguer menu) -->
+<div class="header-container offscreen">
+  <div [ngClass]="{'hamburger': true, 'change': this.toggle}" (click)="this.toggle = !this.toggle;">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+
+  <ng-container *ngIf="!logado; else hamburgerlogado"> 
+    <!-- Opcoes para quem nao esta logado -->
+    <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
+      <p (click)="login(); this.toggle = !this.toggle">Login</p>
+      <p (click)="register(); this.toggle = !this.toggle">Registrar</p>
+    </div>
+  </ng-container>
+
+  <ng-template #hamburgerlogado>
+    <!-- Opcoes para quem esta logado -->
+    <div class="burger-options" [ngClass]="{'hide': true, 'burger-open': this.toggle}">
+      <p *ngIf="user?.role != 'cliente'" (click)="admin(); this.toggle = !this.toggle">ADMIN</p>
+      <p (click)="perfil(); this.toggle = !this.toggle">Perfil</p>
+      <p (click)="sair(); this.toggle = !this.toggle">Sair</p>
+    </div>
   </ng-template>
 
 </div>
