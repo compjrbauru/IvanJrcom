@@ -18,7 +18,7 @@ export class AuthService {
     return this.firebaseAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(
-        res => {
+        () => {
           if (this.isVerified()) {
             this.getToken();
             return 'sucesso';
@@ -67,9 +67,9 @@ export class AuthService {
   resetPassword(email: string) {
     return this.firebaseAuth.auth
       .sendPasswordResetEmail(email)
-      .then(res => {
-        return 'success';
-      })
+      .then(() => {
+          return 'success';
+        })
       .catch(err => {
         return err.code;
       });
@@ -78,9 +78,9 @@ export class AuthService {
   signupUser(email: string, password: string) {
     return this.firebaseAuth.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        return 'success'; // pro componente saber se deu certo
-      })
+      .then(() => {
+          return 'success';
+        })
       .catch(err => {
         return err.code; // Retorna o erro para ser tratado no componente registrar
       });
