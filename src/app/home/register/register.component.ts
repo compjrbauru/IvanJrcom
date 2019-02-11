@@ -32,12 +32,9 @@ export class RegisterComponent implements OnInit {
     this.authService.signupUser(email, pass).then(res => {
       if (res === 'success') {
         const user = this.authService.getUser();
-
         user.sendEmailVerification().then(() => {
           const { senha: removedSenha, ConfirmarSenha: removedConfirmarSenha, ...form } = this.form['formEvent'].value;
-
           this.usuarioService.addUsuario(form); // Adiciona o usuario
-
           this.notificacao.ngxtoaster(
             'Cadastro',
             'Usuario Cadastrado com sucesso! Verifique seu Email!',
