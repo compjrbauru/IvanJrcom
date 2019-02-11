@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CanDeactivateGuard } from '../../guards/can-deactivate-guard.service';
 import { CreateEventComponent } from './create-event/create-event.component';
-import { ListEventsComponent } from './edit-events/list-events/list-events.component';
 import { EventsComponent } from './events.component';
+import { EditEventsComponent } from './edit-events/edit-events.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'edit',
-        component: ListEventsComponent,
+        component: EditEventsComponent,
         canDeactivate: [CanDeactivateGuard],
       },
     ],

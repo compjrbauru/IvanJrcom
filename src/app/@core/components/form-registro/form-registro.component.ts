@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
@@ -6,10 +6,9 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
   templateUrl: './form-registro.component.html',
   styleUrls: ['./form-registro.component.scss'],
 })
-export class FormRegistroComponent implements OnInit, DoCheck {
+export class FormRegistroComponent implements OnInit {
   public formEvent: FormGroup;
   @Output() formEmitter = new EventEmitter<any>();
-  @Input() resolvedEvento: any = null;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -66,7 +65,6 @@ export class FormRegistroComponent implements OnInit, DoCheck {
       },
       { validator: [RGvalidator, CPFvalidator, PassValidator] },
     );
-    this.patchValues(this.resolvedEvento);
     this.onFormValueChanges();
     this.formEmitter.emit(this.formEvent);
   }
@@ -77,32 +75,4 @@ export class FormRegistroComponent implements OnInit, DoCheck {
     });
   }
 
-  ngDoCheck() {
-    this.patchValues(this.resolvedEvento);
-  }
-
-  resolvenascimento(nascimento: any) {
-    if (nascimento && nascimento.hasOwnProperty('seconds') && !(typeof nascimento === 'string')) {
-      nascimento = nascimento.toDate();
-      const mnth = ('0' + (nascimento.getMonth() + 1)).slice(-2);
-      const day = ('0' + nascimento.getDate()).slice(-2);
-      const hours = ('0' + nascimento.getHours()).slice(-2);
-      const minutes = ('0' + nascimento.getMinutes()).slice(-2);
-      return [nascimento.getFullYear(), mnth, day + 'T' + hours + ':' + minutes].join(
-        '-',
-      );
-    } else {
-      return null;
-    }
-  }
-
-  patchValues(resolvedEvento: any = []) {
-    if (resolvedEvento && !(typeof resolvedEvento.nascimento === 'string')) {
-      const time = this.resolvenascimento(resolvedEvento.nascimento);
-      resolvedEvento.nascimento = time;
-      this.formEvent.patchValue({
-        ...resolvedEvento,
-      });
-    }
-  }
 }

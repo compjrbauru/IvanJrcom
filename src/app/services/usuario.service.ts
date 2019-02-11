@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable, of as observableOf, Subject, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Injectable()
 export class UsuarioService {
-  private UsuarioCollection: AngularFirestoreCollection<
-    any
-    > = this.db.collection('/Usuario');
+  private UsuarioCollection: AngularFirestoreCollection<any> = this.db.collection('/Usuario');
 
-  constructor(private db: AngularFirestore) { }
+  constructor(
+    private db: AngularFirestore,
+    private localStorage: LocalStorage,
+  ) { }
 
   getAll(): Observable<any> {
     return this.UsuarioCollection.valueChanges();
@@ -45,5 +47,13 @@ export class UsuarioService {
     return this.db
       .collection('/Usuario', ref => ref.where('email', '==', email))
       .valueChanges();
+  }
+
+  setItemCompra(compra: any): Observable<any> {
+    return this.localStorage.setItem('compra', compra);
+  }
+
+  getItemCompra(): Observable<any> {
+    return this.localStorage.getItem('compra');
   }
 }
