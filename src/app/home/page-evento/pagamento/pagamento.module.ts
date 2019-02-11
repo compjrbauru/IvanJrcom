@@ -7,6 +7,7 @@ import { DepositoConfirmationModule } from './deposito-confirmation/deposito-con
 import { PagamentoRoutingModule } from './pagamento-routing.module';
 import { PagamentoComponent } from './pagamento.component';
 import { StripeModule } from './stripe/stripe.module';
+import { CarouselLocalModule } from '../../main/carousel/carousel-local.module';
 
 const PAGAMENTO_IMPORTS = [
   CommonModule,
@@ -15,6 +16,7 @@ const PAGAMENTO_IMPORTS = [
   StripeModule,
   DepositoConfirmationModule,
   NgxCaptchaModule,
+  CarouselLocalModule,
 ];
 
 @NgModule({

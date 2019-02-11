@@ -1,4 +1,4 @@
-<div *ngIf="compra && userInfo">
+<div *ngIf="compra && userInfo; else Erro">
   <nb-card>
     <nb-card-header>Dados</nb-card-header>
     <nb-card-body>
@@ -128,3 +128,20 @@
     </div>
   </div>
 </div>
+<ng-template #Erro>
+  <nb-card-header>
+    Erro!
+  </nb-card-header>
+  <nb-card-body>
+    <div *ngIf="!userInfo">Você não está logado</div>
+    <div *ngIf="!compra">Você não selecionou a quantidade de Ingressos</div>
+  </nb-card-body>
+</ng-template>
+<nb-card-header>
+  Outros eventos
+</nb-card-header>
+<nb-card-body>
+  <ngx-carousel
+    [eventos]="eventosAsync"
+  ></ngx-carousel>
+</nb-card-body>
