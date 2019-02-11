@@ -22,10 +22,21 @@
   </nb-card>
   <br>
   <br>
-  <h2 class="font-w-light">Categorias em destaque</h2>
-  <br>
-  <ngx-categorias-destaque></ngx-categorias-destaque>
-  <br>
-  <br>
-  <ngx-sobre-nos></ngx-sobre-nos>
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+          <div class="col">
+            <h2 class="font-w-light">Categorias em destaque</h2>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <button class="btn btn-primary" type="button" routerLink="/home/categoria">Todas as Categorias</button>
+            </div>
+          </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+      <ngx-categorias-destaque></ngx-categorias-destaque>
+    </nb-card-body>
+  </nb-card>
 </div>

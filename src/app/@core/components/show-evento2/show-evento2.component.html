@@ -1,13 +1,38 @@
 <div class="row">
-  <div *ngFor="let evento of eventos; index as i" class="col-md-4">
+  <div *ngFor="let evento of eventos; index as i" class="col-md-4" style="padding-bottom: 10px;">
     <div class="card img">
-      <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap" style="width:100%; max-height:180px">
+      <div class="img-container">
+        <img class="card-img-top img-responsive" src="{{evento.url}}" alt="Card image cap">
+      </div>
       <button *ngIf="cosmic; else default" [ngClass]="mouseOvered[i] ?'btn btn-hero-info btn-demo' : 'btn btn-hero-danger btn-demo'"
         (mouseover)="mouseOvered[i]=true" (mouseout)="mouseOvered[i]=false" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
       <ng-template #default>
         <button [ngClass]="mouseOvered[i] ?'btn btn-hero-success btn-demo' : 'btn btn-hero-secondary btn-demo'" (mouseover)="mouseOvered[i]=true"
           (mouseout)="mouseOvered[i]=false" routerLink="/home/evento/{{evento.id}}">{{evento.nome}}</button>
       </ng-template>
+      <div class="container">
+        <div class="row event-data">
+          <div class="calendar-box">
+            <div class="calendar-month">
+              {{ evento.data | secondsToDate | date: 'MMM' }}
+            </div>
+            <div class="calendar-day">
+              {{ evento.data | secondsToDate | date: 'dd' }}
+            </div>
+          </div>
+
+          <div class="event-info">
+            <div class="event-time">
+              <i class="ion-clock"></i>
+              {{ evento.data | secondsToDate | date: 'HH' }}h
+            </div>
+            <div class="event-local">
+              <i class="nb-location"></i>
+              {{ evento.local | eventLocation }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

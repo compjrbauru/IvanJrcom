@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'ngx-carousel',
   templateUrl: './carousel-local.component.html',
-  styleUrls: ['./carousel-local.component.scss'],
+  styleUrls: ['./carousel-local.component.scss', '../../../../style.css'],
 })
 export class CarouselLocalComponent implements OnInit {
   @Input() eventos: Observable<any>;

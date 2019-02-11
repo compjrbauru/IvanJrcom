@@ -1,18 +1,24 @@
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   token: string;
-  isLogged$ = new Subject<any>();
+  isLogged$ = new BehaviorSubject<any>(false);
 
   constructor(
     private firebaseAuth: AngularFireAuth,
     public localStorage: LocalStorage,
-  ) { }
+  ) {
+    // Vê se tem algum usuario salvo, na inicializacao da pagina
+    this.getResolvedUser().subscribe(user => {
+      if (user !== null && user !== undefined)
+        this.isLogged$.next(true);
+    });
+  }
 
   signInWithEmail(email, password) {
     return this.firebaseAuth.auth

@@ -2,6 +2,14 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
+$lime_color: #49cc3d;
+
+.heading {
+  font-size: 1.75rem;
+  color: $lime_color;
+  padding: 10px;
+}
+
 .input-group {
   margin-bottom: 1rem;
 }
@@ -10,7 +18,7 @@
   width: 50%;
 }
 .resetpass {
-  color: #3dcc6d;
+  color: $lime_color;
   cursor: pointer;
 }
 .resetpass:hover {
@@ -18,7 +26,7 @@
 }
 .ion-social-facebook {
   font-size: 2em;
-  color: #3dcc6d;
+  color: $lime_color;
 }
 .ion-social-facebook:hover {
   cursor: pointer;

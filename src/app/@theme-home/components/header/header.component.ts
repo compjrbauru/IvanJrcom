@@ -11,6 +11,7 @@ import { filter, tap, mergeMap } from 'rxjs/operators';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
+  toggle = false;
   logado = false;
   menu = MENU_ITEMS;
   conta = {
@@ -23,7 +24,9 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Perfil' }, { title: 'Sair' }];
+  CLIENT_ACTIONS = [{ title: 'Perfil' }, { title: 'Sair' }];
+  ADMIN_ACTIONS = [{ title: 'ADMIN' }, ...this.CLIENT_ACTIONS];
+  userMenu = this.CLIENT_ACTIONS;
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -38,7 +41,9 @@ export class HeaderComponent implements OnInit {
       if (title.item.title === 'Sair') {
         this.sair();
       } else if (title.item.title === 'Perfil') {
-        this.route.navigate(['/home/conta']);
+        this.perfil();
+      } else if (title.item.title === 'ADMIN') {
+        this.admin();
       }
     });
     this.authService.onStateChange().pipe(
@@ -51,10 +56,17 @@ export class HeaderComponent implements OnInit {
       }),
       mergeMap(() => this.authService.getResolvedUser()),
     ).subscribe( (user) => {
-      this.menu.push(this.conta);
+      if (!this.logado)
+        this.menu.push(this.conta);
+      if (user.role !== 'cliente')
+        this.userMenu = this.ADMIN_ACTIONS;
       this.user = user;
       this.logado = true;
     });
+  }
+
+  perfil() {
+    this.route.navigate(['/home/conta']);
   }
 
   toggleSidebar(): boolean {
@@ -72,7 +84,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    this.route.navigate(['/home']);
   }
 
   startSearch() {

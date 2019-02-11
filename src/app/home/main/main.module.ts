@@ -10,7 +10,6 @@ import { ShowEvento2Module } from './../../@core/components/show-evento2/show-ev
 import { CarouselLocalModule } from './carousel/carousel-local.module';
 import { CategoriasDestaquModule } from './categorias-destaque/categorias-destaque.module';
 import { MainComponent } from './main.component';
-import { SobreNosModule } from './sobre-nos/sobre-nos.module';
 
 const MAIN_COMPONENTS = [MainComponent];
 const MAIN_MODULES = [
@@ -20,7 +19,6 @@ const MAIN_MODULES = [
   SearchBarModule,
   ShowEvento2Module,
   RouterModule,
-  SobreNosModule,
   CategoriasDestaquModule,
 ];
 
